@@ -17,9 +17,13 @@ export default async function DoctorsPage() {
   // the inner join to the doctors table with status = 'approved' keeps
   // pending and rejected sign-ups out. Availability comes from the one
   // source of truth, profiles.availability_status.
+  // The embed names its foreign key (doctors_user_id_fkey) on purpose:
+  // doctors also references profiles via reviewed_by, so a bare
+  // doctors!inner embed is ambiguous and PostgREST refuses it
+  // (PGRST201 — the 2026-11-01 directory outage).
   const { data: doctors, error } = await supabase
     .from('profiles')
-    .select('id, full_name, specialty, contact_number, email, department, hospital_id, hospitals(name), avatar_url, bio, availability_status, consultation_fee, services, doctors!inner(status)')
+    .select('id, full_name, specialty, contact_number, email, department, hospital_id, hospitals(name), avatar_url, bio, availability_status, consultation_fee, services, doctors!doctors_user_id_fkey!inner(status)')
     .eq('role', 'doctor')
     .eq('doctors.status', 'approved')
     .order('full_name', { ascending: true })

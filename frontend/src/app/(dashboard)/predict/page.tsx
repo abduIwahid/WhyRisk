@@ -153,7 +153,7 @@ export default function PredictPage() {
     // prediction-print M8 / states F-12): keep the two states separate.
     const { data, error } = await supabase
       .from("profiles")
-      .select("id, full_name, specialty, avatar_url, bio, consultation_fee, availability_status, contact_number, hospitals(name), doctors!inner(status)")
+      .select("id, full_name, specialty, avatar_url, bio, consultation_fee, availability_status, contact_number, hospitals(name), doctors!doctors_user_id_fkey!inner(status)")
       .eq("role", "doctor")
       .eq("doctors.status", "approved")
       .ilike("specialty", `%${specialty.split(" ")[0]}%`)

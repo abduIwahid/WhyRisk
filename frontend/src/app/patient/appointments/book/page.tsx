@@ -35,7 +35,7 @@ export default function BookAppointmentPage() {
       // not the legacy `available` bool.
       const { data, error } = await supabase
         .from("profiles")
-        .select("id, full_name, specialty, department, doctors!inner(status)")
+        .select("id, full_name, specialty, department, doctors!doctors_user_id_fkey!inner(status)")
         .eq("role", "doctor")
         .eq("doctors.status", "approved")
         .eq("availability_status", "available")
@@ -105,7 +105,7 @@ export default function BookAppointmentPage() {
       // booking.
       const { data: doctor, error: doctorError } = await supabase
         .from("profiles")
-        .select("id, availability_status, doctors!inner(status)")
+        .select("id, availability_status, doctors!doctors_user_id_fkey!inner(status)")
         .eq("id", doctorId)
         .eq("role", "doctor")
         .single()

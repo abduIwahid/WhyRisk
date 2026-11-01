@@ -42,6 +42,12 @@ export const metadata: Metadata = {
     template: "%s — WhyRisk",
   },
   description,
+  // Google Search Console ownership proof (Wadi, 2026-11-01) — the
+  // HTML-tag method renders this meta in every page's head; removing it
+  // after verification is fine for Google but harmless to keep.
+  verification: {
+    google: "V9W5eQmNGsddSR0k1tUxfbeawcnBWbiBXadOwRLmBoE",
+  },
   openGraph: {
     type: "website",
     siteName: "WhyRisk",

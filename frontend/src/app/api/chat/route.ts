@@ -2,8 +2,24 @@ import { NextResponse } from "next/server"
 import { createClient } from "@/lib/supabase/server"
 import { checkRateLimit, rateLimitBody } from "@/lib/rate-limit"
 
-const GEMINI_MODEL = "gemini-flash-latest"
-const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent`
+// Model fallback chain (2026-11-01): with a single hard-coded model, a
+// one-model outage becomes a dead assistant — the flash-latest pool
+// returned 503s while other Gemini models stayed up. GEMINI_MODEL may
+// pin a preferred model; the rest are tried in order on retryable
+// upstream failures (see the fetch loop below).
+const GEMINI_MODELS = Array.from(
+  new Set(
+    [
+      process.env.GEMINI_MODEL?.trim(),
+      "gemini-flash-latest",
+      "gemini-3.5-flash",
+      "gemini-2.5-flash",
+      "gemini-2.5-flash-lite",
+    ].filter((m): m is string => Boolean(m))
+  )
+)
+const geminiUrl = (model: string) =>
+  `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`
 
 const DOCTOR_SYSTEM_INSTRUCTION = `You are WhyRisk, a clinical decision-support assistant embedded in a hospital dashboard used by doctors.
 
@@ -176,36 +192,50 @@ export async function POST(request: Request) {
       },
     ]
 
-    // A hung upstream must not hold the request (and the panel's
-    // spinner) open indefinitely (QA Round 3, ai-chat L3).
-    const controller = new AbortController()
-    const timeout = setTimeout(() => controller.abort(), 30_000)
-    let geminiResponse: Response
-    try {
-      geminiResponse = await fetch(GEMINI_URL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "x-goog-api-key": apiKey,
-        },
-        signal: controller.signal,
-        body: JSON.stringify({
-          system_instruction: { parts: [{ text: SYSTEM_INSTRUCTION }] },
-          contents,
-          generationConfig: {
-            temperature: 0.4,
-            maxOutputTokens: 800,
-          },
-        }),
-      })
-    } finally {
-      clearTimeout(timeout)
-    }
+    const requestBody = JSON.stringify({
+      system_instruction: { parts: [{ text: SYSTEM_INSTRUCTION }] },
+      contents,
+      generationConfig: {
+        temperature: 0.4,
+        maxOutputTokens: 800,
+      },
+    })
 
-    if (!geminiResponse.ok) {
+    // Try the models in order. Retryable failures — 404 (model not
+    // available to this key), 429 (that model's quota), 5xx (upstream
+    // outage) — move on to the next model; a 400/401/403 would fail the
+    // same way on every model, so stop there. A hung upstream must not
+    // hold the request (and the panel's spinner) open indefinitely
+    // (QA Round 3, ai-chat L3), so each attempt gets its own timeout.
+    let geminiResponse: Response | null = null
+    for (const model of GEMINI_MODELS) {
+      const controller = new AbortController()
+      const timeout = setTimeout(() => controller.abort(), 20_000)
+      try {
+        geminiResponse = await fetch(geminiUrl(model), {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "x-goog-api-key": apiKey,
+          },
+          signal: controller.signal,
+          body: requestBody,
+        })
+      } catch (fetchError) {
+        console.error(`[api/chat] Gemini (${model}) request failed:`, fetchError)
+        geminiResponse = null
+        continue
+      } finally {
+        clearTimeout(timeout)
+      }
+      if (geminiResponse.ok) break
       // Upstream error bodies can contain provider internals — log the
       // status server-side, return a generic message to the client.
-      console.error(`[api/chat] Gemini responded with ${geminiResponse.status}.`)
+      console.error(`[api/chat] Gemini (${model}) responded with ${geminiResponse.status}.`)
+      if (![404, 429, 500, 502, 503].includes(geminiResponse.status)) break
+    }
+
+    if (!geminiResponse || !geminiResponse.ok) {
       return NextResponse.json(
         { error: "The AI assistant could not respond. Please try again.", fallback: true },
         { status: 502 }

@@ -117,8 +117,8 @@ export default function WelcomePage() {
       />
       {/* Header */}
       <header className="sticky top-0 z-40 border-b border-border bg-background/95">
-        <div className="mx-auto flex max-w-6xl items-center gap-3.5 px-4 py-3.5 sm:px-5">
-          <Link href="/welcome" className="flex items-center gap-3">
+        <div className="mx-auto flex max-w-6xl flex-wrap items-center gap-x-3.5 gap-y-2 px-4 py-3.5 sm:px-5">
+          <Link href="/welcome" className="flex shrink-0 items-center gap-3">
             <BrandMark className="h-[38px] w-[38px] shrink-0" />
             <span className="font-display text-[21px] uppercase leading-none tracking-wide">
               WhyRisk
@@ -130,7 +130,10 @@ export default function WelcomePage() {
               </span>
             </span>
           </Link>
-          <nav className="ml-auto hidden items-center gap-6 text-sm font-semibold md:flex">
+          {/* Nav: on mobile it takes its own row under brand + CTA — one
+              centred horizontal line, links never wrap (Wadi, 2026-11-01).
+              From md up it sits inline, centred between brand and CTA. */}
+          <nav className="order-3 flex w-full items-center justify-center gap-3.5 overflow-x-auto whitespace-nowrap text-[12.5px] font-semibold min-[420px]:gap-4 md:order-none md:w-auto md:flex-1 md:justify-center md:gap-6 md:overflow-visible md:text-[13px]">
             <a href="#check" className="text-foreground/75 transition hover:text-foreground">Risk check</a>
             <Link href="/model-card" className="text-foreground/75 transition hover:text-foreground">The model</Link>
             <a href="#how" className="text-foreground/75 transition hover:text-foreground">How it works</a>
@@ -139,7 +142,7 @@ export default function WelcomePage() {
           </nav>
           <Link
             href="/signup"
-            className="ml-auto inline-flex shrink-0 items-center whitespace-nowrap rounded-lg border-[1.5px] border-primary px-3.5 py-2.5 text-sm font-bold text-primary transition hover:bg-secondary sm:ml-4 sm:px-5 md:ml-6"
+            className="ml-auto inline-flex shrink-0 items-center whitespace-nowrap rounded-lg border-[1.5px] border-primary px-3 py-2 text-[13px] font-bold text-primary transition hover:bg-secondary sm:px-5 sm:py-2.5 sm:text-sm md:ml-0"
           >
             Create your account
           </Link>
@@ -249,7 +252,7 @@ export default function WelcomePage() {
         </section>
 
         {/* Honest facts */}
-        <section id="model" className="grid scroll-mt-24 gap-3 pb-2 pt-8 sm:grid-cols-2 lg:grid-cols-4">
+        <section id="model" className="grid scroll-mt-28 md:scroll-mt-24 gap-3 pb-2 pt-8 sm:grid-cols-2 lg:grid-cols-4">
           {FACTS.map((f) => (
             <div key={f.value} className="rounded-xl bg-primary p-[18px] text-white">
               <span className="block font-display text-[26px] tracking-wide">{f.value}</span>
@@ -259,7 +262,7 @@ export default function WelcomePage() {
         </section>
 
         {/* Quick risk check — the real model, no account needed */}
-        <section id="check" className="scroll-mt-24 pb-2 pt-12">
+        <section id="check" className="scroll-mt-28 md:scroll-mt-24 pb-2 pt-12">
           <h2 className="font-heading text-[30px] font-bold uppercase tracking-wide">Try the model yourself</h2>
           <p className="mt-1.5 max-w-[640px] text-[15.5px] text-muted-foreground">
             No account, nothing saved. Answer the same questions a care team would ask, and the trained
@@ -271,7 +274,7 @@ export default function WelcomePage() {
         </section>
 
         {/* What it does */}
-        <section id="how" className="scroll-mt-24 pb-2 pt-12">
+        <section id="how" className="scroll-mt-28 md:scroll-mt-24 pb-2 pt-12">
           <h2 className="font-heading text-[30px] font-bold uppercase tracking-wide">What it does</h2>
           <p className="mt-1.5 max-w-[640px] text-[15.5px] text-muted-foreground">
             Three things, done properly — instead of ten things done with smoke and mirrors.
@@ -290,7 +293,7 @@ export default function WelcomePage() {
         </section>
 
         {/* Honest scope */}
-        <section id="scope" className="scroll-mt-24 pb-2 pt-12">
+        <section id="scope" className="scroll-mt-28 md:scroll-mt-24 pb-2 pt-12">
           <h2 className="font-heading text-[30px] font-bold uppercase tracking-wide">What is real, what is next</h2>
           <p className="mt-1.5 max-w-[640px] text-[15.5px] text-muted-foreground">
             Most health apps hide this page. We put it on the homepage.

@@ -123,6 +123,18 @@
 }
 
 @layer components {
+  /* Interactive-card hover — the ONE shared recipe (Step C6, feedback
+     unification): lift 6px + shadow-premium + primary border tint on
+     hover, on the interior cards' transition (all, 300ms). Opt-in
+     only: apply solely to cards that are links/actions or designated
+     marketing showcase cards — never to static/display cards, which
+     would promise a click that isn't there. Per-instance copies of
+     this recipe predate it (admin stat cards, patient quick actions);
+     new surfaces use this class instead of re-typing the utilities. */
+  .card-interactive {
+    @apply transition-all duration-300 hover:-translate-y-1.5 hover:shadow-premium hover:border-primary/30;
+  }
+
   /* Section eyebrow — a plain small label, never a pill badge. */
   .eyebrow {
     font-size: 0.72rem;

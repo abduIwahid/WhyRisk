@@ -369,7 +369,7 @@ export default function WelcomePage() {
           <div className="mt-[22px] space-y-4">
             {CAPABILITIES.map((c, i) => (
               <SlideIn key={c.title} delay={i * 0.1}>
-                <div className="grid items-start gap-3 rounded-xl border bg-card p-5 shadow-card sm:grid-cols-[64px_1fr] md:grid-cols-[76px_minmax(210px,290px)_1fr] md:gap-6">
+                <div className="card-interactive grid items-start gap-3 rounded-xl border bg-card p-5 shadow-card sm:grid-cols-[64px_1fr] md:grid-cols-[76px_minmax(210px,290px)_1fr] md:gap-6">
                   <div aria-hidden="true" className="flex h-[52px] w-[52px] items-center justify-center rounded-[12px] bg-secondary text-primary">
                     <c.icon className="h-6 w-6" />
                   </div>

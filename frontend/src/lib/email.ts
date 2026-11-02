@@ -19,6 +19,8 @@
  *    booking itself. No marketing claims, no invented details.
  */
 
+import { doctorDisplayName } from "./doctor-name"
+
 export interface AppointmentEmailData {
   patientName: string
   patientEmail: string
@@ -92,7 +94,7 @@ export async function sendAppointmentConfirmationEmail(data: AppointmentEmailDat
   const lines = [
     `Hello ${data.patientName},`,
     "",
-    `Your appointment with Dr. ${data.doctorName} has been booked.`,
+    `Your appointment with ${doctorDisplayName(data.doctorName)} has been booked.`,
     "",
     `When: ${formatWhen(data.scheduledAt)}`,
     `Status: ${data.status}`,
@@ -116,7 +118,7 @@ export async function sendAppointmentReminderEmail(data: AppointmentEmailData): 
   const lines = [
     `Hello ${data.patientName},`,
     "",
-    `This is a reminder of your appointment with Dr. ${data.doctorName}.`,
+    `This is a reminder of your appointment with ${doctorDisplayName(data.doctorName)}.`,
     "",
     `When: ${formatWhen(data.scheduledAt)}`,
     `Status: ${data.status}`,
@@ -131,7 +133,7 @@ export async function sendAppointmentCancellationEmail(data: AppointmentEmailDat
   const lines = [
     `Hello ${data.patientName},`,
     "",
-    `Your appointment with Dr. ${data.doctorName} has been cancelled.`,
+    `Your appointment with ${doctorDisplayName(data.doctorName)} has been cancelled.`,
     "",
     `When it was booked for: ${formatWhen(data.scheduledAt)}`,
   ]

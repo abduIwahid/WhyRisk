@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { ArrowLeft, MapPin, Phone, Mail, CheckCircle2 } from "lucide-react"
 import { availabilityInfo } from "@/lib/status"
+import { doctorDisplayName } from "@/lib/doctor-name"
 import { SlideIn } from "@/components/shared/SlideIn"
 
 function initialsOf(name: string): string {
@@ -49,9 +50,11 @@ interface DoctorDetailViewProps {
 }
 
 export function DoctorDetailView({ doctor }: DoctorDetailViewProps) {
-  const displayName = doctor.first_name && doctor.last_name
-    ? `${doctor.first_name} ${doctor.last_name}`
-    : (doctor.full_name || doctor.name || 'Doctor')
+  const displayName = doctorDisplayName(
+    doctor.first_name && doctor.last_name
+      ? `${doctor.first_name} ${doctor.last_name}`
+      : (doctor.full_name || doctor.name)
+  ) || 'Doctor'
   // ONE availability source: availability_status (never the legacy bool,
   // never an invented fallback state).
   const statusInfo = availabilityInfo(doctor.availability_status)

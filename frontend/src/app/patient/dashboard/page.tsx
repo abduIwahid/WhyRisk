@@ -9,6 +9,7 @@ import { EmptyState } from "@/components/shared/EmptyState"
 import { SlideIn } from "@/components/shared/SlideIn"
 import { appointmentStatusClass } from "@/lib/status"
 import { fmtDateTime } from "@/lib/dates"
+import { doctorDisplayName } from "@/lib/doctor-name"
 
 interface Appointment {
   id: string
@@ -168,7 +169,7 @@ export default function PatientDashboardPage() {
               <div key={a.id} className="flex flex-wrap items-center justify-between gap-2 rounded-xl border bg-muted/10 px-4 py-3">
                 <div>
                   <p className="text-sm font-medium">
-                    {a.doctor?.full_name ? `Dr. ${a.doctor.full_name}` : "Doctor to be assigned"}
+                    {a.doctor?.full_name ? doctorDisplayName(a.doctor.full_name) : "Doctor to be assigned"}
                     {a.doctor?.specialty ? ` · ${a.doctor.specialty}` : ""}
                   </p>
                   <p className="text-xs text-muted-foreground">

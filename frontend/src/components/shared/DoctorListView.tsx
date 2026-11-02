@@ -7,10 +7,11 @@ import { EmptyState } from "@/components/shared/EmptyState"
 import { SlideIn } from "@/components/shared/SlideIn"
 import { Stethoscope, MapPin, Phone, Mail } from "lucide-react"
 import { availabilityInfo } from "@/lib/status"
+import { doctorDisplayName } from "@/lib/doctor-name"
 
 function doctorName(doctor: DoctorListRow): string {
-  if (doctor.first_name && doctor.last_name) return `${doctor.first_name} ${doctor.last_name}`
-  return doctor.full_name || 'Doctor'
+  const raw = doctor.first_name && doctor.last_name ? `${doctor.first_name} ${doctor.last_name}` : doctor.full_name
+  return doctorDisplayName(raw) || 'Doctor'
 }
 
 function doctorInitials(doctor: DoctorListRow): string {
@@ -46,7 +47,7 @@ export function DoctorListView({ doctors }: DoctorListViewProps) {
           {doctor.avatar_url ? (
             <Image
               src={doctor.avatar_url}
-              alt={doctor.full_name || 'Doctor'}
+              alt={doctorDisplayName(doctor.full_name) || 'Doctor'}
               width={36}
               height={36}
               className="h-9 w-9 rounded-full object-cover border border-border flex-shrink-0"
@@ -59,9 +60,7 @@ export function DoctorListView({ doctors }: DoctorListViewProps) {
           )}
           <div className="space-y-0.5">
             <div className="font-semibold text-sm">
-              {doctor.first_name && doctor.last_name
-                ? `${doctor.first_name} ${doctor.last_name}`
-                : (doctor.full_name || '—')}
+              {doctorDisplayName(doctor.first_name && doctor.last_name ? `${doctor.first_name} ${doctor.last_name}` : doctor.full_name) || '—'}
             </div>
             <div className="flex items-center gap-1 text-xs text-muted-foreground">
               <Stethoscope className="h-3 w-3" /> {doctor.specialty || '—'}

@@ -8,6 +8,7 @@ import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { PulseLoader } from "@/components/shared/PulseLoader"
 import { SlideIn } from "@/components/shared/SlideIn"
+import { doctorDisplayName } from "@/lib/doctor-name"
 
 interface Doctor {
   id: string
@@ -210,7 +211,7 @@ export default function BookAppointmentPage() {
               <SelectContent>
                 {doctors.map((d) => (
                   <SelectItem key={d.id} value={d.id}>
-                    Dr. {d.full_name}{d.specialty ? ` — ${d.specialty}` : ""}
+                    {doctorDisplayName(d.full_name)}{d.specialty ? ` — ${d.specialty}` : ""}
                   </SelectItem>
                 ))}
               </SelectContent>

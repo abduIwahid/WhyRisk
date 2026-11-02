@@ -21,6 +21,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { createClient } from "@/lib/supabase/client"
 import { ALL_SYMPTOMS } from "@/lib/symptoms"
+import { doctorDisplayName } from "@/lib/doctor-name"
 
 /* ------------------------------------------------------------------ */
 /*  Static config                                                      */
@@ -482,7 +483,7 @@ export default function PredictPage() {
                   <div key={doc.id} className="flex gap-4 rounded-xl border border-border bg-card p-5 shadow-card transition hover:shadow-card">
                     <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-full bg-secondary">
                       {doc.avatar_url ? (
-                        <Image src={doc.avatar_url} alt={doc.full_name} fill sizes="64px" className="object-cover" />
+                        <Image src={doc.avatar_url} alt={doctorDisplayName(doc.full_name)} fill sizes="64px" className="object-cover" />
                       ) : (
                         <div className="flex h-full w-full items-center justify-center bg-brand text-sm font-bold text-white">
                           {doc.full_name?.split(" ").map((n) => n[0]).slice(0, 2).join("")}
@@ -491,7 +492,7 @@ export default function PredictPage() {
                     </div>
                     <div className="flex-1">
                       <div className="flex items-center justify-between gap-2">
-                        <h3 className="font-heading text-sm font-bold">{doc.full_name}</h3>
+                        <h3 className="font-heading text-sm font-bold">{doctorDisplayName(doc.full_name)}</h3>
                         <span className="flex shrink-0 items-center gap-1.5 text-[11px] font-medium text-muted-foreground">
                           <span className={`h-2 w-2 rounded-full ${doc.availability_status === "available" ? "bg-[#1E7A46]" : "bg-muted-foreground/40"}`} />
                           {doc.availability_status === "available" ? "Available" : "Not available"}

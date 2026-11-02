@@ -10,6 +10,7 @@ import { PulseLoader } from "@/components/shared/PulseLoader"
 import { SlideIn } from "@/components/shared/SlideIn"
 import { appointmentStatusClass } from "@/lib/status"
 import { fmtDateTime } from "@/lib/dates"
+import { doctorDisplayName } from "@/lib/doctor-name"
 
 interface Appointment {
   id: string
@@ -174,7 +175,7 @@ export default function MyAppointmentsPage() {
             <div key={a.id} className="flex flex-wrap items-center justify-between gap-3 rounded-xl border bg-card p-4 shadow-card transition-shadow duration-300 hover:border-primary/30 hover:shadow-premium">
               <div>
                 <p className="font-medium">
-                  {a.doctor?.full_name ? `Dr. ${a.doctor.full_name}` : "Doctor to be assigned"}
+                  {a.doctor?.full_name ? doctorDisplayName(a.doctor.full_name) : "Doctor to be assigned"}
                   {a.doctor?.specialty ? ` · ${a.doctor.specialty}` : ""}
                 </p>
                 <p className="text-sm text-muted-foreground">
@@ -202,7 +203,7 @@ export default function MyAppointmentsPage() {
               {confirmingId === a.id && (
                 <div role="alertdialog" aria-label="Confirm cancellation" className="mt-3 flex w-full flex-wrap items-center gap-3 rounded-xl border border-destructive/30 bg-destructive/10 px-4 py-3 text-sm">
                   <span className="text-destructive">
-                    Cancel your appointment with {a.doctor?.full_name ? `Dr. ${a.doctor.full_name}` : "this doctor"} on {fmtDateTime(a.scheduled_at)}? This cannot be undone.
+                    Cancel your appointment with {a.doctor?.full_name ? doctorDisplayName(a.doctor.full_name) : "this doctor"} on {fmtDateTime(a.scheduled_at)}? This cannot be undone.
                   </span>
                   <span className="flex gap-2">
                     <Button variant="destructive" size="sm" onClick={() => handleCancel(a.id)}>

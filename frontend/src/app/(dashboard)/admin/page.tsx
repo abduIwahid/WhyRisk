@@ -2,6 +2,8 @@ import { createServerClient } from "@supabase/ssr"
 import { cookies } from "next/headers"
 import Link from "next/link"
 import { Users, Stethoscope, Clock, Activity } from "lucide-react"
+import { CountUp } from "@/components/shared/CountUp"
+import { SlideIn } from "@/components/shared/SlideIn"
 import { getCurrentProfile } from "@/lib/current-profile"
 
 export const dynamic = "force-dynamic"
@@ -67,37 +69,45 @@ export default async function AdminOverviewPage() {
 
   return (
     <div className="space-y-8">
-      <div>
+      <SlideIn direction="left">
         <h2 className="text-lg font-semibold">Overview</h2>
         <p className="mt-1 text-sm text-muted-foreground">{subtitle}</p>
-      </div>
+      </SlideIn>
 
       {countsFailed && (
-        <div role="alert" className="rounded-2xl border border-destructive/30 bg-destructive/10 p-5 text-sm text-destructive-text">
-          Some counts could not be loaded, so the figures below may be incomplete. Refresh the page to try again.
-        </div>
+        <SlideIn direction="up">
+          <div role="alert" className="rounded-2xl border border-destructive/30 bg-destructive/10 p-5 text-sm text-destructive-text">
+            Some counts could not be loaded, so the figures below may be incomplete. Refresh the page to try again.
+          </div>
+        </SlideIn>
       )}
 
+      {/* Stat cards rise from below in a stagger and count up — the
+          same treatment as the staff dashboard home. */}
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {stats.map((s) => (
-          <div key={s.label} className="rounded-xl border border-border bg-card p-5 shadow-card">
-            <div className={`flex h-10 w-10 items-center justify-center rounded-xl ${s.accent}`}>
-              <s.icon className="h-5 w-5" />
+        {stats.map((s, i) => (
+          <SlideIn key={s.label} direction="up" delay={i * 0.08} className="h-full">
+            <div className="h-full rounded-xl border border-border bg-card p-5 shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-premium hover:border-primary/30 active:scale-[0.98]">
+              <div className={`flex h-10 w-10 items-center justify-center rounded-xl ${s.accent}`}>
+                <s.icon className="h-5 w-5" />
+              </div>
+              <p className="mt-4 text-2xl font-bold"><CountUp text={String(s.value)} /></p>
+              <p className="text-xs text-muted-foreground">{s.label}</p>
+              <p className="mt-0.5 text-[11px] text-muted-foreground">{s.scope}</p>
             </div>
-            <p className="mt-4 text-2xl font-bold">{s.value}</p>
-            <p className="text-xs text-muted-foreground">{s.label}</p>
-            <p className="mt-0.5 text-[11px] text-muted-foreground">{s.scope}</p>
-          </div>
+          </SlideIn>
         ))}
       </div>
 
       {(pendingDoctors ?? 0) > 0 && (
-        <div className="rounded-xl border border-[#D97706]/30 bg-[#FDF0DC] p-5">
-          <p className="text-sm font-semibold text-[#A85008]">
-            {pendingDoctors} doctor{pendingDoctors === 1 ? "" : "s"} waiting for approval —{" "}
-            <Link href="/admin/doctors" className="underline">review now</Link>
-          </p>
-        </div>
+        <SlideIn direction="left">
+          <div className="rounded-xl border border-[#D97706]/30 bg-[#FDF0DC] p-5">
+            <p className="text-sm font-semibold text-[#A85008]">
+              {pendingDoctors} doctor{pendingDoctors === 1 ? "" : "s"} waiting for approval —{" "}
+              <Link href="/admin/doctors" className="underline">review now</Link>
+            </p>
+          </div>
+        </SlideIn>
       )}
     </div>
   )

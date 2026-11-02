@@ -4,6 +4,8 @@ import Link from "next/link"
 import { RiskBadge } from "@/components/shared/RiskBadge"
 import { Bell, AlertTriangle, Sparkles, Stethoscope, ArrowRight, ShieldCheck, Users, Activity, TrendingUp } from "lucide-react"
 import { motion, type Variants } from "framer-motion"
+import { CountUp } from "@/components/shared/CountUp"
+import { SlideIn } from "@/components/shared/SlideIn"
 import type { AlertRow } from "@/lib/types"
 import { dayKey } from "@/lib/dates"
 
@@ -43,6 +45,19 @@ const containerVariants: Variants = {
 const itemVariants: Variants = {
   hidden: { opacity: 0, y: 20 },
   show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 300, damping: 24 } }
+}
+
+// Stat cards rise from below, one after another (the container only
+// sequences them; each card carries its own up-reveal), and their
+// numbers count up via the shared CountUp.
+const statsContainerVariants: Variants = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.08 } }
+}
+
+const statCardVariants: Variants = {
+  hidden: { opacity: 0, y: 28 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.22, 0.8, 0.3, 1] } }
 }
 
 export function DashboardClientView({
@@ -97,7 +112,7 @@ export function DashboardClientView({
       )}
 
       {/* Stats Grid */}
-      <motion.div variants={itemVariants} className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+      <motion.div variants={statsContainerVariants} className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
         {[
           { label: "Total Patients", value: totalPatients, icon: Users, color: "text-[#2E7FA8]", bg: "bg-[#2E7FA8]/10", href: "/patients" },
           { label: "Active Doctors", value: totalDoctors, icon: Stethoscope, color: "text-primary", bg: "bg-secondary", href: "/doctors" },
@@ -107,22 +122,28 @@ export function DashboardClientView({
         ].map((stat, i) => (
           <Link key={i} href={stat.href} className={i === 4 ? "col-span-2 sm:col-span-1" : undefined}>
             <motion.div
-              className="group bg-card border rounded-xl p-5 shadow-card transition-shadow duration-200 cursor-pointer"
+              variants={statCardVariants}
+              whileHover={{ y: -6 }}
+              whileTap={{ scale: 0.98 }}
+              className="group bg-card border rounded-xl p-5 shadow-card transition-shadow duration-300 cursor-pointer hover:shadow-premium hover:border-primary/30"
             >
               <div className={`inline-flex p-2 rounded-xl ${stat.bg} mb-3 group-hover:scale-110 transition-transform`}>
                 <stat.icon className={`h-5 w-5 ${stat.color}`} />
               </div>
-              <p className="text-2xl font-extrabold">{stat.value}</p>
+              <p className="text-2xl font-extrabold"><CountUp text={String(stat.value)} /></p>
               <p className="text-xs text-muted-foreground mt-0.5 font-medium">{stat.label}</p>
             </motion.div>
           </Link>
         ))}
       </motion.div>
 
-      {/* Quick Actions + Alerts */}
-      <motion.div variants={itemVariants} className="grid gap-6 lg:grid-cols-2">
+      {/* Quick Actions + Alerts — mixed reveals: the card grid rises
+          from below, the list-like alerts block slides in from the
+          left, so the page does not travel in a single direction. */}
+      <div className="grid gap-6 lg:grid-cols-2">
         {/* Quick Actions */}
-        <div className="bg-card border rounded-xl p-6 shadow-card space-y-4">
+        <SlideIn direction="up" className="h-full">
+        <div className="bg-card border rounded-xl p-6 shadow-card space-y-4 h-full">
           <h2 className="text-lg font-bold tracking-tight flex items-center gap-2">
             <TrendingUp className="h-5 w-5 text-primary" /> Quick Actions
           </h2>
@@ -136,7 +157,7 @@ export function DashboardClientView({
               { label: "Alerts Center", desc: "Critical & high risk alerts", href: "/alerts", icon: Bell, color: "bg-secondary text-primary group-hover:bg-primary group-hover:text-white" },
             ].map((action, i) => (
               <Link key={i} href={action.href}>
-                <div className="group flex items-start gap-3 p-3 rounded-xl border bg-background hover:border-primary/30 hover:shadow-card transition-all duration-200 cursor-pointer h-full">
+                <div className="group flex items-start gap-3 p-3 rounded-xl border bg-background hover:border-primary/40 hover:shadow-premium hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-200 cursor-pointer h-full">
                   <div className={`p-2 rounded-xl transition-all duration-200 flex-shrink-0 ${action.color}`}>
                     <action.icon className="h-4 w-4" />
                   </div>
@@ -149,9 +170,11 @@ export function DashboardClientView({
             ))}
           </div>
         </div>
+        </SlideIn>
 
         {/* Active Alerts */}
-        <div className="bg-card border rounded-xl p-6 shadow-card flex flex-col">
+        <SlideIn direction="left" className="h-full">
+        <div className="bg-card border rounded-xl p-6 shadow-card flex flex-col h-full">
           <div className="flex items-center justify-between border-b pb-4 mb-4">
             <div className="flex items-center gap-3">
               <div className="p-2 bg-[#FAE9E7] rounded-lg">
@@ -208,7 +231,8 @@ export function DashboardClientView({
             </div>
           )}
         </div>
-      </motion.div>
+        </SlideIn>
+      </div>
     </motion.div>
   )
 }

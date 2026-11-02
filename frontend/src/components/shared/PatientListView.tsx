@@ -232,9 +232,17 @@ export function PatientListView({ patients, initialSearch = "", isAdmin = false,
     show: { opacity: 1, transition: { staggerChildren: 0.1 } }
   }
 
+  // Step 2 motion language, shared with the dashboards: the header
+  // travels in from the left, the table block rises from below — same
+  // easing family as SlideIn, staggered by the container.
+  const headerVariants: Variants = {
+    hidden: { opacity: 0, x: -76 },
+    show: { opacity: 1, x: 0, transition: { duration: 0.8, ease: [0.22, 0.8, 0.3, 1] } }
+  }
+
   const itemVariants: Variants = {
-    hidden: { opacity: 0, y: 15 },
-    show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 300, damping: 24 } }
+    hidden: { opacity: 0, y: 36 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.22, 0.8, 0.3, 1] } }
   }
 
   return (
@@ -281,7 +289,7 @@ export function PatientListView({ patients, initialSearch = "", isAdmin = false,
         </div>
       )}
 
-      <motion.div variants={itemVariants} className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+      <motion.div variants={headerVariants} className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <h1 className="text-3xl font-bold tracking-tight">Patient Registry</h1>
           <p className="mt-1.5 text-sm text-muted-foreground">

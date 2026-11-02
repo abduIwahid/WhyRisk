@@ -317,7 +317,7 @@ export function RunPredictionButton({ patient, onResult }: RunPredictionButtonPr
           {result.shapPayload.length > 0 && (
             <div className="rounded-xl border bg-card p-4 shadow-card">
               <h4 className="mb-3 text-sm font-bold">Why this score — top factors</h4>
-              <ShapFactorList data={result.shapPayload} />
+              <ShapFactorList data={result.shapPayload} animate />
               {result.clinicalExplanation && (
                 <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
                   {result.clinicalExplanation}

@@ -12,6 +12,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Loader2, ArrowLeft, HeartPulse, Stethoscope, TestTube2, CheckCircle2, AlertCircle } from "lucide-react"
 import Link from "next/link"
 import { motion, type Variants } from "framer-motion"
+import { SlideIn } from "@/components/shared/SlideIn"
 
 export default function NewPatientPage() {
   const router = useRouter()
@@ -384,9 +385,18 @@ export default function NewPatientPage() {
     show: { opacity: 1, transition: { staggerChildren: 0.1 } }
   }
 
+  // Step 2 motion language, shared with the dashboards: the header
+  // travels in from the left, the form card rises from below — same
+  // easing family as SlideIn, staggered by the container. The form's
+  // own sections reveal upwards via SlideIn below.
+  const headerVariants: Variants = {
+    hidden: { opacity: 0, x: -76 },
+    show: { opacity: 1, x: 0, transition: { duration: 0.8, ease: [0.22, 0.8, 0.3, 1] } }
+  }
+
   const itemVariants: Variants = {
-    hidden: { opacity: 0, y: 15 },
-    show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 300, damping: 24 } }
+    hidden: { opacity: 0, y: 36 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.22, 0.8, 0.3, 1] } }
   }
 
   return (
@@ -396,7 +406,7 @@ export default function NewPatientPage() {
       animate="show"
       className="mx-auto max-w-4xl space-y-6 pb-12"
     >
-      <motion.div variants={itemVariants} className="flex items-center gap-5">
+      <motion.div variants={headerVariants} className="flex items-center gap-5">
         <Link href="/patients">
           <button type="button" className="h-10 w-10 rounded-full border border-border/50 bg-muted/30 flex items-center justify-center hover:bg-muted hover:scale-105 transition-all shadow-card">
             <ArrowLeft className="h-4 w-4 text-muted-foreground" />
@@ -467,6 +477,7 @@ export default function NewPatientPage() {
               )}
 
               {/* Patient Identity */}
+              <SlideIn direction="up">
               <div className="space-y-4">
                 <div className="flex items-center gap-2 border-b pb-2">
                   <div className="h-6 w-6 rounded-full bg-primary/10 flex items-center justify-center">
@@ -544,8 +555,10 @@ export default function NewPatientPage() {
                   </div>
                 </div>
               </div>
+              </SlideIn>
 
               {/* Clinical Measurements */}
+              <SlideIn direction="up" delay={0.08}>
               <div className="space-y-4">
                 <div className="flex items-center gap-2 border-b pb-2">
                   <div className="h-6 w-6 rounded-full bg-primary/10 flex items-center justify-center">
@@ -605,8 +618,10 @@ export default function NewPatientPage() {
                   </div>
                 </div>
               </div>
+              </SlideIn>
 
               {/* Lab Results */}
+              <SlideIn direction="up" delay={0.16}>
               <div className="space-y-4">
                 <div className="flex items-center justify-between border-b pb-2">
                   <div className="flex items-center gap-2">
@@ -717,8 +732,10 @@ export default function NewPatientPage() {
                   ))}
                 </div>
               </div>
+              </SlideIn>
 
               {/* Medical History */}
+              <SlideIn direction="up" delay={0.24}>
               <div className="space-y-4">
                 <div className="flex items-center gap-2 border-b pb-2">
                   <div className="h-6 w-6 rounded-full bg-primary/10 flex items-center justify-center">
@@ -753,6 +770,7 @@ export default function NewPatientPage() {
                   ))}
                 </div>
               </div>
+              </SlideIn>
             </CardContent>
             <CardFooter className="border-t bg-muted/20 p-6 sm:px-8">
               <button

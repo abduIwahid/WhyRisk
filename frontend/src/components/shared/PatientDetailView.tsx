@@ -17,6 +17,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { motion, AnimatePresence, type Variants } from "framer-motion"
+import { SlideIn } from "@/components/shared/SlideIn"
 import type { LabResultRow, PatientDemographics, PatientRow, PredictionRow, VitalRow } from "@/lib/types"
 
 // Format snake_case → Title Case, with medical abbreviations
@@ -504,9 +505,17 @@ export function PatientDetailView({ patient, latestPrediction, isAdmin = false, 
     show: { opacity: 1, transition: { staggerChildren: 0.1 } }
   }
 
+  // Step 2 motion language, shared with the dashboards: the header
+  // panel travels in from the left, content blocks rise from below —
+  // same easing family as SlideIn, staggered by the container.
+  const headerVariants: Variants = {
+    hidden: { opacity: 0, x: -76 },
+    show: { opacity: 1, x: 0, transition: { duration: 0.8, ease: [0.22, 0.8, 0.3, 1] } }
+  }
+
   const itemVariants: Variants = {
-    hidden: { opacity: 0, y: 15 },
-    show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 300, damping: 24 } }
+    hidden: { opacity: 0, y: 36 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.22, 0.8, 0.3, 1] } }
   }
 
   return (
@@ -516,7 +525,7 @@ export function PatientDetailView({ patient, latestPrediction, isAdmin = false, 
       animate="show"
       className="space-y-6 max-w-7xl mx-auto pb-8"
     >
-      <motion.div variants={itemVariants} className="flex flex-col gap-6 lg:gap-0 lg:flex-row lg:items-start lg:justify-between bg-card p-6 rounded-xl border shadow-card">
+      <motion.div variants={headerVariants} className="flex flex-col gap-6 lg:gap-0 lg:flex-row lg:items-start lg:justify-between bg-card p-6 rounded-xl border shadow-card">
         <div className="flex items-start gap-5">
           <Link href="/patients">
             <button className="mt-1 h-10 w-10 rounded-full border border-border/50 bg-muted/30 flex items-center justify-center hover:bg-muted hover:scale-105 transition-all">
@@ -742,7 +751,7 @@ export function PatientDetailView({ patient, latestPrediction, isAdmin = false, 
           { label: "Vitals Tracked", icon: Activity, value: `${sortedVitals.length} records` },
           { label: "Lab Results", icon: FlaskConical, value: `${patient.lab_results?.length || 0} results` },
         ].map((stat, i) => (
-          <div key={i} className="group bg-card border rounded-xl p-5 shadow-card hover:shadow-md transition-all duration-300 flex flex-col items-start gap-2 relative overflow-hidden">
+          <div key={i} className="group bg-card border rounded-xl p-5 shadow-card hover:shadow-premium hover:-translate-y-1 hover:border-primary/30 transition-all duration-300 flex flex-col items-start gap-2 relative overflow-hidden">
             <div className="absolute -right-4 -top-4 opacity-5 group-hover:scale-150 transition-transform duration-500">
               <stat.icon className="h-24 w-24" />
             </div>
@@ -759,8 +768,9 @@ export function PatientDetailView({ patient, latestPrediction, isAdmin = false, 
 
       <motion.div variants={itemVariants} className="grid gap-6 lg:grid-cols-3">
         <div className="lg:col-span-1 space-y-6">
+          <SlideIn direction="up">
           {currentPrediction ? (
-            <motion.div whileHover={{ scale: 1.01 }} className="transition-all">
+            <motion.div whileHover={{ y: -6 }} className="rounded-xl transition-shadow duration-300 hover:shadow-premium">
               <PatientRiskCard
                 disease={currentPrediction.disease ?? "Diabetes"}
                 probability={currentPrediction.probability ?? null}
@@ -782,14 +792,18 @@ export function PatientDetailView({ patient, latestPrediction, isAdmin = false, 
               <RunPredictionButton patient={patient} onResult={setFreshPrediction} />
             </div>
           )}
+          </SlideIn>
 
           {currentPrediction && (
+            <SlideIn direction="up">
             <div className="bg-card border rounded-xl p-5 shadow-card">
               <h3 className="text-xs font-bold text-primary uppercase tracking-widest mb-4">Run Updated Assessment</h3>
               <RunPredictionButton patient={patient} onResult={setFreshPrediction} />
             </div>
+            </SlideIn>
           )}
 
+          <SlideIn direction="up">
           <div className="bg-card border rounded-xl p-5 shadow-card">
             <h3 className="text-xs font-bold text-primary uppercase tracking-widest mb-4 flex items-center gap-2">
               <Calendar className="h-4 w-4" /> Follow-up
@@ -853,8 +867,10 @@ export function PatientDetailView({ patient, latestPrediction, isAdmin = false, 
               </div>
             )}
           </div>
+          </SlideIn>
 
           {sortedPreds.length >= 1 && (
+            <SlideIn direction="up">
             <div className="bg-card border rounded-xl p-5 shadow-card">
               <h3 className="text-sm font-bold mb-4 flex items-center gap-2">
                 <TrendingUp className="h-4 w-4 text-primary" /> Risk Trend
@@ -870,9 +886,11 @@ export function PatientDetailView({ patient, latestPrediction, isAdmin = false, 
                 />
               )}
             </div>
+            </SlideIn>
           )}
 
           {sortedPreds.length > 1 && (
+            <SlideIn direction="left">
             <div className="bg-card border rounded-xl p-5 shadow-card">
               <h3 className="text-sm font-bold mb-4 flex items-center gap-2">
                 <Heart className="h-4 w-4 text-primary" /> Prediction History
@@ -882,7 +900,7 @@ export function PatientDetailView({ patient, latestPrediction, isAdmin = false, 
                   <Link
                     key={pred.id}
                     href={`/patients/${patient.id}/predictions/${pred.id}`}
-                    className="flex items-center justify-between text-sm p-3 rounded-xl border bg-background hover:bg-muted/50 transition-colors"
+                    className="flex items-center justify-between text-sm p-3 rounded-xl border bg-background hover:bg-muted/50 hover:border-primary/30 hover:shadow-card active:scale-[0.98] transition-all duration-200"
                   >
                     <span className="text-muted-foreground font-medium">{fmtDate(pred.created_at)}</span>
                     <div className="flex items-center gap-3">
@@ -893,10 +911,12 @@ export function PatientDetailView({ patient, latestPrediction, isAdmin = false, 
                 ))}
               </div>
             </div>
+            </SlideIn>
           )}
         </div>
 
         <div className="lg:col-span-2 space-y-6">
+          <SlideIn direction="up">
           <div className="bg-card border rounded-xl p-6 shadow-card overflow-hidden flex flex-col">
             <div className="mb-5 flex items-center justify-between gap-3">
               <h2 className="text-lg font-bold flex items-center gap-3 tracking-tight">
@@ -1025,7 +1045,9 @@ export function PatientDetailView({ patient, latestPrediction, isAdmin = false, 
               </div>
             )}
           </div>
+          </SlideIn>
 
+          <SlideIn direction="up">
           <div className="bg-card border rounded-xl p-6 shadow-card overflow-hidden flex flex-col">
             <h2 className="text-lg font-bold mb-5 flex items-center gap-3 tracking-tight">
               <div className="p-2 bg-primary/10 rounded-lg">
@@ -1053,7 +1075,9 @@ export function PatientDetailView({ patient, latestPrediction, isAdmin = false, 
               </div>
             </div>
           </div>
+          </SlideIn>
 
+          <SlideIn direction="left">
           <div className="bg-card border rounded-xl p-6 shadow-card overflow-hidden flex flex-col">
             <h2 className="text-lg font-bold mb-5 flex items-center gap-3 tracking-tight">
               <div className="p-2 bg-primary/10 rounded-lg">
@@ -1079,6 +1103,7 @@ export function PatientDetailView({ patient, latestPrediction, isAdmin = false, 
               />
             )}
           </div>
+          </SlideIn>
         </div>
       </motion.div>
     </motion.div>

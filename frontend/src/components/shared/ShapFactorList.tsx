@@ -1,6 +1,7 @@
 "use client"
 
 import { useMemo } from "react"
+import { motion, useReducedMotion } from "framer-motion"
 import { formatShapFactorLabel } from "@/lib/feature-labels"
 
 export interface ShapFeature {
@@ -11,6 +12,12 @@ export interface ShapFeature {
 
 interface ShapFactorListProps {
   data: ShapFeature[]
+  /** Opt-in bar animation (Step 2 interior pass): bars grow out of
+   *  the centre zero line, staggered, the first time they scroll into
+   *  view. Off by default so the print report keeps fully static bars
+   *  — a half-animated bar must never reach paper. Reduced-motion
+   *  users always get the finished bars. */
+  animate?: boolean
 }
 
 /**
@@ -27,7 +34,9 @@ interface ShapFactorListProps {
  * state — spreading a plain object here used to crash the whole detail
  * page and print report (QA Round 2, cluster 9).
  */
-export function ShapFactorList({ data }: ShapFactorListProps) {
+export function ShapFactorList({ data, animate = false }: ShapFactorListProps) {
+  const reduceMotion = useReducedMotion()
+  const animateBars = animate && !reduceMotion
   const rows = useMemo(() => {
     if (!Array.isArray(data)) return []
     const valid = data.filter(
@@ -52,7 +61,7 @@ export function ShapFactorList({ data }: ShapFactorListProps) {
   return (
     <div>
       <div className="space-y-2.5">
-        {rows.map((row) => (
+        {rows.map((row, i) => (
           <div key={row.label} className="flex flex-col gap-1 text-[13px] print:break-inside-avoid sm:flex-row sm:items-center sm:gap-3">
             <span className="w-full shrink-0 text-foreground/80 sm:w-44 sm:truncate print:whitespace-normal print:overflow-visible" title={row.label}>
               {row.label}
@@ -60,9 +69,29 @@ export function ShapFactorList({ data }: ShapFactorListProps) {
             <span className="relative h-[9px] flex-1 overflow-hidden rounded-full bg-secondary">
               <span className="absolute left-1/2 top-0 h-full w-px bg-foreground/15" />
               {row.impact >= 0 ? (
-                <span
-                  className="absolute top-0 h-full rounded-r-full bg-[#D97706]"
-                  style={{ left: "50%", width: `${row.pct}%` }}
+                animateBars ? (
+                  <motion.span
+                    className="absolute top-0 h-full origin-left rounded-r-full bg-[#D97706]"
+                    style={{ left: "50%", width: `${row.pct}%` }}
+                    initial={{ scaleX: 0 }}
+                    whileInView={{ scaleX: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.8, delay: 0.1 + i * 0.08, ease: [0.22, 0.8, 0.3, 1] }}
+                  />
+                ) : (
+                  <span
+                    className="absolute top-0 h-full rounded-r-full bg-[#D97706]"
+                    style={{ left: "50%", width: `${row.pct}%` }}
+                  />
+                )
+              ) : animateBars ? (
+                <motion.span
+                  className="absolute top-0 h-full origin-right rounded-l-full bg-[#1E7A46]"
+                  style={{ right: "50%", width: `${row.pct}%` }}
+                  initial={{ scaleX: 0 }}
+                  whileInView={{ scaleX: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8, delay: 0.1 + i * 0.08, ease: [0.22, 0.8, 0.3, 1] }}
                 />
               ) : (
                 <span

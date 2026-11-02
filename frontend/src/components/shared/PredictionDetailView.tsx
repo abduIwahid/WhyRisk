@@ -1,7 +1,10 @@
 "use client"
 
 import { useMemo } from "react"
+import { motion } from "framer-motion"
 import Link from "next/link"
+import { SlideIn } from "@/components/shared/SlideIn"
+import { CountUp } from "@/components/shared/CountUp"
 import { ArrowLeft, Printer } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { ShapFactorList, ShapFeature } from "@/components/shared/ShapFactorList"
@@ -61,6 +64,7 @@ export function PredictionDetailView({
 
   return (
     <div className="space-y-6 max-w-5xl mx-auto">
+      <SlideIn direction="left">
       <div className="flex flex-wrap items-center gap-4 mb-6">
         <Button variant="ghost" size="icon" asChild>
           <Link href={`/patients/${patientId}`}>
@@ -81,9 +85,11 @@ export function PredictionDetailView({
           </Link>
         </Button>
       </div>
+      </SlideIn>
 
       <div className="grid gap-6 md:grid-cols-3">
         <div className="md:col-span-1 space-y-6">
+          <SlideIn direction="up">
           <Card>
             <CardHeader>
               <CardTitle>Assessment Summary</CardTitle>
@@ -95,13 +101,17 @@ export function PredictionDetailView({
                 {probability !== null ? (
                   <>
                     <div className="font-display text-5xl leading-none">
-                      {(probability * 100).toFixed(1)}
+                      <CountUp text={(probability * 100).toFixed(1)} />
                       <span className="font-sans text-base font-semibold text-muted-foreground">%</span>
                     </div>
                     <div className="mt-3 h-2.5 overflow-hidden rounded-full bg-secondary">
-                      <div
-                        className="h-full rounded-full"
+                      <motion.div
+                        className="h-full origin-left rounded-full"
                         style={{ width: `${Math.min(100, Math.max(0, probability * 100))}%`, background: gaugeColor }}
+                        initial={{ scaleX: 0 }}
+                        whileInView={{ scaleX: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.9, delay: 0.2, ease: [0.22, 0.8, 0.3, 1] }}
                       />
                     </div>
                     <div className="mt-1 flex justify-between font-mono text-[11px] text-muted-foreground">
@@ -133,7 +143,9 @@ export function PredictionDetailView({
               </div>
             </CardContent>
           </Card>
+          </SlideIn>
 
+          <SlideIn direction="up" delay={0.08}>
           <Card>
             <CardHeader>
               <CardTitle>Clinical Explanation</CardTitle>
@@ -145,9 +157,11 @@ export function PredictionDetailView({
               </p>
             </CardContent>
           </Card>
+          </SlideIn>
         </div>
 
         <div className="md:col-span-2">
+          <SlideIn direction="up" className="h-full">
           <Card className="h-full">
             <CardHeader>
               <CardTitle>Why this score — top factors</CardTitle>
@@ -157,16 +171,18 @@ export function PredictionDetailView({
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <ShapFactorList data={shapPayload} />
+              <ShapFactorList data={shapPayload} animate />
               <p className="mt-6 border-t border-secondary pt-3 text-xs leading-relaxed text-muted-foreground">
                 Explanation generated with SHAP from the patient&apos;s own inputs. A screening aid — not a diagnosis.
               </p>
             </CardContent>
           </Card>
+          </SlideIn>
         </div>
       </div>
 
       {baseline && (
+        <SlideIn direction="up">
         <Card>
           <CardHeader>
             <CardTitle>Inputs used for this score</CardTitle>
@@ -184,9 +200,11 @@ export function PredictionDetailView({
             />
           </CardContent>
         </Card>
+        </SlideIn>
       )}
 
       {baseline && probability !== null && (
+        <SlideIn direction="up">
         <WhatIfSimulator
           key={prediction.id}
           baseline={baseline}
@@ -194,6 +212,7 @@ export function PredictionDetailView({
           originalSeverity={severity}
           fromSnapshot={snapshot !== null}
         />
+        </SlideIn>
       )}
     </div>
   )

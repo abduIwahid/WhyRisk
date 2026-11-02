@@ -4,9 +4,22 @@ import { usePathname, useRouter } from "next/navigation"
 import { cn } from "@/lib/utils"
 import { LayoutDashboard, CalendarPlus, CalendarClock, Bot, User, LogOut, X, Gauge } from "lucide-react"
 import { createClient } from "@/lib/supabase/client"
-import { motion } from "framer-motion"
+import { motion, type Variants } from "framer-motion"
 import BrandMark from "@/components/shared/BrandMark"
 import { roleLabel } from "@/lib/roles"
+
+// Nav entrance: items stagger in from the left on mount (transform
+// stripped automatically for reduced-motion users by the app-wide
+// MotionConfig) — the same language as the staff sidebar.
+const navVariants: Variants = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.05, delayChildren: 0.15 } },
+}
+
+const navItemVariants: Variants = {
+  hidden: { opacity: 0, x: -18 },
+  show: { opacity: 1, x: 0, transition: { duration: 0.35, ease: [0.22, 0.8, 0.3, 1] } },
+}
 
 interface PatientSidebarProps {
   onClose?: () => void
@@ -74,28 +87,47 @@ export function PatientSidebar({ onClose, className }: PatientSidebarProps) {
       </div>
 
       <div className="flex-1 overflow-y-auto overflow-x-hidden py-4 custom-scrollbar">
-        <nav className="grid gap-1 px-4">
+        <motion.nav
+          variants={navVariants}
+          initial="hidden"
+          animate="show"
+          className="grid gap-1 px-4"
+        >
           {navItems.map((item) => {
             const isActive = item.href === activeHref
             return (
-              <Link
-                key={item.href}
-                href={item.href}
-                aria-current={isActive ? "page" : undefined}
-                onClick={() => onClose?.()}
-                className={cn(
-                  "group relative flex min-h-11 items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-all duration-300",
-                  isActive
-                    ? "bg-primary text-primary-foreground shadow-card"
-                    : "text-muted-foreground hover:bg-muted/80 hover:text-foreground"
-                )}
-              >
-                <item.icon className={cn("h-4 w-4 transition-transform duration-300", isActive ? "scale-110" : "group-hover:scale-110 group-hover:text-primary")} />
-                <span>{item.name}</span>
-              </Link>
+              <motion.div key={item.href} variants={navItemVariants}>
+                <Link
+                  href={item.href}
+                  aria-current={isActive ? "page" : undefined}
+                  onClick={() => onClose?.()}
+                  className={cn(
+                    "group relative flex min-h-11 items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-all duration-300",
+                    isActive
+                      ? "bg-primary text-primary-foreground shadow-card"
+                      : "text-muted-foreground hover:bg-muted/80 hover:text-foreground"
+                  )}
+                >
+                  {!isActive && (
+                    <span
+                      aria-hidden
+                      className="absolute left-0 top-1/2 h-0 w-1.5 -translate-y-1/2 rounded-r-md bg-primary transition-all duration-300 group-hover:h-8"
+                    />
+                  )}
+                  <item.icon className={cn("h-4 w-4 transition-transform duration-300", isActive ? "scale-110" : "group-hover:scale-110 group-hover:text-primary")} />
+                  <span>{item.name}</span>
+                  {isActive && (
+                    <motion.span
+                      layoutId="patientActiveIndicator"
+                      className="absolute left-0 w-1 h-6 bg-white rounded-r-md"
+                      transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                    />
+                  )}
+                </Link>
+              </motion.div>
             )
           })}
-        </nav>
+        </motion.nav>
       </div>
 
       <div className="border-t p-4 pb-[max(1rem,env(safe-area-inset-bottom))] bg-muted/10">

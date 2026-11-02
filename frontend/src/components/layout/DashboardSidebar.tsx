@@ -5,9 +5,25 @@ import { cn } from "@/lib/utils"
 import { LayoutDashboard, Users, Settings, LogOut, X, Bell, Bot, ShieldCheck, BarChart3, User, Stethoscope, Mail, Calendar, HeartPulse, Wand2 } from "lucide-react"
 import { createClient } from "@/lib/supabase/client"
 import { useState, useEffect } from "react"
-import { motion } from "framer-motion"
+import { motion, type Variants } from "framer-motion"
 import BrandMark from "@/components/shared/BrandMark"
 import { roleLabel } from "@/lib/roles"
+
+// Nav entrance: groups fade in one after another and their items
+// stagger in from the left (transform stripped automatically for
+// reduced-motion users by the app-wide MotionConfig).
+const navGroupVariants: Variants = {
+  hidden: { opacity: 0 },
+  show: (i: number) => ({
+    opacity: 1,
+    transition: { duration: 0.3, staggerChildren: 0.045, delayChildren: 0.12 + i * 0.07 },
+  }),
+}
+
+const navItemVariants: Variants = {
+  hidden: { opacity: 0, x: -18 },
+  show: { opacity: 1, x: 0, transition: { duration: 0.35, ease: [0.22, 0.8, 0.3, 1] } },
+}
 
 interface DashboardSidebarProps {
   onClose?: () => void
@@ -126,11 +142,12 @@ export function DashboardSidebar({ onClose, className }: DashboardSidebarProps) 
           {navGroups.map((group, groupIdx) => {
             if (group.items.length === 0) return null;
             return (
-              <motion.div 
+              <motion.div
                 key={group.title}
-                initial={{ opacity: 0, y: 10 }} 
-                animate={{ opacity: 1, y: 0 }} 
-                transition={{ delay: 0.1 + (groupIdx * 0.05) }}
+                custom={groupIdx}
+                variants={navGroupVariants}
+                initial="hidden"
+                animate="show"
                 className="space-y-1"
               >
                 <p className="px-3 text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-2">
@@ -139,30 +156,37 @@ export function DashboardSidebar({ onClose, className }: DashboardSidebarProps) 
                 {group.items.map((item) => {
                   const isActive = item.href === activeHref;
                   return (
+                    <motion.div key={item.href} variants={navItemVariants}>
                     <Link
-                      key={item.href}
                       href={item.href}
                       aria-current={isActive ? "page" : undefined}
                       onClick={() => onClose?.()}
                       className={cn(
                         "group relative flex min-h-11 items-center justify-between rounded-xl px-3 py-2.5 text-sm font-medium transition-all duration-300",
                         isActive
-                          ? "bg-primary text-primary-foreground shadow-card" 
+                          ? "bg-primary text-primary-foreground shadow-card"
                           : "text-muted-foreground hover:bg-muted/80 hover:text-foreground"
                       )}
                     >
-                      <div className="flex items-center gap-3">
+                      {!isActive && (
+                        <span
+                          aria-hidden
+                          className="absolute left-0 top-1/2 h-0 w-1.5 -translate-y-1/2 rounded-r-md bg-primary transition-all duration-300 group-hover:h-8"
+                        />
+                      )}
+                      <div className="flex items-center gap-3 transition-transform duration-300 group-hover:translate-x-0.5">
                         <item.icon className={cn("h-4 w-4 transition-transform duration-300", isActive ? "scale-110" : "group-hover:scale-110 group-hover:text-primary")} />
                         <span>{item.name}</span>
                       </div>
                       {isActive && (
-                        <motion.div 
-                          layoutId="activeIndicator" 
+                        <motion.div
+                          layoutId="activeIndicator"
                           className="absolute left-0 w-1 h-6 bg-white rounded-r-md"
                           transition={{ type: "spring", stiffness: 300, damping: 30 }}
                         />
                       )}
                     </Link>
+                    </motion.div>
                   )
                 })}
               </motion.div>

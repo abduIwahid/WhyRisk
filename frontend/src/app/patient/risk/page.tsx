@@ -7,6 +7,8 @@ import { Activity, CalendarPlus, Info } from "lucide-react"
 import { PulseLoader } from "@/components/shared/PulseLoader"
 import { EmptyState } from "@/components/shared/EmptyState"
 import { ShapFactorList, type ShapFeature } from "@/components/shared/ShapFactorList"
+import { SlideIn } from "@/components/shared/SlideIn"
+import { CountUp } from "@/components/shared/CountUp"
 import { severityPillClass } from "@/lib/status"
 import { fmtDate } from "@/lib/dates"
 
@@ -171,11 +173,14 @@ export default function PatientRiskPage() {
 
   return (
     <div className="space-y-6">
-      <div>
-        <h1 className="text-2xl font-bold tracking-tight">My Risk</h1>
-        <p className="text-muted-foreground">Your latest risk assessment from your care team.</p>
-      </div>
+      <SlideIn direction="left">
+        <div>
+          <h1 className="text-2xl font-bold tracking-tight">My Risk</h1>
+          <p className="text-muted-foreground">Your latest risk assessment from your care team.</p>
+        </div>
+      </SlideIn>
 
+      <SlideIn direction="up">
       <div className="rounded-xl border bg-card p-6 shadow-card">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div>
@@ -183,7 +188,7 @@ export default function PatientRiskPage() {
               {latest.disease ? `${latest.disease} risk` : "Risk assessment"} · {fmtDate(latest.created_at)}
             </p>
             <div className="mt-1 flex items-end gap-3">
-              <span className="font-display text-5xl leading-none">{pct != null ? `${pct}%` : "—"}</span>
+              <span className="font-display text-5xl leading-none">{pct != null ? <><CountUp text={String(pct)} />%</> : "—"}</span>
               <span className={`mb-1 rounded-full border px-3 py-1 text-xs font-medium ${severityPillClass[severity] ?? ""}`}>
                 {severity}
               </span>
@@ -206,16 +211,20 @@ export default function PatientRiskPage() {
           </p>
         </div>
       </div>
+      </SlideIn>
 
+      <SlideIn direction="up">
       <div className="rounded-xl border bg-card p-6 shadow-card">
         <h2 className="font-semibold">What influenced this score</h2>
         <p className="mb-4 text-sm text-muted-foreground">
           The factors below pushed the estimate up (amber) or pulled it down (green), largest first.
         </p>
-        <ShapFactorList data={factors} />
+        <ShapFactorList data={factors} animate />
       </div>
+      </SlideIn>
 
       {history.length > 1 && (
+        <SlideIn direction="left">
         <div className="rounded-xl border bg-card p-6 shadow-card">
           <h2 className="mb-4 font-semibold">Previous assessments</h2>
           <div className="space-y-3">
@@ -235,6 +244,7 @@ export default function PatientRiskPage() {
             ))}
           </div>
         </div>
+        </SlideIn>
       )}
     </div>
   )

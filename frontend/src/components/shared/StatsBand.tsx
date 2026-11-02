@@ -1,7 +1,7 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
-import { animate, motion, useInView, useReducedMotion } from "framer-motion"
+import { motion } from "framer-motion"
+import { CountUp } from "@/components/shared/CountUp"
 
 /**
  * The landing page's honest-facts band: one navy panel, four columns
@@ -11,28 +11,9 @@ import { animate, motion, useInView, useReducedMotion } from "framer-motion"
  * scrolls into view; "SHAP" stays static text. The final value is the
  * initial render state, so SSR and no-JS visitors see the real figures
  * — the count-up only replays them after mount, and never runs for
- * users who prefer reduced motion.
+ * users who prefer reduced motion. (The count-up itself lives in the
+ * shared CountUp component.)
  */
-function CountUp({ text }: { text: string }) {
-  const ref = useRef<HTMLSpanElement>(null)
-  const inView = useInView(ref, { once: true, margin: "-40px" })
-  const reduceMotion = useReducedMotion()
-  const target = Number(text)
-  const decimals = text.includes(".") ? text.split(".")[1].length : 0
-  const [display, setDisplay] = useState(text)
-
-  useEffect(() => {
-    if (!inView || reduceMotion || !Number.isFinite(target)) return
-    const controls = animate(0, target, {
-      duration: 1.4,
-      ease: [0.16, 1, 0.3, 1],
-      onUpdate: (v) => setDisplay(v.toFixed(decimals)),
-    })
-    return () => controls.stop()
-  }, [inView, reduceMotion, target, decimals])
-
-  return <span ref={ref}>{display}</span>
-}
 
 const columnMotion = {
   initial: { opacity: 0, x: -44 },

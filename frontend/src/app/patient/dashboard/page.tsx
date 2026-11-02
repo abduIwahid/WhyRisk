@@ -6,6 +6,7 @@ import { createClient } from "@/lib/supabase/client"
 import { CalendarPlus, CalendarClock, Bot, ArrowRight, Gauge } from "lucide-react"
 import { PulseLoader } from "@/components/shared/PulseLoader"
 import { EmptyState } from "@/components/shared/EmptyState"
+import { SlideIn } from "@/components/shared/SlideIn"
 import { appointmentStatusClass } from "@/lib/status"
 import { fmtDateTime } from "@/lib/dates"
 
@@ -66,17 +67,18 @@ export default function PatientDashboardPage() {
 
   return (
     <div className="space-y-6">
-      <div>
+      <SlideIn direction="left">
         <h1 className="text-2xl font-bold tracking-tight">
           {fullName ? `Welcome back, ${fullName.split(" ")[0]}` : "Welcome back"}
         </h1>
         <p className="text-muted-foreground">Manage your appointments and get quick health guidance.</p>
-      </div>
+      </SlideIn>
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <SlideIn direction="up" className="h-full">
         <Link
           href="/patient/risk"
-          className="group flex items-center justify-between rounded-xl border bg-card p-6 shadow-card transition hover:shadow-md hover:border-primary/40"
+          className="group flex h-full items-center justify-between rounded-xl border bg-card p-6 shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-premium hover:border-primary/40 active:scale-[0.98]"
         >
           <div className="flex items-center gap-4">
             <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 text-primary">
@@ -89,10 +91,12 @@ export default function PatientDashboardPage() {
           </div>
           <ArrowRight className="h-4 w-4 text-muted-foreground transition group-hover:translate-x-1 group-hover:text-primary" />
         </Link>
+        </SlideIn>
 
+        <SlideIn direction="up" delay={0.08} className="h-full">
         <Link
           href="/patient/appointments/book"
-          className="group flex items-center justify-between rounded-xl border bg-card p-6 shadow-card transition hover:shadow-md hover:border-primary/40"
+          className="group flex h-full items-center justify-between rounded-xl border bg-card p-6 shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-premium hover:border-primary/40 active:scale-[0.98]"
         >
           <div className="flex items-center gap-4">
             <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 text-primary">
@@ -105,10 +109,12 @@ export default function PatientDashboardPage() {
           </div>
           <ArrowRight className="h-4 w-4 text-muted-foreground transition group-hover:translate-x-1 group-hover:text-primary" />
         </Link>
+        </SlideIn>
 
+        <SlideIn direction="up" delay={0.16} className="h-full">
         <Link
           href="/patient/assistant"
-          className="group flex items-center justify-between rounded-xl border bg-card p-6 shadow-card transition hover:shadow-md hover:border-primary/40"
+          className="group flex h-full items-center justify-between rounded-xl border bg-card p-6 shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-premium hover:border-primary/40 active:scale-[0.98]"
         >
           <div className="flex items-center gap-4">
             <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 text-primary">
@@ -121,8 +127,10 @@ export default function PatientDashboardPage() {
           </div>
           <ArrowRight className="h-4 w-4 text-muted-foreground transition group-hover:translate-x-1 group-hover:text-primary" />
         </Link>
+        </SlideIn>
       </div>
 
+      <SlideIn direction="up" delay={0.1}>
       <div className="rounded-xl border bg-card p-6 shadow-card">
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-2">
@@ -173,6 +181,7 @@ export default function PatientDashboardPage() {
           </div>
         )}
       </div>
+      </SlideIn>
     </div>
   )
 }

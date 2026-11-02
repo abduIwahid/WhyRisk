@@ -1,19 +1,27 @@
 import type { Metadata, Viewport } from "next";
-import { Anton, Archivo, JetBrains_Mono } from "next/font/google";
+import { Quicksand } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { MotionProvider } from "@/components/providers/MotionProvider";
 
-const archivo = Archivo({ subsets: ['latin'], variable: '--font-sans' });
-// Display + mono fonts are not the body face — don't let their preload
-// compete with Archivo and first paint on every page.
-const anton = Anton({
+// Quicksand across the whole site (Wadi's pick, 2026-11-02, approved from a
+// full-site mockup): one rounded geometric sans for body, display and data.
+// The three CSS variables keep their names, so every existing font-sans /
+// font-display / font-mono class picks Quicksand up unchanged.
+const quicksand = Quicksand({
   subsets: ['latin'],
-  weight: '400',
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-sans',
+});
+// Display + mono slots are not the body face — don't let their preload
+// compete with the body face and first paint on every page.
+const quicksandDisplay = Quicksand({
+  subsets: ['latin'],
+  weight: '700',
   variable: '--font-display',
   preload: false,
 });
-const jetbrainsMono = JetBrains_Mono({
+const quicksandMono = Quicksand({
   subsets: ['latin'],
   weight: ['500', '600'],
   variable: '--font-mono',

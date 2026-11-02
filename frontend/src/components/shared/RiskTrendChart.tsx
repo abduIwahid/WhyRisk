@@ -60,7 +60,7 @@ export function RiskTrendChart({ predictions }: { predictions: PredictionRow[] }
           return (
             <g key={v}>
               <line x1={PAD.left} x2={PAD.left + innerW} y1={y} y2={y} stroke="#CCD0CF" strokeWidth={v === 0 ? 1.2 : 0.6} strokeDasharray={v === 0 ? "" : "3 3"} />
-              <text x={PAD.left - 6} y={y + 3} textAnchor="end" fontSize="11" fill="#5A6B73" fontFamily="JetBrains Mono, monospace">
+              <text x={PAD.left - 6} y={y + 3} textAnchor="end" fontSize="11" fill="#5A6B73" fontFamily="Quicksand, sans-serif">
                 {v * 100}
               </text>
             </g>
@@ -73,10 +73,10 @@ export function RiskTrendChart({ predictions }: { predictions: PredictionRow[] }
             <title>{`${fmtFullDate(c.p.created_at)} — ${((c.p.probability ?? 0) * 100).toFixed(1)}% (${c.p.severity ?? "severity not recorded"})`}</title>
           </circle>
         ))}
-        <text x={PAD.left} y={H - 6} fontSize="11" fill="#5A6B73" fontFamily="JetBrains Mono, monospace">
+        <text x={PAD.left} y={H - 6} fontSize="11" fill="#5A6B73" fontFamily="Quicksand, sans-serif">
           {fmtShortDate(first.created_at)}
         </text>
-        <text x={PAD.left + innerW} y={H - 6} textAnchor="end" fontSize="11" fill="#5A6B73" fontFamily="JetBrains Mono, monospace">
+        <text x={PAD.left + innerW} y={H - 6} textAnchor="end" fontSize="11" fill="#5A6B73" fontFamily="Quicksand, sans-serif">
           {fmtShortDate(last.created_at)}
         </text>
       </svg>

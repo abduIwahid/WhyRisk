@@ -2,6 +2,7 @@ import { createServerClient } from "@supabase/ssr"
 import { cookies } from "next/headers"
 import { ProfileForm } from "@/components/shared/ProfileForm"
 import { ChangePasswordCard } from "@/components/shared/ChangePasswordCard"
+import { SlideIn } from "@/components/shared/SlideIn"
 import { getCurrentProfile, getCurrentUser } from "@/lib/current-profile"
 import { redirect } from "next/navigation"
 
@@ -27,12 +28,16 @@ export default async function SettingsPage() {
   if (!profile) {
     return (
       <div className="space-y-6 max-w-3xl">
-        <div>
-          <h1 className="text-2xl font-bold tracking-tight">Profile & Settings</h1>
-        </div>
-        <div role="alert" className="rounded-xl border border-destructive/30 bg-destructive/10 p-6 text-sm text-destructive-text">
-          Your profile could not be loaded. Please reload the page to try again — if it keeps happening, contact an administrator.
-        </div>
+        <SlideIn direction="left">
+          <div>
+            <h1 className="text-2xl font-bold tracking-tight">Profile & Settings</h1>
+          </div>
+        </SlideIn>
+        <SlideIn direction="up">
+          <div role="alert" className="rounded-xl border border-destructive/30 bg-destructive/10 p-6 text-sm text-destructive-text">
+            Your profile could not be loaded. Please reload the page to try again — if it keeps happening, contact an administrator.
+          </div>
+        </SlideIn>
       </div>
     )
   }
@@ -61,20 +66,28 @@ export default async function SettingsPage() {
 
   return (
     <div className="space-y-6 max-w-3xl">
-      <div>
-        <h1 className="text-2xl font-bold tracking-tight">Profile & Settings</h1>
-        <p className="text-sm text-muted-foreground mt-1">
-          Manage your account details and profile information. Your role is shown for reference — it is assigned by an admin.
-        </p>
-      </div>
-      <div className="bg-card border rounded-xl p-6 shadow-card">
-        <ProfileForm
-          user={user}
-          profile={profile}
-          hospitalName={hospitalLookupFailed ? "Couldn't load — refresh to retry" : hospitalName}
-        />
-      </div>
-      {user.email && <ChangePasswordCard email={user.email} />}
+      <SlideIn direction="left">
+        <div>
+          <h1 className="text-2xl font-bold tracking-tight">Profile & Settings</h1>
+          <p className="text-sm text-muted-foreground mt-1">
+            Manage your account details and profile information. Your role is shown for reference — it is assigned by an admin.
+          </p>
+        </div>
+      </SlideIn>
+      <SlideIn direction="up">
+        <div className="bg-card border rounded-xl p-6 shadow-card">
+          <ProfileForm
+            user={user}
+            profile={profile}
+            hospitalName={hospitalLookupFailed ? "Couldn't load — refresh to retry" : hospitalName}
+          />
+        </div>
+      </SlideIn>
+      {user.email && (
+        <SlideIn direction="up" delay={0.08}>
+          <ChangePasswordCard email={user.email} />
+        </SlideIn>
+      )}
     </div>
   )
 }

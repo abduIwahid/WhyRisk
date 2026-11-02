@@ -392,7 +392,7 @@ export function ProfileForm({ user, profile, hospitalName }: {
             { key: "email", label: "Email notifications", hint: "Appointment emails sent to your address." },
             { key: "sms", label: "SMS notifications", hint: "Text messages, where the clinic has them enabled." },
           ] as const).map((row) => (
-            <div key={row.key} className="flex items-center justify-between gap-4 rounded-xl border px-4 py-3">
+            <div key={row.key} className="flex items-center justify-between gap-4 rounded-xl border px-4 py-3 transition-colors duration-200 hover:bg-muted/30">
               <div>
                 <p className="text-sm font-medium">{row.label}</p>
                 <p className="text-xs text-muted-foreground">{row.hint}</p>
@@ -401,7 +401,7 @@ export function ProfileForm({ user, profile, hospitalName }: {
                 type="button"
                 aria-pressed={notifPrefs[row.key]}
                 onClick={() => setNotifPrefs((p) => ({ ...p, [row.key]: !p[row.key] }))}
-                className={`shrink-0 rounded-full border px-3.5 py-1.5 text-xs font-semibold ${notifPrefs[row.key] ? "border-[#1E7A46]/30 bg-[#E2F0E6] text-[#1E7A46]" : "border-border bg-muted/40 text-muted-foreground"}`}
+                className={`shrink-0 rounded-full border px-3.5 py-1.5 text-xs font-semibold transition active:scale-[0.98] ${notifPrefs[row.key] ? "border-[#1E7A46]/30 bg-[#E2F0E6] text-[#1E7A46]" : "border-border bg-muted/40 text-muted-foreground"}`}
               >
                 {notifPrefs[row.key] ? "On" : "Off"}
               </button>

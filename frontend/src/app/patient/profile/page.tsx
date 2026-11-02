@@ -9,6 +9,7 @@ import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { PulseLoader } from "@/components/shared/PulseLoader"
 import { AvatarUploader } from "@/components/shared/AvatarUploader"
+import { SlideIn } from "@/components/shared/SlideIn"
 
 export default function PatientProfilePage() {
   const [fullName, setFullName] = useState("")
@@ -186,11 +187,14 @@ export default function PatientProfilePage() {
 
   return (
     <div className="max-w-xl mx-auto space-y-6">
-      <div>
-        <h1 className="text-2xl font-bold tracking-tight">Profile</h1>
-        <p className="text-muted-foreground">Manage your personal information.</p>
-      </div>
+      <SlideIn direction="left">
+        <div>
+          <h1 className="text-2xl font-bold tracking-tight">Profile</h1>
+          <p className="text-muted-foreground">Manage your personal information.</p>
+        </div>
+      </SlideIn>
 
+      <SlideIn direction="up">
       <form onSubmit={handleSave} className="space-y-5 rounded-xl border bg-card p-6 shadow-card">
         {userId && (
           <AvatarUploader url={avatarUrl} uid={userId} name={fullName} onUpload={handleAvatarUpload} />
@@ -251,7 +255,9 @@ export default function PatientProfilePage() {
           {saving ? "Saving…" : "Save Changes"}
         </Button>
       </form>
+      </SlideIn>
 
+      <SlideIn direction="up" delay={0.08}>
       <div className="rounded-xl border bg-card p-6 shadow-card">
         <p className="font-semibold">Password</p>
         <p className="mt-1 text-sm text-muted-foreground">
@@ -261,7 +267,9 @@ export default function PatientProfilePage() {
           Change your password
         </Link>
       </div>
+      </SlideIn>
 
+      <SlideIn direction="up" delay={0.16}>
       <div className="rounded-xl border bg-card p-6 shadow-card">
         <p className="font-semibold">Are you a doctor?</p>
         <p className="mt-1 text-sm text-muted-foreground">
@@ -271,6 +279,7 @@ export default function PatientProfilePage() {
           Apply for the Doctor Portal
         </Link>
       </div>
+      </SlideIn>
     </div>
   )
 }

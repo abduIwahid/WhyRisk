@@ -10,6 +10,7 @@ import { AtSign, Lock, Eye, EyeOff } from "lucide-react"
 import { motion } from "framer-motion"
 import BrandMark from "@/components/shared/BrandMark"
 import { PulseLoader } from "@/components/shared/PulseLoader"
+import { SlideIn } from "@/components/shared/SlideIn"
 
 // Google sign-in is NOT enabled in the Supabase project yet — rendering
 // the button sends users to a raw provider error page. The OAuth code
@@ -221,11 +222,14 @@ function LoginPageInner() {
         {/* Brand / marketing panel */}
         <div className="relative hidden flex-col justify-between overflow-hidden bg-primary p-10 text-white md:flex">
           <BrandMark variant="glyph" className="pointer-events-none absolute -bottom-14 -right-10 h-72 w-72 opacity-[0.06]" />
-          <div className="relative z-10 flex items-center gap-2.5">
-            <BrandMark variant="glyph" className="h-10 w-10 shrink-0" />
-            <span className="text-xl font-bold tracking-tight">WhyRisk</span>
-          </div>
-          <div className="relative z-10 space-y-5">
+          <SlideIn direction="left" className="relative z-10">
+            <div className="flex items-center gap-2.5">
+              <BrandMark variant="glyph" className="h-10 w-10 shrink-0" />
+              <span className="text-xl font-bold tracking-tight">WhyRisk</span>
+            </div>
+          </SlideIn>
+          <SlideIn direction="left" delay={0.1} className="relative z-10">
+          <div className="space-y-5">
             <h2 className="font-heading text-3xl font-bold leading-tight">
               Clinical intelligence, delivered with confidence.
             </h2>
@@ -238,11 +242,15 @@ function LoginPageInner() {
               <li className="flex items-center gap-2"><span className="h-1.5 w-1.5 rounded-full bg-brand" /> Role-based access for patients, doctors and admins</li>
             </ul>
           </div>
-          <p className="relative z-10 text-xs text-white/60">One workspace for patients, doctors and admins.</p>
+          </SlideIn>
+          <SlideIn direction="left" delay={0.2} className="relative z-10">
+            <p className="text-xs text-white/60">One workspace for patients, doctors and admins.</p>
+          </SlideIn>
         </div>
 
         {/* Form panel */}
         <div className="flex flex-col justify-center bg-card px-8 py-10 md:px-12 md:py-12">
+          <SlideIn direction="up" delay={0.05}>
           <div className="space-y-6">
             {/* Brand lockup for small screens — the brand panel is hidden there */}
             <div className="flex items-center gap-2.5 md:hidden">
@@ -262,7 +270,7 @@ function LoginPageInner() {
                 type="button"
                 aria-pressed={portal === "patient"}
                 onClick={() => { setPortal("patient"); setError(null) }}
-                className={`rounded-xl px-4 py-2.5 text-sm font-semibold transition-all duration-200 ${
+                className={`rounded-xl px-4 py-2.5 text-sm font-semibold transition-all duration-200 active:scale-[0.98] ${
                   portal === "patient" ? "bg-primary text-primary-foreground shadow-md" : "text-muted-foreground hover:bg-background/60 hover:text-foreground"
                 }`}
               >
@@ -272,7 +280,7 @@ function LoginPageInner() {
                 type="button"
                 aria-pressed={portal === "doctor"}
                 onClick={() => { setPortal("doctor"); setError(null) }}
-                className={`rounded-xl px-4 py-2.5 text-sm font-semibold transition-all duration-200 ${
+                className={`rounded-xl px-4 py-2.5 text-sm font-semibold transition-all duration-200 active:scale-[0.98] ${
                   portal === "doctor" ? "bg-primary text-primary-foreground shadow-md" : "text-muted-foreground hover:bg-background/60 hover:text-foreground"
                 }`}
               >
@@ -371,7 +379,7 @@ function LoginPageInner() {
                     type="button"
                     onClick={() => handleOAuth("google")}
                     disabled={oauthLoading !== null}
-                    className="flex items-center justify-center gap-2 rounded-xl border border-border bg-card px-4 py-2.5 text-sm font-medium text-foreground transition-all duration-200 hover:-translate-y-px hover:bg-muted hover:shadow-md disabled:opacity-60"
+                    className="flex items-center justify-center gap-2 rounded-xl border border-border bg-card px-4 py-2.5 text-sm font-medium text-foreground transition-all duration-200 hover:-translate-y-px hover:bg-muted hover:shadow-md active:scale-[0.98] disabled:opacity-60"
                   >
                     <svg className="h-4 w-4" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.99.66-2.25 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.85A11 11 0 0 0 12 23z"/><path fill="#FBBC05" d="M5.84 14.1a6.6 6.6 0 0 1 0-4.2V7.05H2.18a11 11 0 0 0 0 9.9z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1a11 11 0 0 0-9.82 6.05l3.66 2.85C6.71 7.31 9.14 5.38 12 5.38z"/></svg>
                     Google
@@ -392,6 +400,7 @@ function LoginPageInner() {
               </Link>
             </div>
           </div>
+          </SlideIn>
         </div>
       </div>
     </motion.div>

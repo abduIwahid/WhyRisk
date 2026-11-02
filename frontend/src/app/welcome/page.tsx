@@ -119,7 +119,7 @@ export default function WelcomePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       {/* Header */}
-      <header className="sticky top-0 z-40 border-b border-border bg-background/95">
+      <header className="sticky top-0 z-40 border-b border-border bg-background shadow-[0_1px_12px_rgba(13,43,62,0.06)]">
         <div className="mx-auto flex max-w-6xl flex-wrap items-center gap-x-3.5 gap-y-2 px-4 py-3.5 sm:px-5">
           <Link href="/welcome" className="flex shrink-0 items-center gap-3">
             <BrandMark className="h-[38px] w-[38px] shrink-0" />

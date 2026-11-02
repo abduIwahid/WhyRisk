@@ -1,5 +1,6 @@
 import Link from "next/link"
 import BrandMark from "@/components/shared/BrandMark"
+import PublicFooterLinks from "@/components/shared/PublicFooterLinks"
 import { ModelCardLiveStatus } from "@/components/shared/ModelCardLiveStatus"
 import { severityPillClass } from "@/lib/status"
 
@@ -127,20 +128,10 @@ export default function ModelCardPage() {
             <BrandMark className="h-9 w-9 shrink-0" />
             <span className="text-lg font-bold tracking-tight text-white">WhyRisk</span>
           </span>
-          <span className="flex items-center gap-5 text-sm font-medium">
-            <Link href="/login" className="text-white underline decoration-[#2E7FA8] decoration-2 underline-offset-4 hover:opacity-80">
-              Sign in
-            </Link>
-            <Link href="/signup" className="text-white underline decoration-[#2E7FA8] decoration-2 underline-offset-4 hover:opacity-80">
-              Create account
-            </Link>
-            <Link href="/privacy" className="text-white underline decoration-[#2E7FA8] decoration-2 underline-offset-4 hover:opacity-80">
-              Privacy
-            </Link>
-            <Link href="/terms" className="text-white underline decoration-[#2E7FA8] decoration-2 underline-offset-4 hover:opacity-80">
-              Terms
-            </Link>
-          </span>
+          <PublicFooterLinks
+            className="flex flex-wrap items-center gap-5 text-sm font-medium"
+            linkClassName="text-white underline decoration-[#2E7FA8] decoration-2 underline-offset-4 hover:opacity-80"
+          />
           <p className="max-w-[640px] text-xs leading-relaxed opacity-75">
             WhyRisk is an experimental clinical decision-support and research tool. It is not a certified medical
             device and does not replace professional diagnosis. Built during a machine-learning internship at Ezitech

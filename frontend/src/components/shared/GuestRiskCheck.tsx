@@ -225,7 +225,7 @@ export function GuestRiskCheck() {
             {result.severity} risk
           </span>
         </div>
-        <div className="mt-3 flex flex-wrap items-center gap-3">
+        <div className="mt-3 flex flex-wrap items-center justify-center gap-3 text-center">
           <span className="font-display text-[52px] leading-none">
             {result.probability.toFixed(2)}{" "}
             <small className="font-sans text-sm font-semibold text-muted-foreground">/ 1.00 probability ({pct}%)</small>

@@ -9,6 +9,7 @@ import { Parallax } from "@/components/motion/Parallax"
 import { ScrollTrace } from "@/components/motion/ScrollTrace"
 import { TiltCard } from "@/components/motion/TiltCard"
 import BrandMark from "@/components/shared/BrandMark"
+import PublicFooterLinks from "@/components/shared/PublicFooterLinks"
 import { GuestRiskCheck } from "@/components/shared/GuestRiskCheck"
 import { SlideIn } from "@/components/shared/SlideIn"
 import { StatsBand } from "@/components/shared/StatsBand"
@@ -497,23 +498,10 @@ export default function WelcomePage() {
         <div aria-hidden="true" className="absolute inset-0 bg-foreground/[0.94]" />
         <div className="relative z-10 mx-auto flex max-w-[1400px] flex-wrap items-center justify-between gap-3.5 px-5">
           <span className="font-display text-lg uppercase tracking-wide text-white">WhyRisk</span>
-          <span className="flex items-center gap-4">
-            <Link href="/login" className="text-xs font-semibold text-white underline decoration-[#2E7FA8] decoration-2 underline-offset-4 hover:opacity-80">
-              Sign in
-            </Link>
-            <a href="/model-card" className="text-xs font-semibold text-white underline decoration-[#2E7FA8] decoration-2 underline-offset-4 hover:opacity-80">
-              Model card
-            </a>
-            <Link href="/contact-us" className="text-xs font-semibold text-white underline decoration-[#2E7FA8] decoration-2 underline-offset-4 hover:opacity-80">
-              Contact
-            </Link>
-            <Link href="/privacy" className="text-xs font-semibold text-white underline decoration-[#2E7FA8] decoration-2 underline-offset-4 hover:opacity-80">
-              Privacy
-            </Link>
-            <Link href="/terms" className="text-xs font-semibold text-white underline decoration-[#2E7FA8] decoration-2 underline-offset-4 hover:opacity-80">
-              Terms
-            </Link>
-          </span>
+          <PublicFooterLinks
+            className="flex flex-wrap items-center gap-4"
+            linkClassName="text-xs font-semibold text-white underline decoration-[#2E7FA8] decoration-2 underline-offset-4 hover:opacity-80"
+          />
           <p className="max-w-[640px] text-xs leading-relaxed opacity-75">
             WhyRisk is an experimental clinical decision-support and research tool. It is not a certified medical
             device and does not replace professional diagnosis. Built during a machine-learning internship at Ezitech

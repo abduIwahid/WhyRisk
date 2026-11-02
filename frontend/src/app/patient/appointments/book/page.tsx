@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { PulseLoader } from "@/components/shared/PulseLoader"
+import { SlideIn } from "@/components/shared/SlideIn"
 
 interface Doctor {
   id: string
@@ -180,12 +181,16 @@ export default function BookAppointmentPage() {
 
   return (
     <div className="max-w-2xl mx-auto space-y-6">
-      <div>
-        <h1 className="text-2xl font-bold tracking-tight">Book an Appointment</h1>
-        <p className="text-muted-foreground">Choose a doctor and a time that works for you.</p>
-      </div>
+      <SlideIn direction="left">
+        <div>
+          <h1 className="text-2xl font-bold tracking-tight">Book an Appointment</h1>
+          <p className="text-muted-foreground">Choose a doctor and a time that works for you.</p>
+        </div>
+      </SlideIn>
 
+      <SlideIn direction="up">
       <form onSubmit={handleSubmit} className="space-y-5 rounded-xl border bg-card p-6 shadow-card">
+        <SlideIn direction="up">
         <div className="space-y-2">
           <Label htmlFor="doctor-select">Doctor</Label>
           {loading ? (
@@ -212,7 +217,9 @@ export default function BookAppointmentPage() {
             </Select>
           )}
         </div>
+        </SlideIn>
 
+        <SlideIn direction="up" delay={0.08}>
         <div className="space-y-2">
           <Label htmlFor="date">Date &amp; time</Label>
           <input
@@ -225,7 +232,9 @@ export default function BookAppointmentPage() {
             className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base sm:text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
           />
         </div>
+        </SlideIn>
 
+        <SlideIn direction="up" delay={0.16}>
         <div className="space-y-2">
           <Label htmlFor="reason">Reason for visit (optional)</Label>
           <textarea
@@ -237,6 +246,7 @@ export default function BookAppointmentPage() {
             className="flex w-full rounded-md border border-input bg-background px-3 py-2 text-base sm:text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
           />
         </div>
+        </SlideIn>
 
         {error && <div role="alert" className="rounded-xl bg-destructive/10 px-4 py-3 text-sm text-destructive-text">{error}</div>}
         {success && <div role="status" className="rounded-xl border border-[#1E7A46]/30 bg-[#E2F0E6] px-4 py-3 text-sm text-[#1E7A46]">Appointment requested! Redirecting…</div>}
@@ -245,6 +255,7 @@ export default function BookAppointmentPage() {
           {submitting ? "Booking…" : "Request Appointment"}
         </Button>
       </form>
+      </SlideIn>
     </div>
   )
 }

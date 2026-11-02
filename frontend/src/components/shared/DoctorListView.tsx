@@ -4,6 +4,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { DataTable } from "@/components/shared/DataTable"
 import { EmptyState } from "@/components/shared/EmptyState"
+import { SlideIn } from "@/components/shared/SlideIn"
 import { Stethoscope, MapPin, Phone, Mail } from "lucide-react"
 import { availabilityInfo } from "@/lib/status"
 
@@ -123,14 +124,16 @@ export function DoctorListView({ doctors }: DoctorListViewProps) {
 
   return (
     <div className="space-y-5">
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <div>
-          <h1 className="text-2xl font-bold tracking-tight">Doctor Directory</h1>
-          <p className="text-sm text-muted-foreground mt-1">
-            Browse vetted doctors and specialists available through WhyRisk.
-          </p>
+      <SlideIn direction="left">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <h1 className="text-2xl font-bold tracking-tight">Doctor Directory</h1>
+            <p className="text-sm text-muted-foreground mt-1">
+              Browse vetted doctors and specialists available through WhyRisk.
+            </p>
+          </div>
         </div>
-      </div>
+      </SlideIn>
       {doctors.length === 0 ? (
         <EmptyState
           icon={Stethoscope}
@@ -140,12 +143,14 @@ export function DoctorListView({ doctors }: DoctorListViewProps) {
           actionHref="/admin/doctors"
         />
       ) : (
-        <div className="overflow-hidden rounded-xl border bg-card shadow-card overflow-x-auto">
-          {/* No min-w wrapper (QA Round 2, cluster 28): the table fits
-              360px because Hospital + Contact hide below sm — Doctor,
-              Status and Fee stay visible. */}
-          <DataTable columns={columns} data={doctors} />
-        </div>
+        <SlideIn direction="up">
+          <div className="overflow-hidden rounded-xl border bg-card shadow-card overflow-x-auto">
+            {/* No min-w wrapper (QA Round 2, cluster 28): the table fits
+                360px because Hospital + Contact hide below sm — Doctor,
+                Status and Fee stay visible. */}
+            <DataTable columns={columns} data={doctors} />
+          </div>
+        </SlideIn>
       )}
     </div>
   )

@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import { CalendarPlus, CalendarX2 } from "lucide-react"
 import { EmptyState } from "@/components/shared/EmptyState"
 import { PulseLoader } from "@/components/shared/PulseLoader"
+import { SlideIn } from "@/components/shared/SlideIn"
 import { appointmentStatusClass } from "@/lib/status"
 import { fmtDateTime } from "@/lib/dates"
 
@@ -103,18 +104,20 @@ export default function MyAppointmentsPage() {
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <div>
-          <h1 className="text-2xl font-bold tracking-tight">My Appointments</h1>
-          <p className="text-muted-foreground">View and manage your bookings.</p>
+      <SlideIn direction="left">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <h1 className="text-2xl font-bold tracking-tight">My Appointments</h1>
+            <p className="text-muted-foreground">View and manage your bookings.</p>
+          </div>
+          <Link href="/patient/appointments/book">
+            <Button className="gap-2">
+              <CalendarPlus className="h-4 w-4" />
+              Book New
+            </Button>
+          </Link>
         </div>
-        <Link href="/patient/appointments/book">
-          <Button className="gap-2">
-            <CalendarPlus className="h-4 w-4" />
-            Book New
-          </Button>
-        </Link>
-      </div>
+      </SlideIn>
 
       <div className="inline-flex rounded-2xl border bg-muted/40 p-1">
         <button
@@ -165,9 +168,10 @@ export default function MyAppointmentsPage() {
           actionHref="/patient/appointments/book"
         />
       ) : (
+        <SlideIn direction="up">
         <div className="space-y-3">
           {appointments.map((a) => (
-            <div key={a.id} className="flex flex-wrap items-center justify-between gap-3 rounded-xl border bg-card p-4 shadow-card">
+            <div key={a.id} className="flex flex-wrap items-center justify-between gap-3 rounded-xl border bg-card p-4 shadow-card transition-shadow duration-300 hover:border-primary/30 hover:shadow-premium">
               <div>
                 <p className="font-medium">
                   {a.doctor?.full_name ? `Dr. ${a.doctor.full_name}` : "Doctor to be assigned"}
@@ -213,6 +217,7 @@ export default function MyAppointmentsPage() {
             </div>
           ))}
         </div>
+        </SlideIn>
       )}
     </div>
   )

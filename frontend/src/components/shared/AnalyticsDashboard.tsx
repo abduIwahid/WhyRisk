@@ -10,6 +10,8 @@ import { TrendingUp, Users, AlertTriangle, Activity, BarChart3 } from "lucide-re
 import type { LucideIcon } from "lucide-react"
 import type { PredictionRow } from "@/lib/types"
 import { EmptyState } from "@/components/shared/EmptyState"
+import { SlideIn } from "@/components/shared/SlideIn"
+import { CountUp } from "@/components/shared/CountUp"
 import { dayKey } from "@/lib/dates"
 import { severityChartColor, ALERT_STATUS_CHART_COLORS, DISEASE_CHART_COLORS } from "@/lib/status"
 
@@ -23,16 +25,20 @@ const ALERT_STATUS_COLORS = ALERT_STATUS_CHART_COLORS
 // palette (QA Round 3, visual V6) — token values only.
 const DISEASE_COLORS = DISEASE_CHART_COLORS
 
-function StatCard({ icon: Icon, label, value, sub }: { icon: LucideIcon; label: string; value: string | number; sub?: string }) {
+function StatCard({ icon: Icon, label, value, sub }: { icon: LucideIcon; label: string; value: React.ReactNode; sub?: string }) {
+  // Plain numeric values count up (the dashboards' shared CountUp);
+  // anything formatted — locale separators, units, the "—" failure
+  // marker — renders exactly as passed.
+  const plain = typeof value === "number" || (typeof value === "string" && /^-?[\d.]+$/.test(value))
   return (
-    <div className="bg-card border rounded-xl p-5 shadow-card">
+    <div className="bg-card border rounded-xl p-5 shadow-card h-full">
       <div className="flex items-center gap-3 mb-3">
         <div className="h-9 w-9 rounded-lg bg-primary/10 flex items-center justify-center">
           <Icon className="h-4 w-4 text-primary" />
         </div>
         <p className="text-sm text-muted-foreground font-medium">{label}</p>
       </div>
-      <p className="text-2xl font-bold tracking-tight">{value}</p>
+      <p className="text-2xl font-bold tracking-tight">{plain ? <CountUp text={String(value)} /> : value}</p>
       {sub && <p className="text-xs text-muted-foreground mt-1">{sub}</p>}
     </div>
   )
@@ -40,7 +46,7 @@ function StatCard({ icon: Icon, label, value, sub }: { icon: LucideIcon; label: 
 
 function ChartCard({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <div className="bg-card border rounded-xl p-6 shadow-card">
+    <div className="bg-card border rounded-xl p-6 shadow-card h-full">
       <h2 className="font-semibold mb-4">{title}</h2>
       {children}
     </div>
@@ -176,17 +182,19 @@ export function AnalyticsDashboard({ predictions, patientsByHospital, alertStats
 
   return (
     <div className="space-y-6">
-      <div>
-        <h1 className="text-2xl font-bold tracking-tight">Clinical Analytics</h1>
-        <p className="text-sm text-muted-foreground mt-1">
-          {viewerRole === "super_admin"
-            ? "Population-level risk insights across all patients and hospitals."
-            : "Population-level risk insights across the records your role can access."}
-        </p>
-        {(predictions.length >= 2000 || alertStats.length >= 2000 || patientsByHospital.length >= 2000 || recentPredictions.length >= 2000) && (
-          <p className="text-xs text-muted-foreground mt-1">Based on the most recent 2,000 records.</p>
-        )}
-      </div>
+      <SlideIn direction="left">
+        <div>
+          <h1 className="text-2xl font-bold tracking-tight">Clinical Analytics</h1>
+          <p className="text-sm text-muted-foreground mt-1">
+            {viewerRole === "super_admin"
+              ? "Population-level risk insights across all patients and hospitals."
+              : "Population-level risk insights across the records your role can access."}
+          </p>
+          {(predictions.length >= 2000 || alertStats.length >= 2000 || patientsByHospital.length >= 2000 || recentPredictions.length >= 2000) && (
+            <p className="text-xs text-muted-foreground mt-1">Based on the most recent 2,000 records.</p>
+          )}
+        </div>
+      </SlideIn>
 
       {loadError && (
         <div role="alert" className="rounded-xl border border-destructive/30 bg-destructive/10 px-4 py-3 text-sm text-destructive-text">
@@ -206,14 +214,23 @@ export function AnalyticsDashboard({ predictions, patientsByHospital, alertStats
 
       {/* KPI Cards */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <StatCard icon={Users} label="Total Predictions" value={srcErr.predictions ? "—" : predictions.length.toLocaleString()} sub={predictions.length >= 2000 ? "Most recent 2,000" : "All time"} />
-        <StatCard icon={TrendingUp} label="Avg Risk Score (per prediction)" value={srcErr.predictions ? "—" : avgRisk !== null ? `${avgRisk}%` : "—"} sub={unscoredCount > 0 ? `Averaged across scored predictions; ${unscoredCount} had no recorded score` : "Averaged across predictions, not patients"} />
-        <StatCard icon={AlertTriangle} label="Critical Alerts" value={srcErr.alerts ? "—" : criticalCount} sub="All statuses — the Dashboard counts new ones only" />
-        <StatCard icon={Activity} label="Hospitals Tracked" value={srcErr.hospitals ? "—" : hospitalData.length} sub="Facilities with registered patients" />
+        <SlideIn direction="up" className="h-full">
+          <StatCard icon={Users} label="Total Predictions" value={srcErr.predictions ? "—" : predictions.length.toLocaleString()} sub={predictions.length >= 2000 ? "Most recent 2,000" : "All time"} />
+        </SlideIn>
+        <SlideIn direction="up" delay={0.06} className="h-full">
+          <StatCard icon={TrendingUp} label="Avg Risk Score (per prediction)" value={srcErr.predictions ? "—" : avgRisk !== null ? <><CountUp text={avgRisk} />%</> : "—"} sub={unscoredCount > 0 ? `Averaged across scored predictions; ${unscoredCount} had no recorded score` : "Averaged across predictions, not patients"} />
+        </SlideIn>
+        <SlideIn direction="up" delay={0.12} className="h-full">
+          <StatCard icon={AlertTriangle} label="Critical Alerts" value={srcErr.alerts ? "—" : criticalCount} sub="All statuses — the Dashboard counts new ones only" />
+        </SlideIn>
+        <SlideIn direction="up" delay={0.18} className="h-full">
+          <StatCard icon={Activity} label="Hospitals Tracked" value={srcErr.hospitals ? "—" : hospitalData.length} sub="Facilities with registered patients" />
+        </SlideIn>
       </div>
 
       <div className="grid md:grid-cols-2 gap-6">
         {/* Severity Distribution Pie */}
+        <SlideIn direction="up" className="h-full">
         <ChartCard title="Risk Severity Distribution">
           {srcErr.predictions ? (
             <ChartEmpty title="Severity data could not be loaded" description="Reload the page to try again." />
@@ -236,8 +253,10 @@ export function AnalyticsDashboard({ predictions, patientsByHospital, alertStats
             </>
           )}
         </ChartCard>
+        </SlideIn>
 
         {/* Disease Distribution Bar */}
+        <SlideIn direction="up" delay={0.08} className="h-full">
         <ChartCard title="Disease Distribution">
           {srcErr.predictions ? (
             <ChartEmpty title="Disease data could not be loaded" description="Reload the page to try again." />
@@ -262,8 +281,10 @@ export function AnalyticsDashboard({ predictions, patientsByHospital, alertStats
             </>
           )}
         </ChartCard>
+        </SlideIn>
 
         {/* 30-Day Risk Trend Area Chart — solid low-opacity fill, no gradient */}
+        <SlideIn direction="up" className="h-full">
         <ChartCard title="30-Day Average Risk Score Trend">
           {srcErr.recent ? (
             <ChartEmpty title="Trend data could not be loaded" description="Reload the page to try again." />
@@ -287,8 +308,10 @@ export function AnalyticsDashboard({ predictions, patientsByHospital, alertStats
             </>
           )}
         </ChartCard>
+        </SlideIn>
 
         {/* Patients per Hospital Bar */}
+        <SlideIn direction="up" delay={0.08} className="h-full">
         <ChartCard title="Patient Volume by Hospital">
           {srcErr.hospitals ? (
             <ChartEmpty title="Hospital data could not be loaded" description="Reload the page to try again." />
@@ -312,10 +335,12 @@ export function AnalyticsDashboard({ predictions, patientsByHospital, alertStats
             </>
           )}
         </ChartCard>
+        </SlideIn>
       </div>
 
       {/* Alert Status + Severity Radar — Full Width */}
       <div className="grid md:grid-cols-2 gap-6">
+        <SlideIn direction="up" className="h-full">
         <ChartCard title="Alert Status Breakdown">
           {srcErr.alerts ? (
             <ChartEmpty title="Alert data could not be loaded" description="Reload the page to try again." />
@@ -337,7 +362,9 @@ export function AnalyticsDashboard({ predictions, patientsByHospital, alertStats
             </>
           )}
         </ChartCard>
+        </SlideIn>
 
+        <SlideIn direction="up" delay={0.08} className="h-full">
         <ChartCard title="Severity Radar by Disease">
           {srcErr.predictions ? (
             <ChartEmpty title="Radar data could not be loaded" description="Reload the page to try again." />
@@ -365,6 +392,7 @@ export function AnalyticsDashboard({ predictions, patientsByHospital, alertStats
             </>
           )}
         </ChartCard>
+        </SlideIn>
       </div>
     </div>
   )

@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { ArrowLeft, MapPin, Phone, Mail, CheckCircle2 } from "lucide-react"
 import { availabilityInfo } from "@/lib/status"
+import { SlideIn } from "@/components/shared/SlideIn"
 
 function initialsOf(name: string): string {
   return (name.split(" ").filter(Boolean).map((p) => p[0]).slice(0, 2).join("") || "D").toUpperCase()
@@ -58,20 +59,23 @@ export function DoctorDetailView({ doctor }: DoctorDetailViewProps) {
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-        <div>
-          <h1 className="text-2xl font-bold tracking-tight">{displayName}</h1>
-          <p className="text-sm text-muted-foreground mt-1">{doctor.specialty} • {doctor.hospitals?.name || "No hospital on file"}</p>
+      <SlideIn direction="left">
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <h1 className="text-2xl font-bold tracking-tight">{displayName}</h1>
+            <p className="text-sm text-muted-foreground mt-1">{doctor.specialty} • {doctor.hospitals?.name || "No hospital on file"}</p>
+          </div>
+          <Link href="/doctors">
+            <Button variant="outline" className="h-10">
+              <ArrowLeft className="mr-2 h-4 w-4" /> Back to doctors
+            </Button>
+          </Link>
         </div>
-        <Link href="/doctors">
-          <Button variant="outline" className="h-10">
-            <ArrowLeft className="mr-2 h-4 w-4" /> Back to doctors
-          </Button>
-        </Link>
-      </div>
+      </SlideIn>
 
       <div className="grid gap-6 lg:grid-cols-3">
-        <Card className="lg:col-span-1">
+        <SlideIn direction="up" className="lg:col-span-1 h-full">
+        <Card className="h-full">
           <CardHeader>
             <CardTitle>Doctor Profile</CardTitle>
             <CardDescription>Contact details and availability.</CardDescription>
@@ -126,8 +130,10 @@ export function DoctorDetailView({ doctor }: DoctorDetailViewProps) {
             </div>
           </CardContent>
         </Card>
+        </SlideIn>
 
         <div className="lg:col-span-2 space-y-6">
+          <SlideIn direction="up" delay={0.08}>
           <Card>
             <CardHeader>
               <CardTitle>About {displayName}</CardTitle>
@@ -158,6 +164,7 @@ export function DoctorDetailView({ doctor }: DoctorDetailViewProps) {
               </div>
             </CardContent>
           </Card>
+          </SlideIn>
         </div>
       </div>
     </div>

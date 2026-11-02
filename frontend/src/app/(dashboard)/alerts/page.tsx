@@ -5,6 +5,7 @@ import { createClient } from "@/lib/supabase/client"
 import { RiskBadge, RiskSeverity } from "@/components/shared/RiskBadge"
 import { EmptyState } from "@/components/shared/EmptyState"
 import { PulseLoader } from "@/components/shared/PulseLoader"
+import { SlideIn } from "@/components/shared/SlideIn"
 import type { PatientDemographics } from "@/lib/types"
 import { fmtDateTime } from "@/lib/dates"
 import { severityRowClass } from "@/lib/status"
@@ -174,6 +175,7 @@ export default function AlertsPage() {
 
   return (
     <div className="space-y-6 max-w-5xl mx-auto">
+      <SlideIn direction="left">
       <div className="flex items-start justify-between">
         <div>
           <h1 className="text-2xl font-bold tracking-tight">Alerts Center</h1>
@@ -196,6 +198,7 @@ export default function AlertsPage() {
           </div>
         )}
       </div>
+      </SlideIn>
 
       {ackError && (
         <div role="alert" className="rounded-xl border border-destructive/30 bg-destructive/10 px-4 py-3 text-sm text-destructive-text">
@@ -204,6 +207,7 @@ export default function AlertsPage() {
       )}
 
       {/* Active Alerts */}
+      <SlideIn direction="up">
       <Card>
         <CardHeader>
           <div className="flex items-center gap-2">
@@ -236,12 +240,12 @@ export default function AlertsPage() {
             />
           ) : (
             <div className="space-y-3">
-              {alerts.map((alert) => {
+              {alerts.map((alert, index) => {
                 const name = getPatientName(alert)
                 const mrn = alert.patients?.mrn || ""
                 return (
+                  <SlideIn key={alert.id} direction="up" delay={Math.min(index * 0.05, 0.25)}>
                   <div
-                    key={alert.id}
                     className={`flex flex-col sm:flex-row sm:items-center justify-between p-4 border rounded-xl transition-colors ${severityRowClass(alert.severity)}`}
                   >
                     <div className="space-y-1.5 mb-4 sm:mb-0">
@@ -273,12 +277,14 @@ export default function AlertsPage() {
                       </Button>
                     </div>
                   </div>
+                  </SlideIn>
                 )
               })}
             </div>
           )}
         </CardContent>
       </Card>
+      </SlideIn>
 
       {ackLoadError && (
         <p role="note" className="text-xs text-muted-foreground">
@@ -288,6 +294,7 @@ export default function AlertsPage() {
 
       {/* Recently Acknowledged */}
       {acknowledged.length > 0 && (
+        <SlideIn direction="up" delay={0.08}>
         <Card>
           <CardHeader>
             <div className="flex items-center gap-2">
@@ -318,6 +325,7 @@ export default function AlertsPage() {
             </div>
           </CardContent>
         </Card>
+        </SlideIn>
       )}
     </div>
   )

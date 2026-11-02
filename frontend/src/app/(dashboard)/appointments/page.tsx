@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button"
 import { createClient } from "@/lib/supabase/client"
 import { EmptyState } from "@/components/shared/EmptyState"
 import { PulseLoader } from "@/components/shared/PulseLoader"
+import { SlideIn } from "@/components/shared/SlideIn"
 import { appointmentStatusClass } from "@/lib/status"
 
 type Appointment = {
@@ -88,13 +89,15 @@ export default function AppointmentsPage() {
 
   return (
     <div className="space-y-6">
-      <div>
-        <h1 className="font-heading text-2xl font-bold">Appointments</h1>
-        <p className="mt-1 text-sm text-muted-foreground">Review requests and manage your patient schedule.</p>
-        {appointments.length >= 200 && (
-          <p className="mt-1 text-xs text-muted-foreground">Showing the 200 most recent appointments.</p>
-        )}
-      </div>
+      <SlideIn direction="left">
+        <div>
+          <h1 className="font-heading text-2xl font-bold">Appointments</h1>
+          <p className="mt-1 text-sm text-muted-foreground">Review requests and manage your patient schedule.</p>
+          {appointments.length >= 200 && (
+            <p className="mt-1 text-xs text-muted-foreground">Showing the 200 most recent appointments.</p>
+          )}
+        </div>
+      </SlideIn>
 
       <div className="flex flex-wrap gap-2">
         {["All", "Requested", "Confirmed", "Completed", "Cancelled"].map((f) => (
@@ -135,9 +138,10 @@ export default function AppointmentsPage() {
           actionHref="/patients"
         />
       ) : (
+        <SlideIn direction="up">
         <div className="space-y-3">
           {filtered.map((a) => (
-            <div key={a.id} className="rounded-xl border border-border bg-card p-5 shadow-card">
+            <div key={a.id} className="rounded-xl border border-border bg-card p-5 shadow-card transition-shadow duration-300 hover:border-primary/30 hover:shadow-premium">
               <div className="flex flex-wrap items-start justify-between gap-4">
                 <div className="space-y-1.5">
                   <div className="flex items-center gap-2">
@@ -187,6 +191,7 @@ export default function AppointmentsPage() {
             </div>
           ))}
         </div>
+        </SlideIn>
       )}
     </div>
   )

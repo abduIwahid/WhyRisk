@@ -123,8 +123,9 @@ export function DashboardClientView({
           <Link key={i} href={stat.href} className={i === 4 ? "col-span-2 sm:col-span-1" : undefined}>
             <motion.div
               variants={statCardVariants}
-              whileHover={{ y: -4 }}
-              className="group bg-card border rounded-xl p-5 shadow-card transition-shadow duration-300 cursor-pointer hover:shadow-premium"
+              whileHover={{ y: -6 }}
+              whileTap={{ scale: 0.98 }}
+              className="group bg-card border rounded-xl p-5 shadow-card transition-shadow duration-300 cursor-pointer hover:shadow-premium hover:border-primary/30"
             >
               <div className={`inline-flex p-2 rounded-xl ${stat.bg} mb-3 group-hover:scale-110 transition-transform`}>
                 <stat.icon className={`h-5 w-5 ${stat.color}`} />
@@ -156,7 +157,7 @@ export function DashboardClientView({
               { label: "Alerts Center", desc: "Critical & high risk alerts", href: "/alerts", icon: Bell, color: "bg-secondary text-primary group-hover:bg-primary group-hover:text-white" },
             ].map((action, i) => (
               <Link key={i} href={action.href}>
-                <div className="group flex items-start gap-3 p-3 rounded-xl border bg-background hover:border-primary/30 hover:shadow-card transition-all duration-200 cursor-pointer h-full">
+                <div className="group flex items-start gap-3 p-3 rounded-xl border bg-background hover:border-primary/40 hover:shadow-premium hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-200 cursor-pointer h-full">
                   <div className={`p-2 rounded-xl transition-all duration-200 flex-shrink-0 ${action.color}`}>
                     <action.icon className="h-4 w-4" />
                   </div>

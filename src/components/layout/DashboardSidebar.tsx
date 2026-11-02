@@ -171,7 +171,7 @@ export function DashboardSidebar({ onClose, className }: DashboardSidebarProps) 
                       {!isActive && (
                         <span
                           aria-hidden
-                          className="absolute left-0 top-1/2 h-0 w-1 -translate-y-1/2 rounded-r-md bg-primary transition-all duration-300 group-hover:h-6"
+                          className="absolute left-0 top-1/2 h-0 w-1.5 -translate-y-1/2 rounded-r-md bg-primary transition-all duration-300 group-hover:h-7"
                         />
                       )}
                       <div className="flex items-center gap-3 transition-transform duration-300 group-hover:translate-x-0.5">

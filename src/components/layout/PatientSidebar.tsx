@@ -111,7 +111,7 @@ export function PatientSidebar({ onClose, className }: PatientSidebarProps) {
                   {!isActive && (
                     <span
                       aria-hidden
-                      className="absolute left-0 top-1/2 h-0 w-1 -translate-y-1/2 rounded-r-md bg-primary transition-all duration-300 group-hover:h-6"
+                      className="absolute left-0 top-1/2 h-0 w-1.5 -translate-y-1/2 rounded-r-md bg-primary transition-all duration-300 group-hover:h-7"
                     />
                   )}
                   <item.icon className={cn("h-4 w-4 transition-transform duration-300", isActive ? "scale-110" : "group-hover:scale-110 group-hover:text-primary")} />

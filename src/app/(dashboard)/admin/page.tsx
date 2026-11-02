@@ -87,7 +87,7 @@ export default async function AdminOverviewPage() {
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {stats.map((s, i) => (
           <SlideIn key={s.label} direction="up" delay={i * 0.08} className="h-full">
-            <div className="h-full rounded-xl border border-border bg-card p-5 shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-premium">
+            <div className="h-full rounded-xl border border-border bg-card p-5 shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-premium hover:border-primary/30 active:scale-[0.98]">
               <div className={`flex h-10 w-10 items-center justify-center rounded-xl ${s.accent}`}>
                 <s.icon className="h-5 w-5" />
               </div>

@@ -78,7 +78,7 @@ export default function PatientDashboardPage() {
         <SlideIn direction="up" className="h-full">
         <Link
           href="/patient/risk"
-          className="group flex h-full items-center justify-between rounded-xl border bg-card p-6 shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-premium hover:border-primary/40"
+          className="group flex h-full items-center justify-between rounded-xl border bg-card p-6 shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-premium hover:border-primary/40 active:scale-[0.98]"
         >
           <div className="flex items-center gap-4">
             <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 text-primary">
@@ -96,7 +96,7 @@ export default function PatientDashboardPage() {
         <SlideIn direction="up" delay={0.08} className="h-full">
         <Link
           href="/patient/appointments/book"
-          className="group flex h-full items-center justify-between rounded-xl border bg-card p-6 shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-premium hover:border-primary/40"
+          className="group flex h-full items-center justify-between rounded-xl border bg-card p-6 shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-premium hover:border-primary/40 active:scale-[0.98]"
         >
           <div className="flex items-center gap-4">
             <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 text-primary">
@@ -114,7 +114,7 @@ export default function PatientDashboardPage() {
         <SlideIn direction="up" delay={0.16} className="h-full">
         <Link
           href="/patient/assistant"
-          className="group flex h-full items-center justify-between rounded-xl border bg-card p-6 shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-premium hover:border-primary/40"
+          className="group flex h-full items-center justify-between rounded-xl border bg-card p-6 shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-premium hover:border-primary/40 active:scale-[0.98]"
         >
           <div className="flex items-center gap-4">
             <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 text-primary">

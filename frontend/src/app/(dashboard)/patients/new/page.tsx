@@ -233,7 +233,7 @@ export default function NewPatientPage() {
       const earlyWarnings: string[] = []
       if (assignmentError && assignmentError.code !== "23505") {
         console.error("Assignment insert failed:", assignmentError)
-        earlyWarnings.push("the assignment to your patient list could not be saved — the record exists, but it may not appear in your Risk Queue")
+        earlyWarnings.push("the assignment to your patient list could not be saved, the record exists, but it may not appear in your Risk Queue")
       }
 
       // 4. Insert Vitals
@@ -327,7 +327,7 @@ export default function NewPatientPage() {
           if (expErr) throw new Error(expErr.message)
           return null
         } catch {
-          return "its SHAP explanation could not be stored — the detail page will show this score without factor contributions"
+          return "its SHAP explanation could not be stored, the detail page will show this score without factor contributions"
         }
       })()
 
@@ -340,7 +340,7 @@ export default function NewPatientPage() {
       // the detail page's "Inputs used" disclosure — worth a warning.
       if (featuresRes.error || !featuresRes.data || featuresRes.data.length === 0) {
         if (featuresRes.error) console.warn("Prediction feature snapshot was not stored:", featuresRes.error.message)
-        warnings.push("its input snapshot could not be stored — the detail page will classify its inputs conservatively")
+        warnings.push("its input snapshot could not be stored, the detail page will classify its inputs conservatively")
       }
       if (explainWarning) warnings.push(explainWarning)
 
@@ -427,7 +427,7 @@ export default function NewPatientPage() {
               </CardTitle>
               <CardDescription>
                 The details you record here are scored by the LightGBM model. Anything not recorded
-                uses documented population defaults — the score&apos;s detail page lists exactly
+                uses documented population defaults, the score&apos;s detail page lists exactly
                 which inputs were recorded and which were defaults.
               </CardDescription>
             </CardHeader>
@@ -483,7 +483,7 @@ export default function NewPatientPage() {
                   <div className="h-6 w-6 rounded-full bg-primary/10 flex items-center justify-center">
                     <span className="text-xs font-bold text-primary">1</span>
                   </div>
-                  <h3 className="text-sm font-bold uppercase tracking-widest text-primary">Patient Demographics</h3>
+                  <h3 className="text-sm font-medium text-primary">Patient Demographics</h3>
                 </div>
                 <div className="grid gap-5 sm:grid-cols-2">
                   <div className="space-y-2">
@@ -523,7 +523,7 @@ export default function NewPatientPage() {
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="dob" className="font-semibold">Date of Birth <span className="font-normal text-muted-foreground">(optional — wins over age)</span></Label>
+                    <Label htmlFor="dob" className="font-semibold">Date of Birth <span className="font-normal text-muted-foreground">(optional, wins over age)</span></Label>
                     <Input
                       id="dob"
                       type="date"
@@ -564,7 +564,7 @@ export default function NewPatientPage() {
                   <div className="h-6 w-6 rounded-full bg-primary/10 flex items-center justify-center">
                     <span className="text-xs font-bold text-primary">2</span>
                   </div>
-                  <h3 className="text-sm font-bold uppercase tracking-widest text-primary flex items-center gap-2">
+                  <h3 className="text-sm font-medium text-primary flex items-center gap-2">
                     <HeartPulse className="h-4 w-4" /> Vitals & Health
                   </h3>
                 </div>
@@ -608,11 +608,11 @@ export default function NewPatientPage() {
                         <SelectValue placeholder="Select general health" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="1">1 — Excellent</SelectItem>
-                        <SelectItem value="2">2 — Very Good</SelectItem>
-                        <SelectItem value="3">3 — Good</SelectItem>
-                        <SelectItem value="4">4 — Fair</SelectItem>
-                        <SelectItem value="5">5 — Poor</SelectItem>
+                        <SelectItem value="1">1: Excellent</SelectItem>
+                        <SelectItem value="2">2: Very Good</SelectItem>
+                        <SelectItem value="3">3: Good</SelectItem>
+                        <SelectItem value="4">4: Fair</SelectItem>
+                        <SelectItem value="5">5: Poor</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
@@ -628,7 +628,7 @@ export default function NewPatientPage() {
                     <div className="h-6 w-6 rounded-full bg-primary/10 flex items-center justify-center">
                       <span className="text-xs font-bold text-primary">3</span>
                     </div>
-                    <h3 className="text-sm font-bold uppercase tracking-widest text-primary flex items-center gap-2">
+                    <h3 className="text-sm font-medium text-primary flex items-center gap-2">
                       <TestTube2 className="h-4 w-4" /> Laboratory Results
                     </h3>
                   </div>
@@ -741,7 +741,7 @@ export default function NewPatientPage() {
                   <div className="h-6 w-6 rounded-full bg-primary/10 flex items-center justify-center">
                     <span className="text-xs font-bold text-primary">4</span>
                   </div>
-                  <h3 className="text-sm font-bold uppercase tracking-widest text-primary flex items-center gap-2">
+                  <h3 className="text-sm font-medium text-primary flex items-center gap-2">
                     <CheckCircle2 className="h-4 w-4" /> Medical History & Lifestyle
                   </h3>
                 </div>

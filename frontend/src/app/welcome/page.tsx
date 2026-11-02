@@ -2,7 +2,7 @@ import Image from "next/image"
 import Link from "next/link"
 import type { CSSProperties } from "react"
 import type { Metadata } from "next"
-import { Activity, ArrowRight, CalendarCheck, ListChecks, ShieldAlert } from "lucide-react"
+import { ArrowRight, BrainCircuit, CalendarCheck, ShieldAlert, ShieldCheck } from "lucide-react"
 import BrandMark from "@/components/shared/BrandMark"
 import { GuestRiskCheck } from "@/components/shared/GuestRiskCheck"
 import { SlideIn } from "@/components/shared/SlideIn"
@@ -13,9 +13,9 @@ import { SEVERITY_HEX } from "@/lib/status"
 export const metadata: Metadata = {
   // Absolute title: the root template would otherwise append "— WhyRisk"
   // to a title that already starts with the brand name.
-  title: { absolute: "WhyRisk — Know your risk. See exactly why." },
+  title: { absolute: "WhyRisk: Know your risk. See exactly why." },
   description:
-    "WhyRisk estimates diabetes risk with a trained machine-learning model and shows the reasons behind the score — SHAP explanations, stored per prediction.",
+    "WhyRisk estimates diabetes risk with a trained machine-learning model and shows the reasons behind the score, SHAP explanations, stored per prediction.",
   alternates: { canonical: "/welcome" },
   openGraph: {
     // Restated in full (QA Round 3, SEO H1): Next REPLACES the
@@ -24,15 +24,15 @@ export const metadata: Metadata = {
     type: "website",
     siteName: "WhyRisk",
     url: "/welcome",
-    title: "WhyRisk — Know your risk. See exactly why.",
+    title: "WhyRisk: Know your risk. See exactly why.",
     description:
-      "Diabetes risk prediction with explainable machine learning — every score shows its reasons.",
+      "Diabetes risk prediction with explainable machine learning, every score shows its reasons.",
     images: [
       {
         url: "/opengraph-image",
         width: 1200,
         height: 630,
-        alt: "WhyRisk — Know your risk. See exactly why.",
+        alt: "WhyRisk: Know your risk. See exactly why.",
       },
     ],
   },
@@ -49,7 +49,7 @@ const jsonLd = {
   offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
   url: "https://whyrisk.vercel.app/welcome",
   description:
-    "Diabetes risk prediction with explainable machine learning — every score shows its reasons.",
+    "Diabetes risk prediction with explainable machine learning, every score shows its reasons.",
 }
 
 /* ------------------------------------------------------------------ */
@@ -63,7 +63,7 @@ const jsonLd = {
 const FACTS = [
   {
     value: "0.8222",
-    text: "AUC-ROC of the diabetes model on a held-out test split of the balanced dataset — the only accuracy figure we claim",
+    text: "AUC-ROC of the diabetes model on a held-out test split of the balanced dataset, the only accuracy figure we claim",
   },
   {
     value: "1",
@@ -75,25 +75,25 @@ const FACTS = [
   },
   {
     value: "SHAP",
-    text: "Predictions ship with a SHAP explanation — each score shows the factors behind it",
+    text: "Predictions ship with a SHAP explanation, each score shows the factors behind it",
   },
 ]
 
 const CAPABILITIES = [
   {
-    icon: Activity,
+    icon: BrainCircuit,
     title: "Risk prediction",
-    text: "A LightGBM model trained on CDC survey data estimates diabetes risk from 21 everyday health indicators — no lab visit needed for a first screening.",
+    text: "A LightGBM model trained on CDC survey data estimates diabetes risk from 21 everyday health indicators, no lab visit needed for a first screening.",
   },
   {
-    icon: ListChecks,
+    icon: ShieldCheck,
     title: "The reason, not just the score",
-    text: "Every result lists the factors that pushed the score up or down, with their weights. A doctor can argue with it — that is the point.",
+    text: "Every result lists the factors that pushed the score up or down, with their weights. A doctor can argue with it, that is the point.",
   },
   {
     icon: CalendarCheck,
     title: "Records & appointments",
-    text: "Patient and doctor portals with role-based access, appointment booking and an admin overview — protected by row-level security.",
+    text: "Patient and doctor portals with role-based access, appointment booking and an admin overview, protected by row-level security.",
   },
 ]
 
@@ -129,7 +129,7 @@ export default function WelcomePage() {
               {/* Tagline hidden below sm: at 360px the header row
                   (brand + tagline + CTA) overflowed the screen
                   (QA Round 2, cluster 28). */}
-              <span className="mt-1 hidden font-mono text-[9.5px] font-medium uppercase tracking-[2px] text-brand-text sm:block">
+              <span className="mt-1 hidden text-[9.5px] font-medium text-brand-text sm:block">
                 Risk, explained
               </span>
             </span>
@@ -172,7 +172,7 @@ export default function WelcomePage() {
           />
           <div aria-hidden="true" className="absolute inset-0 bg-[#0D2B3E]/70" />
           <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-r from-[#0D2B3E]/95 via-[#0D2B3E]/85 to-[#0D2B3E]/60" />
-          <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-[#0D2B3E]/60 via-transparent to-[#0D2B3E]/25" />
+          <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-[#0D2B3E]/80 via-transparent to-[#0D2B3E]/25" />
           <svg
             aria-hidden="true"
             viewBox="0 0 1440 160"
@@ -217,7 +217,7 @@ export default function WelcomePage() {
               style={{ "--d": "200ms" } as CSSProperties}
             >
               WhyRisk helps care teams estimate a patient&apos;s diabetes risk with a trained machine-learning
-              model — and shows the reasons behind every score, in plain language. Assessments are run by your
+              model, and shows the reasons behind every score, in plain language. Assessments are run by your
               care team; patients use the portal for appointments, their profile and their latest risk assessment. No black box. No invented
               numbers.
             </p>
@@ -236,13 +236,13 @@ export default function WelcomePage() {
               </a>
             </div>
             <div
-              className="reveal reveal-slow mt-7 flex items-start gap-2.5 border-l-[3px] border-[#D97706] pl-4 text-[13.5px] leading-relaxed text-[#F2B25C]"
+              className="reveal reveal-slow mt-7 flex items-start gap-2.5 rounded-lg border border-[#D97706]/35 bg-white/5 px-4 py-3 text-[13.5px] leading-relaxed text-[#F2B25C]"
               style={{ "--d": "430ms" } as CSSProperties}
             >
               <ShieldAlert className="mt-0.5 h-4 w-4 shrink-0" />
               <p>
                 <strong>Honest by design:</strong> one trained model today (diabetes). Everything else is clearly marked
-                as roadmap — this site never dresses up a guess as a prediction.
+                as roadmap, this site never dresses up a guess as a prediction.
               </p>
             </div>
           </div>
@@ -253,15 +253,16 @@ export default function WelcomePage() {
             style={{ "--d": "240ms" } as CSSProperties}
           >
             <div className="flex items-center justify-between">
-              <span className="font-mono text-[11px] uppercase tracking-[1.6px] text-muted-foreground">
-                Patient · Diabetes risk
+              <span className="flex flex-wrap items-center gap-1.5">
+                <span className="rounded-full border px-2.5 py-0.5 text-xs font-medium">Patient</span>
+                <span className="rounded-full border px-2.5 py-0.5 text-xs font-medium">Diabetes risk</span>
               </span>
               <span className="rounded-full bg-[#E2F0E6] px-2.5 py-1 text-[11px] font-bold text-[#1E7A46]">
                 Demo data
               </span>
             </div>
             <p className="mt-2 font-sans text-xl font-bold tracking-normal">Ahmed Raza, 47</p>
-            <p className="text-[13px] text-muted-foreground">Sample assessment · LightGBM model</p>
+            <p className="text-[13px] text-muted-foreground">Sample assessment, LightGBM model</p>
             <div className="mt-2 flex flex-wrap items-center gap-3">
               <span className="font-display text-[52px] leading-none">
                 0.31{" "}
@@ -274,20 +275,20 @@ export default function WelcomePage() {
             <div className="mt-2.5 h-2.5 overflow-hidden rounded-full bg-secondary">
               <div className="h-full w-[31%] rounded-full bg-brand" />
             </div>
-            <div className="flex justify-between font-mono text-[11px] text-muted-foreground">
+            <div className="flex justify-between text-[11px] font-medium text-muted-foreground">
               <span>LOW</span>
               <span>MODERATE</span>
               <span>HIGH</span>
               <span>CRITICAL</span>
             </div>
             <div className="mt-[18px] border-t border-secondary pt-3.5">
-              <p className="font-mono text-[11px] font-semibold uppercase tracking-[1.6px] text-brand-text">
-                Why this score — top factors
+              <p className="text-[11px] font-medium text-brand-text">
+                Why this score: top factors
               </p>
               <AnimatedFactorBars factors={DEMO_FACTORS} />
             </div>
             <p className="mt-4 border-t border-secondary pt-3 text-xs leading-relaxed text-muted-foreground">
-              Explanation generated with SHAP from the patient&apos;s own inputs. A screening aid — not a diagnosis.
+              Explanation generated with SHAP from the patient&apos;s own inputs. A screening aid, not a diagnosis.
             </p>
           </div>
           </div>
@@ -315,14 +316,14 @@ export default function WelcomePage() {
             <div aria-hidden="true" className="absolute inset-0 bg-background/[0.96]" />
           </div>
           <div className="relative z-10">
-          <SlideIn>
-            <h2 className="font-heading text-[30px] font-bold uppercase tracking-wide">Try the model yourself</h2>
-            <p className="mt-1.5 max-w-[640px] text-[15.5px] text-muted-foreground">
+          <SlideIn direction="up">
+            <h2 className="font-heading text-[30px] font-bold">Try the model yourself</h2>
+            <p className="mt-1.5 max-w-[640px] text-[15.5px] text-foreground/80">
               No account, nothing saved. Answer the same questions a care team would ask, and the trained
-              diabetes model scores them — the same model, not a demo imitation.
+              diabetes model scores them, the same model, not a demo imitation.
             </p>
           </SlideIn>
-          <SlideIn delay={0.1} className="mt-[22px]">
+          <SlideIn direction="up" delay={0.1} className="mt-[22px]">
             <GuestRiskCheck />
           </SlideIn>
           </div>
@@ -339,30 +340,25 @@ export default function WelcomePage() {
               alt="Glass laboratory flasks holding amber liquid in a dark laboratory"
               fill
               sizes="(min-width: 1400px) 1370px, 100vw"
-              className="scale-[1.06] object-cover blur-[4px]"
+              className="scale-[1.06] object-cover blur-[6px]"
             />
-            <div aria-hidden="true" className="absolute inset-0 bg-background/[0.96]" />
+            <div aria-hidden="true" className="absolute inset-0 bg-background/[0.97]" />
           </div>
           <div className="relative z-10">
           <SlideIn>
-            <h2 className="font-heading text-[30px] font-bold uppercase tracking-wide">What it does</h2>
+            <h2 className="font-heading text-[30px] font-bold">What it does</h2>
             <p className="mt-1.5 max-w-[640px] text-[15.5px] text-muted-foreground">
-              Three things, done properly — instead of ten things done with smoke and mirrors.
+              Three things, done properly, instead of ten things done with smoke and mirrors.
             </p>
           </SlideIn>
-          <div className="mt-[22px] border-b border-border">
+          <div className="mt-[22px] space-y-4">
             {CAPABILITIES.map((c, i) => (
               <SlideIn key={c.title} delay={i * 0.1}>
-                <div className="grid items-start gap-3 border-t border-border py-6 sm:grid-cols-[64px_1fr] md:grid-cols-[76px_minmax(210px,290px)_1fr] md:gap-6">
-                  <span className="font-display text-[34px] leading-none text-brand">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <div className="flex items-center gap-3">
-                    <div className="flex h-[42px] w-[42px] shrink-0 items-center justify-center rounded-[10px] bg-secondary text-primary">
-                      <c.icon className="h-5 w-5" />
-                    </div>
-                    <h3 className="font-sans text-[17px] font-bold tracking-normal">{c.title}</h3>
+                <div className="grid items-start gap-3 rounded-xl border bg-card p-5 shadow-card sm:grid-cols-[64px_1fr] md:grid-cols-[76px_minmax(210px,290px)_1fr] md:gap-6">
+                  <div aria-hidden="true" className="flex h-[52px] w-[52px] items-center justify-center rounded-[12px] bg-secondary text-primary">
+                    <c.icon className="h-6 w-6" />
                   </div>
+                  <h3 className="self-center font-sans text-[17px] font-bold tracking-normal">{c.title}</h3>
                   <p className="text-sm leading-relaxed text-foreground/75 sm:col-start-2 md:col-start-3">{c.text}</p>
                 </div>
               </SlideIn>
@@ -374,19 +370,19 @@ export default function WelcomePage() {
         {/* Honest scope */}
         <section id="scope" className="scroll-mt-28 md:scroll-mt-24 pb-2 pt-12 lg:pt-16">
           <SlideIn>
-            <h2 className="font-heading text-[30px] font-bold uppercase tracking-wide">What is real, what is next</h2>
+            <h2 className="font-heading text-[30px] font-bold">What is real, what is next</h2>
             <p className="mt-1.5 max-w-[640px] text-[15.5px] text-muted-foreground">
               Most health apps hide this page. We put it on the homepage.
             </p>
           </SlideIn>
           <div className="mt-[22px] grid gap-10 md:grid-cols-2 md:gap-0 md:divide-x md:divide-border">
             <SlideIn className="md:pr-10">
-              <h3 className="font-mono text-xs font-semibold uppercase tracking-[1.6px] text-[#1E7A46]">Available now</h3>
+              <h3 className="text-xs font-medium text-[#1E7A46]">Available now</h3>
               <ul className="mt-2 text-[14.5px]">
                 {[
                   ["Diabetes risk model (LightGBM)", "Trained", "bg-[#E2F0E6] text-[#1E7A46]"],
                   ["SHAP explanations", "Stored per prediction", "bg-[#E2F0E6] text-[#1E7A46]"],
-                  ["Symptom screening", "Rule-based · labelled", "bg-[#FDF0DC] text-[#A85008]"],
+                  ["Symptom screening", "Rule-based, labelled", "bg-[#FDF0DC] text-[#A85008]"],
                   ["Patient / doctor portals & appointments", "Live", "bg-[#E2F0E6] text-[#1E7A46]"],
                 ].map(([label, tag, tagClass]) => (
                   <li key={label} className="flex items-center justify-between gap-2 border-b border-foreground/[0.07] py-[9px] last:border-b-0">
@@ -396,8 +392,8 @@ export default function WelcomePage() {
                 ))}
               </ul>
             </SlideIn>
-            <SlideIn delay={0.1} className="md:pl-10">
-              <h3 className="font-mono text-xs font-semibold uppercase tracking-[1.6px] text-muted-foreground">On the roadmap</h3>
+            <SlideIn direction="up" delay={0.1} className="md:pl-10">
+              <h3 className="text-xs font-medium text-muted-foreground">On the roadmap</h3>
               <ul className="mt-2 text-[14.5px]">
                 {[
                   "Heart disease model",
@@ -420,13 +416,13 @@ export default function WelcomePage() {
 
         {/* Inside the app */}
         <section className="pb-4 pt-12 lg:pt-16">
-          <SlideIn>
-            <h2 className="font-heading text-[30px] font-bold uppercase tracking-wide">Inside the app</h2>
+          <SlideIn direction="up">
+            <h2 className="font-heading text-[30px] font-bold">Inside the app</h2>
             <p className="mt-1.5 max-w-[640px] text-[15.5px] text-muted-foreground">
-              One admin, one login — a live overview of the whole practice.
+              One admin, one login, a live overview of the whole practice.
             </p>
           </SlideIn>
-          <SlideIn delay={0.1} className="mt-[22px]">
+          <SlideIn direction="up" delay={0.1} className="mt-[22px]">
           <div className="overflow-hidden rounded-[14px] border border-border bg-card shadow-premium">
             <div className="flex items-center gap-3 border-b border-border bg-secondary/60 px-4 py-2.5">
               <span className="flex gap-1.5" aria-hidden="true">
@@ -450,7 +446,7 @@ export default function WelcomePage() {
               </ul>
             </div>
             <div className="p-5">
-              <div className="font-mono text-[11px] uppercase tracking-[1.6px] text-muted-foreground">Admin · Overview</div>
+              <div className="text-[11px] font-medium text-muted-foreground">Admin overview</div>
               <div className="mt-3 grid grid-cols-2 gap-2.5 lg:grid-cols-4">
                 {["Total patients (live count)", "Total doctors (live count)", "Pending approvals", "Appointments"].map((label) => (
                   <div key={label} className="rounded-[10px] border border-secondary bg-background p-3.5">
@@ -460,7 +456,7 @@ export default function WelcomePage() {
                 ))}
               </div>
               <p className="mt-3.5 text-[13px] text-muted-foreground">
-                Counts load live from the database — the preview leaves them blank rather than inventing numbers.
+                Counts load live from the database, the preview leaves them blank rather than inventing numbers.
               </p>
             </div>
             </div>

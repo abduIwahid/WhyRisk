@@ -54,12 +54,12 @@ export function ModelCardLiveStatus() {
 
   return (
         <section className="mt-4 rounded-xl border bg-card p-5 shadow-card">
-          <h2 className="text-xs font-bold uppercase tracking-widest text-muted-foreground">Live service status</h2>
+          <h2 className="text-xs font-medium text-muted-foreground">Live service status</h2>
           {live === null ? (
             <p className="mt-3 text-sm text-muted-foreground">Checking the ML service…</p>
           ) : !live.live ? (
             <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-              Live status unavailable — the ML service could not be reached just now. The facts above are from
+              Live status unavailable, the ML service could not be reached just now. The facts above are from
               the project documentation and stand on their own.
             </p>
           ) : (
@@ -74,7 +74,7 @@ export function ModelCardLiveStatus() {
                 <dt className="text-muted-foreground">Model</dt>
                 <dd className="font-mono font-semibold">
                   {live.modelName || "—"}
-                  {live.version ? ` · ${live.version}` : ""}
+                  {live.version ? `, ${live.version}` : ""}
                 </dd>
               </div>
               <div className="flex items-baseline justify-between gap-4 rounded-lg bg-background px-4 py-2.5">

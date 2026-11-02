@@ -143,12 +143,12 @@ export function RunPredictionButton({ patient, onResult }: RunPredictionButtonPr
         if (featuresRes.error || !featuresRes.data || featuresRes.data.length === 0) {
           if (featuresRes.error) console.warn("Prediction feature snapshot was not stored:", featuresRes.error.message)
           runWarnings.push(
-            "The prediction was saved, but its input snapshot could not be stored — the detail page will classify this score's inputs conservatively."
+            "The prediction was saved, but its input snapshot could not be stored, the detail page will classify this score's inputs conservatively."
           )
         }
         if (!explainOk) {
           runWarnings.push(
-            "The prediction was saved, but its SHAP explanation could not be stored — the detail page will show this score without factor contributions."
+            "The prediction was saved, but its SHAP explanation could not be stored, the detail page will show this score without factor contributions."
           )
         }
 
@@ -195,7 +195,7 @@ export function RunPredictionButton({ patient, onResult }: RunPredictionButtonPr
         if (dedupeErr) {
           console.error("Existing-alert check failed:", dedupeErr)
           runWarnings.push(
-            "The prediction was saved, but the existing-alert check failed — if no alert appears in the Alerts Center, run the prediction again."
+            "The prediction was saved, but the existing-alert check failed, if no alert appears in the Alerts Center, run the prediction again."
           )
         } else if (openAlerts && openAlerts.length > 0) {
           const open = openAlerts[0]
@@ -209,7 +209,7 @@ export function RunPredictionButton({ patient, onResult }: RunPredictionButtonPr
             if (upgradeErr || !upgraded || upgraded.length === 0) {
               console.error("Alert escalation failed:", upgradeErr)
               runWarnings.push(
-                "The prediction was saved, but the existing alert could not be raised to the new severity — check the Alerts Center."
+                "The prediction was saved, but the existing alert could not be raised to the new severity, check the Alerts Center."
               )
             }
           }
@@ -227,7 +227,7 @@ export function RunPredictionButton({ patient, onResult }: RunPredictionButtonPr
           if (alertErr) {
             console.error("High-risk alert could not be created:", alertErr)
             runWarnings.push(
-              "The prediction was saved, but its high-risk alert could not be created — this patient will not appear in the Alerts Center until a later run succeeds."
+              "The prediction was saved, but its high-risk alert could not be created, this patient will not appear in the Alerts Center until a later run succeeds."
             )
           }
         }
@@ -316,7 +316,7 @@ export function RunPredictionButton({ patient, onResult }: RunPredictionButtonPr
           )}
           {result.shapPayload.length > 0 && (
             <div className="rounded-xl border bg-card p-4 shadow-card">
-              <h4 className="mb-3 text-sm font-bold">Why this score — top factors</h4>
+              <h4 className="mb-3 text-sm font-bold">Why this score: top factors</h4>
               <ShapFactorList data={result.shapPayload} animate />
               {result.clinicalExplanation && (
                 <p className="mt-3 text-sm leading-relaxed text-muted-foreground">

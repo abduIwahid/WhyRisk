@@ -34,7 +34,7 @@ export default function GlobalError({
         <div style={{ maxWidth: "28rem", textAlign: "center" }}>
           <h1 style={{ fontSize: "1.5rem", marginBottom: "0.5rem" }}>WhyRisk ran into a problem</h1>
           <p style={{ fontSize: "0.875rem", lineHeight: 1.6, color: "#41525B" }}>
-            The application failed to load. Please try again — if it keeps happening, come back in a few
+            The application failed to load. Please try again, if it keeps happening, come back in a few
             minutes.
           </p>
           {error.digest && (

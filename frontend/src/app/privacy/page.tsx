@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import LegalPage, { LegalSection, LegalList } from "@/components/shared/LegalPage"
 
 export const metadata: Metadata = {
-  title: "Privacy Policy — WhyRisk",
+  title: "Privacy Policy: WhyRisk",
   description:
     "What information WhyRisk handles, why, and what choices you have. WhyRisk is an experimental clinical decision-support and research tool.",
 }
@@ -38,8 +38,8 @@ export default function PrivacyPage() {
           items={[
             <>
               <strong className="font-semibold text-foreground">Account information.</strong> When you create an
-              account we store your name, email address, role (patient, doctor, or other staff), and — depending
-              on role — professional details you provide (for doctors: speciality, licence number, qualifications)
+              account we store your name, email address, role (patient, doctor, or other staff), and, depending
+              on role, professional details you provide (for doctors: speciality, licence number, qualifications)
               or profile details (for patients: phone number, gender, date of birth).
             </>,
             <>

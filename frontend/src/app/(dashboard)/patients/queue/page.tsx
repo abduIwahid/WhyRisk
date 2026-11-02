@@ -101,7 +101,7 @@ export default async function RiskQueuePage({
         <p className="eyebrow">Doctor workspace</p>
         <h1 className="mt-1 text-2xl sm:text-3xl 2xl:text-4xl font-bold tracking-tight">High-risk queue</h1>
         <p className="mt-1 text-muted-foreground">
-          Your assigned patients, ordered by their latest risk score — highest first.
+          Your assigned patients, ordered by their latest risk score, highest first.
         </p>
       </div>
 
@@ -154,7 +154,7 @@ export default async function RiskQueuePage({
                 <span className="min-w-0 flex-1">
                   <span className="block truncate font-semibold">{patientName(patient.demographics)}</span>
                   <span className="block text-xs text-muted-foreground">
-                    <span className="font-mono">{patient.mrn || "—"}</span> · {latest.disease || "Diabetes"} ·
+                    <span className="font-mono">{patient.mrn || "—"}</span>, {latest.disease || "Diabetes"},
                     assessed {fmtDate(latest.created_at)}
                   </span>
                 </span>

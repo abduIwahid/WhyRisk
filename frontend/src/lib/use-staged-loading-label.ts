@@ -27,5 +27,5 @@ export function useStagedLoadingLabel(active: boolean, initialLabel: string): st
 
   if (!active || stage === 0) return initialLabel
   if (stage === 1) return "Waking the model…"
-  return "Still working — free models sleep when idle"
+  return "Still working, free models sleep when idle"
 }

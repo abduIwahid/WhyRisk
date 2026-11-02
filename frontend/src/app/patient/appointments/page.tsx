@@ -88,7 +88,7 @@ export default function MyAppointmentsPage() {
     const { data, error } = await query.select("id")
     if (error || !data || data.length === 0) {
       console.error("Cancel appointment failed:", error)
-      setActionError("That appointment could not be cancelled. It may already have been changed — the list has been refreshed.")
+      setActionError("That appointment could not be cancelled. It may already have been changed, the list has been refreshed.")
       setConfirmingId(null)
       load()
       return
@@ -176,10 +176,10 @@ export default function MyAppointmentsPage() {
               <div>
                 <p className="font-medium">
                   {a.doctor?.full_name ? doctorDisplayName(a.doctor.full_name) : "Doctor to be assigned"}
-                  {a.doctor?.specialty ? ` · ${a.doctor.specialty}` : ""}
+                  {a.doctor?.specialty ? `, ${a.doctor.specialty}` : ""}
                 </p>
                 <p className="text-sm text-muted-foreground">
-                  {fmtDateTime(a.scheduled_at)} {a.reason ? `· ${a.reason}` : ""}
+                  {fmtDateTime(a.scheduled_at)} {a.reason ? `, ${a.reason}` : ""}
                 </p>
               </div>
               <div className="flex items-center gap-3">

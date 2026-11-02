@@ -21,7 +21,7 @@ export default function DashboardError({
     <div role="alert" className="rounded-xl border border-destructive/20 bg-destructive/10 p-6">
       <h2 className="font-heading text-lg font-bold text-foreground">This page could not be loaded</h2>
       <p className="mt-1 text-sm leading-6 text-muted-foreground">
-        Something went wrong while loading this page. Your other pages are unaffected — try again, or use the
+        Something went wrong while loading this page. Your other pages are unaffected, try again, or use the
         sidebar to go elsewhere.
       </p>
       {error.digest && (

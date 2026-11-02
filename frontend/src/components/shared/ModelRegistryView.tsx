@@ -76,7 +76,7 @@ export function ModelRegistryView({ models, liveStatus, loadError }: {
     <div className="space-y-6 lg:space-y-8 2xl:space-y-10">
       {!registryHasLive && (
         <div role="alert" className="rounded-xl border border-[#D97706]/30 bg-[#FDF0DC] px-4 py-3 text-sm text-[#A85008]">
-          The live service reports model version <strong>{liveVersion}</strong>, but this registry has no Production entry with that version — the registry is behind what is actually serving. Register the current version so this page reflects production.
+          The live service reports model version <strong>{liveVersion}</strong>, but this registry has no Production entry with that version, the registry is behind what is actually serving. Register the current version so this page reflects production.
         </div>
       )}
       {/* Live Production Model Card */}
@@ -137,7 +137,7 @@ export function ModelRegistryView({ models, liveStatus, loadError }: {
                   note, "Accuracy" reads as real-world field accuracy. */}
               {liveStatus.metrics && (
                 <p className="text-xs text-muted-foreground">
-                  Held-out test metrics, measured on the balanced (50/50) BRFSS 2015 test split —
+                  Held-out test metrics, measured on the balanced (50/50) BRFSS 2015 test split ,
                   not field accuracy on a real-world population.
                 </p>
               )}

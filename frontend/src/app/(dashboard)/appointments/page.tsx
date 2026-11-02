@@ -148,7 +148,7 @@ export default function AppointmentsPage() {
                     <p className="font-semibold">{a.patient?.full_name || "Unknown patient"}</p>
                     <Badge className={appointmentStatusClass(a.status)} variant="outline">{a.status}</Badge>
                   </div>
-                  <p className="text-xs text-muted-foreground">{a.patient?.email}{a.patient?.contact_number ? ` · ${a.patient.contact_number}` : ""}</p>
+                  <p className="text-xs text-muted-foreground">{a.patient?.email}{a.patient?.contact_number ? `, ${a.patient.contact_number}` : ""}</p>
                   <div className="flex items-center gap-4 text-xs text-muted-foreground">
                     <span className="flex items-center gap-1"><Calendar className="h-3.5 w-3.5" /> {new Date(a.scheduled_at).toLocaleDateString()}</span>
                     <span className="flex items-center gap-1"><Clock className="h-3.5 w-3.5" /> {new Date(a.scheduled_at).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}</span>

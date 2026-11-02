@@ -166,7 +166,7 @@ export default function SignupPage() {
               <h1 className="font-heading text-3xl font-bold text-foreground">Create your account</h1>
               <p className="max-w-xl text-sm leading-6 text-muted-foreground">
                 {portal === "doctor"
-                  ? "Apply for the Doctor Portal — an administrator reviews every application before access opens."
+                  ? "Apply for the Doctor Portal, an administrator reviews every application before access opens."
                   : "Create your patient account to book appointments and manage your profile. Risk assessments are run by your care team, not from this portal."}
               </p>
             </div>
@@ -383,7 +383,7 @@ export default function SignupPage() {
 
             {GOOGLE_OAUTH_ENABLED && (
               <>
-                <div className="flex items-center gap-3 text-xs uppercase tracking-wider text-muted-foreground">
+                <div className="flex items-center gap-3 text-xs font-medium text-muted-foreground">
                   <span className="h-px flex-1 bg-border" /> or continue with <span className="h-px flex-1 bg-border" />
                 </div>
                 <div className="grid grid-cols-1 gap-3">
@@ -399,7 +399,7 @@ export default function SignupPage() {
                 </div>
                 {portal === "doctor" && (
                   <p className="text-center text-xs text-muted-foreground">
-                    Google sign-up as a doctor takes you to a short verification form right after — your account
+                    Google sign-up as a doctor takes you to a short verification form right after, your account
                     stays pending until an administrator approves it.
                   </p>
                 )}
@@ -416,7 +416,7 @@ export default function SignupPage() {
 
           <SlideIn direction="up" delay={0.12}>
           <div className="rounded-2xl border border-border bg-muted/40 p-6">
-            <p className="text-sm font-medium uppercase tracking-[0.24em] text-muted-foreground">Why join?</p>
+            <p className="text-sm font-medium text-muted-foreground">Why join?</p>
             {/* Role-aware bullets (QA Round 2, cluster 31): the patient
                 portal has no dashboards or scores to promise — patients
                 book appointments and manage their profile; assessments

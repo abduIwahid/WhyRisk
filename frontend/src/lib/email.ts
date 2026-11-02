@@ -59,7 +59,7 @@ async function sendEmail(
 ): Promise<boolean> {
   const config = emailConfig()
   if (!config) {
-    console.log("[email] RESEND_API_KEY / APP_EMAIL_FROM not set — skipping email send.")
+    console.log("[email] RESEND_API_KEY / APP_EMAIL_FROM not set, skipping email send.")
     return false
   }
 
@@ -104,7 +104,7 @@ export async function sendAppointmentConfirmationEmail(data: AppointmentEmailDat
     "",
     "If you need to change or cancel this appointment, sign in to WhyRisk and open your appointments.",
     "",
-    "— WhyRisk"
+    "WhyRisk"
   )
   return sendEmail(data.patientEmail, "Your WhyRisk appointment", lines.join("\n"))
 }
@@ -124,7 +124,7 @@ export async function sendAppointmentReminderEmail(data: AppointmentEmailData): 
     `Status: ${data.status}`,
   ]
   if (data.reason) lines.push(`Reason for visit: ${data.reason}`)
-  lines.push("", "— WhyRisk")
+  lines.push("", "WhyRisk")
   return sendEmail(data.patientEmail, "Reminder: your WhyRisk appointment", lines.join("\n"))
 }
 
@@ -142,7 +142,7 @@ export async function sendAppointmentCancellationEmail(data: AppointmentEmailDat
     "",
     "If this was a mistake, you can book a new appointment from your WhyRisk appointments page.",
     "",
-    "— WhyRisk"
+    "WhyRisk"
   )
   return sendEmail(data.patientEmail, "Your WhyRisk appointment was cancelled", lines.join("\n"))
 }

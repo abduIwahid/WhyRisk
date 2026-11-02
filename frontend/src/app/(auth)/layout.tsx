@@ -5,8 +5,8 @@ import type { Metadata } from "next"
 // and signup segment layouts refine title + canonical per page.
 export const metadata: Metadata = {
   title: {
-    template: "%s — WhyRisk",
-    default: "Account — WhyRisk",
+    template: "%s: WhyRisk",
+    default: "Account: WhyRisk",
   },
   description: "Sign in or create your WhyRisk account.",
   // Account pages are not content (QA Round 3, SEO M2): noindex, and

@@ -186,7 +186,7 @@ export function MLOpsView({
           <div>
             <p className="font-semibold text-[#C0392B]">Drift Baseline Above Threshold</p>
             <p className="text-muted-foreground">
-              The ML service&apos;s training-data baseline reports drift{currentPsi !== null ? ` (PSI ${currentPsi.toFixed(4)}, threshold ${driftThreshold})` : ""}. This compares slices of the training dataset — it is not drift measured on live patient traffic, which is not monitored yet.
+              The ML service&apos;s training-data baseline reports drift{currentPsi !== null ? ` (PSI ${currentPsi.toFixed(4)}, threshold ${driftThreshold})` : ""}. This compares slices of the training dataset, it is not drift measured on live patient traffic, which is not monitored yet.
             </p>
           </div>
         </div>
@@ -202,7 +202,7 @@ export function MLOpsView({
             </p>
             <p className="text-xs text-muted-foreground mt-2">
               Note: a retrained model keeps the service&apos;s &ldquo;1.0.0&rdquo; version label, and the model
-              registry is not updated automatically — after a retrain, check the Retrain Status and Last
+              registry is not updated automatically, after a retrain, check the Retrain Status and Last
               trained fields rather than the version number.
             </p>
             {modelStatus?.last_trained && (
@@ -312,10 +312,10 @@ export function MLOpsView({
           dataset (QA Round 2, cluster 23). */}
       {psiHistory.length > 0 && (
         <div className="bg-card border rounded-xl p-6 shadow-card">
-          <h2 className="font-semibold mb-1">Drift Baseline (Training Data) — PSI by Window</h2>
+          <h2 className="font-semibold mb-1">Drift Baseline (Training Data): PSI by Window</h2>
           <p className="text-xs text-muted-foreground mb-4">
             Each point compares one slice of the training dataset against the training reference window.
-            This is a baseline self-check — live drift monitoring on production predictions is not yet wired up.
+            This is a baseline self-check, live drift monitoring on production predictions is not yet wired up.
           </p>
           <ResponsiveContainer width="100%" height={200}>
             <LineChart data={psiHistory} margin={{ top: 5, right: 20, left: -10, bottom: 5 }}>

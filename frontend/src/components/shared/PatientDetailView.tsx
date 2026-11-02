@@ -131,7 +131,7 @@ export function PatientDetailView({ patient, latestPrediction, isAdmin = false, 
       return
     }
     if (spec && (value < spec.min || value > spec.max)) {
-      setVitalError(`${spec.type} must be between ${spec.min} and ${spec.max} ${spec.unit} — please check the value.`)
+      setVitalError(`${spec.type} must be between ${spec.min} and ${spec.max} ${spec.unit}, please check the value.`)
       return
     }
     if (!newVital.recorded_at || newVital.recorded_at > new Date().toISOString().slice(0, 10)) {
@@ -245,7 +245,7 @@ export function PatientDetailView({ patient, latestPrediction, isAdmin = false, 
       doctorId = assignment?.doctor_id ?? null
     }
     if (!doctorId) {
-      setFollowUpError("No doctor is assigned to this patient yet — assign a doctor before booking a follow-up.")
+      setFollowUpError("No doctor is assigned to this patient yet, assign a doctor before booking a follow-up.")
       setFollowUpSaving(false)
       return
     }
@@ -388,7 +388,7 @@ export function PatientDetailView({ patient, latestPrediction, isAdmin = false, 
       .select('id')
     if (demoError || !updatedRows || updatedRows.length === 0) {
       if (demoError) console.error("Patient demographics update failed:", demoError)
-      setErrorMessage('The demographic changes could not be saved. Nothing was changed — please try again.')
+      setErrorMessage('The demographic changes could not be saved. Nothing was changed, please try again.')
       setSaving(false)
       return
     }
@@ -406,7 +406,7 @@ export function PatientDetailView({ patient, latestPrediction, isAdmin = false, 
       })
       if (labError) {
         console.error("Lab insert failed:", labError)
-        setStatusMessage('Demographics saved. The lab result could not be added — check it and save again.')
+        setStatusMessage('Demographics saved. The lab result could not be added, check it and save again.')
         setSaving(false)
         router.refresh()
         return
@@ -661,7 +661,7 @@ export function PatientDetailView({ patient, latestPrediction, isAdmin = false, 
               </div>
 
               <div className="space-y-4 pt-6 border-t border-border/50">
-                <h3 className="text-xs font-bold text-primary uppercase tracking-widest flex items-center gap-2">
+                <h3 className="text-xs font-medium text-primary flex items-center gap-2">
                   <FlaskConical className="h-4 w-4" /> Add Laboratory Result
                 </h3>
                 <div className="grid gap-5 sm:grid-cols-4 items-end">
@@ -759,7 +759,7 @@ export function PatientDetailView({ patient, latestPrediction, isAdmin = false, 
               <stat.icon className="h-4 w-4" />
             </div>
             <div>
-              <p className="text-xs text-muted-foreground font-medium uppercase tracking-wider">{stat.label}</p>
+              <p className="text-xs text-muted-foreground font-medium">{stat.label}</p>
               <p className="font-bold text-lg mt-0.5">{stat.value}</p>
             </div>
           </div>
@@ -797,7 +797,7 @@ export function PatientDetailView({ patient, latestPrediction, isAdmin = false, 
           {currentPrediction && (
             <SlideIn direction="up">
             <div className="bg-card border rounded-xl p-5 shadow-card">
-              <h3 className="text-xs font-bold text-primary uppercase tracking-widest mb-4">Run Updated Assessment</h3>
+              <h3 className="text-xs font-medium text-primary mb-4">Run Updated Assessment</h3>
               <RunPredictionButton patient={patient} onResult={setFreshPrediction} />
             </div>
             </SlideIn>
@@ -805,7 +805,7 @@ export function PatientDetailView({ patient, latestPrediction, isAdmin = false, 
 
           <SlideIn direction="up">
           <div className="bg-card border rounded-xl p-5 shadow-card">
-            <h3 className="text-xs font-bold text-primary uppercase tracking-widest mb-4 flex items-center gap-2">
+            <h3 className="text-xs font-medium text-primary mb-4 flex items-center gap-2">
               <Calendar className="h-4 w-4" /> Follow-up
             </h3>
             {!linkedUserId ? (
@@ -962,7 +962,7 @@ export function PatientDetailView({ patient, latestPrediction, isAdmin = false, 
 
             {canAddVitals && vitalFormOpen && (
               <div className="mt-2 space-y-4 border-t border-border/50 pt-5">
-                <h3 className="text-xs font-bold text-primary uppercase tracking-widest flex items-center gap-2">
+                <h3 className="text-xs font-medium text-primary flex items-center gap-2">
                   <Activity className="h-4 w-4" /> {editingVitalId ? "Edit Vital" : "Add Vital"}
                 </h3>
                 <div className="grid gap-5 sm:grid-cols-4 items-end">
@@ -1030,7 +1030,7 @@ export function PatientDetailView({ patient, latestPrediction, isAdmin = false, 
                 </div>
                 {editingVitalId && (
                   <p className="text-xs text-muted-foreground">
-                    The type and unit of an existing vital stay fixed — record a new vital to correct those.
+                    The type and unit of an existing vital stay fixed, record a new vital to correct those.
                   </p>
                 )}
               </div>

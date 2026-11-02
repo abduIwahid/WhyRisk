@@ -83,7 +83,7 @@ function LoginPageInner() {
       // Provider messages are mapped to the app's own sentences; the
       // not-confirmed case additionally offers the resend action.
       if (/email not confirmed/i.test(error.message)) {
-        setError("Your email address hasn't been confirmed yet. Use the link in the confirmation email we sent you — or resend it below.")
+        setError("Your email address hasn't been confirmed yet. Use the link in the confirmation email we sent you, or resend it below.")
         setShowResend(true)
       } else if (/invalid login credentials/i.test(error.message)) {
         setError("That email and password don't match our records. Please check them and try again.")
@@ -225,7 +225,7 @@ function LoginPageInner() {
           {/* Step B: stethoscope photo as the panel's blurred backdrop
               under a navy tint — background only, the feature list
               above it stays crisp. */}
-          <AuthPhotoBackdrop tintClassName="bg-primary/92" />
+          <AuthPhotoBackdrop tintClassName="bg-[#0D2B3E]/92" />
           <BrandMark variant="glyph" className="pointer-events-none absolute -bottom-14 -right-10 h-72 w-72 opacity-[0.06]" />
           <SlideIn direction="left" className="relative z-10">
             <div className="flex items-center gap-2.5">
@@ -239,7 +239,7 @@ function LoginPageInner() {
               Clinical intelligence, delivered with confidence.
             </h2>
             <p className="max-w-sm text-sm leading-6 text-white/80">
-              A trained diabetes risk model with explainable AI — every score shows the factors behind it — in one secure workspace for care teams.
+              A trained diabetes risk model with explainable AI, every score shows the factors behind it, in one secure workspace for care teams.
             </p>
             <ul className="space-y-3 text-sm text-white/85">
               <li className="flex items-center gap-2"><span className="h-1.5 w-1.5 rounded-full bg-brand" /> Diabetes risk prediction</li>
@@ -376,7 +376,7 @@ function LoginPageInner() {
 
             {GOOGLE_OAUTH_ENABLED && (
               <>
-                <div className="flex items-center gap-3 text-xs uppercase tracking-wider text-muted-foreground">
+                <div className="flex items-center gap-3 text-xs font-medium text-muted-foreground">
                   <span className="h-px flex-1 bg-border" /> or continue with <span className="h-px flex-1 bg-border" />
                 </div>
                 <div className="grid grid-cols-1 gap-3">

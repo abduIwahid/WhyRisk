@@ -1,19 +1,18 @@
-import Image from "next/image"
 import Link from "next/link"
 import { Shield, Brain, Stethoscope, HeartPulse, Activity, Sparkles, ArrowRight, Clock } from "lucide-react"
 
 export default function AboutPage() {
   const departments = [
     { name: "Endocrinology", desc: "The live model: diabetes risk prediction (LightGBM, CDC BRFSS 2015) with a SHAP explanation stored per prediction.", icon: Activity, count: "Live" },
-    { name: "Cardiology", desc: "Heart disease risk modelling is on the roadmap — no trained model yet, and the product says so wherever it appears.", icon: HeartPulse, count: "Roadmap" },
-    { name: "Nephrology", desc: "Chronic kidney disease modelling is on the roadmap — no trained model yet, and the product says so wherever it appears.", icon: Stethoscope, count: "Roadmap" },
-    { name: "Clinical AI MLOps", desc: "Model registry, PSI drift baseline and retraining — the operational side of the one live model.", icon: Brain, count: "Live" },
+    { name: "Cardiology", desc: "Heart disease risk modelling is on the roadmap, no trained model yet, and the product says so wherever it appears.", icon: HeartPulse, count: "Roadmap" },
+    { name: "Nephrology", desc: "Chronic kidney disease modelling is on the roadmap, no trained model yet, and the product says so wherever it appears.", icon: Stethoscope, count: "Roadmap" },
+    { name: "Clinical AI MLOps", desc: "Model registry, PSI drift baseline and retraining, the operational side of the one live model.", icon: Brain, count: "Live" },
   ]
 
   const metrics = [
     { value: "0.8222", label: "Diabetes model AUC-ROC (held-out test split of the balanced dataset)" },
     { value: "21", label: "BRFSS health indicators per assessment" },
-    { value: "1", label: "Trained model — diabetes (LightGBM)" },
+    { value: "1", label: "Trained model: diabetes (LightGBM)" },
     { value: "SHAP", label: "Explanations stored per prediction" },
   ]
 
@@ -22,14 +21,14 @@ export default function AboutPage() {
       {/* Novena-inspired Hero Header Banner */}
       <div className="relative overflow-hidden rounded-2xl bg-primary p-8 sm:p-12 text-white shadow-card">
         <div className="relative z-10 max-w-2xl space-y-4">
-          <p className="flex items-center gap-2 font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-[#8FC3DC]">
+          <p className="flex items-center gap-2 text-[11px] font-medium text-[#8FC3DC]">
             <Sparkles className="h-3.5 w-3.5" /> Healthcare & Decision Support
           </p>
           <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight">
             Clinical AI that shows its reasons
           </h1>
           <p className="text-sm sm:text-base text-white/75 leading-relaxed">
-            WhyRisk bridges the gap between traditional clinical care and predictive machine learning, giving doctors diabetes risk screening and risk insights they can inspect — not just trust.
+            WhyRisk bridges the gap between traditional clinical care and predictive machine learning, giving doctors diabetes risk screening and risk insights they can inspect, not just trust.
           </p>
           <div className="flex flex-wrap gap-4 pt-2">
             <Link href="/patients/new" className="inline-flex items-center justify-center rounded-lg bg-brand px-5 py-3 text-sm font-semibold text-white transition hover:bg-brand/90">
@@ -52,7 +51,7 @@ export default function AboutPage() {
             <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary mb-4">
               <Stethoscope className="h-6 w-6" />
             </div>
-            <span className="text-xs uppercase tracking-wider font-semibold text-primary">Explainable AI</span>
+            <span className="text-xs font-medium text-primary">Explainable AI</span>
             <h3 className="text-lg font-bold mt-1">Predictive Risk Assessment</h3>
             <p className="text-xs text-muted-foreground mt-2 leading-relaxed">
               Diabetes risk calculation powered by a trained ML model (LightGBM, CDC BRFSS 2015), plus a rule-based symptom screening wizard for triage. Models for further conditions are on the roadmap.
@@ -68,12 +67,12 @@ export default function AboutPage() {
             <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#2E7FA8]/10 text-[#2E7FA8] mb-4">
               <Clock className="h-6 w-6" />
             </div>
-            <span className="text-xs uppercase tracking-wider font-semibold text-[#2E7FA8]">Service Facts</span>
+            <span className="text-xs font-medium text-[#2E7FA8]">Service Facts</span>
             <h3 className="text-lg font-bold mt-1">Clinical AI Service</h3>
             <ul className="text-xs space-y-2 text-muted-foreground mt-3">
               <li className="flex justify-between border-b pb-1"><span>Trained model:</span> <span className="font-semibold text-foreground">Diabetes (LightGBM)</span></li>
               <li className="flex justify-between border-b pb-1"><span>Explanations:</span> <span className="font-semibold text-foreground">SHAP, stored per prediction</span></li>
-              <li className="flex justify-between"><span>Other conditions:</span> <span className="font-semibold text-foreground">Roadmap — not trained</span></li>
+              <li className="flex justify-between"><span>Other conditions:</span> <span className="font-semibold text-foreground">Roadmap: not trained</span></li>
             </ul>
           </div>
         </div>
@@ -83,7 +82,7 @@ export default function AboutPage() {
             <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#E2F0E6] text-[#1E7A46] mb-4">
               <Shield className="h-6 w-6" />
             </div>
-            <span className="text-xs uppercase tracking-wider font-semibold text-[#1E7A46]">Alerts</span>
+            <span className="text-xs font-medium text-[#1E7A46]">Alerts</span>
             <h3 className="text-lg font-bold mt-1">Critical-Risk Alerts</h3>
             <p className="text-xs text-muted-foreground mt-2 leading-relaxed">
               When a prediction is stored with Critical severity, a database trigger fires the alert pipeline and the case appears in the Alerts Center for review.
@@ -95,19 +94,11 @@ export default function AboutPage() {
         </div>
       </div>
 
-      {/* Metrics Banner — Step B: the laboratory-vials photograph as a
-          blurred background layer under a heavy card tint; background
-          only, the figures render above it untouched. */}
-      <div className="relative overflow-hidden rounded-xl border bg-card p-8 shadow-card">
-        <Image
-          src="https://images.pexels.com/photos/8533080/pexels-photo-8533080.jpeg?auto=compress&cs=tinysrgb&w=1600"
-          alt="Laboratory vials and specimen tubes filled with blue liquid"
-          fill
-          sizes="(min-width: 1280px) 1152px, 100vw"
-          className="scale-[1.06] object-cover blur-[4px]"
-        />
-        <div aria-hidden="true" className="absolute inset-0 bg-card/[0.97]" />
-        <div className="relative z-10 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+      {/* Metrics Banner — a clean solid card. (A background photo
+          layer was tried here and removed: its captions failed two
+          contrast checks over the bright vials image.) */}
+      <div className="rounded-xl border bg-card p-8 shadow-card">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
           {metrics.map((m, i) => (
             <div key={i} className="space-y-1">
               <div className="text-2xl sm:text-4xl font-extrabold text-primary">{m.value}</div>

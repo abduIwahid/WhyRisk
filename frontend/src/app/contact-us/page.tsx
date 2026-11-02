@@ -5,7 +5,7 @@ import BrandMark from "@/components/shared/BrandMark"
 import { PublicContactForm } from "@/components/shared/PublicContactForm"
 
 export const metadata: Metadata = {
-  title: "Contact — WhyRisk",
+  title: "Contact: WhyRisk",
   description:
     "Contact the WhyRisk maintainer about the platform, the diabetes risk model, or an account. Messages are emailed directly to the maintainer.",
 }
@@ -50,11 +50,11 @@ export default function PublicContactPage() {
       </header>
 
       <main id="main-content" className="mx-auto max-w-4xl px-5 py-10">
-        <p className="font-mono text-[11px] font-semibold uppercase tracking-[1.6px] text-brand-text">Contact</p>
+        <p className="text-[11px] font-medium text-brand-text">Contact</p>
         <h1 className="mt-2 font-heading text-3xl font-bold tracking-tight">Talk to the maintainer</h1>
         <p className="mt-3 max-w-[640px] leading-relaxed text-muted-foreground">
           WhyRisk is an experimental research tool maintained by its developer. Questions about the platform,
-          the model, or getting access — send a message here and it lands in the maintainer&apos;s inbox.
+          the model, or getting access, send a message here and it lands in the maintainer&apos;s inbox.
         </p>
 
         <div className="mt-6 flex items-start gap-3 rounded-xl border bg-card p-5 shadow-card">
@@ -68,7 +68,7 @@ export default function PublicContactPage() {
               <a href="mailto:contact@abdulwahid.me" className="font-medium text-primary hover:underline">
                 contact@abdulwahid.me
               </a>{" "}
-              — the same inbox this form delivers to.
+              , the same inbox this form delivers to.
             </p>
           </div>
         </div>
@@ -78,7 +78,7 @@ export default function PublicContactPage() {
         </section>
 
         <p className="mt-4 text-xs leading-relaxed text-muted-foreground">
-          Please do not send patient health information through this form — it is for questions about the
+          Please do not send patient health information through this form, it is for questions about the
           platform itself. If you are a patient, clinical questions belong with your care team.
         </p>
       </main>

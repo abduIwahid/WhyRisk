@@ -31,12 +31,12 @@ export function InputsUsedDisclosure({ payload, recordedFeatures, fromSnapshot =
       <p className="leading-relaxed text-muted-foreground">
         {fromSnapshot
           ? "These are the exact inputs this score was computed from, stored with the prediction."
-          : "This prediction predates stored input snapshots, so its inputs are re-derived from the patient's current record — they may differ from the inputs used at the time if the record has changed since."}
+          : "This prediction predates stored input snapshots, so its inputs are re-derived from the patient's current record, they may differ from the inputs used at the time if the record has changed since."}
       </p>
 
       {recorded.length > 0 && (
         <div>
-          <h3 className="text-xs font-bold uppercase tracking-widest text-muted-foreground">
+          <h3 className="text-xs font-medium text-muted-foreground">
             From this patient&apos;s record ({recorded.length})
           </h3>
           <dl className="mt-2 grid gap-x-6 gap-y-1.5 sm:grid-cols-2">
@@ -52,8 +52,8 @@ export function InputsUsedDisclosure({ payload, recordedFeatures, fromSnapshot =
 
       {assumed.length > 0 && (
         <div>
-          <h3 className="text-xs font-bold uppercase tracking-widest text-muted-foreground">
-            Not recorded for this patient — population defaults used ({assumed.length})
+          <h3 className="text-xs font-medium text-muted-foreground">
+            Not recorded for this patient, population defaults used ({assumed.length})
           </h3>
           <dl className="mt-2 grid gap-x-6 gap-y-1.5 sm:grid-cols-2">
             {assumed.map((name) => (

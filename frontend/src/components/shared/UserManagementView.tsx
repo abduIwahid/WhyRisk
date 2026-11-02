@@ -100,7 +100,7 @@ export function UserManagementView({ profiles, hospitals, viewerRole, viewerId, 
     // admin can never be demoted. The admin API route enforces the
     // same rules server-side.
     if (viewerId && profile.id === viewerId) {
-      setActionError("You can't change your own role — that could lock you out of the admin area. Ask another super admin to make this change.")
+      setActionError("You can't change your own role, that could lock you out of the admin area. Ask another super admin to make this change.")
       return
     }
     if (profile.role === 'super_admin' && newRole !== 'super_admin') {
@@ -128,7 +128,7 @@ export function UserManagementView({ profiles, hospitals, viewerRole, viewerId, 
     } else {
       setLocalProfiles(prev => prev.map(p => p.id === profileId ? { ...p, role: newRole } : p))
       const target = localProfiles.find(p => p.id === profileId)
-      setActionSuccess(`Role updated for ${target?.full_name || "the user"} — now ${roleLabel(newRole)}.`)
+      setActionSuccess(`Role updated for ${target?.full_name || "the user"}, now ${roleLabel(newRole)}.`)
     }
     setUpdatingId(null)
   }
@@ -196,7 +196,7 @@ export function UserManagementView({ profiles, hospitals, viewerRole, viewerId, 
       if (!res.ok) {
         setActionError(data?.error || "The password could not be reset. Please try again.")
       } else {
-        setActionSuccess(`Password reset for ${resetTarget.name}. Share the new password with them privately — it is not stored anywhere you can view it again.`)
+        setActionSuccess(`Password reset for ${resetTarget.name}. Share the new password with them privately, it is not stored anywhere you can view it again.`)
         setResetTarget(null)
         setResetPassword("")
       }
@@ -312,7 +312,7 @@ export function UserManagementView({ profiles, hospitals, viewerRole, viewerId, 
       {resetTarget && (
         <div role="alertdialog" aria-label="Reset password" className="flex flex-wrap items-center gap-3 rounded-xl border border-[#D97706]/30 bg-[#FDF0DC] px-4 py-3 text-sm">
           <p className="text-[#A85008]">
-            Set a new password for <strong>{resetTarget.name}</strong>. They will sign in with it next time — their current password stops working immediately.
+            Set a new password for <strong>{resetTarget.name}</strong>. They will sign in with it next time, their current password stops working immediately.
           </p>
           <div className="ml-auto flex flex-wrap items-center gap-2">
             <Input
@@ -347,7 +347,7 @@ export function UserManagementView({ profiles, hospitals, viewerRole, viewerId, 
         <div role="alertdialog" aria-label="Confirm account deletion" className="flex flex-wrap items-center gap-3 rounded-xl border border-destructive/30 bg-destructive/10 px-4 py-3 text-sm">
           <div className="text-destructive">
             <p>
-              Delete <strong>{deleteTarget.name}</strong>&apos;s account? This permanently removes their sign-in and profile. Patient records they are linked to may also be removed by database cascade — this cannot be undone.
+              Delete <strong>{deleteTarget.name}</strong>&apos;s account? This permanently removes their sign-in and profile. Patient records they are linked to may also be removed by database cascade, this cannot be undone.
             </p>
             <p className="mt-1">Type <strong>{deleteTarget.name}</strong> to confirm.</p>
           </div>
@@ -510,11 +510,11 @@ export function UserManagementView({ profiles, hospitals, viewerRole, viewerId, 
         </div>
         <div className="p-3 border-t bg-muted/10 text-xs text-muted-foreground">
           {filtered.length} of {localProfiles.length} users shown
-          {localProfiles.length >= 1000 ? " · Showing the most recent 1,000 users — refine by role to narrow the list." : ""}
+          {localProfiles.length >= 1000 ? ", Showing the most recent 1,000 users, refine by role to narrow the list." : ""}
         </div>
       </div>
       <p className="text-xs text-muted-foreground">
-        Doctor accounts are created through signup and verification. To disable a staff account, set its role to Patient — the person keeps sign-in but loses all staff access.
+        Doctor accounts are created through signup and verification. To disable a staff account, set its role to Patient, the person keeps sign-in but loses all staff access.
       </p>
     </div>
   )

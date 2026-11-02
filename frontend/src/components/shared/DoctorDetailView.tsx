@@ -19,9 +19,9 @@ function availabilitySentence(status?: string | null): string {
     case "available":
       return "Available for new consultations and follow-ups."
     case "busy":
-      return "Currently busy — not taking new bookings right now."
+      return "Currently busy, not taking new bookings right now."
     case "on_leave":
-      return "On leave — not taking new bookings right now."
+      return "On leave, not taking new bookings right now."
     default:
       return "Availability has not been set for this doctor yet."
   }
@@ -120,7 +120,7 @@ export function DoctorDetailView({ doctor }: DoctorDetailViewProps) {
               )}
             </div>
             <div className="space-y-2">
-              <span className="text-xs uppercase tracking-[0.2em] text-muted-foreground">Status</span>
+              <span className="text-xs font-medium text-muted-foreground">Status</span>
               <div>
                 <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold border ${statusInfo.className}`}>
                   {statusLabel}
@@ -128,7 +128,7 @@ export function DoctorDetailView({ doctor }: DoctorDetailViewProps) {
               </div>
             </div>
             <div className="space-y-2">
-              <span className="text-xs uppercase tracking-[0.2em] text-muted-foreground">Consultation Fee</span>
+              <span className="text-xs font-medium text-muted-foreground">Consultation Fee</span>
               <div className="text-lg font-semibold">{doctor.consultation_fee ? `Rs. ${Number(doctor.consultation_fee).toLocaleString()}` : "Not set"}</div>
             </div>
           </CardContent>
@@ -146,7 +146,7 @@ export function DoctorDetailView({ doctor }: DoctorDetailViewProps) {
               <p className="text-sm leading-6 text-muted-foreground">{doctor.bio || "No biography added yet."}</p>
               <div className="grid gap-4 sm:grid-cols-2">
                 <div className="rounded-xl border p-4 bg-muted/50">
-                  <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground mb-2">Services</p>
+                  <p className="text-xs font-medium text-muted-foreground mb-2">Services</p>
                   <div className="space-y-2 text-sm">
                     {Array.isArray(doctor.services) && doctor.services.length > 0 ? (
                       doctor.services.map((service: string, index: number) => (
@@ -161,7 +161,7 @@ export function DoctorDetailView({ doctor }: DoctorDetailViewProps) {
                   </div>
                 </div>
                 <div className="rounded-xl border p-4 bg-muted/50">
-                  <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground mb-2">Availability</p>
+                  <p className="text-xs font-medium text-muted-foreground mb-2">Availability</p>
                   <p className="text-sm leading-6 text-muted-foreground">{availabilitySentence(doctor.availability_status)}</p>
                 </div>
               </div>

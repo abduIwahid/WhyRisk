@@ -170,10 +170,10 @@ export default function PatientDashboardPage() {
                 <div>
                   <p className="text-sm font-medium">
                     {a.doctor?.full_name ? doctorDisplayName(a.doctor.full_name) : "Doctor to be assigned"}
-                    {a.doctor?.specialty ? ` · ${a.doctor.specialty}` : ""}
+                    {a.doctor?.specialty ? `, ${a.doctor.specialty}` : ""}
                   </p>
                   <p className="text-xs text-muted-foreground">
-                    {fmtDateTime(a.scheduled_at)} {a.reason ? `· ${a.reason}` : ""}
+                    {fmtDateTime(a.scheduled_at)} {a.reason ? `, ${a.reason}` : ""}
                   </p>
                 </div>
                 <span className={`rounded-full border px-3 py-1 text-xs font-medium ${appointmentStatusClass(a.status)}`}>{a.status}</span>

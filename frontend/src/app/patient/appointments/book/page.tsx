@@ -139,7 +139,7 @@ export default function BookAppointmentPage() {
         return
       }
       if (clashes && clashes.length > 0) {
-        setError("That time is no longer available with this doctor — another appointment is booked then. Please choose a different time.")
+        setError("That time is no longer available with this doctor, another appointment is booked then. Please choose a different time.")
         return
       }
 
@@ -153,7 +153,7 @@ export default function BookAppointmentPage() {
 
       if (insertError) {
         console.error("Booking failed:", insertError)
-        setError("Your appointment could not be booked. Please check the details and try again — if it keeps failing, the doctor may no longer be available.")
+        setError("Your appointment could not be booked. Please check the details and try again, if it keeps failing, the doctor may no longer be available.")
         return
       }
       // Fire-and-forget confirmation email. The notify route skips

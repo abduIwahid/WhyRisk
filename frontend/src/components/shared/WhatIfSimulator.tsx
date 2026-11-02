@@ -121,8 +121,8 @@ export function WhatIfSimulator({ baseline, originalProbability, originalSeverit
           What would change this score?
         </CardTitle>
         <CardDescription>
-          Adjust a factor and the model re-runs on the spot — the new score is a real model output, not an
-          estimate. Simulations are exploratory and are not saved to the patient record.{!fromSnapshot && " The starting values below come from the patient's current record — this prediction has no stored input snapshot."}
+          Adjust a factor and the model re-runs on the spot, the new score is a real model output, not an
+          estimate. Simulations are exploratory and are not saved to the patient record.{!fromSnapshot && " The starting values below come from the patient's current record, this prediction has no stored input snapshot."}
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -265,7 +265,7 @@ export function WhatIfSimulator({ baseline, originalProbability, originalSeverit
                   </span>
                 </div>
                 <p className="mt-3 text-xs leading-relaxed text-muted-foreground">
-                  Same model, same patient — only the factors you changed are different.
+                  Same model, same patient, only the factors you changed are different.
                 </p>
               </div>
             )}

@@ -42,7 +42,7 @@ export default async function AdminOverviewPage() {
       ? "System-wide stats across doctors, patients, and appointments."
       : viewerRole === "hospital_admin"
         ? `Stats for ${facilityLabel} where records are hospital-scoped; doctor counts are platform-wide, because the doctor directory is shared.`
-        : "Stats across doctors, patients, and appointments — each count reflects the records your role can access."
+        : "Stats across doctors, patients, and appointments, each count reflects the records your role can access."
 
   // Stat definitions match the rest of the product (QA Round 1): Total
   // Patients counts clinical patient records (the patients table), and
@@ -64,7 +64,7 @@ export default async function AdminOverviewPage() {
     { label: "Total Patients", value: display(patientsRes), icon: Users, accent: "text-[#2E7FA8] bg-[#2E7FA8]/10", scope: scopedLabel },
     { label: "Active Doctors", value: display(doctorsRes), icon: Stethoscope, accent: "text-primary bg-secondary", scope: viewerRole === "data_scientist" ? "Records you can access" : "Platform-wide" },
     { label: "Pending Approvals", value: display(pendingRes), icon: Clock, accent: "text-[#A85008] bg-[#D97706]/10", scope: viewerRole === "data_scientist" ? "Records you can access" : "Platform-wide" },
-    { label: "Total Appointments", value: display(apptsRes), icon: Activity, accent: "text-[#1E7A46] bg-[#1E7A46]/10", scope: `${scopedLabel} · all statuses, incl. cancelled` },
+    { label: "Total Appointments", value: display(apptsRes), icon: Activity, accent: "text-[#1E7A46] bg-[#1E7A46]/10", scope: `${scopedLabel}, all statuses, incl. cancelled` },
   ]
 
   return (
@@ -103,7 +103,7 @@ export default async function AdminOverviewPage() {
         <SlideIn direction="left">
           <div className="rounded-xl border border-[#D97706]/30 bg-[#FDF0DC] p-5">
             <p className="text-sm font-semibold text-[#A85008]">
-              {pendingDoctors} doctor{pendingDoctors === 1 ? "" : "s"} waiting for approval —{" "}
+              {pendingDoctors} doctor{pendingDoctors === 1 ? "" : "s"} waiting for approval,{" "}
               <Link href="/admin/doctors" className="underline">review now</Link>
             </p>
           </div>

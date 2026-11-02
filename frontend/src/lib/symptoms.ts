@@ -32,7 +32,7 @@ export const DISEASE_PROFILES: DiseaseProfile[] = [
     specialty: "General Practitioner",
     symptoms: { fever: 2, cough: 3, chest_pain: 3, shortness_of_breath: 3, fatigue: 2, chills: 1 },
     recommendations: [
-      "Seek in-person evaluation promptly — chest imaging may be needed",
+      "Seek in-person evaluation promptly, chest imaging may be needed",
       "Monitor oxygen levels if a pulse oximeter is available",
       "Avoid exertion until assessed by a physician",
       "Go to emergency care if lips/fingertips turn bluish or breathing is severe",

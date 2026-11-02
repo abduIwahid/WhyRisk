@@ -136,7 +136,7 @@ export async function POST(request: Request) {
   }
 
   if (!isEmailConfigured()) {
-    console.log("[api/contact] Email is not configured — inquiry not sent.")
+    console.log("[api/contact] Email is not configured, inquiry not sent.")
     return NextResponse.json(
       {
         error:

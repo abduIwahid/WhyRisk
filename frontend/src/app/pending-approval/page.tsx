@@ -75,7 +75,7 @@ export default function PendingApprovalPage() {
           <>
             <h1 className="text-xl font-bold">Status Could Not Be Checked</h1>
             <p className="text-sm text-muted-foreground">
-              Your application status could not be checked just now. Please reload the page to try again — this does not change your application.
+              Your application status could not be checked just now. Please reload the page to try again, this does not change your application.
             </p>
             <Button variant="outline" className="w-full" onClick={() => window.location.reload()}>
               Reload page

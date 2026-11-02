@@ -129,8 +129,8 @@ export function DashboardSidebar({ onClose, className }: DashboardSidebarProps) 
           className="border-b px-6 py-3.5 bg-muted/20"
         >
           <div className="flex items-center gap-2">
-            <div className="h-2 w-2 rounded-full bg-[#1E7A46] animate-pulse"></div>
-            <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-muted-foreground">
+            <div className="h-2 w-2 rounded-full bg-[#1E7A46]"></div>
+            <span className="text-[11px] font-medium text-muted-foreground">
               {roleLabel(role)}
             </span>
           </div>
@@ -150,7 +150,7 @@ export function DashboardSidebar({ onClose, className }: DashboardSidebarProps) 
                 animate="show"
                 className="space-y-1"
               >
-                <p className="px-3 text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-2">
+                <p className="px-3 text-xs font-medium text-muted-foreground mb-2">
                   {group.title}
                 </p>
                 {group.items.map((item) => {

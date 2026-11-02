@@ -99,7 +99,7 @@ export async function POST(request: Request) {
   const doctor = profiles?.find((p) => p.id === appointment.doctor_id)
 
   if (!patient?.email) {
-    console.log("[api/appointments/notify] Patient has no email on record — skipping send.")
+    console.log("[api/appointments/notify] Patient has no email on record, skipping send.")
     return NextResponse.json({ sent: false })
   }
 

@@ -123,13 +123,10 @@
 }
 
 @layer components {
-  /* Section eyebrow — a plain mono label, never a pill badge. */
+  /* Section eyebrow — a plain small label, never a pill badge. */
   .eyebrow {
-    font-family: var(--font-mono);
     font-size: 0.72rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.22em;
+    font-weight: 500;
     color: var(--brand-text);
   }
 

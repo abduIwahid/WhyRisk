@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react"
 import Link from "next/link"
-import { ArrowRight, Loader2, RotateCcw, ShieldAlert } from "lucide-react"
+import { ArrowRight, Footprints, Gauge, HeartPulse, Loader2, RotateCcw, ShieldAlert, User, type LucideIcon } from "lucide-react"
 import { brfssAgeBand } from "@/lib/prediction-features"
 import { severityPillClass } from "@/lib/status"
 
@@ -102,22 +102,25 @@ const inputClass =
   "h-11 w-full rounded-xl border border-input bg-background px-3.5 text-sm outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/25"
 
 /**
- * Numbered step marker for one question group (01–04), closed by a
- * hairline rule — the form sits open on the page, not inside a card.
+ * Step marker for one question group: a Lucide icon in a tile (the
+ * step heading text is the label), closed by a hairline rule. The
+ * whole form renders inside one solid card.
  */
 function StepHeading({
-  step,
+  icon: Icon,
   title,
   className = "",
 }: {
-  step: string
+  icon: LucideIcon
   title: React.ReactNode
   className?: string
 }) {
   return (
-    <div className={`flex items-baseline gap-3 border-b border-border pb-2.5 ${className}`}>
-      <span className="font-display text-[19px] leading-none text-brand">{step}</span>
-      <h3 className="font-mono text-[11px] font-semibold uppercase tracking-[1.6px] text-brand-text">{title}</h3>
+    <div className={`flex items-center gap-3 border-b border-border pb-2.5 ${className}`}>
+      <span aria-hidden="true" className="flex h-[34px] w-[34px] shrink-0 items-center justify-center rounded-[9px] bg-secondary text-primary">
+        <Icon className="h-[18px] w-[18px]" />
+      </span>
+      <h3 className="text-[11px] font-medium text-brand-text">{title}</h3>
     </div>
   )
 }
@@ -161,14 +164,14 @@ export function GuestRiskCheck() {
     const ageYears = Number(age)
     if (!ageYears || ageYears < 18 || ageYears > 100) {
       setStatus("error")
-      setErrorMessage("Please enter an age between 18 and 100 — the model was trained on adults.")
+      setErrorMessage("Please enter an age between 18 and 100, the model was trained on adults.")
       return
     }
     const h = Number(heightCm)
     const w = Number(weightKg)
     if (!h || h < 100 || h > 230 || !w || w < 25 || w > 350 || bmi === null || bmi < 10 || bmi > 80) {
       setStatus("error")
-      setErrorMessage("Please check the height and weight — together they give a BMI the model can use (10–80).")
+      setErrorMessage("Please check the height and weight, together they give a BMI the model can use (10–80).")
       return
     }
     const ment = Number(mentHlth)
@@ -215,8 +218,8 @@ export function GuestRiskCheck() {
     return (
       <div className="rounded-[14px] border border-border bg-card p-[22px] shadow-premium" role="status">
         <div className="flex items-center justify-between">
-          <span className="font-mono text-[11px] uppercase tracking-[1.6px] text-muted-foreground">
-            Your estimate · Diabetes risk
+          <span className="text-[11px] font-medium text-muted-foreground">
+            Your estimate, Diabetes risk
           </span>
           <span className={`rounded-full border px-3 py-1 text-xs font-bold ${severityPillClass[result.severity] ?? ""}`}>
             {result.severity} risk
@@ -231,7 +234,7 @@ export function GuestRiskCheck() {
         <div className="mt-2.5 h-2.5 overflow-hidden rounded-full bg-secondary">
           <div className="h-full rounded-full bg-brand transition-all" style={{ width: `${pct}%` }} />
         </div>
-        <div className="flex justify-between font-mono text-[11px] text-muted-foreground">
+        <div className="flex justify-between text-[11px] font-medium text-muted-foreground">
           <span>LOW</span>
           <span>MODERATE</span>
           <span>HIGH</span>
@@ -243,7 +246,7 @@ export function GuestRiskCheck() {
           <p>
             <strong>This is an educational estimate, not a diagnosis.</strong> It comes from a statistical
             model trained on survey data, and it can be wrong in either direction. Only a clinician who
-            knows your full history can assess your actual risk — if this number concerns you, talk to a
+            knows your full history can assess your actual risk, if this number concerns you, talk to a
             doctor.
           </p>
         </div>
@@ -265,7 +268,7 @@ export function GuestRiskCheck() {
         </div>
         <p className="mt-4 text-xs leading-relaxed text-muted-foreground">
           With a free patient account you can book appointments, and your care team can run a full
-          assessment on your record — with the reasons behind the score explained factor by factor.
+          assessment on your record, with the reasons behind the score explained factor by factor.
           Your quick-check answers were not saved.
         </p>
       </div>
@@ -273,10 +276,10 @@ export function GuestRiskCheck() {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="rounded-[14px] border border-border bg-card p-[22px] shadow-premium">
       <div className="grid gap-x-8 gap-y-8 lg:grid-cols-2 lg:gap-y-0">
         <div>
-          <StepHeading step="01" title="About you" />
+          <StepHeading icon={User} title="About you" />
           <div className="mt-3 grid grid-cols-2 gap-3">
             <div className="space-y-1.5">
               <label htmlFor="grc-age" className="text-sm font-medium">Age (years)</label>
@@ -311,7 +314,7 @@ export function GuestRiskCheck() {
             {bmi !== null ? `Your BMI works out to ${bmi.toFixed(1)}.` : "Height and weight give your BMI, one of the model's inputs."}
           </p>
 
-          <StepHeading step="02" title="Health history" className="mt-8" />
+          <StepHeading icon={HeartPulse} title="Health history" className="mt-8" />
           <div className="mt-1 divide-y divide-foreground/[0.06]">
             {HISTORY_QUESTIONS.map((q) => (
               <YesNoToggle key={q.key} label={q.label} value={answers[q.key]} onChange={setAnswer(q.key)} />
@@ -320,14 +323,14 @@ export function GuestRiskCheck() {
         </div>
 
         <div>
-          <StepHeading step="03" title={<>Lifestyle &amp; access</>} />
+          <StepHeading icon={Footprints} title={<>Lifestyle &amp; access</>} />
           <div className="mt-1 divide-y divide-foreground/[0.06]">
             {LIFESTYLE_QUESTIONS.map((q) => (
               <YesNoToggle key={q.key} label={q.label} value={answers[q.key]} onChange={setAnswer(q.key)} />
             ))}
           </div>
 
-          <StepHeading step="04" title="How you have been" className="mt-8" />
+          <StepHeading icon={Gauge} title="How you have been" className="mt-8" />
           <div className="mt-3 grid grid-cols-2 gap-3">
             <div className="space-y-1.5">
               <label htmlFor="grc-genhlth" className="text-sm font-medium">General health</label>

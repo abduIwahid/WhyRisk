@@ -66,7 +66,7 @@ export function DashboardClientView({
 }: DashboardClientViewProps) {
   const scopeLabel =
     viewerRole === "super_admin"
-      ? "Platform-wide — all hospitals"
+      ? "Platform-wide, all hospitals"
       : hospitalName
         ? `Scoped to ${hospitalName} and the records your role can access`
         : "Scoped to the records your role can access"
@@ -84,13 +84,13 @@ export function DashboardClientView({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2, duration: 0.5 }}
-            className="flex items-center gap-2 font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-[#8FC3DC]"
+            className="flex items-center gap-2 text-[11px] font-medium text-[#8FC3DC]"
           >
-            <Sparkles className="h-4 w-4" /> WhyRisk — Clinical Intelligence Platform
+            <Sparkles className="h-4 w-4" /> WhyRisk: Clinical Intelligence Platform
           </motion.p>
           <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight">Your patients, scored and explained</h1>
           <p className="text-sm sm:text-base text-white/75 leading-relaxed max-w-2xl">
-            Patient risk scores, critical alerts, and model predictions for your facility — each score with the factors behind it.
+            Patient risk scores, critical alerts, and model predictions for your facility, each score with the factors behind it.
           </p>
           <div className="flex flex-wrap items-center gap-4 pt-4">
             <Link href="/patients/new" className="inline-flex items-center justify-center rounded-lg bg-[#1F6E96] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[#1F6E96]/90">

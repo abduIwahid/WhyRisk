@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import LegalPage, { LegalSection, LegalList } from "@/components/shared/LegalPage"
 
 export const metadata: Metadata = {
-  title: "Terms of Use — WhyRisk",
+  title: "Terms of Use: WhyRisk",
   description:
     "The terms for using WhyRisk, an experimental clinical decision-support and research tool. It is not a certified medical device.",
 }
@@ -20,7 +20,7 @@ export default function TermsPage() {
         <p>
           WhyRisk is an experimental clinical decision-support and research tool. It is{" "}
           <strong className="font-semibold text-foreground">not a certified medical device</strong>, and nothing
-          on this platform — including any risk score, explanation, or assistant reply — is a diagnosis or a
+          on this platform, including any risk score, explanation, or assistant reply, is a diagnosis or a
           substitute for professional medical judgement.
         </p>
       </LegalSection>
@@ -49,7 +49,7 @@ export default function TermsPage() {
           Risk scores are estimates from a statistical model and can be wrong in either direction. Clinical
           decisions remain the responsibility of the treating clinician. The AI assistant can make mistakes;
           verify anything important through your care team or official guidance. If you are experiencing a
-          medical emergency, contact local emergency services — do not rely on this platform.
+          medical emergency, contact local emergency services, do not rely on this platform.
         </p>
       </LegalSection>
 

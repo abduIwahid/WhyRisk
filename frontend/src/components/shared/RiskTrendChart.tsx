@@ -81,7 +81,7 @@ export function RiskTrendChart({ predictions }: { predictions: PredictionRow[] }
         </text>
       </svg>
       <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
-        {points.length} assessments · latest {((last.probability ?? 0) * 100).toFixed(1)}% on {fmtFullDate(last.created_at)} ·{" "}
+        {points.length} assessments, latest {((last.probability ?? 0) * 100).toFixed(1)}% on {fmtFullDate(last.created_at)},{" "}
         <span style={{ color: deltaPts < 0 ? "#1E7A46" : deltaPts > 0 ? "#C0392B" : undefined }} className="font-mono font-semibold">
           {deltaPts > 0 ? "+" : ""}
           {deltaPts.toFixed(1)} pts

@@ -56,13 +56,13 @@ export function PatientRiskCard({ disease, probability, confidence, severity, pa
           </div>
         </div>
         <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
-          Confidence is the probability the model assigns to the class it predicted — not a calibrated accuracy estimate.
+          Confidence is the probability the model assigns to the class it predicted, not a calibrated accuracy estimate.
         </p>
 
         <div className="rounded-xl border border-border/70 bg-muted/50 p-4 mt-6 text-sm">
-          <div className="text-muted-foreground text-xs uppercase tracking-[0.18em] mb-2">Recommended Care</div>
+          <div className="text-muted-foreground text-xs font-medium mb-2">Recommended Care</div>
           <p className="font-semibold">{recommended}</p>
-          <p className="mt-1 text-xs text-muted-foreground">Rule-based suggestion from the severity band — confirm with the care team.</p>
+          <p className="mt-1 text-xs text-muted-foreground">Rule-based suggestion from the severity band, confirm with the care team.</p>
         </div>
 
         <p className="mt-4 text-xs leading-relaxed text-muted-foreground">

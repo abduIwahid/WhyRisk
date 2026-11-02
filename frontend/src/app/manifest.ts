@@ -8,7 +8,7 @@ export default function manifest(): MetadataRoute.Manifest {
     name: "WhyRisk",
     short_name: "WhyRisk",
     description:
-      "Diabetes risk prediction with explainable machine learning — every score shows its reasons.",
+      "Diabetes risk prediction with explainable machine learning, every score shows its reasons.",
     start_url: "/welcome",
     display: "standalone",
     background_color: "#F4F6F6",

@@ -195,7 +195,7 @@ export default function PredictPage() {
         <p className="eyebrow mb-3">Rule-Based Symptom Screening</p>
         <h1 className="font-heading text-3xl sm:text-4xl font-bold">Symptom Screening Wizard</h1>
         <p className="mt-2 text-sm md:text-base text-muted-foreground">
-          Answer a few questions and get a rule-based symptom screening, plus a matched specialist. This checker uses fixed symptom rules — it is not the trained prediction model.
+          Answer a few questions and get a rule-based symptom screening, plus a matched specialist. This checker uses fixed symptom rules, it is not the trained prediction model.
         </p>
       </div>
 
@@ -371,15 +371,15 @@ export default function PredictPage() {
               <div className="mb-5 hidden border-b border-border pb-4 print:block">
                 <p className="font-display text-[22px] uppercase leading-none tracking-wide">WhyRisk</p>
                 <p className="mt-1.5 text-xs text-muted-foreground">
-                  Symptom screening result — a rule-based screening, not a diagnosis.
+                  Symptom screening result, a rule-based screening, not a diagnosis.
                 </p>
               </div>
               <div className="flex flex-wrap items-start justify-between gap-4">
                 <div>
                   <p className="eyebrow mb-3">Screening Result</p>
                   <h2 ref={headingRef} tabIndex={-1} className="font-heading text-2xl font-bold outline-none">{result.disease}</h2>
-                  <p className="mt-1 text-sm text-muted-foreground">{patient.name} · Age {patient.age}</p>
-                  <p className="mt-1 text-xs font-medium text-muted-foreground">Rule-based screening result — a symptom-rule match, not a model prediction or a diagnosis.</p>
+                  <p className="mt-1 text-sm text-muted-foreground">{patient.name} , Age {patient.age}</p>
+                  <p className="mt-1 text-xs font-medium text-muted-foreground">Rule-based screening result, a symptom-rule match, not a model prediction or a diagnosis.</p>
                 </div>
                 <span className="shrink-0 rounded-full border border-[#D97706]/30 bg-[#FDF0DC] px-3.5 py-1.5 text-xs font-semibold text-[#A85008]">
                   {result.match} symptom match
@@ -391,12 +391,12 @@ export default function PredictPage() {
               <div className="mt-6 hidden border-t border-border pt-4 text-sm print:block">
                 <p className="font-semibold">Patient details</p>
                 <p className="mt-1 text-muted-foreground">
-                  {patient.name} · Age {patient.age}{patient.gender ? ` · ${patient.gender}` : ""}{patient.bloodGroup ? ` · Blood group ${patient.bloodGroup}` : ""}
-                  {patient.weight ? ` · ${patient.weight} kg` : ""}{patient.height ? ` · ${patient.height} cm` : ""}
+                  {patient.name} , Age {patient.age}{patient.gender ? `, ${patient.gender}` : ""}{patient.bloodGroup ? `, Blood group ${patient.bloodGroup}` : ""}
+                  {patient.weight ? `, ${patient.weight} kg` : ""}{patient.height ? `, ${patient.height} cm` : ""}
                 </p>
                 {(patient.phone || patient.email) && (
                   <p className="mt-1 text-muted-foreground">
-                    {patient.phone ? `Phone: ${patient.phone}` : ""}{patient.phone && patient.email ? " · " : ""}{patient.email ? `Email: ${patient.email}` : ""}
+                    {patient.phone ? `Phone: ${patient.phone}` : ""}{patient.phone && patient.email ? ", " : ""}{patient.email ? `Email: ${patient.email}` : ""}
                   </p>
                 )}
                 <p className="mt-1 text-muted-foreground">

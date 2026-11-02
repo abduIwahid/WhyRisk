@@ -64,7 +64,7 @@ export function PulseLoader({
         </p>
       )}
       {showLabel && (
-        <p className="pulse-label mt-[10px] font-mono text-[0.66rem] font-medium uppercase tracking-[0.26em] text-muted-foreground">
+        <p className="pulse-label mt-[10px] text-[0.66rem] font-medium text-muted-foreground">
           Loading
         </p>
       )}

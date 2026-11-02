@@ -181,17 +181,17 @@ export default function OnboardingPage() {
                   <button type="button" className="underline" onClick={() => void loadHospitals()}>
                     Try again
                   </button>{" "}
-                  — or continue without choosing; you can book with any doctor.
+                  , or continue without choosing; you can book with any doctor.
                 </p>
               )}
             </div>
           ) : profileRole === 'doctor' ? (
             <div className="rounded-xl border bg-muted/40 px-4 py-3 text-sm text-muted-foreground">
-              The hospital you named on your application is confirmed by an administrator when your application is approved — it will appear in your profile once set.
+              The hospital you named on your application is confirmed by an administrator when your application is approved, it will appear in your profile once set.
             </div>
           ) : (
             <div className="rounded-xl border bg-muted/40 px-4 py-3 text-sm text-muted-foreground">
-              Your hospital is assigned by an administrator — it will appear in your profile once set.
+              Your hospital is assigned by an administrator, it will appear in your profile once set.
             </div>
           )}
 

@@ -155,7 +155,7 @@ export function ProfileForm({ user, profile, hospitalName }: {
           .select("id")
         if (error) throw error
         if (!data || data.length === 0) {
-          setError("Your profile could not be saved — no matching record was found. Please reload the page and try again.")
+          setError("Your profile could not be saved, no matching record was found. Please reload the page and try again.")
           return
         }
       }
@@ -212,7 +212,7 @@ export function ProfileForm({ user, profile, hospitalName }: {
 
       {/* Read-only account info */}
       <div>
-        <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-3">Account Info</h3>
+        <h3 className="text-sm font-medium text-muted-foreground mb-3">Account Info</h3>
         <div className="grid sm:grid-cols-2 gap-4">
           <div className="space-y-1">
             <Label className="text-xs text-muted-foreground">Email Address</Label>
@@ -220,7 +220,7 @@ export function ProfileForm({ user, profile, hospitalName }: {
               <Mail className="h-3.5 w-3.5" />
               {user.email}
             </div>
-            <p className="text-xs text-muted-foreground">Your email can&apos;t be changed here — ask an administrator if it needs updating.</p>
+            <p className="text-xs text-muted-foreground">Your email can&apos;t be changed here, ask an administrator if it needs updating.</p>
           </div>
           <div className="space-y-1">
             <Label className="text-xs text-muted-foreground">System Role</Label>
@@ -235,7 +235,7 @@ export function ProfileForm({ user, profile, hospitalName }: {
 
       {/* Personal info fields */}
       <div>
-        <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-3">Personal Details</h3>
+        <h3 className="text-sm font-medium text-muted-foreground mb-3">Personal Details</h3>
         <div className="grid sm:grid-cols-2 gap-4">
           <div className="space-y-2">
             <Label htmlFor="fullName">Full Name</Label>
@@ -266,7 +266,7 @@ export function ProfileForm({ user, profile, hospitalName }: {
 
       {/* Clinical info fields */}
       <div>
-        <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-3">Clinical Information</h3>
+        <h3 className="text-sm font-medium text-muted-foreground mb-3">Clinical Information</h3>
         <div className="grid sm:grid-cols-2 gap-4">
           {isDoctor && (
           <div className="space-y-2">
@@ -304,14 +304,14 @@ export function ProfileForm({ user, profile, hospitalName }: {
               <span className="text-xs text-muted-foreground ml-1">(assigned by admin)</span>
             </div>
             <p className="text-xs text-muted-foreground">
-              Your hospital decides which patients you can see. To change it, ask an administrator — they manage assignments in User Management.
+              Your hospital decides which patients you can see. To change it, ask an administrator, they manage assignments in User Management.
             </p>
           </div>
         </div>
 
         {isDoctor && (
         <div>
-          <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-3">Doctor Profile</h3>
+          <h3 className="text-sm font-medium text-muted-foreground mb-3">Doctor Profile</h3>
           <div className="grid gap-4">
             {doctorRecord && (
               <div className="grid sm:grid-cols-2 gap-4">
@@ -328,7 +328,7 @@ export function ProfileForm({ user, profile, hospitalName }: {
                   </div>
                 </div>
                 <p className="text-xs text-muted-foreground sm:col-span-2">
-                  These come from your approved application and can&apos;t be edited here — contact an administrator if either is wrong.
+                  These come from your approved application and can&apos;t be edited here, contact an administrator if either is wrong.
                 </p>
               </div>
             )}
@@ -339,8 +339,8 @@ export function ProfileForm({ user, profile, hospitalName }: {
                   <SelectValue placeholder="Not set" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="available">Available — accepting new patients</SelectItem>
-                  <SelectItem value="busy">Busy — not taking new bookings</SelectItem>
+                  <SelectItem value="available">Available: accepting new patients</SelectItem>
+                  <SelectItem value="busy">Busy: not taking new bookings</SelectItem>
                   <SelectItem value="on_leave">On leave</SelectItem>
                 </SelectContent>
               </Select>
@@ -385,7 +385,7 @@ export function ProfileForm({ user, profile, hospitalName }: {
 
       {/* Notification preferences */}
       <div>
-        <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-3">Notifications</h3>
+        <h3 className="text-sm font-medium text-muted-foreground mb-3">Notifications</h3>
         <div className="space-y-2">
           {([
             { key: "in_app", label: "In-app notifications", hint: "Alerts inside WhyRisk, such as the header bell." },

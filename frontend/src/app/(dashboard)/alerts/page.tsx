@@ -166,7 +166,7 @@ export default function AlertsPage() {
       setTotalNew((n) => n + 1)
       if (alert.severity === 'Critical') setTotalCritical((n) => n + 1)
       if (alert.severity === 'High') setTotalHigh((n) => n + 1)
-      setAckError("That alert could not be acknowledged. It has been put back in the active list — please try again.")
+      setAckError("That alert could not be acknowledged. It has been put back in the active list, please try again.")
     }
   }
 
@@ -218,7 +218,7 @@ export default function AlertsPage() {
             {loadError
               ? "Alerts could not be loaded."
               : totalNew === 0
-                ? "You're all caught up — no unacknowledged alerts."
+                ? "You're all caught up, no unacknowledged alerts."
                 : `${totalNew} unacknowledged alert${totalNew !== 1 ? "s" : ""} require attention.${alerts.length >= 200 ? " Showing the newest 200." : ""}`}
           </CardDescription>
         </CardHeader>
@@ -264,7 +264,7 @@ export default function AlertsPage() {
                       </div>
                       <div className="flex items-center gap-1 text-xs text-muted-foreground">
                         <Clock className="h-3 w-3" />
-                        {timeAgo(alert.created_at)} · {fmtDateTime(alert.created_at)}
+                        {timeAgo(alert.created_at)} , {fmtDateTime(alert.created_at)}
                       </div>
                     </div>
                     <div className="flex gap-2">
@@ -288,7 +288,7 @@ export default function AlertsPage() {
 
       {ackLoadError && (
         <p role="note" className="text-xs text-muted-foreground">
-          The recently acknowledged list could not be loaded — acknowledged alerts are unaffected.
+          The recently acknowledged list could not be loaded, acknowledged alerts are unaffected.
         </p>
       )}
 

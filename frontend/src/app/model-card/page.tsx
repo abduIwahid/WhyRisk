@@ -7,7 +7,7 @@ const FACTS: { label: string; value: string; note: string }[] = [
   {
     label: "Dataset",
     value: "CDC BRFSS 2015",
-    note: "Behavioural Risk Factor Surveillance System survey data — the balanced 50/50 training file of 70,692 records, 21 input features per record.",
+    note: "Behavioural Risk Factor Surveillance System survey data, the balanced 50/50 training file of 70,692 records, 21 input features per record.",
   },
   {
     label: "Selected model",
@@ -17,7 +17,7 @@ const FACTS: { label: string; value: string; note: string }[] = [
   {
     label: "Measured performance",
     value: "AUC-ROC 0.8222",
-    note: "Measured on a stratified held-out test split (80/20) of the balanced dataset that the model never trained on. Because the test split is balanced (50/50), this figure is not directly comparable to performance on a real-world population. Diabetes prediction only — this figure does not describe any other condition.",
+    note: "Measured on a stratified held-out test split (80/20) of the balanced dataset that the model never trained on. Because the test split is balanced (50/50), this figure is not directly comparable to performance on a real-world population. Diabetes prediction only, this figure does not describe any other condition.",
   },
   {
     label: "Explanations",
@@ -64,14 +64,14 @@ export default function ModelCardPage() {
         </h1>
         <p className="mt-4 max-w-2xl leading-relaxed text-muted-foreground">
           This page states exactly what WhyRisk&apos;s model is, what data it was trained and measured on, and
-          what it does not do. Figures here come from the project documentation and the held-out evaluation —
+          what it does not do. Figures here come from the project documentation and the held-out evaluation ,
           nothing on this page is estimated or rounded up.
         </p>
 
         <section className="mt-10 grid gap-4 sm:grid-cols-2">
           {FACTS.map((fact) => (
             <div key={fact.label} className="rounded-xl border bg-card p-5 shadow-card">
-              <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground">{fact.label}</p>
+              <p className="text-xs font-medium text-muted-foreground">{fact.label}</p>
               <p className="mt-2 font-sans text-2xl font-bold tracking-normal">{fact.value}</p>
               <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{fact.note}</p>
             </div>
@@ -82,15 +82,15 @@ export default function ModelCardPage() {
 
         <section className="mt-4 grid gap-4 sm:grid-cols-2">
           <div className="rounded-xl border bg-card p-5 shadow-card">
-            <h2 className="text-xs font-bold uppercase tracking-widest text-muted-foreground">What is real today</h2>
+            <h2 className="text-xs font-medium text-muted-foreground">What is real today</h2>
             <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-relaxed text-muted-foreground">
               <li>One trained model: diabetes risk prediction from the 21 BRFSS health indicators.</li>
               <li>SHAP explanations are stored per prediction.</li>
-              <li>A separate symptom checker that is a rule-based heuristic — not a trained model, and labelled as such in the product.</li>
+              <li>A separate symptom checker that is a rule-based heuristic, not a trained model, and labelled as such in the product.</li>
             </ul>
           </div>
           <div className="rounded-xl border bg-card p-5 shadow-card">
-            <h2 className="text-xs font-bold uppercase tracking-widest text-muted-foreground">Roadmap — not trained models</h2>
+            <h2 className="text-xs font-medium text-muted-foreground">Roadmap: not trained models</h2>
             <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-relaxed text-muted-foreground">
               <li>Heart disease, stroke, chronic kidney disease, hypertension, asthma and COPD are planned future models.</li>
               <li>They are listed so the scope is transparent: today, WhyRisk predicts diabetes risk only.</li>
@@ -99,20 +99,20 @@ export default function ModelCardPage() {
         </section>
 
         <section className="mt-4 rounded-xl border bg-card p-5 shadow-card">
-          <h2 className="text-xs font-bold uppercase tracking-widest text-muted-foreground">How scores are banded</h2>
+          <h2 className="text-xs font-medium text-muted-foreground">How scores are banded</h2>
           <p className="mt-3 max-w-[70ch] text-sm leading-relaxed text-muted-foreground">
-            Every score is placed in one of four severity bands — the same bands used everywhere in the app:
+            Every score is placed in one of four severity bands, the same bands used everywhere in the app:
           </p>
           <div className="mt-3 flex flex-wrap gap-2">
-            <span className={`rounded-full border px-3 py-1 text-xs font-semibold ${severityPillClass.Low}`}>Low — under 0.20</span>
-            <span className={`rounded-full border px-3 py-1 text-xs font-semibold ${severityPillClass.Moderate}`}>Moderate — 0.20 to 0.49</span>
-            <span className={`rounded-full border px-3 py-1 text-xs font-semibold ${severityPillClass.High}`}>High — 0.50 to 0.79</span>
-            <span className={`rounded-full border px-3 py-1 text-xs font-semibold ${severityPillClass.Critical}`}>Critical — 0.80 and above</span>
+            <span className={`rounded-full border px-3 py-1 text-xs font-semibold ${severityPillClass.Low}`}>Low: under 0.20</span>
+            <span className={`rounded-full border px-3 py-1 text-xs font-semibold ${severityPillClass.Moderate}`}>Moderate: 0.20 to 0.49</span>
+            <span className={`rounded-full border px-3 py-1 text-xs font-semibold ${severityPillClass.High}`}>High: 0.50 to 0.79</span>
+            <span className={`rounded-full border px-3 py-1 text-xs font-semibold ${severityPillClass.Critical}`}>Critical: 0.80 and above</span>
           </div>
         </section>
 
         <section className="mt-4 rounded-xl border bg-card p-5 shadow-card">
-          <h2 className="text-xs font-bold uppercase tracking-widest text-muted-foreground">Limitations</h2>
+          <h2 className="text-xs font-medium text-muted-foreground">Limitations</h2>
           <ul className="mt-3 max-w-[70ch] list-disc space-y-2 pl-5 text-sm leading-relaxed text-muted-foreground">
             <li>The model was trained on United States survey data (BRFSS 2015); performance on other populations has not been validated.</li>
             <li>A score is a screening estimate, not a diagnosis. False positives and false negatives occur.</li>

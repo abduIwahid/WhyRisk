@@ -57,7 +57,7 @@ export async function PATCH(request: Request, { params }: { params: { id: string
   if (role !== undefined) {
     if (role === "doctor") {
       return NextResponse.json(
-        { error: "The doctor role is granted by approving a doctor application in Doctor Verification — it can't be assigned here." },
+        { error: "The doctor role is granted by approving a doctor application in Doctor Verification, it can't be assigned here." },
         { status: 400 }
       )
     }

@@ -114,7 +114,7 @@ export function PredictionDetailView({
                         transition={{ duration: 0.9, delay: 0.2, ease: [0.22, 0.8, 0.3, 1] }}
                       />
                     </div>
-                    <div className="mt-1 flex justify-between font-mono text-[11px] text-muted-foreground">
+                    <div className="mt-1 flex justify-between text-[11px] font-medium text-muted-foreground">
                       <span>LOW</span>
                       <span>MODERATE</span>
                       <span>HIGH</span>
@@ -127,7 +127,7 @@ export function PredictionDetailView({
                 {/* The severity bands the ML service assigns, shown where
                     the score is read (QA Round 1, item 60). */}
                 <p className="mt-3 text-[11px] leading-relaxed text-muted-foreground">
-                  Bands: Low under 0.20 · Moderate 0.20–0.49 · High 0.50–0.79 · Critical 0.80 and above.
+                  Bands: Low under 0.20, Moderate 0.20–0.49, High 0.50–0.79, Critical 0.80 and above.
                 </p>
               </div>
               <div className="flex items-center justify-between">
@@ -138,7 +138,7 @@ export function PredictionDetailView({
                 <div className="text-sm text-muted-foreground mb-1">Model confidence</div>
                 <div className="text-xl font-medium">{prediction.confidence != null ? `${(prediction.confidence * 100).toFixed(1)}%` : "Not recorded"}</div>
                 <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
-                  The probability the model assigns to the class it predicted — not a calibrated accuracy estimate.
+                  The probability the model assigns to the class it predicted, not a calibrated accuracy estimate.
                 </p>
               </div>
             </CardContent>
@@ -164,7 +164,7 @@ export function PredictionDetailView({
           <SlideIn direction="up" className="h-full">
           <Card className="h-full">
             <CardHeader>
-              <CardTitle>Why this score — top factors</CardTitle>
+              <CardTitle>Why this score: top factors</CardTitle>
               <CardDescription>
                 SHAP values showing how much each factor pushed this patient&apos;s predicted risk up or down,
                 relative to the average patient.
@@ -173,7 +173,7 @@ export function PredictionDetailView({
             <CardContent>
               <ShapFactorList data={shapPayload} animate />
               <p className="mt-6 border-t border-secondary pt-3 text-xs leading-relaxed text-muted-foreground">
-                Explanation generated with SHAP from the patient&apos;s own inputs. A screening aid — not a diagnosis.
+                Explanation generated with SHAP from the patient&apos;s own inputs. A screening aid, not a diagnosis.
               </p>
             </CardContent>
           </Card>
@@ -189,7 +189,7 @@ export function PredictionDetailView({
             <CardDescription>
               {snapshot
                 ? "Every model input, marked as recorded from this patient or filled with a population default."
-                : "This prediction has no stored input snapshot, so the values below are derived from the patient's current record — today's record stands in for the scored inputs."}
+                : "This prediction has no stored input snapshot, so the values below are derived from the patient's current record, today's record stands in for the scored inputs."}
             </CardDescription>
           </CardHeader>
           <CardContent>

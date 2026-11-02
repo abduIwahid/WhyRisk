@@ -79,8 +79,8 @@ export function PatientSidebar({ onClose, className }: PatientSidebarProps) {
 
       <div className="border-b px-6 py-3.5 bg-muted/20">
         <div className="flex items-center gap-2">
-          <div className="h-2 w-2 rounded-full bg-[#1E7A46] animate-pulse"></div>
-          <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-muted-foreground">
+          <div className="h-2 w-2 rounded-full bg-[#1E7A46]"></div>
+          <span className="text-[11px] font-medium text-muted-foreground">
             {roleLabel("patient")}
           </span>
         </div>

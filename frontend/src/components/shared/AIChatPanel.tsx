@@ -107,7 +107,7 @@ function buildPatientSummary(patient: PatientRow | null): string {
 
   let ctx = `Patient: ${name}${age ? `, ${age}` : ""}${gender ? `, ${gender}` : ""}. MRN: ${patient.mrn}.`
   if (latest) {
-    ctx += ` Latest risk assessment${asOf(latest.created_at)}: **${latest.severity}** severity — ${((latest.probability ?? 0) * 100).toFixed(1)}% diabetes probability`
+    ctx += ` Latest risk assessment${asOf(latest.created_at)}: **${latest.severity}** severity, ${((latest.probability ?? 0) * 100).toFixed(1)}% diabetes probability`
     if (latest.confidence) ctx += ` (confidence: ${(latest.confidence * 100).toFixed(0)}%)`
     ctx += `. Disease: ${latest.disease || "Diabetes"}.`
   } else {
@@ -115,8 +115,8 @@ function buildPatientSummary(patient: PatientRow | null): string {
   }
   if (preds.length > 1) ctx += ` ${preds.length} historical predictions on record.`
   if (diagnoses) ctx += ` Recorded conditions (most recent first, up to 5): ${diagnoses}.`
-  if (vitalsDated) ctx += ` Recent vitals — ${vitalsDated}.`
-  if (labsDated) ctx += ` Recent labs — ${labsDated}.`
+  if (vitalsDated) ctx += ` Recent vitals, ${vitalsDated}.`
+  if (labsDated) ctx += ` Recent labs, ${labsDated}.`
   return ctx
 }
 
@@ -180,15 +180,15 @@ function generateLocalResponse(message: string, patientContext: string, modelSta
       // know THIS patient's drivers — it has no SHAP access — so it
       // must not present the model's general feature list under a
       // "Key Risk Drivers" heading.
-      return `**What the model weighs**\n\nThis built-in answer can't see this patient's per-feature contributions (SHAP values) — for those, open the patient's prediction detail page. In general, the WhyRisk model evaluates 21 clinical features:\n• **Biometric:** BMI, systolic BP, cholesterol status\n• **Lifestyle:** Physical activity, smoking history, diet, alcohol\n• **Medical history:** Stroke, heart disease, mobility difficulty\n• **Socioeconomic:** Income, education, healthcare access\n\n${patientContext}\n\n---\nFor the per-patient SHAP breakdown, navigate to the patient's prediction detail page.`
+      return `**What the model weighs**\n\nThis built-in answer can't see this patient's per-feature contributions (SHAP values), for those, open the patient's prediction detail page. In general, the WhyRisk model evaluates 21 clinical features:\n• **Biometric:** BMI, systolic BP, cholesterol status\n• **Lifestyle:** Physical activity, smoking history, diet, alcohol\n• **Medical history:** Stroke, heart disease, mobility difficulty\n• **Socioeconomic:** Income, education, healthcare access\n\n${patientContext}\n\n---\nFor the per-patient SHAP breakdown, navigate to the patient's prediction detail page.`
     }
     if (q.includes("discharge") || q.includes("draft")) {
-      return `**Discharge Risk Summary (AI Draft)**\n\n${patientContext}\n\n**Next steps to confirm with the treating team:**\n• Review the discharge plan with the treating physician before it is finalised\n• Arrange follow-up and any further tests according to your facility's protocol for this risk band\n• Make sure the patient understands their follow-up plan before they leave\n\n---\nNote: This is an AI-generated draft — review and edit before official use.`
+      return `**Discharge Risk Summary (AI Draft)**\n\n${patientContext}\n\n**Next steps to confirm with the treating team:**\n• Review the discharge plan with the treating physician before it is finalised\n• Arrange follow-up and any further tests according to your facility's protocol for this risk band\n• Make sure the patient understands their follow-up plan before they leave\n\n---\nNote: This is an AI-generated draft, review and edit before official use.`
     }
     if (q.includes("change") || q.includes("last visit") || q.includes("since") || q.includes("trend")) {
       // No trend is computed here (QA Round 3, ml-honesty): the old
       // answer asserted a "trajectory" this template never calculated.
-      return `**About trend questions**\n\nThis built-in answer doesn't calculate a trend. The patient's dated predictions are listed in the Prediction History on the patient detail page — comparing those directly shows how the score has moved.\n\n${patientContext}`
+      return `**About trend questions**\n\nThis built-in answer doesn't calculate a trend. The patient's dated predictions are listed in the Prediction History on the patient detail page, comparing those directly shows how the score has moved.\n\n${patientContext}`
     }
     return `**Patient Insights**\n\n${patientContext}\n\nI can help with:\n• Risk summaries and severity explanations\n• Key clinical drivers (ask "which factors are driving the prediction?")\n• Discharge planning (ask "draft a discharge summary")\n• Trend analysis (ask "what changed since their last visit?")`
   }
@@ -206,16 +206,16 @@ function generateLocalResponse(message: string, patientContext: string, modelSta
     return `**Model Performance**\n\nThe WhyRisk ML engine (LightGBM) reports AUC-ROC 0.8222 on the held-out test split of its balanced training dataset (70,692 records).\nLive metrics from the FastAPI inference service are shown here whenever the service is connected.`
   }
   if (q.includes("diabetes") || q.includes("disease") || q.includes("predict")) {
-    return `**About WhyRisk Prediction**\n\nWhyRisk estimates Diabetes risk from 21 clinical & lifestyle features:\n\n• **Biometric:** BMI, blood pressure, cholesterol\n• **Lifestyle:** Physical activity, smoking, diet, alcohol\n• **History:** Stroke, heart disease, difficulty walking\n• **Socioeconomic:** Income, education, healthcare access\n\n**Risk Classification:**\nLow risk: (< 20%) · Moderate risk: (20–50%) · High risk: (50–80%) · Critical risk: (> 80%)\n\nSelect a patient from the dropdown above to get patient-specific insights.`
+    return `**About WhyRisk Prediction**\n\nWhyRisk estimates Diabetes risk from 21 clinical & lifestyle features:\n\n• **Biometric:** BMI, blood pressure, cholesterol\n• **Lifestyle:** Physical activity, smoking, diet, alcohol\n• **History:** Stroke, heart disease, difficulty walking\n• **Socioeconomic:** Income, education, healthcare access\n\n**Risk Classification:**\nLow risk: (< 20%), Moderate risk: (20–50%), High risk: (50–80%), Critical risk: (> 80%)\n\nSelect a patient from the dropdown above to get patient-specific insights.`
   }
   if (q.includes("help") || q.includes("what can") || q.includes("feature")) {
-    return `**How I Can Help**\n\n1. **Patient risk summaries** — Select a patient and ask me to summarize their risk\n2. **Risk driver analysis** — Find out which clinical factors are influencing the prediction\n3. **Discharge drafts** — Generate a draft risk summary for discharge planning\n4. **Trend analysis** — Understand how a patient's risk has changed over time\n5. **Model performance** — Ask about the model's accuracy and metrics\n\nSelect a patient from the dropdown above to get started!`
+    return `**How I Can Help**\n\n1. **Patient risk summaries**: Select a patient and ask me to summarize their risk\n2. **Risk driver analysis**: Find out which clinical factors are influencing the prediction\n3. **Discharge drafts**: Generate a draft risk summary for discharge planning\n4. **Trend analysis**: Understand how a patient's risk has changed over time\n5. **Model performance**: Ask about the model's accuracy and metrics\n\nSelect a patient from the dropdown above to get started!`
   }
   if (q.includes("high risk") || q.includes("critical") || q.includes("alert")) {
     // General guidance only. The previous canned answer listed specific
     // clinical orders (named lab panels, a fixed follow-up interval)
     // with no source — removed in QA Round 1, item 87.
-    return `**High and Critical risk — general guidance**\n\nFor patients flagged as **High** or **Critical** risk:\n\n1. Notify the treating physician promptly\n2. Follow your facility's escalation protocol for high-risk results\n3. Review the factors behind the score on the patient's prediction detail page\n4. Arrange follow-up and any further assessment as the treating team decides\n\nCheck the **Alerts Center** in the sidebar for active risk alerts across your patient panel.`
+    return `**High and Critical risk: general guidance**\n\nFor patients flagged as **High** or **Critical** risk:\n\n1. Notify the treating physician promptly\n2. Follow your facility's escalation protocol for high-risk results\n3. Review the factors behind the score on the patient's prediction detail page\n4. Arrange follow-up and any further assessment as the treating team decides\n\nCheck the **Alerts Center** in the sidebar for active risk alerts across your patient panel.`
   }
 
   return `**I'm the WhyRisk AI Assistant**, your clinical decision support assistant.\n\nI can answer questions about:\n• Patient risk summaries and clinical factors\n• Model performance and predictions\n• High-risk protocols and clinical guidance\n\nTo get patient-specific insights: **Select a patient from the dropdown above**, then ask about their risk, lab drivers, or request a discharge summary.\n\nWhat would you like to know?`
@@ -442,7 +442,7 @@ export function AIChatPanel({ patientId }: AIChatPanelProps) {
             : contextStatus === "loaded"
               ? "Patient context loaded. Ask about risk, clinical drivers, or request a discharge summary."
               : contextStatus === "error"
-                ? "Patient context could not be loaded — answers will be general, with no patient data."
+                ? "Patient context could not be loaded, answers will be general, with no patient data."
                 : "Loading patient context…"}
         </CardDescription>
         {patientId && contextStatus === "error" && (
@@ -474,7 +474,7 @@ export function AIChatPanel({ patientId }: AIChatPanelProps) {
             >
               {msg.fallback && (
                 <span className="mb-2 inline-block rounded-full border border-[#D97706]/30 bg-[#FDF0DC] px-2 py-0.5 text-[11px] font-semibold text-[#A85008]">
-                  Built-in template response — the AI service is unavailable
+                  Built-in template response, the AI service is unavailable
                 </span>
               )}
               {renderContent(msg.content)}

@@ -24,7 +24,7 @@ function formatValues(values?: Record<string, unknown> | null): string {
   if (entries.length === 0) return "—"
   return entries
     .map(([k, v]) => `${k}: ${typeof v === "object" ? JSON.stringify(v) : String(v)}`)
-    .join(" · ")
+    .join(", ")
 }
 
 export function AuditLogView({ logs, loadError = false }: { logs: AuditLogRow[]; loadError?: boolean }) {
@@ -54,7 +54,7 @@ export function AuditLogView({ logs, loadError = false }: { logs: AuditLogRow[];
     <div className="space-y-4">
       {loadError && (
         <div role="alert" className="rounded-xl border border-destructive/20 bg-destructive/10 px-4 py-3 text-sm text-destructive-text">
-          The audit trail could not be loaded, so entries below may be missing. Refresh the page to try again — an empty list here does not mean nothing happened.
+          The audit trail could not be loaded, so entries below may be missing. Refresh the page to try again, an empty list here does not mean nothing happened.
         </div>
       )}
       <div className="flex flex-col sm:flex-row gap-3">
@@ -98,8 +98,8 @@ export function AuditLogView({ logs, loadError = false }: { logs: AuditLogRow[];
           <span className="font-semibold">PHI Audit Trail</span>
           <span className="text-xs text-muted-foreground ml-auto">
             {filtered.length} of {logs.length} entries
-            {logs.length >= 200 ? " · most recent 200 shown" : ""}
-            {" · search and filters apply to the loaded entries only"}
+            {logs.length >= 200 ? ", most recent 200 shown" : ""}
+            {", search and filters apply to the loaded entries only"}
           </span>
         </div>
         <div className="overflow-x-auto">

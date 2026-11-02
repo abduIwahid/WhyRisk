@@ -35,7 +35,7 @@ export default async function SettingsPage() {
         </SlideIn>
         <SlideIn direction="up">
           <div role="alert" className="rounded-xl border border-destructive/30 bg-destructive/10 p-6 text-sm text-destructive-text">
-            Your profile could not be loaded. Please reload the page to try again — if it keeps happening, contact an administrator.
+            Your profile could not be loaded. Please reload the page to try again, if it keeps happening, contact an administrator.
           </div>
         </SlideIn>
       </div>
@@ -70,7 +70,7 @@ export default async function SettingsPage() {
         <div>
           <h1 className="text-2xl sm:text-3xl 2xl:text-4xl font-bold tracking-tight">Profile & Settings</h1>
           <p className="text-sm md:text-base text-muted-foreground mt-1">
-            Manage your account details and profile information. Your role is shown for reference — it is assigned by an admin.
+            Manage your account details and profile information. Your role is shown for reference, it is assigned by an admin.
           </p>
         </div>
       </SlideIn>
@@ -79,7 +79,7 @@ export default async function SettingsPage() {
           <ProfileForm
             user={user}
             profile={profile}
-            hospitalName={hospitalLookupFailed ? "Couldn't load — refresh to retry" : hospitalName}
+            hospitalName={hospitalLookupFailed ? "Couldn't load, refresh to retry" : hospitalName}
           />
         </div>
       </SlideIn>

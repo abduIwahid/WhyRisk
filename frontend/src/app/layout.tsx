@@ -29,7 +29,7 @@ const quicksandMono = Quicksand({
 });
 
 const description =
-  "Diabetes risk prediction with explainable machine learning — every score shows its reasons.";
+  "Diabetes risk prediction with explainable machine learning, every score shows its reasons.";
 
 export const viewport: Viewport = {
   themeColor: "#0D2B3E",
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://whyrisk.vercel.app"),
   title: {
     default: "WhyRisk",
-    template: "%s — WhyRisk",
+    template: "%s: WhyRisk",
   },
   description,
   // Google Search Console ownership proof (Wadi, 2026-11-01) — the
@@ -68,7 +68,7 @@ export const metadata: Metadata = {
         url: "/opengraph-image",
         width: 1200,
         height: 630,
-        alt: "WhyRisk — Know your risk. See exactly why.",
+        alt: "WhyRisk: Know your risk. See exactly why.",
       },
     ],
   },

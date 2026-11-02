@@ -226,7 +226,7 @@ export function DoctorVerificationView({ doctors, viewerName, hospitals, loadErr
             </p>
             <p className="mt-1">
               Approving also assigns the hospital their workspace is scoped to
-              {pendingApproval.declaredHospital ? <> — they declared <strong>{pendingApproval.declaredHospital}</strong> on their application</> : ""}.
+              {pendingApproval.declaredHospital ? <> , they declared <strong>{pendingApproval.declaredHospital}</strong> on their application</> : ""}.
               Confirm the hospital before approving:
             </p>
           </div>
@@ -345,7 +345,7 @@ export function DoctorVerificationView({ doctors, viewerName, hospitals, loadErr
                   {d.status !== "pending" && d.reviewed_at && (
                     <p className="mt-2 text-xs text-muted-foreground">
                       {d.status === "approved" ? "Approved" : "Rejected"}
-                      {d.reviewer?.full_name ? ` by ${d.reviewer.full_name}` : ""} · {fmtDateTime(d.reviewed_at)}
+                      {d.reviewer?.full_name ? ` by ${d.reviewer.full_name}` : ""} , {fmtDateTime(d.reviewed_at)}
                     </p>
                   )}
                   {sessionReasons[d.user_id] && (
@@ -413,7 +413,7 @@ export function DoctorVerificationView({ doctors, viewerName, hospitals, loadErr
       )}
       {rows.length >= 200 && (
         <p className="text-xs text-muted-foreground">
-          Showing the 200 most recent applications — older applications are not listed here.
+          Showing the 200 most recent applications, older applications are not listed here.
         </p>
       )}
     </div>

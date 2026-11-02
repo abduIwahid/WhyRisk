@@ -221,7 +221,7 @@ export function AnalyticsDashboard({ predictions, patientsByHospital, alertStats
           <StatCard icon={TrendingUp} label="Avg Risk Score (per prediction)" value={srcErr.predictions ? "—" : avgRisk !== null ? <><CountUp text={avgRisk} />%</> : "—"} sub={unscoredCount > 0 ? `Averaged across scored predictions; ${unscoredCount} had no recorded score` : "Averaged across predictions, not patients"} />
         </SlideIn>
         <SlideIn direction="up" delay={0.12} className="h-full">
-          <StatCard icon={AlertTriangle} label="Critical Alerts" value={srcErr.alerts ? "—" : criticalCount} sub="All statuses — the Dashboard counts new ones only" />
+          <StatCard icon={AlertTriangle} label="Critical Alerts" value={srcErr.alerts ? "—" : criticalCount} sub="All statuses, the Dashboard counts new ones only" />
         </SlideIn>
         <SlideIn direction="up" delay={0.18} className="h-full">
           <StatCard icon={Activity} label="Hospitals Tracked" value={srcErr.hospitals ? "—" : hospitalData.length} sub="Facilities with registered patients" />

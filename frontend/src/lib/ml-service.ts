@@ -20,7 +20,7 @@ export function getMlServiceUrl(): string | null {
   // never a silent localhost call.
   if (process.env.NODE_ENV === "development") {
     console.warn(
-      "[ml-service] ML_SERVICE_URL is not set — defaulting to http://localhost:8000 for local development."
+      "[ml-service] ML_SERVICE_URL is not set, defaulting to http://localhost:8000 for local development."
     )
     return "http://localhost:8000"
   }

@@ -60,7 +60,7 @@ export function PublicContactForm() {
         <CheckCircle2 className="h-10 w-10 text-[#1E7A46]" />
         <p className="font-semibold">Message sent</p>
         <p className="max-w-[420px] text-sm text-muted-foreground">
-          Thanks for getting in touch — your message has been emailed to the maintainer, who replies to the
+          Thanks for getting in touch, your message has been emailed to the maintainer, who replies to the
           address you gave.
         </p>
         <button

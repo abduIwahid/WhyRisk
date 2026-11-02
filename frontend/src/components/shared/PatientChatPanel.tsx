@@ -20,7 +20,7 @@ interface Message {
 const SUGGESTED_PROMPTS = [
   "I've had a headache and dizziness for two days.",
   "What kind of doctor should I see for joint pain?",
-  "I have a mild fever and sore throat — what should I do?",
+  "I have a mild fever and sore throat, what should I do?",
 ]
 
 // Offline fallback guidance: a small, clearly-framed symptom → specialist
@@ -37,7 +37,7 @@ const SYMPTOM_SPECIALIST_MAP: { keywords: string[]; specialist: string }[] = [
 ]
 
 const EMERGENCY_REPLY =
-  "**This could be an emergency.** Please seek immediate medical attention or call your local emergency number right now — don't wait on a chat response.\n\nThis assistant does not replace professional medical advice."
+  "**This could be an emergency.** Please seek immediate medical attention or call your local emergency number right now, don't wait on a chat response.\n\nThis assistant does not replace professional medical advice."
 
 // Emergency screen (QA Round 3, ai-chat M5 / patient F8): whole-phrase
 // matching with a negation guard, wider than the old four substrings —
@@ -77,9 +77,9 @@ function generateLocalFallback(message: string): string {
   }
   const match = SYMPTOM_SPECIALIST_MAP.find((entry) => entry.keywords.some((k) => q.includes(k)))
   if (match) {
-    return `Based on what you described, patients usually start with **${match.specialist}**. You can book one from the Book an Appointment button below.\n\nThis is general guidance, not a diagnosis — only a doctor who examines you can say what is going on.\n\n(Note: the AI service isn't reachable right now, so this is a general fallback response.)`
+    return `Based on what you described, patients usually start with **${match.specialist}**. You can book one from the Book an Appointment button below.\n\nThis is general guidance, not a diagnosis, only a doctor who examines you can say what is going on.\n\n(Note: the AI service isn't reachable right now, so this is a general fallback response.)`
   }
-  return "I'm the WhyRisk AI Assistant. Tell me a bit about your symptoms — how long you've had them and how they feel — and I'll suggest which specialist to book with.\n\nI can't diagnose you or run clinical predictions; a doctor handles that once you're booked in.\n\n(Note: the AI service isn't reachable right now, so this is a general fallback response.)"
+  return "I'm the WhyRisk AI Assistant. Tell me a bit about your symptoms, how long you've had them and how they feel, and I'll suggest which specialist to book with.\n\nI can't diagnose you or run clinical predictions; a doctor handles that once you're booked in.\n\n(Note: the AI service isn't reachable right now, so this is a general fallback response.)"
 }
 
 export function PatientChatPanel() {
@@ -87,7 +87,7 @@ export function PatientChatPanel() {
     {
       id: "welcome",
       role: "assistant",
-      content: "Hi, I'm the **WhyRisk AI Assistant**. Tell me what symptoms you're experiencing and I'll help point you to the right kind of doctor and get you booked in.\n\nI don't diagnose conditions or replace professional medical advice — for anything urgent, please seek emergency care right away."
+      content: "Hi, I'm the **WhyRisk AI Assistant**. Tell me what symptoms you're experiencing and I'll help point you to the right kind of doctor and get you booked in.\n\nI don't diagnose conditions or replace professional medical advice, for anything urgent, please seek emergency care right away."
     }
   ])
   const [input, setInput] = useState("")
@@ -171,7 +171,7 @@ export function PatientChatPanel() {
           <Bot className="h-5 w-5 text-primary" />
           <CardTitle>AI Assistant</CardTitle>
         </div>
-        <CardDescription>Symptom guidance and specialist recommendations — not a diagnosis.</CardDescription>
+        <CardDescription>Symptom guidance and specialist recommendations, not a diagnosis.</CardDescription>
       </CardHeader>
 
       <CardContent role="log" aria-live="polite" className="flex-1 overflow-y-auto p-4 space-y-4">
@@ -183,7 +183,7 @@ export function PatientChatPanel() {
             <div className={`px-4 py-3 rounded-xl text-sm leading-relaxed ${msg.role === "user" ? "bg-primary text-primary-foreground" : "bg-muted"}`}>
               {msg.fallback && (
                 <span className="mb-2 inline-block rounded-full border border-[#D97706]/30 bg-[#FDF0DC] px-2 py-0.5 text-[11px] font-semibold text-[#A85008]">
-                  Built-in template response — the AI service is unavailable
+                  Built-in template response, the AI service is unavailable
                 </span>
               )}
               {renderContent(msg.content)}

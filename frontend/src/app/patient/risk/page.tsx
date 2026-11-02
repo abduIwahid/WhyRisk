@@ -185,7 +185,7 @@ export default function PatientRiskPage() {
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div>
             <p className="text-sm text-muted-foreground">
-              {latest.disease ? `${latest.disease} risk` : "Risk assessment"} · {fmtDate(latest.created_at)}
+              {latest.disease ? `${latest.disease} risk` : "Risk assessment"} , {fmtDate(latest.created_at)}
             </p>
             <div className="mt-1 flex items-end gap-3">
               <span className="font-display text-5xl leading-none">{pct != null ? <><CountUp text={String(pct)} />%</> : "—"}</span>

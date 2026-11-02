@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     type: "website",
     siteName: "WhyRisk",
     url: "/model-card",
-    title: "Model card — WhyRisk",
+    title: "Model card: WhyRisk",
     description:
       "The diabetes model's dataset, measured performance, live service status, and limitations, stated in full.",
     images: [
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
         url: "/opengraph-image",
         width: 1200,
         height: 630,
-        alt: "WhyRisk — Know your risk. See exactly why.",
+        alt: "WhyRisk: Know your risk. See exactly why.",
       },
     ],
   },

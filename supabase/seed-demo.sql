@@ -49,6 +49,18 @@
 --     stored examples for the demo patients (severities follow the ML
 --     service's own probability bands; confidence = max(p, 1 - p),
 --     the service's definition) - they are not live model output.
+--   * EXPLANATION COVERAGE (2026-10-31): this pack stores an explanation
+--     for each patient's LATEST prediction only (36 of 78 predictions);
+--     the older history predictions have none, by design of this pack.
+--     A future re-seed that wants factors on every prediction must
+--     generate an explanation per prediction AND store each prediction's
+--     feature snapshot (predictions.features) - this pack stored none,
+--     so its history explanations cannot be regenerated faithfully
+--     afterwards (a fresh model run does not reproduce the stored
+--     probabilities). Note the stored column is explanations.shap_payload
+--     (array of {feature, value, impact}); the My Risk page once queried
+--     a non-existent "shap_values" column and showed no factors for
+--     every patient despite these rows existing - fixed 2026-10-31.
 --
 -- NOTE: inserting 'Critical' demo predictions fires the database
 -- trigger from 20260723143100_critical_alert_webhook.sql, which calls
@@ -68,6 +80,13 @@ ON CONFLICT (id) DO NOTHING;
 
 -- 2) Demo login accounts (auth.users; profiles are created by the
 --    handle_new_user trigger from the metadata above) -----------------
+--    IMPORTANT: a bare auth.users insert is NOT enough to sign in.
+--    GoTrue also needs an auth.identities row per user (provider
+--    'email') and scans several token columns as plain strings, so
+--    they must be '' rather than NULL — section 2b below does both.
+--    (Learned live 2026-10-30: without 2b every demo login failed
+--    with a generic sign-in error / GoTrue 500 "Database error
+--    querying schema".)
 INSERT INTO auth.users (id, instance_id, email, encrypted_password, email_confirmed_at, raw_app_meta_data, raw_user_meta_data, created_at, updated_at, role, aud) VALUES
   ('d0000000-0000-4000-8000-000000000101', '00000000-0000-0000-0000-000000000000', 'dr.ayesha.rahman@demo.medisight.local', crypt('Demo@12345', gen_salt('bf')), now(), '{"provider":"email","providers":["email"]}', '{"full_name": "Dr. Ayesha Rahman", "role": "doctor", "department": "Endocrinology", "hospital_id": "d0000000-0000-4000-8000-000000000001"}'::jsonb, now(), now(), 'authenticated', 'authenticated'),
   ('d0000000-0000-4000-8000-000000000102', '00000000-0000-0000-0000-000000000000', 'dr.bilal.chaudhry@demo.medisight.local', crypt('Demo@12345', gen_salt('bf')), now(), '{"provider":"email","providers":["email"]}', '{"full_name": "Dr. Bilal Chaudhry", "role": "doctor", "department": "Endocrinology", "hospital_id": "d0000000-0000-4000-8000-000000000002"}'::jsonb, now(), now(), 'authenticated', 'authenticated'),
@@ -90,6 +109,35 @@ INSERT INTO auth.users (id, instance_id, email, encrypted_password, email_confir
   ('d0000000-0000-4000-8000-000000000207', '00000000-0000-0000-0000-000000000000', 'patient7@demo.medisight.local', crypt('Demo@12345', gen_salt('bf')), now(), '{"provider":"email","providers":["email"]}', '{"full_name": "Hassan Javed", "role": "patient", "phone": "0300-1000007"}'::jsonb, now(), now(), 'authenticated', 'authenticated'),
   ('d0000000-0000-4000-8000-000000000208', '00000000-0000-0000-0000-000000000000', 'patient8@demo.medisight.local', crypt('Demo@12345', gen_salt('bf')), now(), '{"provider":"email","providers":["email"]}', '{"full_name": "Amina Tariq", "role": "patient", "phone": "0300-1000008"}'::jsonb, now(), now(), 'authenticated', 'authenticated')
 ON CONFLICT (id) DO NOTHING;
+
+-- 2b) Make the demo logins actually sign-in-able ---------------------
+-- (a) Token/string columns GoTrue scans must be '' not NULL.
+UPDATE auth.users SET
+  confirmation_token         = COALESCE(confirmation_token, ''),
+  recovery_token             = COALESCE(recovery_token, ''),
+  email_change_token_current = COALESCE(email_change_token_current, ''),
+  email_change_token_new     = COALESCE(email_change_token_new, ''),
+  email_change               = COALESCE(email_change, ''),
+  phone_change               = COALESCE(phone_change, ''),
+  phone_change_token         = COALESCE(phone_change_token, ''),
+  reauthentication_token     = COALESCE(reauthentication_token, '')
+WHERE email LIKE '%@demo.medisight.local';
+
+-- (b) One email identity per demo user, shaped exactly as GoTrue
+--     creates it (provider_id = user id; identity_data sub/email).
+INSERT INTO auth.identities (id, user_id, provider, provider_id, identity_data, last_sign_in_at, created_at, updated_at)
+SELECT gen_random_uuid(),
+       u.id,
+       'email',
+       u.id::text,
+       jsonb_build_object('sub', u.id::text, 'email', u.email, 'email_verified', false, 'phone_verified', false),
+       now(), now(), now()
+FROM auth.users u
+WHERE u.email LIKE '%@demo.medisight.local'
+  AND NOT EXISTS (
+    SELECT 1 FROM auth.identities i
+    WHERE i.user_id = u.id AND i.provider = 'email'
+  );
 
 -- 3) Doctor directory details (profiles) ------------------------------
 UPDATE public.profiles SET specialty = 'Endocrinology', bio = 'MBBS, FCPS (Endocrinology). Consultant endocrinology specialist at MediSight Hospital Lahore with 11 years of clinical experience.', consultation_fee = 3000, services = '["Endocrinology consultation", "Diabetes risk assessment", "Follow-up review"]'::jsonb, first_name = 'Ayesha', last_name = 'Rahman', contact_number = '0300-2000101', phone = '0300-2000101', availability_status = 'available' WHERE id = 'd0000000-0000-4000-8000-000000000101';

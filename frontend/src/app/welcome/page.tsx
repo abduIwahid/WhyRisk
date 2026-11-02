@@ -1,9 +1,12 @@
 import Link from "next/link"
 import type { CSSProperties } from "react"
 import type { Metadata } from "next"
-import { Activity, ArrowRight, CalendarCheck, ListChecks } from "lucide-react"
+import { Activity, ArrowRight, CalendarCheck, ListChecks, ShieldAlert } from "lucide-react"
 import BrandMark from "@/components/shared/BrandMark"
 import { GuestRiskCheck } from "@/components/shared/GuestRiskCheck"
+import { SlideIn } from "@/components/shared/SlideIn"
+import { StatsBand } from "@/components/shared/StatsBand"
+import { AnimatedFactorBars } from "@/components/shared/AnimatedFactorBars"
 import { SEVERITY_HEX } from "@/lib/status"
 
 export const metadata: Metadata = {
@@ -133,7 +136,7 @@ export default function WelcomePage() {
           {/* Nav: on mobile it takes its own row under brand + CTA — one
               centred horizontal line, links never wrap (Wadi, 2026-11-01).
               From md up it sits inline, centred between brand and CTA. */}
-          <nav className="order-3 flex w-full items-center justify-center gap-3.5 overflow-x-auto whitespace-nowrap text-[12.5px] font-semibold min-[420px]:gap-4 md:order-none md:w-auto md:flex-1 md:justify-center md:gap-6 md:overflow-visible md:text-[13px]">
+          <nav className="order-3 flex w-full items-center justify-center gap-3.5 overflow-x-auto whitespace-nowrap text-[12.5px] font-semibold min-[420px]:gap-4 md:order-none md:w-auto md:flex-1 md:gap-6 md:overflow-visible md:text-[13px]">
             <a href="#check" className="text-foreground/75 transition hover:text-foreground">Risk check</a>
             <Link href="/model-card" className="text-foreground/75 transition hover:text-foreground">The model</Link>
             <a href="#how" className="text-foreground/75 transition hover:text-foreground">How it works</a>
@@ -170,7 +173,7 @@ export default function WelcomePage() {
             >
               WhyRisk helps care teams estimate a patient&apos;s diabetes risk with a trained machine-learning
               model — and shows the reasons behind every score, in plain language. Assessments are run by your
-              care team; patients use the portal for appointments and their profile. No black box. No invented
+              care team; patients use the portal for appointments, their profile and their latest risk assessment. No black box. No invented
               numbers.
             </p>
             <div className="reveal mt-7 flex flex-wrap gap-3" style={{ "--d": "320ms" } as CSSProperties}>
@@ -188,11 +191,14 @@ export default function WelcomePage() {
               </a>
             </div>
             <div
-              className="reveal reveal-slow mt-7 rounded-[10px] border border-[#D97706] bg-[#FDF0DC] px-4 py-3 text-[13.5px] leading-relaxed text-[#A85008]"
+              className="reveal reveal-slow mt-7 flex items-start gap-2.5 border-l-[3px] border-[#D97706] pl-4 text-[13.5px] leading-relaxed text-[#A85008]"
               style={{ "--d": "430ms" } as CSSProperties}
             >
-              <strong>Honest by design:</strong> one trained model today (diabetes). Everything else is clearly marked
-              as roadmap — this site never dresses up a guess as a prediction.
+              <ShieldAlert className="mt-0.5 h-4 w-4 shrink-0" />
+              <p>
+                <strong>Honest by design:</strong> one trained model today (diabetes). Everything else is clearly marked
+                as roadmap — this site never dresses up a guess as a prediction.
+              </p>
             </div>
           </div>
 
@@ -233,17 +239,7 @@ export default function WelcomePage() {
               <p className="font-mono text-[11px] font-semibold uppercase tracking-[1.6px] text-brand-text">
                 Why this score — top factors
               </p>
-              <div className="mt-1">
-                {DEMO_FACTORS.map((f) => (
-                  <div key={f.label} className="mt-2 flex items-center gap-2.5 text-[13px]">
-                    <span className="w-[118px] shrink-0 text-foreground/80">{f.label}</span>
-                    <span className="h-[9px] flex-1 overflow-hidden rounded-full bg-secondary">
-                      <span className="block h-full rounded-full" style={{ width: f.width, background: f.color }} />
-                    </span>
-                    <span className="w-[42px] text-right font-mono text-[11.5px]">{f.value}</span>
-                  </div>
-                ))}
-              </div>
+              <AnimatedFactorBars factors={DEMO_FACTORS} />
             </div>
             <p className="mt-4 border-t border-secondary pt-3 text-xs leading-relaxed text-muted-foreground">
               Explanation generated with SHAP from the patient&apos;s own inputs. A screening aid — not a diagnosis.
@@ -251,55 +247,63 @@ export default function WelcomePage() {
           </div>
         </section>
 
-        {/* Honest facts */}
-        <section id="model" className="grid scroll-mt-28 md:scroll-mt-24 gap-3 pb-2 pt-8 sm:grid-cols-2 lg:grid-cols-4">
-          {FACTS.map((f) => (
-            <div key={f.value} className="rounded-xl bg-primary p-[18px] text-white">
-              <span className="block font-display text-[26px] tracking-wide">{f.value}</span>
-              <span className="mt-1 block text-[13px] leading-relaxed text-white/85">{f.text}</span>
-            </div>
-          ))}
+        {/* Honest facts — one band, hairline-separated columns */}
+        <section id="model" className="scroll-mt-28 pb-2 pt-8 md:scroll-mt-24">
+          <StatsBand facts={FACTS} />
         </section>
 
         {/* Quick risk check — the real model, no account needed */}
         <section id="check" className="scroll-mt-28 md:scroll-mt-24 pb-2 pt-12">
-          <h2 className="font-heading text-[30px] font-bold uppercase tracking-wide">Try the model yourself</h2>
-          <p className="mt-1.5 max-w-[640px] text-[15.5px] text-muted-foreground">
-            No account, nothing saved. Answer the same questions a care team would ask, and the trained
-            diabetes model scores them — the same model, not a demo imitation.
-          </p>
-          <div className="mt-[22px]">
+          <SlideIn>
+            <h2 className="font-heading text-[30px] font-bold uppercase tracking-wide">Try the model yourself</h2>
+            <p className="mt-1.5 max-w-[640px] text-[15.5px] text-muted-foreground">
+              No account, nothing saved. Answer the same questions a care team would ask, and the trained
+              diabetes model scores them — the same model, not a demo imitation.
+            </p>
+          </SlideIn>
+          <SlideIn delay={0.1} className="mt-[22px]">
             <GuestRiskCheck />
-          </div>
+          </SlideIn>
         </section>
 
         {/* What it does */}
         <section id="how" className="scroll-mt-28 md:scroll-mt-24 pb-2 pt-12">
-          <h2 className="font-heading text-[30px] font-bold uppercase tracking-wide">What it does</h2>
-          <p className="mt-1.5 max-w-[640px] text-[15.5px] text-muted-foreground">
-            Three things, done properly — instead of ten things done with smoke and mirrors.
-          </p>
-          <div className="mt-[22px] grid gap-3.5 md:grid-cols-3">
-            {CAPABILITIES.map((c) => (
-              <div key={c.title} className="rounded-xl border border-border bg-card p-5">
-                <div className="mb-3 flex h-[42px] w-[42px] items-center justify-center rounded-[10px] bg-secondary text-primary">
-                  <c.icon className="h-5 w-5" />
+          <SlideIn>
+            <h2 className="font-heading text-[30px] font-bold uppercase tracking-wide">What it does</h2>
+            <p className="mt-1.5 max-w-[640px] text-[15.5px] text-muted-foreground">
+              Three things, done properly — instead of ten things done with smoke and mirrors.
+            </p>
+          </SlideIn>
+          <div className="mt-[22px] border-b border-border">
+            {CAPABILITIES.map((c, i) => (
+              <SlideIn key={c.title} delay={i * 0.1}>
+                <div className="grid items-start gap-3 border-t border-border py-6 sm:grid-cols-[64px_1fr] md:grid-cols-[76px_minmax(210px,290px)_1fr] md:gap-6">
+                  <span className="font-display text-[34px] leading-none text-brand">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <div className="flex items-center gap-3">
+                    <div className="flex h-[42px] w-[42px] shrink-0 items-center justify-center rounded-[10px] bg-secondary text-primary">
+                      <c.icon className="h-5 w-5" />
+                    </div>
+                    <h3 className="font-sans text-[17px] font-bold tracking-normal">{c.title}</h3>
+                  </div>
+                  <p className="text-sm leading-relaxed text-foreground/75 sm:col-start-2 md:col-start-3">{c.text}</p>
                 </div>
-                <h3 className="font-sans text-[17px] font-bold tracking-normal">{c.title}</h3>
-                <p className="mt-1.5 text-sm leading-relaxed text-foreground/75">{c.text}</p>
-              </div>
+              </SlideIn>
             ))}
           </div>
         </section>
 
         {/* Honest scope */}
         <section id="scope" className="scroll-mt-28 md:scroll-mt-24 pb-2 pt-12">
-          <h2 className="font-heading text-[30px] font-bold uppercase tracking-wide">What is real, what is next</h2>
-          <p className="mt-1.5 max-w-[640px] text-[15.5px] text-muted-foreground">
-            Most health apps hide this page. We put it on the homepage.
-          </p>
-          <div className="mt-[22px] grid gap-3.5 md:grid-cols-2">
-            <div className="rounded-xl border-[1.5px] border-primary bg-card p-5">
+          <SlideIn>
+            <h2 className="font-heading text-[30px] font-bold uppercase tracking-wide">What is real, what is next</h2>
+            <p className="mt-1.5 max-w-[640px] text-[15.5px] text-muted-foreground">
+              Most health apps hide this page. We put it on the homepage.
+            </p>
+          </SlideIn>
+          <div className="mt-[22px] grid gap-10 md:grid-cols-2 md:gap-0 md:divide-x md:divide-border">
+            <SlideIn className="md:pr-10">
               <h3 className="font-mono text-xs font-semibold uppercase tracking-[1.6px] text-[#1E7A46]">Available now</h3>
               <ul className="mt-2 text-[14.5px]">
                 {[
@@ -308,14 +312,14 @@ export default function WelcomePage() {
                   ["Symptom screening", "Rule-based · labelled", "bg-[#FDF0DC] text-[#A85008]"],
                   ["Patient / doctor portals & appointments", "Live", "bg-[#E2F0E6] text-[#1E7A46]"],
                 ].map(([label, tag, tagClass]) => (
-                  <li key={label} className="flex items-center justify-between gap-2 border-b border-foreground/[0.07] py-[7px] last:border-b-0">
+                  <li key={label} className="flex items-center justify-between gap-2 border-b border-foreground/[0.07] py-[9px] last:border-b-0">
                     <span>{label}</span>
                     <span className={`whitespace-nowrap rounded-full px-2 py-0.5 text-[11px] font-bold ${tagClass}`}>{tag}</span>
                   </li>
                 ))}
               </ul>
-            </div>
-            <div className="rounded-xl border border-dashed border-muted-foreground/50 bg-secondary p-5">
+            </SlideIn>
+            <SlideIn delay={0.1} className="md:pl-10">
               <h3 className="font-mono text-xs font-semibold uppercase tracking-[1.6px] text-muted-foreground">On the roadmap</h3>
               <ul className="mt-2 text-[14.5px]">
                 {[
@@ -325,7 +329,7 @@ export default function WelcomePage() {
                   "Hypertension model",
                   "Asthma & COPD models",
                 ].map((label) => (
-                  <li key={label} className="flex items-center justify-between gap-2 border-b border-foreground/[0.07] py-[7px] last:border-b-0">
+                  <li key={label} className="flex items-center justify-between gap-2 border-b border-foreground/[0.07] py-[9px] last:border-b-0">
                     <span>{label}</span>
                     <span className="whitespace-nowrap rounded-full bg-muted px-2 py-0.5 text-[11px] font-bold text-muted-foreground">
                       In development
@@ -333,17 +337,31 @@ export default function WelcomePage() {
                   </li>
                 ))}
               </ul>
-            </div>
+            </SlideIn>
           </div>
         </section>
 
         {/* Inside the app */}
         <section className="pb-4 pt-12">
-          <h2 className="font-heading text-[30px] font-bold uppercase tracking-wide">Inside the app</h2>
-          <p className="mt-1.5 max-w-[640px] text-[15.5px] text-muted-foreground">
-            One admin, one login — a live overview of the whole practice.
-          </p>
-          <div className="mt-[22px] grid overflow-hidden rounded-[14px] border border-border bg-card md:grid-cols-[200px_1fr]">
+          <SlideIn>
+            <h2 className="font-heading text-[30px] font-bold uppercase tracking-wide">Inside the app</h2>
+            <p className="mt-1.5 max-w-[640px] text-[15.5px] text-muted-foreground">
+              One admin, one login — a live overview of the whole practice.
+            </p>
+          </SlideIn>
+          <SlideIn delay={0.1} className="mt-[22px]">
+          <div className="overflow-hidden rounded-[14px] border border-border bg-card shadow-premium">
+            <div className="flex items-center gap-3 border-b border-border bg-secondary/60 px-4 py-2.5">
+              <span className="flex gap-1.5" aria-hidden="true">
+                <span className="h-2.5 w-2.5 rounded-full bg-[#DE6B5F]" />
+                <span className="h-2.5 w-2.5 rounded-full bg-[#E3B341]" />
+                <span className="h-2.5 w-2.5 rounded-full bg-[#57AB5A]" />
+              </span>
+              <span className="rounded-md bg-background px-3 py-1 font-mono text-[11px] text-muted-foreground">
+                whyrisk.vercel.app
+              </span>
+            </div>
+            <div className="grid md:grid-cols-[200px_1fr]">
             <div className="hidden bg-foreground p-5 text-[#CCD0CF] md:block">
               <div className="font-display text-[17px] uppercase tracking-wide text-white">WhyRisk</div>
               <ul className="mt-[18px] space-y-1 text-[13.5px]">
@@ -368,7 +386,9 @@ export default function WelcomePage() {
                 Counts load live from the database — the preview leaves them blank rather than inventing numbers.
               </p>
             </div>
+            </div>
           </div>
+          </SlideIn>
         </section>
       </main>
 
@@ -385,6 +405,12 @@ export default function WelcomePage() {
             </a>
             <Link href="/contact-us" className="text-xs font-semibold text-white underline decoration-[#2E7FA8] decoration-2 underline-offset-4 hover:opacity-80">
               Contact
+            </Link>
+            <Link href="/privacy" className="text-xs font-semibold text-white underline decoration-[#2E7FA8] decoration-2 underline-offset-4 hover:opacity-80">
+              Privacy
+            </Link>
+            <Link href="/terms" className="text-xs font-semibold text-white underline decoration-[#2E7FA8] decoration-2 underline-offset-4 hover:opacity-80">
+              Terms
             </Link>
           </span>
           <p className="max-w-[640px] text-xs leading-relaxed opacity-75">

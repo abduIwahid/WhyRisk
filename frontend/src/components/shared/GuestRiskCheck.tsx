@@ -101,6 +101,27 @@ function YesNoToggle({
 const inputClass =
   "h-11 w-full rounded-xl border border-input bg-background px-3.5 text-sm outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/25"
 
+/**
+ * Numbered step marker for one question group (01–04), closed by a
+ * hairline rule — the form sits open on the page, not inside a card.
+ */
+function StepHeading({
+  step,
+  title,
+  className = "",
+}: {
+  step: string
+  title: React.ReactNode
+  className?: string
+}) {
+  return (
+    <div className={`flex items-baseline gap-3 border-b border-border pb-2.5 ${className}`}>
+      <span className="font-display text-[19px] leading-none text-brand">{step}</span>
+      <h3 className="font-mono text-[11px] font-semibold uppercase tracking-[1.6px] text-brand-text">{title}</h3>
+    </div>
+  )
+}
+
 export function GuestRiskCheck() {
   const [age, setAge] = useState("")
   const [sex, setSex] = useState<YesNo>(0)
@@ -252,13 +273,10 @@ export function GuestRiskCheck() {
   }
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="rounded-[14px] border border-border bg-card p-[22px] shadow-premium"
-    >
-      <div className="grid gap-x-8 lg:grid-cols-2">
+    <form onSubmit={handleSubmit}>
+      <div className="grid gap-x-8 gap-y-8 lg:grid-cols-2 lg:gap-y-0">
         <div>
-          <h3 className="font-mono text-[11px] font-semibold uppercase tracking-[1.6px] text-brand-text">About you</h3>
+          <StepHeading step="01" title="About you" />
           <div className="mt-3 grid grid-cols-2 gap-3">
             <div className="space-y-1.5">
               <label htmlFor="grc-age" className="text-sm font-medium">Age (years)</label>
@@ -293,7 +311,7 @@ export function GuestRiskCheck() {
             {bmi !== null ? `Your BMI works out to ${bmi.toFixed(1)}.` : "Height and weight give your BMI, one of the model's inputs."}
           </p>
 
-          <h3 className="mt-6 font-mono text-[11px] font-semibold uppercase tracking-[1.6px] text-brand-text">Health history</h3>
+          <StepHeading step="02" title="Health history" className="mt-8" />
           <div className="mt-1 divide-y divide-foreground/[0.06]">
             {HISTORY_QUESTIONS.map((q) => (
               <YesNoToggle key={q.key} label={q.label} value={answers[q.key]} onChange={setAnswer(q.key)} />
@@ -302,14 +320,14 @@ export function GuestRiskCheck() {
         </div>
 
         <div>
-          <h3 className="font-mono text-[11px] font-semibold uppercase tracking-[1.6px] text-brand-text">Lifestyle &amp; access</h3>
+          <StepHeading step="03" title={<>Lifestyle &amp; access</>} />
           <div className="mt-1 divide-y divide-foreground/[0.06]">
             {LIFESTYLE_QUESTIONS.map((q) => (
               <YesNoToggle key={q.key} label={q.label} value={answers[q.key]} onChange={setAnswer(q.key)} />
             ))}
           </div>
 
-          <h3 className="mt-6 font-mono text-[11px] font-semibold uppercase tracking-[1.6px] text-brand-text">How you have been</h3>
+          <StepHeading step="04" title="How you have been" className="mt-8" />
           <div className="mt-3 grid grid-cols-2 gap-3">
             <div className="space-y-1.5">
               <label htmlFor="grc-genhlth" className="text-sm font-medium">General health</label>

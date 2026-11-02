@@ -168,9 +168,10 @@ export default function WelcomePage() {
             fill
             priority
             sizes="100vw"
-            className="scale-[1.06] object-cover object-center blur-[2px]"
+            className="scale-[1.06] object-cover object-center blur-[3px]"
           />
-          <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-r from-[#0D2B3E] via-[#0D2B3E]/85 to-[#0D2B3E]/45" />
+          <div aria-hidden="true" className="absolute inset-0 bg-[#0D2B3E]/70" />
+          <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-r from-[#0D2B3E]/95 via-[#0D2B3E]/85 to-[#0D2B3E]/60" />
           <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-[#0D2B3E]/60 via-transparent to-[#0D2B3E]/25" />
           <svg
             aria-hidden="true"
@@ -309,9 +310,9 @@ export default function WelcomePage() {
               alt="A CT scanner and patient table in a bright imaging room"
               fill
               sizes="(min-width: 1400px) 1370px, 100vw"
-              className="scale-[1.06] object-cover blur-[3px]"
+              className="scale-[1.06] object-cover blur-[4px]"
             />
-            <div aria-hidden="true" className="absolute inset-0 bg-background/[0.92]" />
+            <div aria-hidden="true" className="absolute inset-0 bg-background/[0.96]" />
           </div>
           <div className="relative z-10">
           <SlideIn>
@@ -338,9 +339,9 @@ export default function WelcomePage() {
               alt="Glass laboratory flasks holding amber liquid in a dark laboratory"
               fill
               sizes="(min-width: 1400px) 1370px, 100vw"
-              className="scale-[1.06] object-cover blur-[3px]"
+              className="scale-[1.06] object-cover blur-[4px]"
             />
-            <div aria-hidden="true" className="absolute inset-0 bg-background/[0.93]" />
+            <div aria-hidden="true" className="absolute inset-0 bg-background/[0.96]" />
           </div>
           <div className="relative z-10">
           <SlideIn>
@@ -482,7 +483,7 @@ export default function WelcomePage() {
           sizes="100vw"
           className="scale-[1.06] object-cover blur-[2px]"
         />
-        <div aria-hidden="true" className="absolute inset-0 bg-foreground/[0.88]" />
+        <div aria-hidden="true" className="absolute inset-0 bg-foreground/[0.94]" />
         <div className="relative z-10 mx-auto flex max-w-[1400px] flex-wrap items-center justify-between gap-3.5 px-5">
           <span className="font-display text-lg uppercase tracking-wide text-white">WhyRisk</span>
           <span className="flex items-center gap-4">

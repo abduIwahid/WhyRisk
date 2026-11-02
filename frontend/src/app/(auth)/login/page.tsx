@@ -225,7 +225,7 @@ function LoginPageInner() {
           {/* Step B: stethoscope photo as the panel's blurred backdrop
               under a navy tint — background only, the feature list
               above it stays crisp. */}
-          <AuthPhotoBackdrop tintClassName="bg-primary/85" />
+          <AuthPhotoBackdrop tintClassName="bg-primary/92" />
           <BrandMark variant="glyph" className="pointer-events-none absolute -bottom-14 -right-10 h-72 w-72 opacity-[0.06]" />
           <SlideIn direction="left" className="relative z-10">
             <div className="flex items-center gap-2.5">

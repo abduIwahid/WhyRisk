@@ -8,13 +8,13 @@ import Image from "next/image"
  * update-password are centred cards), so each page mounts this layer
  * inside its own root/panel and keeps its content above it.
  *
- * `tintClassName` picks the tint: the navy `bg-primary/85` inside the
- * login brand panel, the paper `bg-background/90` behind the card
+ * `tintClassName` picks the tint: the navy `bg-primary/92` inside the
+ * login brand panel, the paper `bg-background/95` behind the card
  * pages — in both cases the photo stays a faint texture and every
  * label, feature line and form control renders crisp above it.
  */
 export function AuthPhotoBackdrop({
-  tintClassName = "bg-background/90",
+  tintClassName = "bg-background/95",
 }: {
   tintClassName?: string
 }) {
@@ -25,7 +25,7 @@ export function AuthPhotoBackdrop({
         alt="A stethoscope resting on a light blue surface"
         fill
         sizes="(min-width: 1024px) 640px, 100vw"
-        className="scale-[1.06] object-cover blur-[3px]"
+        className="scale-[1.06] object-cover blur-[4px]"
       />
       <div aria-hidden="true" className={`absolute inset-0 ${tintClassName}`} />
     </div>

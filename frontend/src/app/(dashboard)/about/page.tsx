@@ -104,9 +104,9 @@ export default function AboutPage() {
           alt="Laboratory vials and specimen tubes filled with blue liquid"
           fill
           sizes="(min-width: 1280px) 1152px, 100vw"
-          className="scale-[1.06] object-cover blur-[3px]"
+          className="scale-[1.06] object-cover blur-[4px]"
         />
-        <div aria-hidden="true" className="absolute inset-0 bg-card/[0.93]" />
+        <div aria-hidden="true" className="absolute inset-0 bg-card/[0.97]" />
         <div className="relative z-10 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
           {metrics.map((m, i) => (
             <div key={i} className="space-y-1">

@@ -23,6 +23,7 @@ export default function SignupPage() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [showPassword, setShowPassword] = useState(false)
+  const [consent, setConsent] = useState(false)
 
   // Doctor-only fields
   const [licenseNumber, setLicenseNumber] = useState("")
@@ -42,6 +43,14 @@ export default function SignupPage() {
     setLoading(true)
     setError(null)
     setMsg(null)
+
+    // Consent to the Privacy Policy and Terms of Use is required
+    // before any account is created (legal pages shipped 2026-10-30).
+    if (!consent) {
+      setError("Please agree to the Privacy Policy and Terms of Use to create your account.")
+      setLoading(false)
+      return
+    }
 
     if (portal === "doctor" && !licenseNumber.trim()) {
       setError("A medical license number (PMC/PMDC or equivalent) is required for doctor registration.")
@@ -330,6 +339,28 @@ export default function SignupPage() {
                   </button>
                 </div>
                 <p className="text-xs text-muted-foreground">Use at least 6 characters.</p>
+              </div>
+
+              <div className="flex items-start gap-3">
+                <input
+                  id="consent"
+                  type="checkbox"
+                  checked={consent}
+                  onChange={e => setConsent(e.target.checked)}
+                  required
+                  className="mt-1 h-4 w-4 shrink-0 cursor-pointer accent-primary"
+                />
+                <Label htmlFor="consent" className="cursor-pointer text-sm font-normal leading-6 text-muted-foreground">
+                  I agree to the{" "}
+                  <Link href="/privacy" className="font-medium text-primary hover:underline">
+                    Privacy Policy
+                  </Link>{" "}
+                  and{" "}
+                  <Link href="/terms" className="font-medium text-primary hover:underline">
+                    Terms of Use
+                  </Link>
+                  .
+                </Label>
               </div>
 
               {error && <div id="signup-error" role="alert" className="rounded-2xl bg-destructive/10 px-4 py-3 text-sm text-destructive-text">{error}</div>}

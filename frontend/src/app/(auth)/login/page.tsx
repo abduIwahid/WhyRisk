@@ -9,6 +9,7 @@ import Link from "next/link"
 import { AtSign, Lock, Eye, EyeOff } from "lucide-react"
 import { motion } from "framer-motion"
 import BrandMark from "@/components/shared/BrandMark"
+import { AuthPhotoBackdrop } from "@/components/shared/AuthPhotoBackdrop"
 import { PulseLoader } from "@/components/shared/PulseLoader"
 import { SlideIn } from "@/components/shared/SlideIn"
 
@@ -221,6 +222,10 @@ function LoginPageInner() {
       <div className="relative z-10 grid w-full max-w-5xl grid-cols-1 overflow-hidden rounded-2xl border border-border shadow-premium md:grid-cols-2">
         {/* Brand / marketing panel */}
         <div className="relative hidden flex-col justify-between overflow-hidden bg-primary p-10 text-white md:flex">
+          {/* Step B: stethoscope photo as the panel's blurred backdrop
+              under a navy tint — background only, the feature list
+              above it stays crisp. */}
+          <AuthPhotoBackdrop tintClassName="bg-primary/85" />
           <BrandMark variant="glyph" className="pointer-events-none absolute -bottom-14 -right-10 h-72 w-72 opacity-[0.06]" />
           <SlideIn direction="left" className="relative z-10">
             <div className="flex items-center gap-2.5">

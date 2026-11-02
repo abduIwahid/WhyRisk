@@ -1,3 +1,4 @@
+import Image from "next/image"
 import Link from "next/link"
 import { Shield, Brain, Stethoscope, HeartPulse, Activity, Sparkles, ArrowRight, Clock } from "lucide-react"
 
@@ -94,9 +95,19 @@ export default function AboutPage() {
         </div>
       </div>
 
-      {/* Metrics Banner */}
-      <div className="rounded-xl border bg-card p-8 shadow-card">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+      {/* Metrics Banner — Step B: the laboratory-vials photograph as a
+          blurred background layer under a heavy card tint; background
+          only, the figures render above it untouched. */}
+      <div className="relative overflow-hidden rounded-xl border bg-card p-8 shadow-card">
+        <Image
+          src="https://images.pexels.com/photos/8533080/pexels-photo-8533080.jpeg?auto=compress&cs=tinysrgb&w=1600"
+          alt="Laboratory vials and specimen tubes filled with blue liquid"
+          fill
+          sizes="(min-width: 1280px) 1152px, 100vw"
+          className="scale-[1.06] object-cover blur-[3px]"
+        />
+        <div aria-hidden="true" className="absolute inset-0 bg-card/[0.93]" />
+        <div className="relative z-10 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
           {metrics.map((m, i) => (
             <div key={i} className="space-y-1">
               <div className="text-2xl sm:text-4xl font-extrabold text-primary">{m.value}</div>

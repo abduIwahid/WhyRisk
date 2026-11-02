@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image"
 import { motion } from "framer-motion"
 import { CountUp } from "@/components/shared/CountUp"
 
@@ -23,8 +24,19 @@ const columnMotion = {
 
 export function StatsBand({ facts }: { facts: { value: string; text: string }[] }) {
   return (
-    <div className="rounded-[14px] bg-primary px-6 py-8 text-white sm:px-8 lg:py-10">
-      <div className="grid gap-x-8 gap-y-8 sm:grid-cols-2 lg:grid-cols-4">
+    <div className="relative overflow-hidden rounded-[14px] bg-primary px-6 py-8 text-white sm:px-8 lg:py-10">
+      {/* Step B: the hero's ECG photograph at ~9% under the navy — a
+          background layer only, so the band and the hero read as one
+          visual story. The panel's own bg-primary IS the heavy navy
+          overlay; the figures render above it untouched. */}
+      <Image
+        src="https://images.unsplash.com/photo-1682706841289-9d7ddf5eb999?fm=jpg&q=80&w=1600&auto=format&fit=crop"
+        alt="Electrocardiogram heartbeat trace glowing on a dark monitor"
+        fill
+        sizes="(min-width: 1400px) 1370px, 100vw"
+        className="object-cover opacity-[0.09]"
+      />
+      <div className="relative z-10 grid gap-x-8 gap-y-8 sm:grid-cols-2 lg:grid-cols-4">
         {facts.map((f, i) => (
           <motion.div
             key={f.value}

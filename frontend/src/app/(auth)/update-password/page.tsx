@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { CheckCircle2, Eye, EyeOff } from "lucide-react"
 import BrandMark from "@/components/shared/BrandMark"
+import { AuthPhotoBackdrop } from "@/components/shared/AuthPhotoBackdrop"
 import { SlideIn } from "@/components/shared/SlideIn"
 
 export default function UpdatePasswordPage() {
@@ -145,14 +146,18 @@ export default function UpdatePasswordPage() {
   }
 
   return (
-    <div className="flex min-h-dvh w-full flex-col items-center justify-center gap-6 bg-muted/30 px-4 py-10">
-      <SlideIn direction="left">
+    <div className="relative flex min-h-dvh w-full flex-col items-center justify-center gap-6 bg-muted/30 px-4 py-10">
+      {/* Step B: same blurred stethoscope backdrop as the login panel,
+          behind the card (applied at the page root — the auth pages
+          share no panel shell). */}
+      <AuthPhotoBackdrop />
+      <SlideIn direction="left" className="relative z-10">
         <div className="flex items-center gap-2.5">
           <BrandMark className="h-10 w-10 shrink-0" />
           <span className="text-xl font-bold tracking-tight">WhyRisk</span>
         </div>
       </SlideIn>
-      <SlideIn direction="up" delay={0.05} className="w-full max-w-md">
+      <SlideIn direction="up" delay={0.05} className="relative z-10 w-full max-w-md">
       <div className="w-full max-w-md p-8 space-y-6 bg-card rounded-xl border shadow-card">
         {hasSession === null ? (
           <p className="py-4 text-center text-sm text-muted-foreground">Checking your link…</p>

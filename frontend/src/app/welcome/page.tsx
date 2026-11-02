@@ -1,3 +1,4 @@
+import Image from "next/image"
 import Link from "next/link"
 import type { CSSProperties } from "react"
 import type { Metadata } from "next"
@@ -120,7 +121,7 @@ export default function WelcomePage() {
       />
       {/* Header */}
       <header className="sticky top-0 z-40 border-b border-border bg-background shadow-[0_1px_12px_rgba(13,43,62,0.06)]">
-        <div className="mx-auto flex max-w-6xl flex-wrap items-center gap-x-3.5 gap-y-2 px-4 py-3.5 sm:px-5">
+        <div className="mx-auto flex max-w-[1400px] flex-wrap items-center gap-x-3.5 gap-y-2 px-4 py-3.5 sm:px-5">
           <Link href="/welcome" className="flex shrink-0 items-center gap-3">
             <BrandMark className="h-[38px] w-[38px] shrink-0" />
             <span className="font-display text-[21px] uppercase leading-none tracking-wide">
@@ -152,23 +153,66 @@ export default function WelcomePage() {
         </div>
       </header>
 
-      <main id="main-content" className="mx-auto max-w-6xl px-5">
-        {/* Hero */}
-        <section className="grid items-start gap-10 pb-8 pt-14 lg:grid-cols-[1.05fr_0.95fr]">
+      <main id="main-content">
+        {/* Hero — full-bleed ECG photograph background (Step B): the
+            photo sits under a deep-navy gradient, heavier on the text
+            side, so the white headline stays perfectly readable and
+            the trace reads as an accent. The animated pulse below is
+            the Signature Flow beat (globals.css .pulse-beat) travelling
+            a faint trace along the hero's lower edge; under
+            prefers-reduced-motion it renders as a static trace. */}
+        <section className="relative overflow-hidden bg-primary">
+          <Image
+            src="https://images.unsplash.com/photo-1682706841289-9d7ddf5eb999?fm=jpg&q=80&w=2400&auto=format&fit=crop"
+            alt="Electrocardiogram heartbeat trace glowing on a dark monitor"
+            fill
+            priority
+            sizes="100vw"
+            className="scale-[1.06] object-cover object-center blur-[2px]"
+          />
+          <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-r from-[#0D2B3E] via-[#0D2B3E]/85 to-[#0D2B3E]/45" />
+          <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-[#0D2B3E]/60 via-transparent to-[#0D2B3E]/25" />
+          <svg
+            aria-hidden="true"
+            viewBox="0 0 1440 160"
+            preserveAspectRatio="none"
+            className="pointer-events-none absolute inset-x-0 bottom-4 h-[110px] w-full sm:h-[140px]"
+          >
+            <path
+              d="M0 96 H240 L262 96 L280 62 L300 128 L322 24 L344 96 H560 L582 96 L600 68 L620 120 L640 96 H880 L902 96 L920 56 L942 134 L964 20 L986 96 H1200 L1222 96 L1240 66 L1260 122 L1280 96 H1440"
+              fill="none"
+              strokeWidth={3}
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="stroke-brand"
+              opacity={0.16}
+            />
+            <path
+              d="M0 96 H240 L262 96 L280 62 L300 128 L322 24 L344 96 H560 L582 96 L600 68 L620 120 L640 96 H880 L902 96 L920 56 L942 134 L964 20 L986 96 H1200 L1222 96 L1240 66 L1260 122 L1280 96 H1440"
+              fill="none"
+              strokeWidth={3}
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              pathLength={100}
+              className="pulse-beat stroke-brand"
+              opacity={0.45}
+            />
+          </svg>
+          <div className="relative z-10 mx-auto grid w-full max-w-[1400px] items-start gap-10 px-5 pb-14 pt-14 lg:grid-cols-[1.05fr_0.95fr] lg:pb-[72px] lg:pt-20">
           <div>
-            <p className="eyebrow reveal" style={{ "--d": "0ms" } as CSSProperties}>
+            <p className="eyebrow reveal text-[#8FC3DC]" style={{ "--d": "0ms" } as CSSProperties}>
               Explainable healthcare ML
             </p>
             <h1
-              className="reveal mt-4 font-display text-[clamp(42px,7.5vw,76px)] uppercase leading-[1.02]"
+              className="reveal mt-4 font-display text-[clamp(42px,7.5vw,76px)] uppercase leading-[1.02] text-white 2xl:text-[88px]"
               style={{ "--d": "90ms" } as CSSProperties}
             >
               Know your risk.
               <br />
-              <span className="text-brand">See exactly why.</span>
+              <span className="text-[#8FC3DC]">See exactly why.</span>
             </h1>
             <p
-              className="reveal reveal-slow mt-6 max-w-[620px] text-[17.5px] leading-relaxed text-foreground/80"
+              className="reveal reveal-slow mt-6 max-w-[620px] text-[17.5px] leading-relaxed text-white/80"
               style={{ "--d": "200ms" } as CSSProperties}
             >
               WhyRisk helps care teams estimate a patient&apos;s diabetes risk with a trained machine-learning
@@ -185,13 +229,13 @@ export default function WelcomePage() {
               </Link>
               <a
                 href="#how"
-                className="inline-flex items-center rounded-lg border-[1.5px] border-primary px-5 py-3 text-sm font-bold text-primary transition hover:bg-secondary"
+                className="inline-flex items-center rounded-lg border-[1.5px] border-white/50 px-5 py-3 text-sm font-bold text-white transition hover:bg-white/10"
               >
                 How the model works
               </a>
             </div>
             <div
-              className="reveal reveal-slow mt-7 flex items-start gap-2.5 border-l-[3px] border-[#D97706] pl-4 text-[13.5px] leading-relaxed text-[#A85008]"
+              className="reveal reveal-slow mt-7 flex items-start gap-2.5 border-l-[3px] border-[#D97706] pl-4 text-[13.5px] leading-relaxed text-[#F2B25C]"
               style={{ "--d": "430ms" } as CSSProperties}
             >
               <ShieldAlert className="mt-0.5 h-4 w-4 shrink-0" />
@@ -245,15 +289,31 @@ export default function WelcomePage() {
               Explanation generated with SHAP from the patient&apos;s own inputs. A screening aid — not a diagnosis.
             </p>
           </div>
+          </div>
         </section>
 
+        <div className="mx-auto max-w-[1400px] px-5">
         {/* Honest facts — one band, hairline-separated columns */}
-        <section id="model" className="scroll-mt-28 pb-2 pt-8 md:scroll-mt-24">
+        <section id="model" className="scroll-mt-28 pb-2 pt-8 md:scroll-mt-24 lg:pt-10">
           <StatsBand facts={FACTS} />
         </section>
 
-        {/* Quick risk check — the real model, no account needed */}
-        <section id="check" className="scroll-mt-28 md:scroll-mt-24 pb-2 pt-12">
+        {/* Quick risk check — the real model, no account needed.
+            Step B: the CT scanner photograph as a blurred background
+            layer under a heavy paper tint — background only, the form
+            renders above it untouched. */}
+        <section id="check" className="relative scroll-mt-28 md:scroll-mt-24 pb-2 pt-12 lg:pt-16">
+          <div className="absolute inset-0 overflow-hidden">
+            <Image
+              src="https://images.pexels.com/photos/13176356/pexels-photo-13176356.jpeg?auto=compress&cs=tinysrgb&w=1600"
+              alt="A CT scanner and patient table in a bright imaging room"
+              fill
+              sizes="(min-width: 1400px) 1370px, 100vw"
+              className="scale-[1.06] object-cover blur-[3px]"
+            />
+            <div aria-hidden="true" className="absolute inset-0 bg-background/[0.92]" />
+          </div>
+          <div className="relative z-10">
           <SlideIn>
             <h2 className="font-heading text-[30px] font-bold uppercase tracking-wide">Try the model yourself</h2>
             <p className="mt-1.5 max-w-[640px] text-[15.5px] text-muted-foreground">
@@ -264,10 +324,25 @@ export default function WelcomePage() {
           <SlideIn delay={0.1} className="mt-[22px]">
             <GuestRiskCheck />
           </SlideIn>
+          </div>
         </section>
 
-        {/* What it does */}
-        <section id="how" className="scroll-mt-28 md:scroll-mt-24 pb-2 pt-12">
+        {/* What it does — the model/process section. Step B: the
+            dark laboratory photograph as a blurred background layer
+            under a heavy paper tint — background only, the rows
+            render above it untouched. */}
+        <section id="how" className="relative scroll-mt-28 md:scroll-mt-24 pb-2 pt-12 lg:pt-16">
+          <div className="absolute inset-0 overflow-hidden">
+            <Image
+              src="https://images.pexels.com/photos/4912164/pexels-photo-4912164.jpeg?auto=compress&cs=tinysrgb&w=1600"
+              alt="Glass laboratory flasks holding amber liquid in a dark laboratory"
+              fill
+              sizes="(min-width: 1400px) 1370px, 100vw"
+              className="scale-[1.06] object-cover blur-[3px]"
+            />
+            <div aria-hidden="true" className="absolute inset-0 bg-background/[0.93]" />
+          </div>
+          <div className="relative z-10">
           <SlideIn>
             <h2 className="font-heading text-[30px] font-bold uppercase tracking-wide">What it does</h2>
             <p className="mt-1.5 max-w-[640px] text-[15.5px] text-muted-foreground">
@@ -292,10 +367,11 @@ export default function WelcomePage() {
               </SlideIn>
             ))}
           </div>
+          </div>
         </section>
 
         {/* Honest scope */}
-        <section id="scope" className="scroll-mt-28 md:scroll-mt-24 pb-2 pt-12">
+        <section id="scope" className="scroll-mt-28 md:scroll-mt-24 pb-2 pt-12 lg:pt-16">
           <SlideIn>
             <h2 className="font-heading text-[30px] font-bold uppercase tracking-wide">What is real, what is next</h2>
             <p className="mt-1.5 max-w-[640px] text-[15.5px] text-muted-foreground">
@@ -342,7 +418,7 @@ export default function WelcomePage() {
         </section>
 
         {/* Inside the app */}
-        <section className="pb-4 pt-12">
+        <section className="pb-4 pt-12 lg:pt-16">
           <SlideIn>
             <h2 className="font-heading text-[30px] font-bold uppercase tracking-wide">Inside the app</h2>
             <p className="mt-1.5 max-w-[640px] text-[15.5px] text-muted-foreground">
@@ -390,11 +466,24 @@ export default function WelcomePage() {
           </div>
           </SlideIn>
         </section>
+        </div>
       </main>
 
-      {/* Footer */}
-      <footer className="mt-14 bg-foreground py-[30px] text-[#CCD0CF]">
-        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3.5 px-5">
+      {/* Footer — the landing's closing band. Step B: the landing has
+          no separate CTA band, so the pills-on-navy photograph backs
+          this band instead, under a heavy ink overlay (the guest
+          risk-check backdrop carries the CT scanner, per the photo
+          map). Background only; links and disclaimer render above. */}
+      <footer className="relative mt-14 overflow-hidden bg-foreground py-[30px] text-[#CCD0CF] lg:mt-20">
+        <Image
+          src="https://images.pexels.com/photos/9742893/pexels-photo-9742893.jpeg?auto=compress&cs=tinysrgb&w=2400"
+          alt="Assorted medication capsules and tablets arranged on a deep navy surface"
+          fill
+          sizes="100vw"
+          className="scale-[1.06] object-cover blur-[2px]"
+        />
+        <div aria-hidden="true" className="absolute inset-0 bg-foreground/[0.88]" />
+        <div className="relative z-10 mx-auto flex max-w-[1400px] flex-wrap items-center justify-between gap-3.5 px-5">
           <span className="font-display text-lg uppercase tracking-wide text-white">WhyRisk</span>
           <span className="flex items-center gap-4">
             <Link href="/login" className="text-xs font-semibold text-white underline decoration-[#2E7FA8] decoration-2 underline-offset-4 hover:opacity-80">

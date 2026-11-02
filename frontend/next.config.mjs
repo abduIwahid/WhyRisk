@@ -12,6 +12,18 @@ const nextConfig = {
         protocol: "https",
         hostname: "qvlufntpplwofzedrbrj.supabase.co",
       },
+      {
+        // Step B (2026-11-02): the two free photo libraries whose
+        // images serve as blurred background layers (landing, auth,
+        // About). Named hosts only — the same pinning discipline as
+        // the storage host above.
+        protocol: "https",
+        hostname: "images.unsplash.com",
+      },
+      {
+        protocol: "https",
+        hostname: "images.pexels.com",
+      },
     ],
   },
   // The root is a real redirect, not a 200 meta-refresh stub

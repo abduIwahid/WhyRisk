@@ -8,6 +8,7 @@ import Link from "next/link"
 import { Eye, EyeOff } from "lucide-react"
 import { motion } from "framer-motion"
 import BrandMark from "@/components/shared/BrandMark"
+import { AuthPhotoBackdrop } from "@/components/shared/AuthPhotoBackdrop"
 import { SlideIn } from "@/components/shared/SlideIn"
 
 // Google sign-in is NOT enabled in the Supabase project yet — rendering
@@ -148,8 +149,12 @@ export default function SignupPage() {
   }
 
   return (
-    <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.45, ease: "easeOut" }} className="flex min-h-dvh w-full items-center justify-center bg-background px-4 py-10">
-      <div className="w-full max-w-xl overflow-hidden rounded-xl border border-border bg-card shadow-premium">
+    <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.45, ease: "easeOut" }} className="relative flex min-h-dvh w-full items-center justify-center bg-background px-4 py-10">
+      {/* Step B: same blurred stethoscope backdrop as the login panel,
+          behind the card (the auth pages share no panel shell, so the
+          treatment is applied at each page's root). */}
+      <AuthPhotoBackdrop />
+      <div className="relative z-10 w-full max-w-xl overflow-hidden rounded-xl border border-border bg-card shadow-premium">
         <div className="grid gap-8 px-8 py-10 grid-cols-1 md:px-12 md:py-12">
           <div className="space-y-6">
             <SlideIn direction="left">

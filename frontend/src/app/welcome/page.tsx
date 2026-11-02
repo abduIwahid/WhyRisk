@@ -236,7 +236,7 @@ export default function WelcomePage() {
               </a>
             </div>
             <div
-              className="reveal reveal-slow mt-7 flex items-start gap-2.5 rounded-lg border border-[#D97706]/35 bg-white/5 px-4 py-3 text-[13.5px] leading-relaxed text-[#F2B25C]"
+              className="reveal reveal-slow mt-7 flex items-start gap-2.5 rounded-lg border border-[#D97706]/35 bg-[#0D2B3E]/95 px-4 py-3 text-[13.5px] leading-relaxed text-[#F2B25C]"
               style={{ "--d": "430ms" } as CSSProperties}
             >
               <ShieldAlert className="mt-0.5 h-4 w-4 shrink-0" />
@@ -329,21 +329,11 @@ export default function WelcomePage() {
           </div>
         </section>
 
-        {/* What it does — the model/process section. Step B: the
-            dark laboratory photograph as a blurred background layer
-            under a heavy paper tint — background only, the rows
-            render above it untouched. */}
+        {/* What it does — the model/process section. The Step B
+            laboratory-flasks photo was pulled for readability after
+            repeated checks; the section renders on the plain page
+            background. */}
         <section id="how" className="relative scroll-mt-28 md:scroll-mt-24 pb-2 pt-12 lg:pt-16">
-          <div className="absolute inset-0 overflow-hidden">
-            <Image
-              src="https://images.pexels.com/photos/4912164/pexels-photo-4912164.jpeg?auto=compress&cs=tinysrgb&w=1600"
-              alt="Glass laboratory flasks holding amber liquid in a dark laboratory"
-              fill
-              sizes="(min-width: 1400px) 1370px, 100vw"
-              className="scale-[1.06] object-cover blur-[6px]"
-            />
-            <div aria-hidden="true" className="absolute inset-0 bg-background/[0.97]" />
-          </div>
           <div className="relative z-10">
           <SlideIn>
             <h2 className="font-heading text-[30px] font-bold">What it does</h2>

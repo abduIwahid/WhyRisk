@@ -8,7 +8,7 @@ import Image from "next/image"
  * update-password are centred cards), so each page mounts this layer
  * inside its own root/panel and keeps its content above it.
  *
- * `tintClassName` picks the tint: the navy `bg-primary/92` inside the
+ * `tintClassName` picks the tint: the navy `bg-[#0D2B3E]/[0.92]` inside the
  * login brand panel, the paper `bg-background/95` behind the card
  * pages — in both cases the photo stays a faint texture and every
  * label, feature line and form control renders crisp above it.

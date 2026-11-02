@@ -1,0 +1,320 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@layer base {
+  :root {
+    /* Midnight Clinical (2A) — ink, deep navy primary, one steel-blue accent,
+       cool paper background. Flat surfaces, 1px borders, layered soft shadows. */
+    --background: #F4F6F6;
+    --foreground: #06141B;
+    /* Locked Midnight Clinical card surface (QA Round 2, cluster 26):
+       the palette's Card is #E7EDEC, not white — this token was the one
+       surface that had drifted from the approved palette. */
+    --card: #E7EDEC;
+    --card-foreground: #06141B;
+    --popover: #FFFFFF;
+    --popover-foreground: #06141B;
+
+    --primary: #0D2B3E;
+    --primary-foreground: #FFFFFF;
+
+    --brand: #2E7FA8;
+    /* Text-safe deepening of the brand blue: #2E7FA8 measures 4.10:1 on
+       paper and 3.76:1 on card — below the 4.5:1 small-text floor.
+       #1F6E96 passes on paper (5.19:1), card (4.75:1) and white (5.63:1).
+       Graphics, bars and large display text keep --brand. */
+    --brand-text: #1F6E96;
+    --brand-foreground: #FFFFFF;
+
+    --secondary: #E7EDEC;
+    --secondary-foreground: #0D2B3E;
+    --muted: #E7EDEC;
+    --muted-foreground: #5A6B73;
+    --accent: #E7EDEC;
+    --accent-foreground: #0D2B3E;
+    --destructive: #C0392B;
+    --destructive-foreground: #FFFFFF;
+    /* Text on destructive TINTS (bg-destructive/10) uses this deeper
+       red (QA Round 3, accessibility A4): the fill red measures
+       3.99–4.34:1 on its own tints, below the 4.5:1 small-text floor. */
+    --destructive-text: #A93226;
+    --border: #CCD0CF;
+    /* Control borders are a SEPARATE token from decorative dividers
+       (QA Round 3, accessibility A2): --border stays light for
+       hairlines, while --input carries the ≥3:1 contrast WCAG 1.4.11
+       requires for the boundary of an interactive control. */
+    --input: #7A8A91;
+    --ring: #2E7FA8;
+    /* No --radius token: radii are set per component (rounded-xl
+       cards, rounded-lg controls) — the old token was consumed by
+       nothing (QA Round 3, visual V16). */
+  }
+  .dark {
+    --background: #06141B;
+    --foreground: #F4F6F6;
+    --card: #0D2B3E;
+    --card-foreground: #F4F6F6;
+    --popover: #0D2B3E;
+    --popover-foreground: #F4F6F6;
+
+    --primary: #2E7FA8;
+    --primary-foreground: #FFFFFF;
+
+    --brand: #5EA8C9;
+    /* On the ink background the light brand already passes (7.05:1). */
+    --brand-text: #5EA8C9;
+    --brand-foreground: #06141B;
+
+    --secondary: #123043;
+    --secondary-foreground: #F4F6F6;
+    --muted: #123043;
+    --muted-foreground: #9FB3B8;
+    --accent: #123043;
+    --accent-foreground: #F4F6F6;
+    --destructive: #C0392B;
+    --destructive-foreground: #FFFFFF;
+    --destructive-text: #E88A7E;
+    --border: #1D3A4A;
+    --input: #46626F;
+    --ring: #2E7FA8;
+  }
+
+  /* A visible keyboard focus indicator is guaranteed globally
+     (QA Round 3, accessibility A17): components that define their own
+     ring keep it; everything else gets this floor instead of the
+     browser's default or nothing. */
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+
+  html, body {
+    /* Clip (not hidden): prevents horizontal scroll without creating a
+       scroll container, so sticky and fixed layouts keep working. */
+    overflow-x: clip;
+    scrollbar-color: var(--border) transparent;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    /* Deliberate body leading inside the 1.4–1.6 reading range. */
+    line-height: 1.55;
+    caret-color: var(--brand);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading tracking-tight;
+    /* A long word in a display head wraps instead of blowing out the layout. */
+    overflow-wrap: break-word;
+    min-width: 0;
+  }
+
+  ::selection {
+    background: var(--brand);
+    color: #FFFFFF;
+  }
+}
+
+@layer components {
+  /* Section eyebrow — a plain mono label, never a pill badge. */
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: var(--brand-text);
+  }
+
+  /* Staggered reveal — choreographed timing (varied delays via --d,
+     varied durations via .reveal-slow), used sparingly on hero content.
+     Never applied to every section. */
+  .reveal {
+    animation: reveal 0.65s cubic-bezier(0.22, 0.8, 0.3, 1) both;
+    animation-delay: var(--d, 0ms);
+  }
+  .reveal-slow {
+    animation-duration: 0.9s;
+  }
+
+  @keyframes reveal {
+    from {
+      opacity: 0;
+      transform: translateY(14px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Signature Flow loader (components/shared/PulseLoader) — the brand
+     pulse on a 2.4s heartbeat: a bright beat segment travels the faint
+     full trace, and the landing dot from the app icon answers when the
+     beat arrives. Colours come from --brand via the stroke-brand /
+     fill-brand utilities in the component, so the loader follows the
+     light/dark theme on its own. */
+  .pulse-beat {
+    stroke-dasharray: 16 84;
+    animation: pulse-beat 2.4s linear infinite;
+  }
+  .pulse-dot {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: pulse-dot 2.4s ease-out infinite;
+  }
+  .pulse-label {
+    animation: pulse-label 1.6s ease-in-out infinite;
+  }
+
+  @keyframes pulse-beat {
+    from {
+      stroke-dashoffset: 100;
+    }
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+  @keyframes pulse-dot {
+    0%,
+    80% {
+      transform: scale(1);
+      opacity: 0.55;
+    }
+    87% {
+      transform: scale(1.45);
+      opacity: 1;
+    }
+    92% {
+      transform: scale(1.05);
+      opacity: 1;
+    }
+    96% {
+      transform: scale(1.22);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 0.55;
+    }
+  }
+  @keyframes pulse-label {
+    0%,
+    100% {
+      opacity: 0.4;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal, .reveal-slow {
+      animation: none;
+    }
+    /* Tailwind's looping utilities are animations too — the reduced-motion
+       net covers them, not just the brand loader (QA Round 1, item 74). */
+    .animate-pulse, .animate-spin {
+      animation: none;
+    }
+    .pulse-beat, .pulse-dot, .pulse-label {
+      animation: none;
+    }
+    .pulse-beat {
+      /* No travelling beat: the full trace shows statically instead of
+         a frozen dash segment. */
+      stroke-dasharray: none;
+    }
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  /* Custom Scrollbar for sleek UI */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: color-mix(in srgb, var(--muted-foreground) 30%, transparent);
+    border-radius: 10px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: color-mix(in srgb, var(--muted-foreground) 50%, transparent);
+  }
+}
+
+/* Print: when a .print-report is on the page, it prints alone with its
+   colours intact — everything outside it is hidden and elements marked
+   .print-hidden are removed entirely. When NO report is on the page,
+   the screen prints as-is (app chrome carries print:hidden classes):
+   the visibility trick is scoped with :has() so printing a chart, the
+   queue or the appointments list no longer yields a blank page
+   (QA Round 2, cluster 27). */
+.print-repeat-header {
+  display: none;
+}
+@media print {
+  body:has(.print-report) * {
+    visibility: hidden;
+  }
+  .print-report,
+  .print-report * {
+    visibility: visible;
+  }
+  /* Repeating patient-identifier header: position:fixed elements are
+     re-rendered on every printed page by the browser, so page 2+ of a
+     report still carries whose report it is. It lives inside
+     .print-report, so the visibility rules above keep it printable. */
+  .print-repeat-header {
+    display: flex;
+    visibility: visible;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 2mm;
+    font-size: 10px;
+    color: var(--muted-foreground);
+  }
+  .print-repeat-header * {
+    visibility: visible;
+  }
+  .print-report {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .print-hidden {
+    display: none !important;
+  }
+  @page {
+    /* Extra top room for the repeating print header. */
+    margin: 20mm 14mm 14mm;
+  }
+}
+
+/* Interior motion utilities verified live 2026-11-02. */
+.deploy-marker-20261102 {
+  position: relative;
+}

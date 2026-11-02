@@ -27,12 +27,12 @@ export default function PublicContactPage() {
         Skip to content
       </a>
       <header className="border-b border-border bg-card">
-        <div className="mx-auto flex max-w-4xl items-center justify-between px-5 py-4">
+        <div className="mx-auto flex max-w-4xl items-center justify-between gap-3 px-5 py-4">
           <Link href="/welcome" className="flex items-center gap-2.5">
             <BrandMark className="h-9 w-9 shrink-0" />
             <span className="text-lg font-bold tracking-tight">WhyRisk</span>
           </Link>
-          <nav className="flex items-center gap-5 text-sm font-medium">
+          <nav className="flex items-center gap-3.5 whitespace-nowrap text-[13px] font-medium sm:gap-5 sm:text-sm">
             <Link href="/model-card" className="text-muted-foreground transition hover:text-foreground">
               The model
             </Link>
@@ -41,7 +41,7 @@ export default function PublicContactPage() {
             </Link>
             <Link
               href="/signup"
-              className="rounded-lg bg-primary px-4 py-2 font-semibold text-primary-foreground transition hover:bg-primary/90"
+              className="shrink-0 whitespace-nowrap rounded-lg bg-primary px-3.5 py-2 font-semibold text-primary-foreground transition hover:bg-primary/90 sm:px-4"
             >
               Create account
             </Link>
@@ -95,6 +95,12 @@ export default function PublicContactPage() {
             </Link>
             <Link href="/model-card" className="text-white underline decoration-[#2E7FA8] decoration-2 underline-offset-4 hover:opacity-80">
               Model card
+            </Link>
+            <Link href="/privacy" className="text-white underline decoration-[#2E7FA8] decoration-2 underline-offset-4 hover:opacity-80">
+              Privacy
+            </Link>
+            <Link href="/terms" className="text-white underline decoration-[#2E7FA8] decoration-2 underline-offset-4 hover:opacity-80">
+              Terms
             </Link>
             <Link href="/login" className="text-white underline decoration-[#2E7FA8] decoration-2 underline-offset-4 hover:opacity-80">
               Sign in

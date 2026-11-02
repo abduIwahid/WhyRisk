@@ -71,6 +71,8 @@ export async function middleware(request: NextRequest) {
                         request.nextUrl.pathname === '/' ||
                         request.nextUrl.pathname === '/model-card' ||
                         request.nextUrl.pathname === '/contact-us' ||
+                        request.nextUrl.pathname === '/privacy' ||
+                        request.nextUrl.pathname === '/terms' ||
                         request.nextUrl.pathname === '/api/ml/model-card'
 
   const isOnboardingRoute = request.nextUrl.pathname.startsWith('/onboarding')

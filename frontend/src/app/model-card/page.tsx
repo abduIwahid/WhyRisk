@@ -134,6 +134,12 @@ export default function ModelCardPage() {
             <Link href="/signup" className="text-white underline decoration-[#2E7FA8] decoration-2 underline-offset-4 hover:opacity-80">
               Create account
             </Link>
+            <Link href="/privacy" className="text-white underline decoration-[#2E7FA8] decoration-2 underline-offset-4 hover:opacity-80">
+              Privacy
+            </Link>
+            <Link href="/terms" className="text-white underline decoration-[#2E7FA8] decoration-2 underline-offset-4 hover:opacity-80">
+              Terms
+            </Link>
           </span>
           <p className="max-w-[640px] text-xs leading-relaxed opacity-75">
             WhyRisk is an experimental clinical decision-support and research tool. It is not a certified medical

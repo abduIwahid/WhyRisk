@@ -3,6 +3,10 @@ import Link from "next/link"
 import type { CSSProperties } from "react"
 import type { Metadata } from "next"
 import { ArrowRight, BrainCircuit, CalendarCheck, ShieldAlert, ShieldCheck } from "lucide-react"
+import { CursorGlow } from "@/components/motion/CursorGlow"
+import { Magnetic } from "@/components/motion/Magnetic"
+import { Parallax } from "@/components/motion/Parallax"
+import { TiltCard } from "@/components/motion/TiltCard"
 import BrandMark from "@/components/shared/BrandMark"
 import { GuestRiskCheck } from "@/components/shared/GuestRiskCheck"
 import { SlideIn } from "@/components/shared/SlideIn"
@@ -162,14 +166,19 @@ export default function WelcomePage() {
             a faint trace along the hero's lower edge; under
             prefers-reduced-motion it renders as a static trace. */}
         <section className="relative overflow-hidden bg-primary">
-          <Image
-            src="https://images.unsplash.com/photo-1682706841289-9d7ddf5eb999?fm=jpg&q=80&w=2400&auto=format&fit=crop"
-            alt="Electrocardiogram heartbeat trace glowing on a dark monitor"
-            fill
-            priority
-            sizes="100vw"
-            className="scale-[1.06] object-cover object-center blur-[3px]"
-          />
+          {/* Step C3: the photo layer drifts ≤10px with scroll
+              (transform only; the scale-[1.06] is its headroom).
+              Off on touch and under reduced motion. */}
+          <Parallax className="absolute inset-0">
+            <Image
+              src="https://images.unsplash.com/photo-1682706841289-9d7ddf5eb999?fm=jpg&q=80&w=2400&auto=format&fit=crop"
+              alt="Electrocardiogram heartbeat trace glowing on a dark monitor"
+              fill
+              priority
+              sizes="100vw"
+              className="scale-[1.06] object-cover object-center blur-[3px]"
+            />
+          </Parallax>
           <div aria-hidden="true" className="absolute inset-0 bg-[#0D2B3E]/70" />
           <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-r from-[#0D2B3E]/95 via-[#0D2B3E]/85 to-[#0D2B3E]/60" />
           <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-[#0D2B3E]/80 via-transparent to-[#0D2B3E]/25" />
@@ -199,6 +208,10 @@ export default function WelcomePage() {
               opacity={0.45}
             />
           </svg>
+          {/* Step C3: the site's one cursor glow — above the photo
+              and scrims, below the content (z-10). Pointer-fine and
+              reduced-motion gated inside the component. */}
+          <CursorGlow />
           <div className="relative z-10 mx-auto grid w-full max-w-[1400px] items-start gap-10 px-5 pb-14 pt-14 lg:grid-cols-[1.05fr_0.95fr] lg:pb-[72px] lg:pt-20">
           <div>
             <p className="eyebrow reveal text-[#8FC3DC]" style={{ "--d": "0ms" } as CSSProperties}>
@@ -222,12 +235,14 @@ export default function WelcomePage() {
               numbers.
             </p>
             <div className="reveal mt-7 flex flex-wrap gap-3" style={{ "--d": "320ms" } as CSSProperties}>
-              <Link
-                href="/signup"
-                className="inline-flex items-center rounded-lg bg-brand px-5 py-3 text-sm font-bold text-white transition hover:bg-brand/90"
-              >
-                Create your account <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
+              <Magnetic>
+                <Link
+                  href="/signup"
+                  className="inline-flex items-center rounded-lg bg-brand px-5 py-3 text-sm font-bold text-white transition hover:bg-brand/90"
+                >
+                  Create your account <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              </Magnetic>
               <a
                 href="#how"
                 className="inline-flex items-center rounded-lg border-[1.5px] border-white/50 px-5 py-3 text-sm font-bold text-white transition hover:bg-white/10"
@@ -247,7 +262,10 @@ export default function WelcomePage() {
             </div>
           </div>
 
-          {/* Hero visual — the explanation is the product */}
+          {/* Hero visual — the explanation is the product. Step C3:
+              the card leans ≤6° toward the cursor (TiltCard);
+              static on touch and under reduced motion. */}
+          <TiltCard>
           <div
             className="reveal reveal-slow rounded-[14px] border border-border bg-card p-[22px] shadow-premium"
             style={{ "--d": "240ms" } as CSSProperties}
@@ -291,6 +309,7 @@ export default function WelcomePage() {
               Explanation generated with SHAP from the patient&apos;s own inputs. A screening aid, not a diagnosis.
             </p>
           </div>
+          </TiltCard>
           </div>
         </section>
 

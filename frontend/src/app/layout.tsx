@@ -87,7 +87,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={cn("font-sans", archivo.variable, anton.variable, jetbrainsMono.variable)}>
+    <html lang="en" className={cn("font-sans", quicksand.variable, quicksandDisplay.variable, quicksandMono.variable)}>
       <body className="antialiased">
         <MotionProvider>{children}</MotionProvider>
       </body>

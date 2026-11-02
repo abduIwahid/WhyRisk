@@ -1,0 +1,144 @@
+"use client"
+import Link from "next/link"
+import { usePathname, useRouter } from "next/navigation"
+import { cn } from "@/lib/utils"
+import { LayoutDashboard, CalendarPlus, CalendarClock, Bot, User, LogOut, X, Gauge } from "lucide-react"
+import { createClient } from "@/lib/supabase/client"
+import { motion, type Variants } from "framer-motion"
+import BrandMark from "@/components/shared/BrandMark"
+import { roleLabel } from "@/lib/roles"
+
+// Nav entrance: items stagger in from the left on mount (transform
+// stripped automatically for reduced-motion users by the app-wide
+// MotionConfig) — the same language as the staff sidebar.
+const navVariants: Variants = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.05, delayChildren: 0.15 } },
+}
+
+const navItemVariants: Variants = {
+  hidden: { opacity: 0, x: -18 },
+  show: { opacity: 1, x: 0, transition: { duration: 0.35, ease: [0.22, 0.8, 0.3, 1] } },
+}
+
+interface PatientSidebarProps {
+  onClose?: () => void
+  className?: string
+}
+
+export function PatientSidebar({ onClose, className }: PatientSidebarProps) {
+  const pathname = usePathname()
+  const router = useRouter()
+  const supabase = createClient()
+
+  // Same sign-out implementation as the staff shell: shared client,
+  // then route to /login.
+  const handleLogout = async () => {
+    await supabase.auth.signOut()
+    router.push("/login")
+  }
+
+  const navItems = [
+    { name: "Overview", href: "/patient/dashboard", icon: LayoutDashboard },
+    { name: "My Risk", href: "/patient/risk", icon: Gauge },
+    { name: "Book an Appointment", href: "/patient/appointments/book", icon: CalendarPlus },
+    { name: "My Appointments", href: "/patient/appointments", icon: CalendarClock },
+    { name: "AI Assistant", href: "/patient/assistant", icon: Bot },
+    { name: "Profile", href: "/patient/profile", icon: User },
+  ]
+
+  // Active state: the longest matching href wins, so /patient/appointments/book
+  // highlights only "Book an Appointment", not "My Appointments" as well.
+  const activeHref = navItems
+    .map((item) => item.href)
+    .filter((href) => pathname === href || pathname.startsWith(href + "/"))
+    .sort((a, b) => b.length - a.length)[0]
+
+  return (
+    <motion.div
+      initial={{ x: -20, opacity: 0 }}
+      animate={{ x: 0, opacity: 1 }}
+      className={cn("flex h-full w-full flex-col border-r bg-card shadow-lg", className)}
+    >
+      <div className="flex h-16 items-center justify-between border-b px-6">
+        <Link href="/patient/dashboard" className="flex items-center gap-3 group" onClick={() => onClose?.()}>
+          <BrandMark className="h-9 w-9 shrink-0 transition-transform group-hover:scale-105" />
+          <span className="text-xl font-bold tracking-tight text-primary">WhyRisk</span>
+        </Link>
+        {onClose && (
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label="Close menu"
+            className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-muted-foreground transition hover:bg-muted hover:text-foreground lg:hidden"
+          >
+            <X className="h-5 w-5" />
+          </button>
+        )}
+      </div>
+
+      <div className="border-b px-6 py-3.5 bg-muted/20">
+        <div className="flex items-center gap-2">
+          <div className="h-2 w-2 rounded-full bg-[#1E7A46] animate-pulse"></div>
+          <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-muted-foreground">
+            {roleLabel("patient")}
+          </span>
+        </div>
+      </div>
+
+      <div className="flex-1 overflow-y-auto overflow-x-hidden py-4 custom-scrollbar">
+        <motion.nav
+          variants={navVariants}
+          initial="hidden"
+          animate="show"
+          className="grid gap-1 px-4"
+        >
+          {navItems.map((item) => {
+            const isActive = item.href === activeHref
+            return (
+              <motion.div key={item.href} variants={navItemVariants}>
+                <Link
+                  href={item.href}
+                  aria-current={isActive ? "page" : undefined}
+                  onClick={() => onClose?.()}
+                  className={cn(
+                    "group relative flex min-h-11 items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-all duration-300",
+                    isActive
+                      ? "bg-primary text-primary-foreground shadow-card"
+                      : "text-muted-foreground hover:bg-muted/80 hover:text-foreground"
+                  )}
+                >
+                  {!isActive && (
+                    <span
+                      aria-hidden
+                      className="absolute left-0 top-1/2 h-0 w-1 -translate-y-1/2 rounded-r-md bg-primary transition-all duration-300 group-hover:h-6"
+                    />
+                  )}
+                  <item.icon className={cn("h-4 w-4 transition-transform duration-300", isActive ? "scale-110" : "group-hover:scale-110 group-hover:text-primary")} />
+                  <span>{item.name}</span>
+                  {isActive && (
+                    <motion.span
+                      layoutId="patientActiveIndicator"
+                      className="absolute left-0 w-1 h-6 bg-white rounded-r-md"
+                      transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                    />
+                  )}
+                </Link>
+              </motion.div>
+            )
+          })}
+        </motion.nav>
+      </div>
+
+      <div className="border-t p-4 pb-[max(1rem,env(safe-area-inset-bottom))] bg-muted/10">
+        <button
+          onClick={handleLogout}
+          className="group flex w-full items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold text-muted-foreground transition-all duration-300 hover:bg-destructive/10 hover:text-destructive-text hover:shadow-card"
+        >
+          <LogOut className="h-[18px] w-[18px] transition-transform group-hover:-translate-x-1" />
+          <span>Sign out</span>
+        </button>
+      </div>
+    </motion.div>
+  )
+}

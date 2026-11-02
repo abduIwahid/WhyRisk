@@ -6,6 +6,7 @@ import { ArrowRight, BrainCircuit, CalendarCheck, ShieldAlert, ShieldCheck } fro
 import { CursorGlow } from "@/components/motion/CursorGlow"
 import { Magnetic } from "@/components/motion/Magnetic"
 import { Parallax } from "@/components/motion/Parallax"
+import { ScrollTrace } from "@/components/motion/ScrollTrace"
 import { TiltCard } from "@/components/motion/TiltCard"
 import BrandMark from "@/components/shared/BrandMark"
 import { GuestRiskCheck } from "@/components/shared/GuestRiskCheck"
@@ -155,6 +156,11 @@ export default function WelcomePage() {
             Create your account
           </Link>
         </div>
+        {/* Step C4: the scroll-drawn ECG strip rides the header's
+            bottom edge (header is sticky, so it stays in view and
+            fills with page scroll progress). Static full trace
+            under reduced motion; landing-only. */}
+        <ScrollTrace />
       </header>
 
       <main id="main-content">

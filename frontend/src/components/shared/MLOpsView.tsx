@@ -296,7 +296,7 @@ export function MLOpsView({
               <YAxis yAxisId="left" tick={{ fontSize: 11 }} className="fill-muted-foreground" />
               <YAxis yAxisId="right" orientation="right" domain={[0, 1]} tick={{ fontSize: 11 }} className="fill-muted-foreground" />
               <Tooltip
-                contentStyle={{ background: 'hsl(var(--card))', border: '1px solid hsl(var(--border))', borderRadius: 8 }}
+                contentStyle={{ background: 'rgb(var(--card))', border: '1px solid rgb(var(--border))', borderRadius: 8 }}
                 labelStyle={{ fontWeight: 600 }}
               />
               <Area yAxisId="left" type="monotone" dataKey="count" name="Predictions" stroke="#2E7FA8" fill="#2E7FA8" fillOpacity={0.12} strokeWidth={2} />
@@ -322,9 +322,9 @@ export function MLOpsView({
               <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
               <XAxis dataKey="window" tick={{ fontSize: 11 }} className="fill-muted-foreground" />
               <YAxis tick={{ fontSize: 11 }} className="fill-muted-foreground" />
-              <Tooltip contentStyle={{ background: 'hsl(var(--card))', border: '1px solid hsl(var(--border))', borderRadius: 8 }} />
+              <Tooltip contentStyle={{ background: 'rgb(var(--card))', border: '1px solid rgb(var(--border))', borderRadius: 8 }} />
               <ReferenceLine y={driftThreshold} stroke={SEVERITY_HEX.High} strokeDasharray="4 4" label={{ value: 'Threshold', fill: SEVERITY_HEX.High, fontSize: 11 }} />
-              <Line type="monotone" dataKey="psi" name="PSI" stroke="hsl(var(--primary))" strokeWidth={2} dot={false} />
+              <Line type="monotone" dataKey="psi" name="PSI" stroke="rgb(var(--primary))" strokeWidth={2} dot={false} />
             </LineChart>
           </ResponsiveContainer>
         </div>
@@ -339,7 +339,7 @@ export function MLOpsView({
               <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
               <XAxis dataKey="date" tick={{ fontSize: 11 }} className="fill-muted-foreground" />
               <YAxis tick={{ fontSize: 11 }} className="fill-muted-foreground" />
-              <Tooltip contentStyle={{ background: 'hsl(var(--card))', border: '1px solid hsl(var(--border))', borderRadius: 8 }} />
+              <Tooltip contentStyle={{ background: 'rgb(var(--card))', border: '1px solid rgb(var(--border))', borderRadius: 8 }} />
               {/* Series colours from lib/status.ts. The High series uses
                   the Moderate fill amber so it stays distinguishable
                   from Critical red in the same chart. */}

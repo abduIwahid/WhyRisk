@@ -12,78 +12,78 @@
   :root {
     /* Midnight Clinical (2A) — ink, deep navy primary, one steel-blue accent,
        cool paper background. Flat surfaces, 1px borders, layered soft shadows. */
-    --background: #F4F6F6;
-    --foreground: #06141B;
+    --background: 244 246 246;
+    --foreground: 6 20 27;
     /* Locked Midnight Clinical card surface (QA Round 2, cluster 26):
        the palette's Card is #E7EDEC, not white — this token was the one
        surface that had drifted from the approved palette. */
-    --card: #E7EDEC;
-    --card-foreground: #06141B;
-    --popover: #FFFFFF;
-    --popover-foreground: #06141B;
+    --card: 231 237 236;
+    --card-foreground: 6 20 27;
+    --popover: 255 255 255;
+    --popover-foreground: 6 20 27;
 
-    --primary: #0D2B3E;
-    --primary-foreground: #FFFFFF;
+    --primary: 13 43 62;
+    --primary-foreground: 255 255 255;
 
-    --brand: #2E7FA8;
+    --brand: 46 127 168;
     /* Text-safe deepening of the brand blue: #2E7FA8 measures 4.10:1 on
        paper and 3.76:1 on card — below the 4.5:1 small-text floor.
        #1F6E96 passes on paper (5.19:1), card (4.75:1) and white (5.63:1).
        Graphics, bars and large display text keep --brand. */
-    --brand-text: #1F6E96;
-    --brand-foreground: #FFFFFF;
+    --brand-text: 31 110 150;
+    --brand-foreground: 255 255 255;
 
-    --secondary: #E7EDEC;
-    --secondary-foreground: #0D2B3E;
-    --muted: #E7EDEC;
-    --muted-foreground: #5A6B73;
-    --accent: #E7EDEC;
-    --accent-foreground: #0D2B3E;
-    --destructive: #C0392B;
-    --destructive-foreground: #FFFFFF;
+    --secondary: 231 237 236;
+    --secondary-foreground: 13 43 62;
+    --muted: 231 237 236;
+    --muted-foreground: 90 107 115;
+    --accent: 231 237 236;
+    --accent-foreground: 13 43 62;
+    --destructive: 192 57 43;
+    --destructive-foreground: 255 255 255;
     /* Text on destructive TINTS (bg-destructive/10) uses this deeper
        red (QA Round 3, accessibility A4): the fill red measures
        3.99–4.34:1 on its own tints, below the 4.5:1 small-text floor. */
-    --destructive-text: #A93226;
-    --border: #CCD0CF;
+    --destructive-text: 169 50 38;
+    --border: 204 208 207;
     /* Control borders are a SEPARATE token from decorative dividers
        (QA Round 3, accessibility A2): --border stays light for
        hairlines, while --input carries the ≥3:1 contrast WCAG 1.4.11
        requires for the boundary of an interactive control. */
-    --input: #7A8A91;
-    --ring: #2E7FA8;
+    --input: 122 138 145;
+    --ring: 46 127 168;
     /* No --radius token: radii are set per component (rounded-xl
        cards, rounded-lg controls) — the old token was consumed by
        nothing (QA Round 3, visual V16). */
   }
   .dark {
-    --background: #06141B;
-    --foreground: #F4F6F6;
-    --card: #0D2B3E;
-    --card-foreground: #F4F6F6;
-    --popover: #0D2B3E;
-    --popover-foreground: #F4F6F6;
+    --background: 6 20 27;
+    --foreground: 244 246 246;
+    --card: 13 43 62;
+    --card-foreground: 244 246 246;
+    --popover: 13 43 62;
+    --popover-foreground: 244 246 246;
 
-    --primary: #2E7FA8;
-    --primary-foreground: #FFFFFF;
+    --primary: 46 127 168;
+    --primary-foreground: 255 255 255;
 
-    --brand: #5EA8C9;
+    --brand: 94 168 201;
     /* On the ink background the light brand already passes (7.05:1). */
-    --brand-text: #5EA8C9;
-    --brand-foreground: #06141B;
+    --brand-text: 94 168 201;
+    --brand-foreground: 6 20 27;
 
-    --secondary: #123043;
-    --secondary-foreground: #F4F6F6;
-    --muted: #123043;
-    --muted-foreground: #9FB3B8;
-    --accent: #123043;
-    --accent-foreground: #F4F6F6;
-    --destructive: #C0392B;
-    --destructive-foreground: #FFFFFF;
-    --destructive-text: #E88A7E;
-    --border: #1D3A4A;
-    --input: #46626F;
-    --ring: #2E7FA8;
+    --secondary: 18 48 67;
+    --secondary-foreground: 244 246 246;
+    --muted: 18 48 67;
+    --muted-foreground: 159 179 184;
+    --accent: 18 48 67;
+    --accent-foreground: 244 246 246;
+    --destructive: 192 57 43;
+    --destructive-foreground: 255 255 255;
+    --destructive-text: 232 138 126;
+    --border: 29 58 74;
+    --input: 70 98 111;
+    --ring: 46 127 168;
   }
 
   /* A visible keyboard focus indicator is guaranteed globally
@@ -91,7 +91,7 @@
      ring keep it; everything else gets this floor instead of the
      browser's default or nothing. */
   :focus-visible {
-    outline: 2px solid var(--ring);
+    outline: 2px solid rgb(var(--ring));
     outline-offset: 2px;
   }
 
@@ -99,14 +99,14 @@
     /* Clip (not hidden): prevents horizontal scroll without creating a
        scroll container, so sticky and fixed layouts keep working. */
     overflow-x: clip;
-    scrollbar-color: var(--border) transparent;
+    scrollbar-color: rgb(var(--border)) transparent;
   }
 
   body {
     @apply bg-background text-foreground antialiased;
     /* Deliberate body leading inside the 1.4–1.6 reading range. */
     line-height: 1.55;
-    caret-color: var(--brand);
+    caret-color: rgb(var(--brand));
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -117,7 +117,7 @@
   }
 
   ::selection {
-    background: var(--brand);
+    background: rgb(var(--brand));
     color: #FFFFFF;
   }
 }
@@ -127,7 +127,7 @@
   .eyebrow {
     font-size: 0.72rem;
     font-weight: 500;
-    color: var(--brand-text);
+    color: rgb(var(--brand-text));
   }
 
   /* Staggered reveal — choreographed timing (varied delays via --d,
@@ -243,11 +243,11 @@
     background: transparent;
   }
   .custom-scrollbar::-webkit-scrollbar-thumb {
-    background: color-mix(in srgb, var(--muted-foreground) 30%, transparent);
+    background: color-mix(in srgb, rgb(var(--muted-foreground)) 30%, transparent);
     border-radius: 10px;
   }
   .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-    background: color-mix(in srgb, var(--muted-foreground) 50%, transparent);
+    background: color-mix(in srgb, rgb(var(--muted-foreground)) 50%, transparent);
   }
 }
 
@@ -283,10 +283,10 @@
     align-items: baseline;
     justify-content: space-between;
     gap: 1rem;
-    border-bottom: 1px solid var(--border);
+    border-bottom: 1px solid rgb(var(--border));
     padding-bottom: 2mm;
     font-size: 10px;
-    color: var(--muted-foreground);
+    color: rgb(var(--muted-foreground));
   }
   .print-repeat-header * {
     visibility: visible;

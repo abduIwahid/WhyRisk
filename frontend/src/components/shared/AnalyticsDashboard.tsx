@@ -245,7 +245,7 @@ export function AnalyticsDashboard({ predictions, patientsByHospital, alertStats
                       <Cell key={entry.name} fill={SEVERITY_COLORS[entry.name] || "#5A6B73"} />
                     ))}
                   </Pie>
-                  <Tooltip contentStyle={{ background: 'hsl(var(--card))', border: '1px solid hsl(var(--border))', borderRadius: 8 }} />
+                  <Tooltip contentStyle={{ background: 'rgb(var(--card))', border: '1px solid rgb(var(--border))', borderRadius: 8 }} />
                   <Legend />
                 </PieChart>
               </ResponsiveContainer>
@@ -269,7 +269,7 @@ export function AnalyticsDashboard({ predictions, patientsByHospital, alertStats
                   <CartesianGrid strokeDasharray="3 3" className="stroke-muted" horizontal={false} />
                   <XAxis type="number" tick={{ fontSize: 11 }} className="fill-muted-foreground" />
                   <YAxis type="category" dataKey="name" tick={{ fontSize: 11 }} width={60} className="fill-muted-foreground" />
-                  <Tooltip contentStyle={{ background: 'hsl(var(--card))', border: '1px solid hsl(var(--border))', borderRadius: 8 }} />
+                  <Tooltip contentStyle={{ background: 'rgb(var(--card))', border: '1px solid rgb(var(--border))', borderRadius: 8 }} />
                   <Bar dataKey="value" name="Predictions" radius={[0, 4, 4, 0]}>
                     {diseaseData.map((_, i) => (
                       <Cell key={i} fill={DISEASE_COLORS[i % DISEASE_COLORS.length]} />
@@ -297,7 +297,7 @@ export function AnalyticsDashboard({ predictions, patientsByHospital, alertStats
                   <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
                   <XAxis dataKey="date" tick={{ fontSize: 11 }} className="fill-muted-foreground" />
                   <YAxis domain={[0, 1]} tick={{ fontSize: 11 }} className="fill-muted-foreground" />
-                  <Tooltip contentStyle={{ background: 'hsl(var(--card))', border: '1px solid hsl(var(--border))', borderRadius: 8 }} formatter={(v) => [(Number(v ?? 0) * 100).toFixed(1) + '%', 'Avg Risk']} />
+                  <Tooltip contentStyle={{ background: 'rgb(var(--card))', border: '1px solid rgb(var(--border))', borderRadius: 8 }} formatter={(v) => [(Number(v ?? 0) * 100).toFixed(1) + '%', 'Avg Risk']} />
                   <Area type="monotone" dataKey="avgRisk" stroke="#2E7FA8" fill="#2E7FA8" fillOpacity={0.12} strokeWidth={2} />
                 </AreaChart>
               </ResponsiveContainer>
@@ -324,8 +324,8 @@ export function AnalyticsDashboard({ predictions, patientsByHospital, alertStats
                   <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
                   <XAxis dataKey="name" tick={{ fontSize: 11 }} className="fill-muted-foreground" />
                   <YAxis tick={{ fontSize: 11 }} className="fill-muted-foreground" />
-                  <Tooltip contentStyle={{ background: 'hsl(var(--card))', border: '1px solid hsl(var(--border))', borderRadius: 8 }} />
-                  <Bar dataKey="count" name="Patients" fill="hsl(var(--primary))" radius={[4, 4, 0, 0]} />
+                  <Tooltip contentStyle={{ background: 'rgb(var(--card))', border: '1px solid rgb(var(--border))', borderRadius: 8 }} />
+                  <Bar dataKey="count" name="Patients" fill="rgb(var(--primary))" radius={[4, 4, 0, 0]} />
                 </BarChart>
               </ResponsiveContainer>
               <SrOnlyTable caption="Patients by hospital" columns={["Hospital", "Patients"]} rows={hospitalData.map((d) => [d.name, d.count])} />
@@ -355,7 +355,7 @@ export function AnalyticsDashboard({ predictions, patientsByHospital, alertStats
                       <Cell key={entry.name} fill={ALERT_STATUS_COLORS[entry.name] || "#5A6B73"} />
                     ))}
                   </Pie>
-                  <Tooltip contentStyle={{ background: 'hsl(var(--card))', border: '1px solid hsl(var(--border))', borderRadius: 8 }} />
+                  <Tooltip contentStyle={{ background: 'rgb(var(--card))', border: '1px solid rgb(var(--border))', borderRadius: 8 }} />
                 </PieChart>
               </ResponsiveContainer>
               <SrOnlyTable caption="Alerts by status" columns={["Status", "Alerts"]} rows={alertStatusData.map((d) => [d.name, d.value])} />
@@ -380,7 +380,7 @@ export function AnalyticsDashboard({ predictions, patientsByHospital, alertStats
                   {diseaseKeys.map((d, i) => (
                     <Radar key={d} name={d} dataKey={d} stroke={DISEASE_COLORS[i % DISEASE_COLORS.length]} fill={DISEASE_COLORS[i % DISEASE_COLORS.length]} fillOpacity={0.2} />
                   ))}
-                  <Tooltip contentStyle={{ background: 'hsl(var(--card))', border: '1px solid hsl(var(--border))', borderRadius: 8 }} />
+                  <Tooltip contentStyle={{ background: 'rgb(var(--card))', border: '1px solid rgb(var(--border))', borderRadius: 8 }} />
                   <Legend />
                 </RadarChart>
               </ResponsiveContainer>

@@ -6,7 +6,6 @@ import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
 import Link from "next/link"
 import { Eye, EyeOff } from "lucide-react"
-import { motion } from "framer-motion"
 import BrandMark from "@/components/shared/BrandMark"
 import { AuthPhotoBackdrop } from "@/components/shared/AuthPhotoBackdrop"
 import { SlideIn } from "@/components/shared/SlideIn"
@@ -149,7 +148,7 @@ export default function SignupPage() {
   }
 
   return (
-    <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.45, ease: "easeOut" }} className="relative flex min-h-dvh w-full items-center justify-center bg-background px-4 py-10">
+    <SlideIn direction="up" className="relative flex min-h-dvh w-full items-center justify-center bg-background px-4 py-10">
       {/* Step B: same blurred stethoscope backdrop as the login panel,
           behind the card (the auth pages share no panel shell, so the
           treatment is applied at each page's root). */}
@@ -457,6 +456,6 @@ export default function SignupPage() {
           </SlideIn>
         </div>
       </div>
-    </motion.div>
+    </SlideIn>
   )
 }

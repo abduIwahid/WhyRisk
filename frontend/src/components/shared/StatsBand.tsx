@@ -1,8 +1,8 @@
 "use client"
 
 import Image from "next/image"
-import { motion } from "framer-motion"
 import { CountUp } from "@/components/shared/CountUp"
+import { SlideIn } from "@/components/shared/SlideIn"
 
 /**
  * The landing page's honest-facts band: one navy panel, four columns
@@ -15,12 +15,6 @@ import { CountUp } from "@/components/shared/CountUp"
  * users who prefer reduced motion. (The count-up itself lives in the
  * shared CountUp component.)
  */
-
-const columnMotion = {
-  initial: { opacity: 0, x: -44 },
-  whileInView: { opacity: 1, x: 0 },
-  viewport: { once: true, margin: "-40px" },
-}
 
 export function StatsBand({ facts }: { facts: { value: string; text: string }[] }) {
   return (
@@ -38,10 +32,10 @@ export function StatsBand({ facts }: { facts: { value: string; text: string }[] 
       />
       <div className="relative z-10 grid gap-x-8 gap-y-8 sm:grid-cols-2 lg:grid-cols-4">
         {facts.map((f, i) => (
-          <motion.div
+          <SlideIn
             key={f.value}
-            {...columnMotion}
-            transition={{ duration: 0.65, delay: i * 0.1, ease: [0.22, 0.8, 0.3, 1] }}
+            direction="left"
+            delay={i * 0.1}
             className={[
               // Stacked on mobile: hairline above each column but the first.
               "border-t border-white/10 pt-6 first:border-t-0 first:pt-0",
@@ -57,7 +51,7 @@ export function StatsBand({ facts }: { facts: { value: string; text: string }[] 
               {/^[\d.]+$/.test(f.value) ? <CountUp text={f.value} /> : f.value}
             </span>
             <span className="mt-1.5 block text-[13px] leading-relaxed text-white/85">{f.text}</span>
-          </motion.div>
+          </SlideIn>
         ))}
       </div>
     </div>

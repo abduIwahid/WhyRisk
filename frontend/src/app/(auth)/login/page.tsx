@@ -7,7 +7,6 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import Link from "next/link"
 import { AtSign, Lock, Eye, EyeOff } from "lucide-react"
-import { motion } from "framer-motion"
 import BrandMark from "@/components/shared/BrandMark"
 import { AuthPhotoBackdrop } from "@/components/shared/AuthPhotoBackdrop"
 import { PulseLoader } from "@/components/shared/PulseLoader"
@@ -218,7 +217,7 @@ function LoginPageInner() {
   }
 
   return (
-    <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.45, ease: "easeOut" }} className="relative flex min-h-dvh w-full items-center justify-center bg-background px-4 py-10">
+    <SlideIn direction="up" className="relative flex min-h-dvh w-full items-center justify-center bg-background px-4 py-10">
       <div className="relative z-10 grid w-full max-w-5xl grid-cols-1 overflow-hidden rounded-2xl border border-border shadow-premium md:grid-cols-2">
         {/* Brand / marketing panel */}
         <div className="relative hidden flex-col justify-between overflow-hidden bg-[#0D2B3E] p-10 text-white md:flex">
@@ -408,6 +407,6 @@ function LoginPageInner() {
           </SlideIn>
         </div>
       </div>
-    </motion.div>
+    </SlideIn>
   )
 }

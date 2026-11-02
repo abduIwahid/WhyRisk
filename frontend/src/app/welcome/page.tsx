@@ -316,9 +316,9 @@ export default function WelcomePage() {
             <div aria-hidden="true" className="absolute inset-0 bg-background/[0.96]" />
           </div>
           <div className="relative z-10">
-          <SlideIn direction="up">
-            <h2 className="font-heading text-[30px] font-bold">Try the model yourself</h2>
-            <p className="mt-1.5 max-w-[640px] text-[15.5px] text-foreground/80">
+          <SlideIn direction="up" className="text-center">
+            <h2 className="font-heading text-3xl font-bold sm:text-4xl 2xl:text-[44px]">Try the model yourself</h2>
+            <p className="mx-auto mt-1.5 max-w-[640px] text-[15.5px] text-foreground/80">
               No account, nothing saved. Answer the same questions a care team would ask, and the trained
               diabetes model scores them, the same model, not a demo imitation.
             </p>
@@ -335,9 +335,9 @@ export default function WelcomePage() {
             background. */}
         <section id="how" className="relative scroll-mt-28 md:scroll-mt-24 pb-2 pt-12 lg:pt-16">
           <div className="relative z-10">
-          <SlideIn>
-            <h2 className="font-heading text-[30px] font-bold">What it does</h2>
-            <p className="mt-1.5 max-w-[640px] text-[15.5px] text-muted-foreground">
+          <SlideIn className="text-center">
+            <h2 className="font-heading text-3xl font-bold sm:text-4xl 2xl:text-[44px]">What it does</h2>
+            <p className="mx-auto mt-1.5 max-w-[640px] text-[15.5px] text-muted-foreground">
               Three things, done properly, instead of ten things done with smoke and mirrors.
             </p>
           </SlideIn>
@@ -359,9 +359,9 @@ export default function WelcomePage() {
 
         {/* Honest scope */}
         <section id="scope" className="scroll-mt-28 md:scroll-mt-24 pb-2 pt-12 lg:pt-16">
-          <SlideIn>
-            <h2 className="font-heading text-[30px] font-bold">What is real, what is next</h2>
-            <p className="mt-1.5 max-w-[640px] text-[15.5px] text-muted-foreground">
+          <SlideIn className="text-center">
+            <h2 className="font-heading text-3xl font-bold sm:text-4xl 2xl:text-[44px]">What is real, what is next</h2>
+            <p className="mx-auto mt-1.5 max-w-[640px] text-[15.5px] text-muted-foreground">
               Most health apps hide this page. We put it on the homepage.
             </p>
           </SlideIn>
@@ -406,9 +406,9 @@ export default function WelcomePage() {
 
         {/* Inside the app */}
         <section className="pb-4 pt-12 lg:pt-16">
-          <SlideIn direction="up">
-            <h2 className="font-heading text-[30px] font-bold">Inside the app</h2>
-            <p className="mt-1.5 max-w-[640px] text-[15.5px] text-muted-foreground">
+          <SlideIn direction="up" className="text-center">
+            <h2 className="font-heading text-3xl font-bold sm:text-4xl 2xl:text-[44px]">Inside the app</h2>
+            <p className="mx-auto mt-1.5 max-w-[640px] text-[15.5px] text-muted-foreground">
               One admin, one login, a live overview of the whole practice.
             </p>
           </SlideIn>

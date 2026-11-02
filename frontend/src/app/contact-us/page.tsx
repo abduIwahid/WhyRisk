@@ -50,9 +50,9 @@ export default function PublicContactPage() {
       </header>
 
       <main id="main-content" className="mx-auto max-w-4xl px-5 py-10">
-        <p className="text-[11px] font-medium text-brand-text">Contact</p>
-        <h1 className="mt-2 font-heading text-3xl font-bold tracking-tight">Talk to the maintainer</h1>
-        <p className="mt-3 max-w-[640px] leading-relaxed text-muted-foreground">
+        <p className="text-center text-[11px] font-medium text-brand-text">Contact</p>
+        <h1 className="mt-2 text-center font-heading text-3xl font-bold tracking-tight">Talk to the maintainer</h1>
+        <p className="mx-auto mt-3 max-w-[640px] text-center leading-relaxed text-muted-foreground">
           WhyRisk is an experimental research tool maintained by its developer. Questions about the platform,
           the model, or getting access, send a message here and it lands in the maintainer&apos;s inbox.
         </p>

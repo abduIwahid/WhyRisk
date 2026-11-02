@@ -48,9 +48,9 @@ export default function LegalPage({
       </header>
 
       <main id="main-content" className="mx-auto max-w-4xl px-5 py-10">
-        <p className="text-[11px] font-medium text-brand-text">{eyebrow}</p>
-        <h1 className="mt-2 font-heading text-3xl font-bold tracking-tight">{title}</h1>
-        <p className="mt-2 text-sm text-muted-foreground">Last updated: 30 October 2026</p>
+        <p className="text-center text-[11px] font-medium text-brand-text">{eyebrow}</p>
+        <h1 className="mt-2 text-center font-heading text-3xl font-bold tracking-tight">{title}</h1>
+        <p className="mt-2 text-center text-sm text-muted-foreground">Last updated: 30 October 2026</p>
         {children}
       </main>
 

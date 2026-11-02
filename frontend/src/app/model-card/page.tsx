@@ -56,13 +56,13 @@ export default function ModelCardPage() {
       </header>
 
       <main id="main-content" className="mx-auto max-w-4xl px-5 py-12">
-        <p className="eyebrow">Model card</p>
-        <h1 className="mt-2 font-sans text-4xl font-bold leading-tight sm:text-5xl">
+        <p className="eyebrow text-center">Model card</p>
+        <h1 className="mt-2 text-center font-sans text-4xl font-bold leading-tight sm:text-5xl">
           One trained model.
           <br />
           Documented honestly.
         </h1>
-        <p className="mt-4 max-w-2xl leading-relaxed text-muted-foreground">
+        <p className="mx-auto mt-4 max-w-2xl text-center leading-relaxed text-muted-foreground">
           This page states exactly what WhyRisk&apos;s model is, what data it was trained and measured on, and
           what it does not do. Figures here come from the project documentation and the held-out evaluation ,
           nothing on this page is estimated or rounded up.

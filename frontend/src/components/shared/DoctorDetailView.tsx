@@ -133,8 +133,8 @@ export function DoctorDetailView({ doctor }: DoctorDetailViewProps) {
         </SlideIn>
 
         <div className="lg:col-span-2 space-y-6">
-          <SlideIn direction="up" delay={0.08}>
-          <Card>
+          <SlideIn direction="up" delay={0.08} className="h-full">
+          <Card className="h-full">
             <CardHeader>
               <CardTitle>About {displayName}</CardTitle>
               <CardDescription>Specialty, services, and practice summary.</CardDescription>

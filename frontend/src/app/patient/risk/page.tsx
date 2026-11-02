@@ -85,15 +85,26 @@ export default function PatientRiskPage() {
       setLatest(first)
 
       if (first) {
-        const { data: explanation } = await supabase
+        // The stored column is shap_payload (an array of
+        // {feature, value, impact} rows — the same shape the staff
+        // prediction detail page and print report read). This query
+        // previously selected a non-existent "shap_values" column, so
+        // PostgREST errored, the result was always null, and the page
+        // showed "No factor contributions were recorded" even when an
+        // explanation row existed (found 2026-10-31: all 8 linked
+        // demo patients had one for their latest prediction).
+        const { data: explanation, error: explError } = await supabase
           .from("explanations")
-          .select("shap_values")
+          .select("shap_payload")
           .eq("prediction_id", first.id)
           .order("created_at", { ascending: false })
           .limit(1)
           .maybeSingle()
-        if (explanation && Array.isArray(explanation.shap_values)) {
-          setFactors(explanation.shap_values as ShapFeature[])
+        if (explError) {
+          console.error("Own explanation failed to load:", explError)
+        }
+        if (explanation && Array.isArray(explanation.shap_payload)) {
+          setFactors(explanation.shap_payload as ShapFeature[])
         }
       }
       setLoading(false)

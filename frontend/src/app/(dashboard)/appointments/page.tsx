@@ -88,11 +88,11 @@ export default function AppointmentsPage() {
   const filtered = filter === "All" ? appointments : appointments.filter((a) => a.status === filter)
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 lg:space-y-8 2xl:space-y-10">
       <SlideIn direction="left">
         <div>
-          <h1 className="font-heading text-2xl font-bold">Appointments</h1>
-          <p className="mt-1 text-sm text-muted-foreground">Review requests and manage your patient schedule.</p>
+          <h1 className="font-heading text-2xl sm:text-3xl 2xl:text-4xl font-bold">Appointments</h1>
+          <p className="mt-1 text-sm md:text-base text-muted-foreground">Review requests and manage your patient schedule.</p>
           {appointments.length >= 200 && (
             <p className="mt-1 text-xs text-muted-foreground">Showing the 200 most recent appointments.</p>
           )}

@@ -2,7 +2,7 @@ import { PageTitleSkeleton, PanelSkeleton } from "@/components/shared/Skeletons"
 
 export default function PatientRiskLoading() {
   return (
-    <div className="space-y-6" aria-busy="true" aria-label="Loading your risk assessment">
+    <div className="space-y-6 lg:space-y-8 2xl:space-y-10" aria-busy="true" aria-label="Loading your risk assessment">
       <PageTitleSkeleton />
       <div className="rounded-xl border bg-card p-6">
         <div className="h-4 w-44 animate-pulse rounded bg-secondary" />

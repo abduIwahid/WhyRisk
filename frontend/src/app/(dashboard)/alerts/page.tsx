@@ -174,11 +174,11 @@ export default function AlertsPage() {
   const highCount = totalHigh
 
   return (
-    <div className="space-y-6 max-w-5xl mx-auto">
+    <div className="space-y-6 lg:space-y-8 2xl:space-y-10 max-w-[1600px] mx-auto">
       <SlideIn direction="left">
       <div className="flex items-start justify-between">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight">Alerts Center</h1>
+          <h1 className="text-2xl sm:text-3xl 2xl:text-4xl font-bold tracking-tight">Alerts Center</h1>
           <p className="text-muted-foreground">Alerts for patients assessed as High or Critical risk. This list updates live while the page is open.</p>
         </div>
         {totalNew > 0 && (

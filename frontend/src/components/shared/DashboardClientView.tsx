@@ -75,7 +75,7 @@ export function DashboardClientView({
       variants={containerVariants}
       initial="hidden"
       animate="show"
-      className="space-y-8 max-w-7xl mx-auto pb-8"
+      className="space-y-8 2xl:space-y-10 max-w-[1600px] mx-auto pb-8"
     >
       {/* Hero Banner */}
       <motion.div variants={itemVariants} className="relative overflow-hidden rounded-xl bg-primary p-6 sm:p-10 text-white shadow-card">
@@ -112,7 +112,7 @@ export function DashboardClientView({
       )}
 
       {/* Stats Grid */}
-      <motion.div variants={statsContainerVariants} className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+      <motion.div variants={statsContainerVariants} className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 lg:gap-6">
         {[
           { label: "Total Patients", value: totalPatients, icon: Users, color: "text-[#2E7FA8]", bg: "bg-[#2E7FA8]/10", href: "/patients" },
           { label: "Active Doctors", value: totalDoctors, icon: Stethoscope, color: "text-primary", bg: "bg-secondary", href: "/doctors" },

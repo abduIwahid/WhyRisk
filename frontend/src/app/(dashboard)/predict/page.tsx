@@ -190,11 +190,11 @@ export default function PredictPage() {
   const downloadReport = () => window.print()
 
   return (
-    <div className="mx-auto max-w-4xl space-y-8 pb-16 print:max-w-full">
+    <div className="mx-auto max-w-4xl space-y-8 2xl:space-y-10 pb-16 print:max-w-full">
       <div className="print:hidden">
         <p className="eyebrow mb-3">Rule-Based Symptom Screening</p>
-        <h1 className="font-heading text-3xl font-bold">Symptom Screening Wizard</h1>
-        <p className="mt-2 text-sm text-muted-foreground">
+        <h1 className="font-heading text-3xl sm:text-4xl font-bold">Symptom Screening Wizard</h1>
+        <p className="mt-2 text-sm md:text-base text-muted-foreground">
           Answer a few questions and get a rule-based symptom screening, plus a matched specialist. This checker uses fixed symptom rules — it is not the trained prediction model.
         </p>
       </div>

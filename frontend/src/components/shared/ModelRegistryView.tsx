@@ -73,7 +73,7 @@ export function ModelRegistryView({ models, liveStatus, loadError }: {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 lg:space-y-8 2xl:space-y-10">
       {!registryHasLive && (
         <div role="alert" className="rounded-xl border border-[#D97706]/30 bg-[#FDF0DC] px-4 py-3 text-sm text-[#A85008]">
           The live service reports model version <strong>{liveVersion}</strong>, but this registry has no Production entry with that version — the registry is behind what is actually serving. Register the current version so this page reflects production.

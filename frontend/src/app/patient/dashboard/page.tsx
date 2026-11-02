@@ -67,15 +67,15 @@ export default function PatientDashboardPage() {
   }, [])
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 lg:space-y-8 2xl:space-y-10">
       <SlideIn direction="left">
-        <h1 className="text-2xl font-bold tracking-tight">
+        <h1 className="text-2xl sm:text-3xl 2xl:text-4xl font-bold tracking-tight">
           {fullName ? `Welcome back, ${fullName.split(" ")[0]}` : "Welcome back"}
         </h1>
         <p className="text-muted-foreground">Manage your appointments and get quick health guidance.</p>
       </SlideIn>
 
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-4 lg:gap-6 sm:grid-cols-2 lg:grid-cols-3">
         <SlideIn direction="up" className="h-full">
         <Link
           href="/patient/risk"

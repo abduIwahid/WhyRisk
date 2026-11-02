@@ -404,7 +404,7 @@ export default function NewPatientPage() {
       variants={containerVariants}
       initial="hidden"
       animate="show"
-      className="mx-auto max-w-4xl space-y-6 pb-12"
+      className="mx-auto max-w-4xl space-y-6 lg:space-y-8 2xl:space-y-10 pb-12"
     >
       <motion.div variants={headerVariants} className="flex items-center gap-5">
         <Link href="/patients">
@@ -413,7 +413,7 @@ export default function NewPatientPage() {
           </button>
         </Link>
         <div>
-          <h1 className="text-3xl font-bold tracking-tight">New Patient Assessment</h1>
+          <h1 className="text-3xl sm:text-4xl font-bold tracking-tight">New Patient Assessment</h1>
           <p className="text-muted-foreground mt-1">Register a patient and run their first risk assessment.</p>
         </div>
       </motion.div>

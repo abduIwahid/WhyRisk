@@ -181,10 +181,10 @@ export default function BookAppointmentPage() {
   const minDateTime = `${minDateLocal.getFullYear()}-${pad(minDateLocal.getMonth() + 1)}-${pad(minDateLocal.getDate())}T${pad(minDateLocal.getHours())}:${pad(minDateLocal.getMinutes())}`
 
   return (
-    <div className="max-w-2xl mx-auto space-y-6">
+    <div className="max-w-2xl mx-auto space-y-6 lg:space-y-8 2xl:space-y-10">
       <SlideIn direction="left">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight">Book an Appointment</h1>
+          <h1 className="text-2xl sm:text-3xl 2xl:text-4xl font-bold tracking-tight">Book an Appointment</h1>
           <p className="text-muted-foreground">Choose a doctor and a time that works for you.</p>
         </div>
       </SlideIn>

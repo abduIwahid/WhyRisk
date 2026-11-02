@@ -2,7 +2,7 @@ import { PageTitleSkeleton, StatCardsSkeleton, PanelSkeleton } from "@/component
 
 export default function AnalyticsLoading() {
   return (
-    <div className="space-y-6" aria-busy="true" aria-label="Loading analytics">
+    <div className="space-y-6 lg:space-y-8 2xl:space-y-10" aria-busy="true" aria-label="Loading analytics">
       <PageTitleSkeleton wide />
       <StatCardsSkeleton count={4} />
       <div className="grid gap-6 lg:grid-cols-2">

@@ -57,10 +57,10 @@ export default function AssistantPage() {
   }, [supabase])
 
   return (
-    <div className="space-y-6 max-w-5xl mx-auto">
+    <div className="space-y-6 lg:space-y-8 2xl:space-y-10 max-w-5xl mx-auto">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight">AI Assistant</h1>
+          <h1 className="text-2xl sm:text-3xl 2xl:text-4xl font-bold tracking-tight">AI Assistant</h1>
           <p className="text-muted-foreground">Conversational decision support grounded in patient data.</p>
         </div>
         <div className="w-full sm:w-[320px]">

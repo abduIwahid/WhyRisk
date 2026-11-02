@@ -104,11 +104,11 @@ export default function MyAppointmentsPage() {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 lg:space-y-8 2xl:space-y-10">
       <SlideIn direction="left">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <h1 className="text-2xl font-bold tracking-tight">My Appointments</h1>
+            <h1 className="text-2xl sm:text-3xl 2xl:text-4xl font-bold tracking-tight">My Appointments</h1>
             <p className="text-muted-foreground">View and manage your bookings.</p>
           </div>
           <Link href="/patient/appointments/book">

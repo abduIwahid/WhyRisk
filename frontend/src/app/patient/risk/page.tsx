@@ -116,9 +116,9 @@ export default function PatientRiskPage() {
 
   if (loading) {
     return (
-      <div className="space-y-6">
+      <div className="space-y-6 lg:space-y-8 2xl:space-y-10">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight">My Risk</h1>
+          <h1 className="text-2xl sm:text-3xl 2xl:text-4xl font-bold tracking-tight">My Risk</h1>
           <p className="text-muted-foreground">Your latest risk assessment from your care team.</p>
         </div>
         <PulseLoader label="Loading your risk assessment" />
@@ -146,9 +146,9 @@ export default function PatientRiskPage() {
 
   if (!hasRecord || !latest) {
     return (
-      <div className="space-y-6">
+      <div className="space-y-6 lg:space-y-8 2xl:space-y-10">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight">My Risk</h1>
+          <h1 className="text-2xl sm:text-3xl 2xl:text-4xl font-bold tracking-tight">My Risk</h1>
           <p className="text-muted-foreground">Your latest risk assessment from your care team.</p>
         </div>
         <div className="rounded-xl border bg-card p-6 shadow-card">
@@ -172,10 +172,10 @@ export default function PatientRiskPage() {
   const severity = latest.severity || "Unknown"
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 lg:space-y-8 2xl:space-y-10">
       <SlideIn direction="left">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight">My Risk</h1>
+          <h1 className="text-2xl sm:text-3xl 2xl:text-4xl font-bold tracking-tight">My Risk</h1>
           <p className="text-muted-foreground">Your latest risk assessment from your care team.</p>
         </div>
       </SlideIn>

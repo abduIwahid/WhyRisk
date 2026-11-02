@@ -250,7 +250,7 @@ export function PatientListView({ patients, initialSearch = "", isAdmin = false,
       variants={containerVariants}
       initial="hidden"
       animate="show"
-      className="space-y-6 max-w-7xl mx-auto pb-8"
+      className="space-y-6 lg:space-y-8 2xl:space-y-10 max-w-[1600px] mx-auto pb-8"
     >
       {deleteError && (
         <motion.div
@@ -291,8 +291,8 @@ export function PatientListView({ patients, initialSearch = "", isAdmin = false,
 
       <motion.div variants={headerVariants} className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight">Patient Registry</h1>
-          <p className="mt-1.5 text-sm text-muted-foreground">
+          <h1 className="text-3xl sm:text-4xl font-bold tracking-tight">Patient Registry</h1>
+          <p className="mt-1.5 text-sm md:text-base text-muted-foreground">
             {initialSearch ? (
               <>Showing <span className="font-semibold text-foreground">{filtered.length}</span> matching &ldquo;{initialSearch}&rdquo;{normalizedPatients.length >= 200 ? " (first 200 matches)" : ""} — {totalCount ?? normalizedPatients.length} patients in scope in total.</>
             ) : (

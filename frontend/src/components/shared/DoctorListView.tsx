@@ -126,8 +126,8 @@ export function DoctorListView({ doctors }: DoctorListViewProps) {
       <SlideIn direction="left">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <h1 className="text-2xl font-bold tracking-tight">Doctor Directory</h1>
-            <p className="text-sm text-muted-foreground mt-1">
+            <h1 className="text-2xl sm:text-3xl 2xl:text-4xl font-bold tracking-tight">Doctor Directory</h1>
+            <p className="text-sm md:text-base text-muted-foreground mt-1">
               Browse vetted doctors and specialists available through WhyRisk.
             </p>
           </div>

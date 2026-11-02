@@ -122,7 +122,7 @@ export function MLOpsView({
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 lg:space-y-8 2xl:space-y-10">
       {/* Not-Connected Banner — user-level wording only. The dev-server
           start command that used to live here was developer instructions
           shown to end users (QA Round 1, item 59). */}

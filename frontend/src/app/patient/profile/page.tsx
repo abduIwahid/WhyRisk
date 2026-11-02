@@ -186,10 +186,10 @@ export default function PatientProfilePage() {
   }
 
   return (
-    <div className="max-w-xl mx-auto space-y-6">
+    <div className="max-w-xl mx-auto space-y-6 lg:space-y-8 2xl:space-y-10">
       <SlideIn direction="left">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight">Profile</h1>
+          <h1 className="text-2xl sm:text-3xl 2xl:text-4xl font-bold tracking-tight">Profile</h1>
           <p className="text-muted-foreground">Manage your personal information.</p>
         </div>
       </SlideIn>

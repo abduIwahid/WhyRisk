@@ -18,10 +18,10 @@ export default async function AdminLayout({ children }: { children: React.ReactN
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 lg:space-y-8 2xl:space-y-10">
       <div>
-        <h1 className="text-2xl font-bold tracking-tight">Admin Panel</h1>
-        <p className="text-sm text-muted-foreground mt-1">
+        <h1 className="text-2xl sm:text-3xl 2xl:text-4xl font-bold tracking-tight">Admin Panel</h1>
+        <p className="text-sm md:text-base text-muted-foreground mt-1">
           Manage users, review model performance, check the training-data drift baseline, and audit system activity.
         </p>
       </div>

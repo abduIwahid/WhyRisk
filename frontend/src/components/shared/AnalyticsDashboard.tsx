@@ -181,11 +181,11 @@ export function AnalyticsDashboard({ predictions, patientsByHospital, alertStats
     : null
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 lg:space-y-8 2xl:space-y-10">
       <SlideIn direction="left">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight">Clinical Analytics</h1>
-          <p className="text-sm text-muted-foreground mt-1">
+          <h1 className="text-2xl sm:text-3xl 2xl:text-4xl font-bold tracking-tight">Clinical Analytics</h1>
+          <p className="text-sm md:text-base text-muted-foreground mt-1">
             {viewerRole === "super_admin"
               ? "Population-level risk insights across all patients and hospitals."
               : "Population-level risk insights across the records your role can access."}
@@ -213,7 +213,7 @@ export function AnalyticsDashboard({ predictions, patientsByHospital, alertStats
       )}
 
       {/* KPI Cards */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 lg:gap-6">
         <SlideIn direction="up" className="h-full">
           <StatCard icon={Users} label="Total Predictions" value={srcErr.predictions ? "—" : predictions.length.toLocaleString()} sub={predictions.length >= 2000 ? "Most recent 2,000" : "All time"} />
         </SlideIn>

@@ -63,7 +63,7 @@ export function PredictionDetailView({
   const baseline = snapshot ?? derived?.payload ?? null
 
   return (
-    <div className="space-y-6 max-w-5xl mx-auto">
+    <div className="space-y-6 lg:space-y-8 2xl:space-y-10 max-w-[1600px] mx-auto">
       <SlideIn direction="left">
       <div className="flex flex-wrap items-center gap-4 mb-6">
         <Button variant="ghost" size="icon" asChild>
@@ -73,7 +73,7 @@ export function PredictionDetailView({
         </Button>
         <div className="flex-1 min-w-0">
           <p className="eyebrow">Prediction detail</p>
-          <h1 className="mt-1 text-2xl font-bold tracking-tight">Why this score</h1>
+          <h1 className="mt-1 text-2xl sm:text-3xl 2xl:text-4xl font-bold tracking-tight">Why this score</h1>
           <p className="text-muted-foreground">
             Patient: {patientName} | MRN: {patient?.mrn}
           </p>

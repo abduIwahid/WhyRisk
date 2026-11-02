@@ -68,7 +68,7 @@ export default async function AdminOverviewPage() {
   ]
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-8 2xl:space-y-10">
       <SlideIn direction="left">
         <h2 className="text-lg font-semibold">Overview</h2>
         <p className="mt-1 text-sm text-muted-foreground">{subtitle}</p>
@@ -84,7 +84,7 @@ export default async function AdminOverviewPage() {
 
       {/* Stat cards rise from below in a stagger and count up — the
           same treatment as the staff dashboard home. */}
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-4 lg:gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {stats.map((s, i) => (
           <SlideIn key={s.label} direction="up" delay={i * 0.08} className="h-full">
             <div className="h-full rounded-xl border border-border bg-card p-5 shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-premium hover:border-primary/30 active:scale-[0.98]">

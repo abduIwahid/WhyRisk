@@ -207,7 +207,7 @@ export function DoctorVerificationView({ doctors, viewerName, hospitals, loadErr
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 lg:space-y-8 2xl:space-y-10">
       {actionError && (
         <div role="alert" className="rounded-xl border border-destructive/20 bg-destructive/10 px-4 py-3 text-sm text-destructive-text">
           {actionError}

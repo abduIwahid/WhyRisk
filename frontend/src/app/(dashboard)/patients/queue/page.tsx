@@ -96,10 +96,10 @@ export default async function RiskQueuePage({
   const hiddenByFilter = allRows.length - rows.length
 
   return (
-    <div className="mx-auto max-w-5xl space-y-6 pb-8">
+    <div className="mx-auto max-w-[1600px] space-y-6 lg:space-y-8 2xl:space-y-10 pb-8">
       <div>
         <p className="eyebrow">Doctor workspace</p>
-        <h1 className="mt-1 text-2xl font-bold tracking-tight">High-risk queue</h1>
+        <h1 className="mt-1 text-2xl sm:text-3xl 2xl:text-4xl font-bold tracking-tight">High-risk queue</h1>
         <p className="mt-1 text-muted-foreground">
           Your assigned patients, ordered by their latest risk score — highest first.
         </p>

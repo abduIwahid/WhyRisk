@@ -523,7 +523,7 @@ export function PatientDetailView({ patient, latestPrediction, isAdmin = false, 
       variants={containerVariants}
       initial="hidden"
       animate="show"
-      className="space-y-6 max-w-7xl mx-auto pb-8"
+      className="space-y-6 lg:space-y-8 2xl:space-y-10 max-w-[1600px] mx-auto pb-8"
     >
       <motion.div variants={headerVariants} className="flex flex-col gap-6 lg:gap-0 lg:flex-row lg:items-start lg:justify-between bg-card p-6 rounded-xl border shadow-card">
         <div className="flex items-start gap-5">
@@ -540,8 +540,8 @@ export function PatientDetailView({ patient, latestPrediction, isAdmin = false, 
                 </span>
               </div>
               <div>
-                <h1 className="text-3xl font-bold tracking-tight">{name}</h1>
-                <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-muted-foreground mt-1.5">
+                <h1 className="text-3xl sm:text-4xl font-bold tracking-tight">{name}</h1>
+                <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm md:text-base text-muted-foreground mt-1.5">
                   <span className="font-mono text-xs bg-muted/80 px-2.5 py-1 rounded-md border text-foreground font-medium">{patient.mrn}</span>
                   {age != null && <span className="flex items-center gap-1"><Calendar className="h-3.5 w-3.5" /> Age {age}</span>}
                   {gender !== "—" && <span className="flex items-center gap-1"><User className="h-3.5 w-3.5" /> {gender}</span>}
@@ -611,7 +611,7 @@ export function PatientDetailView({ patient, latestPrediction, isAdmin = false, 
               <div className="absolute top-0 left-0 w-1 h-full bg-primary rounded-l-2xl"></div>
               <div className="flex items-center justify-between gap-4">
                 <div>
-                  <h2 className="text-xl font-bold">Update Patient Record</h2>
+                  <h2 className="text-xl sm:text-2xl font-bold">Update Patient Record</h2>
                   <p className="text-sm text-muted-foreground mt-1">Edit patient demographics and register new laboratory results. Changes are not saved until you click Save Changes.</p>
                 </div>
               </div>

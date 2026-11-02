@@ -61,12 +61,12 @@ export function DoctorDetailView({ doctor }: DoctorDetailViewProps) {
   const statusLabel = doctor.availability_status === "available" ? "Accepting Patients" : statusInfo.label
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 lg:space-y-8 2xl:space-y-10">
       <SlideIn direction="left">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <h1 className="text-2xl font-bold tracking-tight">{displayName}</h1>
-            <p className="text-sm text-muted-foreground mt-1">{doctor.specialty} • {doctor.hospitals?.name || "No hospital on file"}</p>
+            <h1 className="text-2xl sm:text-3xl 2xl:text-4xl font-bold tracking-tight">{displayName}</h1>
+            <p className="text-sm md:text-base text-muted-foreground mt-1">{doctor.specialty} • {doctor.hospitals?.name || "No hospital on file"}</p>
           </div>
           <Link href="/doctors">
             <Button variant="outline" className="h-10">

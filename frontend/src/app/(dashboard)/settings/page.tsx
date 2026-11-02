@@ -27,10 +27,10 @@ export default async function SettingsPage() {
   // invite the user to overwrite their real record with blanks.
   if (!profile) {
     return (
-      <div className="space-y-6 max-w-3xl">
+      <div className="space-y-6 lg:space-y-8 2xl:space-y-10 max-w-3xl">
         <SlideIn direction="left">
           <div>
-            <h1 className="text-2xl font-bold tracking-tight">Profile & Settings</h1>
+            <h1 className="text-2xl sm:text-3xl 2xl:text-4xl font-bold tracking-tight">Profile & Settings</h1>
           </div>
         </SlideIn>
         <SlideIn direction="up">
@@ -65,11 +65,11 @@ export default async function SettingsPage() {
   }
 
   return (
-    <div className="space-y-6 max-w-3xl">
+    <div className="space-y-6 lg:space-y-8 2xl:space-y-10 max-w-3xl">
       <SlideIn direction="left">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight">Profile & Settings</h1>
-          <p className="text-sm text-muted-foreground mt-1">
+          <h1 className="text-2xl sm:text-3xl 2xl:text-4xl font-bold tracking-tight">Profile & Settings</h1>
+          <p className="text-sm md:text-base text-muted-foreground mt-1">
             Manage your account details and profile information. Your role is shown for reference — it is assigned by an admin.
           </p>
         </div>

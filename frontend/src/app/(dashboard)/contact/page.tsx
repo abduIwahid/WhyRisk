@@ -47,8 +47,8 @@ export default function ContactPage() {
   return (
     <div className="space-y-10 max-w-5xl mx-auto pb-10">
       <div>
-        <h1 className="text-2xl font-bold tracking-tight">Contact</h1>
-        <p className="text-sm text-muted-foreground mt-1">WhyRisk is an experimental research tool maintained by its developer. For anything about the platform or the model, use the channels below.</p>
+        <h1 className="text-2xl sm:text-3xl 2xl:text-4xl font-bold tracking-tight">Contact</h1>
+        <p className="text-sm md:text-base text-muted-foreground mt-1">WhyRisk is an experimental research tool maintained by its developer. For anything about the platform or the model, use the channels below.</p>
       </div>
 
       <div className="grid gap-6 lg:grid-cols-3">

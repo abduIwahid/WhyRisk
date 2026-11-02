@@ -47,7 +47,7 @@ function PortalErrorBanner() {
   if (!portalError || dismissed || !PORTAL_ERROR_MESSAGES.has(portalError)) return null
 
   return (
-    <div role="alert" className="mx-auto mb-6 max-w-7xl rounded-xl border border-destructive/30 bg-destructive/10 px-4 py-3 text-sm text-destructive-text flex items-center justify-between gap-3">
+    <div role="alert" className="mx-auto mb-6 max-w-[1600px] rounded-xl border border-destructive/30 bg-destructive/10 px-4 py-3 text-sm text-destructive-text flex items-center justify-between gap-3">
       <span>{portalError}</span>
       <button onClick={() => setDismissed(true)} className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-destructive/70 hover:text-destructive" aria-label="Dismiss">
         <X className="h-4 w-4" />
@@ -230,7 +230,7 @@ export default function DashboardLayout({
       </AnimatePresence>
 
       <div className="flex min-w-0 flex-1 flex-col overflow-hidden">
-        <header className="sticky top-0 z-20 flex h-16 items-center justify-between gap-4 border-b bg-background px-4 shadow-card sm:px-6 lg:px-8">
+        <header className="sticky top-0 z-20 flex h-16 items-center justify-between gap-4 border-b bg-background px-4 shadow-card sm:px-6 lg:px-8 xl:px-10">
           <div className="flex flex-1 items-center gap-4">
             <button
               type="button"
@@ -374,7 +374,7 @@ export default function DashboardLayout({
           </div>
         </header>
 
-        <main id="main-content" className="flex-1 overflow-auto custom-scrollbar p-4 sm:p-6 lg:p-8 relative">
+        <main id="main-content" className="flex-1 overflow-auto custom-scrollbar p-4 sm:p-6 lg:p-8 xl:p-10 relative">
           <Suspense fallback={<PulseLoader showWordmark={false} showLabel={false} />}>
             <PortalErrorBanner />
             <OfflineBanner />
@@ -388,7 +388,7 @@ export default function DashboardLayout({
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3, ease: "easeOut" }}
-            className="h-full w-full max-w-7xl mx-auto"
+            className="h-full w-full max-w-[1600px] mx-auto"
           >
             {children}
           </motion.div>

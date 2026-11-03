@@ -35,7 +35,7 @@ export const metadata: Metadata = {
       "Diabetes risk prediction with explainable machine learning, every score shows its reasons.",
     images: [
       {
-        url: "/opengraph-image",
+        url: "/og-card.png",
         width: 1200,
         height: 630,
         alt: "WhyRisk: Know your risk. See exactly why.",

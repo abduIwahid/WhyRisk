@@ -16,7 +16,7 @@ export const metadata: Metadata = {
       "The diabetes model's dataset, measured performance, live service status, and limitations, stated in full.",
     images: [
       {
-        url: "/opengraph-image",
+        url: "/og-card.png",
         width: 1200,
         height: 630,
         alt: "WhyRisk: Know your risk. See exactly why.",

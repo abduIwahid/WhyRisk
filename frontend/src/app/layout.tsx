@@ -61,11 +61,11 @@ export const metadata: Metadata = {
     siteName: "WhyRisk",
     title: "WhyRisk",
     description,
-    // The generated /opengraph-image route (src/app/opengraph-image.tsx)
-    // renders a true 1200×630 card, so the declared dimensions are exact.
+    // Static centre-safe card at public/og-card.png (a true 1200×630
+    // PNG), so the declared dimensions are exact.
     images: [
       {
-        url: "/opengraph-image",
+        url: "/og-card.png",
         width: 1200,
         height: 630,
         alt: "WhyRisk: Know your risk. See exactly why.",
@@ -77,7 +77,7 @@ export const metadata: Metadata = {
     // No title/description here (QA Round 3, SEO L1): page-level
     // values must win, and Twitter falls back to the page's
     // OpenGraph tags when its own are absent.
-    images: ["/opengraph-image"],
+    images: ["/og-card.png"],
   },
 };
 

@@ -176,8 +176,8 @@ build (the build fails loudly if the artifact is missing):
 
 ```bash
 cd ml-service
-docker build -t medisight-ml .
-docker run -p 8000:8000 -e ML_SERVICE_API_KEY=<your-key> medisight-ml
+docker build -t whyrisk-ml .
+docker run -p 8000:8000 -e ML_SERVICE_API_KEY=<your-key> whyrisk-ml
 ```
 
 ### 4. Frontend

@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 import Link from "next/link"
-import { AnimatePresence, motion, type Variants } from "framer-motion"
+import { AnimatePresence, motion, useReducedMotion, type Variants } from "framer-motion"
 import { ArrowUpRight } from "lucide-react"
 import { Crosshair } from "@/components/landing/chrome"
 
@@ -29,41 +29,23 @@ function shot(url: string) {
   return SHOTS[url] ?? url
 }
 
-const FRAMES: {
-  img: string
-  alt: string
-  style: React.CSSProperties
-}[] = [
-  {
-    img: shot("https://whyrisk.vercel.app/login"),
-    alt: "WhyRisk sign-in page",
-    style: { top: "-6%", left: "-4%", width: "27%", transform: "rotate(-10deg)", zIndex: 2 },
-  },
-  {
-    img: shot("https://whyrisk.vercel.app/model-card"),
-    alt: "WhyRisk model card page",
-    style: { top: "-6%", right: "-4%", width: "27%", transform: "rotate(10deg)", zIndex: 2 },
-  },
-  {
-    img: shot("https://whyrisk.vercel.app/signup"),
-    alt: "WhyRisk create-account page",
-    style: { top: "12%", left: "6%", width: "36%", transform: "rotate(-5deg)", zIndex: 3 },
-  },
-  {
-    img: shot("https://whyrisk.vercel.app/login"),
-    alt: "WhyRisk sign-in page",
-    style: { top: "12%", right: "6%", width: "36%", transform: "rotate(5deg)", zIndex: 3 },
-  },
-  {
-    img: shot("https://whyrisk.vercel.app/welcome"),
-    alt: "WhyRisk landing page",
-    style: { top: "15%", left: "38%", width: "24%", transform: "rotate(0deg)", zIndex: 0 },
-  },
-  {
-    img: shot("https://whyrisk.vercel.app/welcome"),
-    alt: "WhyRisk landing page",
-    style: { top: "34%", left: "24%", width: "52%", transform: "rotate(0deg)", zIndex: 10 },
-  },
+const FRAME_IMGS: { img: string; alt: string }[] = [
+  { img: shot("https://whyrisk.vercel.app/login"), alt: "WhyRisk sign-in page" },
+  { img: shot("https://whyrisk.vercel.app/model-card"), alt: "WhyRisk model card page" },
+  { img: shot("https://whyrisk.vercel.app/signup"), alt: "WhyRisk create-account page" },
+  { img: shot("https://whyrisk.vercel.app/login"), alt: "WhyRisk sign-in page" },
+  { img: shot("https://whyrisk.vercel.app/welcome"), alt: "WhyRisk landing page" },
+  { img: shot("https://whyrisk.vercel.app/welcome"), alt: "WhyRisk landing page" },
+]
+
+/** Collage slots (normalised to left/top so frames can glide between them). */
+const SLOTS: { left: string; top: string; width: string; rotate: number; zIndex: number }[] = [
+  { left: "-4%", top: "-6%", width: "27%", rotate: -10, zIndex: 2 },
+  { left: "77%", top: "-6%", width: "27%", rotate: 10, zIndex: 2 },
+  { left: "6%", top: "12%", width: "36%", rotate: -5, zIndex: 3 },
+  { left: "58%", top: "12%", width: "36%", rotate: 5, zIndex: 3 },
+  { left: "38%", top: "15%", width: "24%", rotate: 0, zIndex: 0 },
+  { left: "24%", top: "34%", width: "52%", rotate: 0, zIndex: 10 },
 ]
 
 const containerVariants: Variants = {
@@ -81,6 +63,17 @@ export function LandingHero() {
     const id = setInterval(() => setWordIndex((i) => (i + 1) % ROTATING_WORDS.length), 2800)
     return () => clearInterval(id)
   }, [])
+
+  // Live collage: every 3.4s each frame glides one slot forward, so the
+  // side pages take turns in the front-centre slot. Static (as before)
+  // for reduced-motion users.
+  const reduceMotion = useReducedMotion()
+  const [fanStep, setFanStep] = useState(0)
+  useEffect(() => {
+    if (reduceMotion) return
+    const id = setInterval(() => setFanStep((s) => (s + 1) % SLOTS.length), 3400)
+    return () => clearInterval(id)
+  }, [reduceMotion])
 
   return (
     <section className="relative flex min-h-screen w-full flex-col justify-center overflow-hidden pb-24 pt-36 font-mono">
@@ -196,33 +189,35 @@ export function LandingHero() {
           </motion.div>
         </motion.div>
 
-        {/* Screenshot collage (template IMAGE_POSITIONS + BgFrame) */}
+        {/* Screenshot collage — frames glide between slots (live fan) */}
         <motion.div
           className="pointer-events-none relative mx-auto mt-24 flex h-[380px] w-full max-w-6xl items-center justify-center sm:mt-32 sm:h-[560px] lg:h-[720px]"
-          initial="hidden"
-          animate="visible"
-          variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.1, delayChildren: 0.8 } } }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.8 }}
         >
-          {FRAMES.map((f, i) => (
-            <motion.div
-              key={i}
-              className="pointer-events-auto absolute bg-white p-1.5 shadow-2xl ring-1 ring-border"
-              style={f.style}
-              variants={{
-                hidden: { opacity: 0, y: 12, filter: "blur(4px)" },
-                visible: {
-                  opacity: 1,
-                  y: 0,
-                  filter: "blur(0px)",
-                  transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
-                },
-              }}
-              whileHover={{ scale: 1.05, zIndex: 50, transition: { duration: 0.4 } }}
-            >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={f.img} alt={f.alt} className="h-auto w-full object-cover" loading="lazy" />
-            </motion.div>
-          ))}
+          {FRAME_IMGS.map((f, i) => {
+            const slot = SLOTS[(i + fanStep) % SLOTS.length]
+            return (
+              <motion.div
+                key={i}
+                className="pointer-events-auto absolute bg-white p-1.5 shadow-2xl ring-1 ring-border"
+                initial={false}
+                animate={{
+                  left: slot.left,
+                  top: slot.top,
+                  width: slot.width,
+                  rotate: slot.rotate,
+                  zIndex: slot.zIndex,
+                }}
+                transition={{ duration: 1.15, ease: [0.16, 1, 0.3, 1] }}
+                whileHover={{ scale: 1.05, zIndex: 50, transition: { duration: 0.4 } }}
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={f.img} alt={f.alt} className="h-auto w-full object-cover" loading="lazy" />
+              </motion.div>
+            )
+          })}
         </motion.div>
       </div>
     </section>

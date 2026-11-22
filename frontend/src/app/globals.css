@@ -322,3 +322,20 @@
     margin: 20mm 14mm 14mm;
   }
 }
+
+/* Facts marquee (landing, 22 Nov 2026): the template testimonial
+   section's infinite loop, CSS-driven. The track holds the card set
+   twice; translating -50% loops it seamlessly. Paused under
+   prefers-reduced-motion. */
+@keyframes marquee-x {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.animate-marquee {
+  animation: marquee-x 42s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee {
+    animation: none;
+  }
+}

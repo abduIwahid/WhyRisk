@@ -79,7 +79,7 @@ function YesNoToggle({
   return (
     <div className="flex items-center justify-between gap-3 py-2">
       <span className="text-sm leading-snug text-foreground/85">{label}</span>
-      <span className="flex shrink-0 overflow-hidden rounded-lg border border-border" role="group" aria-label={label}>
+      <span className="flex shrink-0 overflow-hidden rounded-none border border-border" role="group" aria-label={label}>
         {([1, 0] as YesNo[]).map((v) => (
           <button
             key={v}
@@ -99,7 +99,7 @@ function YesNoToggle({
 }
 
 const inputClass =
-  "h-11 w-full rounded-xl border border-input bg-background px-3.5 text-sm outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/25"
+  "h-11 w-full rounded-none border border-input bg-background px-3.5 text-sm outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/25"
 
 /**
  * Step marker for one question group: a Lucide icon in a tile (the
@@ -117,7 +117,7 @@ function StepHeading({
 }) {
   return (
     <div className={`flex items-center gap-3 border-b border-border pb-2.5 ${className}`}>
-      <span aria-hidden="true" className="flex h-[34px] w-[34px] shrink-0 items-center justify-center rounded-[9px] bg-secondary text-primary">
+      <span aria-hidden="true" className="flex h-[34px] w-[34px] shrink-0 items-center justify-center rounded-none bg-secondary text-primary">
         <Icon className="h-[18px] w-[18px]" />
       </span>
       <h3 className="text-[11px] font-medium text-brand-text">{title}</h3>
@@ -216,7 +216,7 @@ export function GuestRiskCheck() {
   if (status === "done" && result) {
     const pct = Math.round(result.probability * 100)
     return (
-      <div className="rounded-[14px] border border-border bg-card p-[22px] shadow-premium" role="status">
+      <div className="rounded-none border border-border bg-card p-[22px] shadow-premium" role="status">
         <div className="flex items-center justify-between">
           <span className="text-[11px] font-medium text-muted-foreground">
             Your estimate, Diabetes risk
@@ -241,7 +241,7 @@ export function GuestRiskCheck() {
           <span>CRITICAL</span>
         </div>
 
-        <div className="mt-5 flex items-start gap-2.5 rounded-[10px] border border-[#D97706] bg-[#FDF0DC] px-4 py-3 text-[13.5px] leading-relaxed text-[#A85008]">
+        <div className="mt-5 flex items-start gap-2.5 rounded-none border border-[#D97706] bg-[#FDF0DC] px-4 py-3 text-[13.5px] leading-relaxed text-[#A85008]">
           <ShieldAlert className="mt-0.5 h-4 w-4 shrink-0" />
           <p>
             <strong>This is an educational estimate, not a diagnosis.</strong> It comes from a statistical
@@ -254,14 +254,14 @@ export function GuestRiskCheck() {
         <div className="mt-5 flex flex-wrap gap-3">
           <Link
             href="/signup"
-            className="inline-flex items-center rounded-lg bg-brand px-5 py-3 text-sm font-bold text-white transition hover:bg-brand/90"
+            className="inline-flex items-center rounded-none bg-brand px-5 py-3 text-sm font-bold text-white transition hover:bg-brand/90"
           >
             Create your account <ArrowRight className="ml-2 h-4 w-4" />
           </Link>
           <button
             type="button"
             onClick={() => { setStatus("idle"); setResult(null) }}
-            className="inline-flex items-center rounded-lg border-[1.5px] border-primary px-5 py-3 text-sm font-bold text-primary transition hover:bg-secondary"
+            className="inline-flex items-center rounded-none border-[1.5px] border-primary px-5 py-3 text-sm font-bold text-primary transition hover:bg-secondary"
           >
             <RotateCcw className="mr-2 h-4 w-4" /> Check again
           </button>
@@ -276,7 +276,7 @@ export function GuestRiskCheck() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="rounded-[14px] border border-border bg-card p-[22px] shadow-premium">
+    <form onSubmit={handleSubmit} className="rounded-none border border-border bg-card p-[22px] shadow-premium">
       <div className="grid gap-x-8 gap-y-8 lg:grid-cols-2 lg:gap-y-0">
         <div>
           <StepHeading icon={User} title="About you" />
@@ -287,7 +287,7 @@ export function GuestRiskCheck() {
             </div>
             <div className="space-y-1.5">
               <span className="text-sm font-medium">Sex</span>
-              <span className="flex overflow-hidden rounded-xl border border-input" role="group" aria-label="Sex">
+              <span className="flex overflow-hidden rounded-none border border-input" role="group" aria-label="Sex">
                 {([{ v: 0 as YesNo, label: "Female" }, { v: 1 as YesNo, label: "Male" }]).map((o) => (
                   <button
                     key={o.label}
@@ -369,7 +369,7 @@ export function GuestRiskCheck() {
       </div>
 
       {status === "error" && errorMessage && (
-        <div role="alert" className="mt-5 rounded-[10px] border border-destructive/20 bg-destructive/10 px-4 py-3 text-sm font-medium text-destructive-text">
+        <div role="alert" className="mt-5 rounded-none border border-destructive/20 bg-destructive/10 px-4 py-3 text-sm font-medium text-destructive-text">
           {errorMessage}
         </div>
       )}
@@ -378,7 +378,7 @@ export function GuestRiskCheck() {
         <button
           type="submit"
           disabled={status === "sending"}
-          className="inline-flex items-center rounded-lg bg-brand px-6 py-3 text-sm font-bold text-white transition hover:bg-brand/90 disabled:opacity-60"
+          className="inline-flex items-center rounded-none bg-brand px-6 py-3 text-sm font-bold text-white transition hover:bg-brand/90 disabled:opacity-60"
         >
           {status === "sending" ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
           {status === "sending" ? "Scoring…" : "Get my estimate"}

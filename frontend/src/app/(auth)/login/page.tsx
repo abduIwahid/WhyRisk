@@ -1,5 +1,6 @@
 "use client"
 import { useState, type FormEvent, Suspense } from "react"
+import { CornerAccents } from "@/components/shared/CornerAccents"
 import { createClient } from "@/lib/supabase/client"
 import { useRouter, useSearchParams } from "next/navigation"
 import { Button } from "@/components/ui/button"
@@ -218,7 +219,8 @@ function LoginPageInner() {
 
   return (
     <SlideIn direction="up" className="relative flex min-h-dvh w-full items-center justify-center bg-background px-4 py-10">
-      <div className="relative z-10 grid w-full max-w-5xl grid-cols-1 overflow-hidden rounded-2xl border border-border shadow-premium md:grid-cols-2">
+      <div className="relative z-10 grid w-full max-w-5xl grid-cols-1 overflow-hidden rounded-none border border-border shadow-premium md:grid-cols-2">
+        <CornerAccents flush className="z-20 border-primary/60" />
         {/* Brand / marketing panel */}
         <div className="relative hidden flex-col justify-between overflow-hidden bg-[#574CD6] p-10 text-white md:flex">
           {/* Step B: stethoscope photo as the panel's blurred backdrop
@@ -269,12 +271,12 @@ function LoginPageInner() {
               </p>
             </div>
 
-            <div className="grid grid-cols-2 gap-2 rounded-2xl border border-border bg-muted/40 p-1">
+            <div className="grid grid-cols-2 gap-2 rounded-none border border-border bg-muted/40 p-1">
               <button
                 type="button"
                 aria-pressed={portal === "patient"}
                 onClick={() => { setPortal("patient"); setError(null) }}
-                className={`rounded-xl px-4 py-2.5 text-sm font-semibold transition-all duration-200 active:scale-[0.98] ${
+                className={`rounded-none px-4 py-2.5 text-sm font-semibold transition-all duration-200 active:scale-[0.98] ${
                   portal === "patient" ? "bg-primary text-primary-foreground shadow-md" : "text-muted-foreground hover:bg-background/60 hover:text-foreground"
                 }`}
               >
@@ -284,7 +286,7 @@ function LoginPageInner() {
                 type="button"
                 aria-pressed={portal === "doctor"}
                 onClick={() => { setPortal("doctor"); setError(null) }}
-                className={`rounded-xl px-4 py-2.5 text-sm font-semibold transition-all duration-200 active:scale-[0.98] ${
+                className={`rounded-none px-4 py-2.5 text-sm font-semibold transition-all duration-200 active:scale-[0.98] ${
                   portal === "doctor" ? "bg-primary text-primary-foreground shadow-md" : "text-muted-foreground hover:bg-background/60 hover:text-foreground"
                 }`}
               >
@@ -295,7 +297,7 @@ function LoginPageInner() {
             <form onSubmit={handleLogin} className="space-y-5">
               <div className="space-y-2">
                 <Label htmlFor="identifier">Email</Label>
-                <div className="flex items-center gap-3 rounded-2xl border border-border bg-muted/40 px-3 py-3 transition-all duration-200 hover:border-primary/40 hover:bg-muted/60 focus-within:border-primary focus-within:ring-2 focus-within:ring-ring">
+                <div className="flex items-center gap-3 rounded-none border border-border bg-muted/40 px-3 py-3 transition-all duration-200 hover:border-primary/40 hover:bg-muted/60 focus-within:border-primary focus-within:ring-2 focus-within:ring-ring">
                   <AtSign className="h-5 w-5 shrink-0 text-muted-foreground" />
                   <Input
                     id="identifier"
@@ -319,7 +321,7 @@ function LoginPageInner() {
                     Forgot password?
                   </Link>
                 </div>
-                <div className="flex items-center gap-3 rounded-2xl border border-border bg-muted/40 px-3 py-3 transition-all duration-200 hover:border-primary/40 hover:bg-muted/60 focus-within:border-primary focus-within:ring-2 focus-within:ring-ring">
+                <div className="flex items-center gap-3 rounded-none border border-border bg-muted/40 px-3 py-3 transition-all duration-200 hover:border-primary/40 hover:bg-muted/60 focus-within:border-primary focus-within:ring-2 focus-within:ring-ring">
                   <Lock className="h-5 w-5 shrink-0 text-muted-foreground" />
                   <Input
                     id="password"
@@ -344,9 +346,9 @@ function LoginPageInner() {
                 </div>
               </div>
 
-              {callbackError && <div role="alert" className="rounded-xl border border-[#D97706]/30 bg-[#FDF0DC] px-4 py-3 text-sm text-[#A85008]">{callbackError}</div>}
+              {callbackError && <div role="alert" className="rounded-none border border-[#D97706]/30 bg-[#FDF0DC] px-4 py-3 text-sm text-[#A85008]">{callbackError}</div>}
               {error && (
-                <div id="login-error" role="alert" className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1 rounded-2xl bg-destructive/10 px-4 py-3 text-sm text-destructive-text">
+                <div id="login-error" role="alert" className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1 rounded-none bg-destructive/10 px-4 py-3 text-sm text-destructive-text">
                   <span>{error}</span>
                   <Link href="/forgot-password" className="shrink-0 font-medium underline underline-offset-2">
                     Forgot password?
@@ -354,7 +356,7 @@ function LoginPageInner() {
                 </div>
               )}
               {(showResend || callbackError === "Could not confirm your account. Please try again.") && (
-                <div className="rounded-2xl border border-border bg-muted/40 px-4 py-3 text-sm">
+                <div className="rounded-none border border-border bg-muted/40 px-4 py-3 text-sm">
                   <p className="text-muted-foreground">Didn&apos;t get the confirmation email, or has the link expired?</p>
                   <button
                     type="button"
@@ -383,7 +385,7 @@ function LoginPageInner() {
                     type="button"
                     onClick={() => handleOAuth("google")}
                     disabled={oauthLoading !== null}
-                    className="flex items-center justify-center gap-2 rounded-xl border border-border bg-card px-4 py-2.5 text-sm font-medium text-foreground transition-all duration-200 hover:-translate-y-px hover:bg-muted hover:shadow-md active:scale-[0.98] disabled:opacity-60"
+                    className="flex items-center justify-center gap-2 rounded-none border border-border bg-card px-4 py-2.5 text-sm font-medium text-foreground transition-all duration-200 hover:-translate-y-px hover:bg-muted hover:shadow-md active:scale-[0.98] disabled:opacity-60"
                   >
                     <svg className="h-4 w-4" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.99.66-2.25 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.85A11 11 0 0 0 12 23z"/><path fill="#FBBC05" d="M5.84 14.1a6.6 6.6 0 0 1 0-4.2V7.05H2.18a11 11 0 0 0 0 9.9z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1a11 11 0 0 0-9.82 6.05l3.66 2.85C6.71 7.31 9.14 5.38 12 5.38z"/></svg>
                     Google

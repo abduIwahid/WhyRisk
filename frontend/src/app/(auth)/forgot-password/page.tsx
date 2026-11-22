@@ -64,7 +64,7 @@ export default function ForgotPasswordPage() {
         </div>
       </SlideIn>
       <SlideIn direction="up" delay={0.05} className="relative z-10 w-full max-w-md">
-      <div className="w-full max-w-md p-8 space-y-6 bg-card rounded-xl border shadow-card">
+      <div className="w-full max-w-md p-8 space-y-6 bg-card rounded-none border shadow-card">
         {sent ? (
           <div role="status" className="flex flex-col items-center text-center space-y-4 py-4">
             <CheckCircle2 className="h-14 w-14 text-[#1E7A46]" />

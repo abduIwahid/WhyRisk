@@ -158,7 +158,7 @@ export default function UpdatePasswordPage() {
         </div>
       </SlideIn>
       <SlideIn direction="up" delay={0.05} className="relative z-10 w-full max-w-md">
-      <div className="w-full max-w-md p-8 space-y-6 bg-card rounded-xl border shadow-card">
+      <div className="w-full max-w-md p-8 space-y-6 bg-card rounded-none border shadow-card">
         {hasSession === null ? (
           <p className="py-4 text-center text-sm text-muted-foreground">Checking your link…</p>
         ) : hasSession === false ? (

@@ -66,7 +66,7 @@ export default function PendingApprovalPage() {
         <BrandMark className="h-10 w-10 shrink-0" />
         <span className="text-xl font-bold tracking-tight">WhyRisk</span>
       </div>
-      <div className="w-full max-w-md space-y-6 rounded-xl border bg-card p-8 text-center shadow-card">
+      <div className="w-full max-w-md space-y-6 rounded-none border bg-card p-8 text-center shadow-card">
         <div className={`mx-auto flex h-14 w-14 items-center justify-center rounded-full ${isRejected ? "bg-destructive/10 text-destructive-text" : isNone ? "bg-secondary text-primary" : "bg-[#FDF0DC] text-[#A85008]"}`}>
           {isRejected ? <XCircle className="h-7 w-7" /> : isNone ? <HelpCircle className="h-7 w-7" /> : <Clock className="h-7 w-7" />}
         </div>

@@ -109,8 +109,8 @@ export function ScoreBento() {
         <Cell tag="Risk meter">
           <svg width="200" height="120" viewBox="0 0 200 120" role="img" aria-label="Risk meter showing 0.31 of 1.00">
             <path d="M20 105 A 85 85 0 0 1 180 105" fill="none" stroke="rgba(87,76,214,0.15)" strokeWidth="12" />
-            <path d="M20 105 A 85 85 0 0 1 82 34" fill="none" stroke="#6B63FF" strokeWidth="12" />
-            <line x1="100" y1="105" x2="66" y2="52" stroke="#212529" strokeWidth="3" />
+            <path d="M20 105 A 85 85 0 0 1 52.2 34.7" fill="none" stroke="#6B63FF" strokeWidth="12" />
+            <line x1="100" y1="105" x2="64.6" y2="52.9" stroke="#212529" strokeWidth="3" />
             <circle cx="100" cy="105" r="6" fill="#212529" />
           </svg>
           <div className="mt-2 font-sans text-[44px] font-bold leading-none text-foreground">0.31</div>

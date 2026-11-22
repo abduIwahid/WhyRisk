@@ -54,7 +54,7 @@ export function PartsBento() {
       >
         <motion.div variants={itemVariants}>
           <SectionHead
-            align="right"
+            align="center"
             eyebrow="Components"
             title={
               <>

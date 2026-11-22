@@ -1,6 +1,7 @@
 "use client"
 
 import Image from "next/image"
+import { CornerAccents } from "@/components/shared/CornerAccents"
 import { CountUp } from "@/components/shared/CountUp"
 import { SlideIn } from "@/components/shared/SlideIn"
 
@@ -30,6 +31,9 @@ export function StatsBand({ facts }: { facts: { value: string; text: string }[] 
         sizes="(min-width: 1400px) 1370px, 100vw"
         className="object-cover opacity-[0.09]"
       />
+      {/* Watermelon-template corner accents (22 Nov 2026), in white at
+          low strength so the panel reads as one framed instrument. */}
+      <CornerAccents className="border-white/30" />
       <div className="relative z-10 grid gap-x-8 gap-y-8 sm:grid-cols-2 lg:grid-cols-4">
         {facts.map((f, i) => (
           <SlideIn

@@ -2,7 +2,7 @@ import Image from "next/image"
 import Link from "next/link"
 import type { CSSProperties } from "react"
 import type { Metadata } from "next"
-import { ArrowRight, BrainCircuit, CalendarCheck, ShieldAlert, ShieldCheck } from "lucide-react"
+import { ArrowRight, ShieldAlert } from "lucide-react"
 import { CursorGlow } from "@/components/motion/CursorGlow"
 import { Magnetic } from "@/components/motion/Magnetic"
 import { Parallax } from "@/components/motion/Parallax"
@@ -10,6 +10,8 @@ import { ScrollTrace } from "@/components/motion/ScrollTrace"
 import { TiltCard } from "@/components/motion/TiltCard"
 import BrandMark from "@/components/shared/BrandMark"
 import PublicFooterLinks from "@/components/shared/PublicFooterLinks"
+import { BentoCapabilities } from "@/components/shared/BentoCapabilities"
+import { CornerAccents } from "@/components/shared/CornerAccents"
 import { GuestRiskCheck } from "@/components/shared/GuestRiskCheck"
 import { SlideIn } from "@/components/shared/SlideIn"
 import { StatsBand } from "@/components/shared/StatsBand"
@@ -82,24 +84,6 @@ const FACTS = [
   {
     value: "SHAP",
     text: "Predictions ship with a SHAP explanation, each score shows the factors behind it",
-  },
-]
-
-const CAPABILITIES = [
-  {
-    icon: BrainCircuit,
-    title: "Risk prediction",
-    text: "A LightGBM model trained on CDC survey data estimates diabetes risk from 21 everyday health indicators, no lab visit needed for a first screening.",
-  },
-  {
-    icon: ShieldCheck,
-    title: "The reason, not just the score",
-    text: "Every result lists the factors that pushed the score up or down, with their weights. A doctor can argue with it, that is the point.",
-  },
-  {
-    icon: CalendarCheck,
-    title: "Records & appointments",
-    text: "Patient and doctor portals with role-based access, appointment booking and an admin overview, protected by row-level security.",
   },
 ]
 
@@ -274,9 +258,10 @@ export default function WelcomePage() {
               static on touch and under reduced motion. */}
           <TiltCard>
           <div
-            className="reveal reveal-slow rounded-[14px] border border-border bg-card p-[22px] shadow-premium"
+            className="reveal reveal-slow relative rounded-[14px] border border-border bg-card p-[22px] shadow-premium"
             style={{ "--d": "240ms" } as CSSProperties}
           >
+            <CornerAccents />
             <div className="flex items-center justify-between">
               <span className="flex flex-wrap items-center gap-1.5">
                 <span className="rounded-full border px-2.5 py-0.5 text-xs font-medium">Patient</span>
@@ -362,24 +347,20 @@ export default function WelcomePage() {
         <section id="how" className="relative scroll-mt-28 md:scroll-mt-24 pb-2 pt-12 lg:pt-16">
           <div className="relative z-10">
           <SlideIn className="text-center">
+            {/* Mono eyebrow in the Watermelon template's style
+                (22 Nov 2026); the heading and sub-copy are unchanged. */}
+            <p className="mb-3 font-mono text-xs font-bold uppercase tracking-widest text-brand-text">
+              <span className="mr-3 opacity-70">{"//"}</span>
+              Capabilities
+            </p>
             <h2 className="font-heading text-3xl font-bold sm:text-4xl 2xl:text-[44px]">What it does</h2>
             <p className="mx-auto mt-1.5 max-w-[640px] text-[15.5px] text-muted-foreground">
               Three things, done properly, instead of ten things done with smoke and mirrors.
             </p>
           </SlideIn>
-          <div className="mt-[22px] space-y-4">
-            {CAPABILITIES.map((c, i) => (
-              <SlideIn key={c.title} delay={i * 0.1}>
-                <div className="card-interactive grid items-start gap-3 rounded-xl border bg-card p-5 shadow-card sm:grid-cols-[64px_1fr] md:grid-cols-[76px_minmax(210px,290px)_1fr] md:gap-6">
-                  <div aria-hidden="true" className="flex h-[52px] w-[52px] items-center justify-center rounded-[12px] bg-secondary text-primary">
-                    <c.icon className="h-6 w-6" />
-                  </div>
-                  <h3 className="self-center font-sans text-[17px] font-bold tracking-normal">{c.title}</h3>
-                  <p className="text-sm leading-relaxed text-foreground/75 sm:col-start-2 md:col-start-3">{c.text}</p>
-                </div>
-              </SlideIn>
-            ))}
-          </div>
+          {/* The three capabilities as a bento grid (Watermelon
+              template layout, adapted) — same content, new frame. */}
+          <BentoCapabilities />
           </div>
         </section>
 

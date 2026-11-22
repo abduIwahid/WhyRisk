@@ -88,6 +88,17 @@ export function ScoreBento() {
       >
         <Cell tag="Explanation" className="md:col-span-2 lg:col-span-2">
           <div className="w-full max-w-[560px]">
+            <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
+              <p className="font-sans text-[15px] font-bold text-foreground">
+                Ahmed Raza, 47{" "}
+                <span className="ml-1 font-mono text-[11px] font-normal uppercase tracking-widest text-muted-foreground">
+                  Sample assessment · LightGBM model
+                </span>
+              </p>
+              <span className="rounded-full bg-[#FDF0DC] px-2.5 py-1 font-mono text-[10px] font-bold uppercase tracking-widest text-[#A85008]">
+                Moderate risk
+              </span>
+            </div>
             <p className="mb-2 font-mono text-xs uppercase tracking-widest text-muted-foreground">
               Why this score — top factors (SHAP)
             </p>
@@ -105,6 +116,18 @@ export function ScoreBento() {
           <div className="mt-2 font-sans text-[44px] font-bold leading-none text-foreground">0.31</div>
           <div className="mt-2 font-mono text-[11px] uppercase tracking-widest text-muted-foreground">
             / 1.00 probability · moderate
+          </div>
+          <div className="mt-5 flex w-full max-w-[230px] items-center justify-between font-mono text-[9.5px] font-bold uppercase tracking-widest">
+            <span className="text-[#1E7A46]">Low</span>
+            <span className="text-[#A85008]">Moderate</span>
+            <span className="text-[#C0392B]">High</span>
+            <span className="text-[#C0392B]">Critical</span>
+          </div>
+          <div className="mt-1.5 grid w-full max-w-[230px] grid-cols-4 gap-1" aria-hidden="true">
+            <span className="h-1 bg-[#1E7A46]/50" />
+            <span className="h-1 bg-[#D97706]" />
+            <span className="h-1 bg-[#C0392B]/40" />
+            <span className="h-1 bg-[#C0392B]/40" />
           </div>
         </Cell>
 

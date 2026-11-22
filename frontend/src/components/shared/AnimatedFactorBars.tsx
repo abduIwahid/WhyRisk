@@ -17,7 +17,7 @@ export function AnimatedFactorBars({ factors }: { factors: Factor[] }) {
       {factors.map((f, i) => (
         <div key={f.label} className="mt-2 flex items-center gap-2.5 text-[13px]">
           <span className="w-[118px] shrink-0 text-foreground/80">{f.label}</span>
-          <span className="h-[9px] flex-1 overflow-hidden rounded-full bg-secondary">
+          <span className="h-[11px] flex-1 overflow-hidden rounded-full bg-primary/15">
             {reduceMotion ? (
               <span className="block h-full rounded-full" style={{ width: f.width, background: f.color }} />
             ) : (
@@ -26,8 +26,8 @@ export function AnimatedFactorBars({ factors }: { factors: Factor[] }) {
                 style={{ width: f.width, background: f.color }}
                 initial={{ scaleX: 0 }}
                 whileInView={{ scaleX: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: 0.15 + i * 0.12, ease: [0.22, 0.8, 0.3, 1] }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ duration: 0.55, delay: 0.05 + i * 0.07, ease: [0.22, 0.8, 0.3, 1] }}
               />
             )}
           </span>

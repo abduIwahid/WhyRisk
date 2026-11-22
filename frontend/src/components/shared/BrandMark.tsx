@@ -19,13 +19,13 @@ export default function BrandMark({
     <>
       <path
         d="M16 62 H33 L41 45 L51 83 L63 27 L72 62 H82"
-        stroke="#F4F6F6"
+        stroke="#F3F4FB"
         strokeWidth="8"
         fill="none"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
-      <circle cx="94" cy="62" r="5.5" fill="#2E7FA8" />
+      <circle cx="94" cy="62" r="5.5" fill="#6B63FF" />
     </>
   );
 
@@ -39,7 +39,7 @@ export default function BrandMark({
 
   return (
     <svg viewBox="0 0 120 120" className={className} aria-hidden="true">
-      <rect x="4" y="4" width="112" height="112" rx="27" fill="#0D2B3E" />
+      <rect x="4" y="4" width="112" height="112" rx="27" fill="#574CD6" />
       {pulse}
     </svg>
   );

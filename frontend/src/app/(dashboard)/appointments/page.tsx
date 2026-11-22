@@ -180,7 +180,7 @@ export default function AppointmentsPage() {
                         </>
                       )}
                       {a.status === "Confirmed" && (
-                        <button onClick={() => updateStatus(a.id, "Completed")} title="Mark Completed" aria-label="Mark appointment completed" className="inline-flex h-11 w-11 items-center justify-center rounded-full text-[#1F6E96] hover:bg-[#2E7FA8]/10">
+                        <button onClick={() => updateStatus(a.id, "Completed")} title="Mark Completed" aria-label="Mark appointment completed" className="inline-flex h-11 w-11 items-center justify-center rounded-full text-[#574CD6] hover:bg-[#6B63FF]/10">
                           <CheckCheck className="h-4 w-4" />
                         </button>
                       )}

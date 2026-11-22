@@ -26,7 +26,7 @@ export function roleLabel(role?: string | null): string {
 export const ROLE_BADGE_CLASSES: Record<string, string> = {
   super_admin: "bg-[#FAE9E7] text-[#C0392B] border-[#C0392B]/25",
   hospital_admin: "bg-[#FDF0DC] text-[#A85008] border-[#D97706]/25",
-  doctor: "bg-[#2E7FA8]/10 text-[#1F6E96] border-[#2E7FA8]/25",
+  doctor: "bg-[#6B63FF]/10 text-[#574CD6] border-[#6B63FF]/25",
   nurse: "bg-[#E2F0E6] text-[#1E7A46] border-[#1E7A46]/25",
   data_scientist: "bg-secondary text-secondary-foreground border-border",
   patient: "bg-secondary text-secondary-foreground border-border",

@@ -18,7 +18,7 @@ export const SEVERITY_HEX = {
   Moderate: "#D97706", // fill value — see the Moderate rule above
   High: "#C0392B",
   Critical: "#C0392B",
-  Unknown: "#5A6B73",
+  Unknown: "#5F6376",
 } as const
 
 /** Severity hexes for TEXT contexts — identical to SEVERITY_HEX except
@@ -28,7 +28,7 @@ export const SEVERITY_TEXT_HEX = {
   Moderate: "#A85008",
   High: "#C0392B",
   Critical: "#C0392B",
-  Unknown: "#5A6B73",
+  Unknown: "#5F6376",
 } as const
 
 export type SeverityName = keyof typeof SEVERITY_HEX
@@ -97,7 +97,7 @@ export function appointmentStatusClass(status?: string | null): string {
     case "Requested":
       return "bg-[#FDF0DC] text-[#A85008] border-[#D97706]/25"
     case "Confirmed":
-      return "bg-[#2E7FA8]/10 text-[#1F6E96] border-[#2E7FA8]/25"
+      return "bg-[#6B63FF]/10 text-[#574CD6] border-[#6B63FF]/25"
     case "Completed":
       return "bg-[#E2F0E6] text-[#1E7A46] border-[#1E7A46]/25"
     case "Cancelled":
@@ -156,14 +156,14 @@ export function availabilityInfo(status?: string | null): AvailabilityInfo {
  * five in-between blues that exist nowhere else in the product.
  */
 export const DISEASE_CHART_COLORS: string[] = [
-  "#0D2B3E", // Primary
-  "#2E7FA8", // Accent
-  "#1F6E96", // brand text steel
-  "#5A6B73", // Unknown grey
-  "#06141B", // Ink
-  "#9FB6BF", // Light-derived steel (chart-only tint of #CCD0CF family)
-  "#2E7FA8",
-  "#0D2B3E",
+  "#574CD6", // Primary
+  "#6B63FF", // Accent
+  "#574CD6", // brand text steel
+  "#5F6376", // Unknown grey
+  "#212529", // Ink
+  "#9FB6BF", // Light-derived steel (chart-only tint of #E5E7EB family)
+  "#6B63FF",
+  "#574CD6",
 ]
 
 /** Banner recipes (QA Round 3, visual V13): one per intent, product-wide. */
@@ -171,8 +171,8 @@ export const BANNER_CLASSES = {
   success: "border-[#1E7A46]/30 bg-[#E2F0E6] text-[#1E7A46]",
   warning: "border-[#D97706]/30 bg-[#FDF0DC] text-[#A85008]",
   error: "border-[#C0392B]/30 bg-[#FAE9E7] text-[#C0392B]",
-  info: "border-[#2E7FA8]/30 bg-[#2E7FA8]/10 text-[#1F6E96]",
+  info: "border-[#6B63FF]/30 bg-[#6B63FF]/10 text-[#574CD6]",
 } as const
 
 /** Neutral accent bar fill for metric bars (QA Round 3, visual V3). */
-export const ACCENT_BAR_CLASS = "bg-[#2E7FA8]"
+export const ACCENT_BAR_CLASS = "bg-[#6B63FF]"

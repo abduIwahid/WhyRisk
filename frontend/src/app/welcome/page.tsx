@@ -108,7 +108,7 @@ const CAPABILITIES = [
 const DEMO_FACTORS = [
   { label: "BMI 29.4", width: "62%", color: SEVERITY_HEX.Moderate, value: "+0.14" },
   { label: "High blood pressure", width: "48%", color: SEVERITY_HEX.Moderate, value: "+0.10" },
-  { label: "High cholesterol", width: "38%", color: "#2E7FA8", value: "+0.08" },
+  { label: "High cholesterol", width: "38%", color: "#6B63FF", value: "+0.08" },
   { label: "Physically active", width: "30%", color: SEVERITY_HEX.Low, value: "−0.06" },
 ]
 
@@ -186,9 +186,9 @@ export default function WelcomePage() {
               className="scale-[1.06] object-cover object-center blur-[3px]"
             />
           </Parallax>
-          <div aria-hidden="true" className="absolute inset-0 bg-[#0D2B3E]/70" />
-          <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-r from-[#0D2B3E]/95 via-[#0D2B3E]/85 to-[#0D2B3E]/60" />
-          <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-[#0D2B3E]/80 via-transparent to-[#0D2B3E]/25" />
+          <div aria-hidden="true" className="absolute inset-0 bg-[#574CD6]/70" />
+          <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-r from-[#574CD6]/95 via-[#574CD6]/85 to-[#574CD6]/60" />
+          <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-[#574CD6]/80 via-transparent to-[#574CD6]/25" />
           <svg
             aria-hidden="true"
             viewBox="0 0 1440 160"
@@ -221,7 +221,7 @@ export default function WelcomePage() {
           <CursorGlow />
           <div className="relative z-10 mx-auto grid w-full max-w-[1400px] items-start gap-10 px-5 pb-14 pt-14 lg:grid-cols-[1.05fr_0.95fr] lg:pb-[72px] lg:pt-20">
           <div>
-            <p className="eyebrow reveal text-[#8FC3DC]" style={{ "--d": "0ms" } as CSSProperties}>
+            <p className="eyebrow reveal text-[#E0DCFF]" style={{ "--d": "0ms" } as CSSProperties}>
               Explainable healthcare ML
             </p>
             <h1
@@ -230,7 +230,7 @@ export default function WelcomePage() {
             >
               Know your risk.
               <br />
-              <span className="text-[#8FC3DC]">See exactly why.</span>
+              <span className="text-[#E0DCFF]">See exactly why.</span>
             </h1>
             <p
               className="reveal reveal-slow mt-6 max-w-[620px] text-[17.5px] leading-relaxed text-white/80"
@@ -258,7 +258,7 @@ export default function WelcomePage() {
               </a>
             </div>
             <div
-              className="reveal reveal-slow mt-7 flex items-start gap-2.5 rounded-lg border border-[#D97706]/35 bg-[#0D2B3E]/95 px-4 py-3 text-[13.5px] leading-relaxed text-[#F2B25C]"
+              className="reveal reveal-slow mt-7 flex items-start gap-2.5 rounded-lg border border-[#D97706]/35 bg-[#574CD6]/95 px-4 py-3 text-[13.5px] leading-relaxed text-[#F2B25C]"
               style={{ "--d": "430ms" } as CSSProperties}
             >
               <ShieldAlert className="mt-0.5 h-4 w-4 shrink-0" />
@@ -451,7 +451,7 @@ export default function WelcomePage() {
               </span>
             </div>
             <div className="grid md:grid-cols-[200px_1fr]">
-            <div className="hidden bg-foreground p-5 text-[#CCD0CF] md:block">
+            <div className="hidden bg-foreground p-5 text-[#E5E7EB] md:block">
               <div className="font-display text-[17px] uppercase tracking-wide text-white">WhyRisk</div>
               <ul className="mt-[18px] space-y-1 text-[13.5px]">
                 {["Dashboard", "Risk Queue", "Alerts Center", "AI Assistant", "Model Registry", "Audit Logs"].map((item, i) => (
@@ -487,7 +487,7 @@ export default function WelcomePage() {
           this band instead, under a heavy ink overlay (the guest
           risk-check backdrop carries the CT scanner, per the photo
           map). Background only; links and disclaimer render above. */}
-      <footer className="relative mt-14 overflow-hidden bg-foreground py-[30px] text-[#CCD0CF] lg:mt-20">
+      <footer className="relative mt-14 overflow-hidden bg-foreground py-[30px] text-[#E5E7EB] lg:mt-20">
         <Image
           src="https://images.pexels.com/photos/9742893/pexels-photo-9742893.jpeg?auto=compress&cs=tinysrgb&w=2400"
           alt="Assorted medication capsules and tablets arranged on a deep navy surface"
@@ -500,7 +500,7 @@ export default function WelcomePage() {
           <span className="font-display text-lg uppercase tracking-wide text-white">WhyRisk</span>
           <PublicFooterLinks
             className="flex flex-wrap items-center gap-4"
-            linkClassName="text-xs font-semibold text-white underline decoration-[#2E7FA8] decoration-2 underline-offset-4 hover:opacity-80"
+            linkClassName="text-xs font-semibold text-white underline decoration-[#6B63FF] decoration-2 underline-offset-4 hover:opacity-80"
           />
           <p className="max-w-[640px] text-xs leading-relaxed opacity-75">
             WhyRisk is an experimental clinical decision-support and research tool. It is not a certified medical

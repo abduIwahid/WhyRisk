@@ -144,7 +144,7 @@ export function WhatIfSimulator({ baseline, originalProbability, originalSeverit
                 value={bmi}
                 onChange={(e) => setBmi(parseFloat(e.target.value))}
                 className="w-full"
-                style={{ accentColor: "#2E7FA8" }}
+                style={{ accentColor: "#6B63FF" }}
               />
             </div>
 

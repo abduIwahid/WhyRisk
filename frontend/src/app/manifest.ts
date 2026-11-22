@@ -11,8 +11,8 @@ export default function manifest(): MetadataRoute.Manifest {
       "Diabetes risk prediction with explainable machine learning, every score shows its reasons.",
     start_url: "/welcome",
     display: "standalone",
-    background_color: "#F4F6F6",
-    theme_color: "#0D2B3E",
+    background_color: "#F3F4FB",
+    theme_color: "#574CD6",
     icons: [
       { src: "/icon.svg", sizes: "any", type: "image/svg+xml", purpose: "any" },
     ],

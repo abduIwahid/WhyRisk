@@ -299,8 +299,8 @@ export function MLOpsView({
                 contentStyle={{ background: 'rgb(var(--card))', border: '1px solid rgb(var(--border))', borderRadius: 8 }}
                 labelStyle={{ fontWeight: 600 }}
               />
-              <Area yAxisId="left" type="monotone" dataKey="count" name="Predictions" stroke="#2E7FA8" fill="#2E7FA8" fillOpacity={0.12} strokeWidth={2} />
-              <Area yAxisId="right" type="monotone" dataKey="avgProb" name="Avg risk score" stroke="#0D2B3E" fill="#0D2B3E" fillOpacity={0.06} strokeWidth={2} />
+              <Area yAxisId="left" type="monotone" dataKey="count" name="Predictions" stroke="#6B63FF" fill="#6B63FF" fillOpacity={0.12} strokeWidth={2} />
+              <Area yAxisId="right" type="monotone" dataKey="avgProb" name="Avg risk score" stroke="#574CD6" fill="#574CD6" fillOpacity={0.06} strokeWidth={2} />
             </AreaChart>
           </ResponsiveContainer>
           </>

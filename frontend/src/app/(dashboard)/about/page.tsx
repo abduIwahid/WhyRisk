@@ -21,7 +21,7 @@ export default function AboutPage() {
       {/* Novena-inspired Hero Header Banner */}
       <div className="relative overflow-hidden rounded-2xl bg-primary p-8 sm:p-12 text-white shadow-card">
         <div className="relative z-10 max-w-2xl space-y-4">
-          <p className="flex items-center gap-2 text-[11px] font-medium text-[#8FC3DC]">
+          <p className="flex items-center gap-2 text-[11px] font-medium text-[#E0DCFF]">
             <Sparkles className="h-3.5 w-3.5" /> Healthcare & Decision Support
           </p>
           <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight">
@@ -64,10 +64,10 @@ export default function AboutPage() {
 
         <div className="rounded-xl border bg-card p-6 shadow-card transition flex flex-col justify-between">
           <div>
-            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#2E7FA8]/10 text-[#2E7FA8] mb-4">
+            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#6B63FF]/10 text-[#6B63FF] mb-4">
               <Clock className="h-6 w-6" />
             </div>
-            <span className="text-xs font-medium text-[#2E7FA8]">Service Facts</span>
+            <span className="text-xs font-medium text-[#6B63FF]">Service Facts</span>
             <h3 className="text-lg font-bold mt-1">Clinical AI Service</h3>
             <ul className="text-xs space-y-2 text-muted-foreground mt-3">
               <li className="flex justify-between border-b pb-1"><span>Trained model:</span> <span className="font-semibold text-foreground">Diabetes (LightGBM)</span></li>

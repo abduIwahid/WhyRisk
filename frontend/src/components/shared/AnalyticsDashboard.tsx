@@ -242,7 +242,7 @@ export function AnalyticsDashboard({ predictions, patientsByHospital, alertStats
                 <PieChart>
                   <Pie data={severityData} cx="50%" cy="50%" innerRadius={55} outerRadius={90} paddingAngle={3} dataKey="value" nameKey="name">
                     {severityData.map((entry) => (
-                      <Cell key={entry.name} fill={SEVERITY_COLORS[entry.name] || "#5A6B73"} />
+                      <Cell key={entry.name} fill={SEVERITY_COLORS[entry.name] || "#5F6376"} />
                     ))}
                   </Pie>
                   <Tooltip contentStyle={{ background: 'rgb(var(--card))', border: '1px solid rgb(var(--border))', borderRadius: 8 }} />
@@ -298,7 +298,7 @@ export function AnalyticsDashboard({ predictions, patientsByHospital, alertStats
                   <XAxis dataKey="date" tick={{ fontSize: 11 }} className="fill-muted-foreground" />
                   <YAxis domain={[0, 1]} tick={{ fontSize: 11 }} className="fill-muted-foreground" />
                   <Tooltip contentStyle={{ background: 'rgb(var(--card))', border: '1px solid rgb(var(--border))', borderRadius: 8 }} formatter={(v) => [(Number(v ?? 0) * 100).toFixed(1) + '%', 'Avg Risk']} />
-                  <Area type="monotone" dataKey="avgRisk" stroke="#2E7FA8" fill="#2E7FA8" fillOpacity={0.12} strokeWidth={2} />
+                  <Area type="monotone" dataKey="avgRisk" stroke="#6B63FF" fill="#6B63FF" fillOpacity={0.12} strokeWidth={2} />
                 </AreaChart>
               </ResponsiveContainer>
               <SrOnlyTable caption="Average risk score per day, last 30 days" columns={["Day", "Average risk"]} rows={riskTrend.map((d) => [d.date, `${(d.avgRisk * 100).toFixed(1)}%`])} />
@@ -352,7 +352,7 @@ export function AnalyticsDashboard({ predictions, patientsByHospital, alertStats
                 <PieChart>
                   <Pie data={alertStatusData} cx="50%" cy="50%" outerRadius={80} dataKey="value" nameKey="name" label={({ name, percent }) => `${name} ${((percent ?? 0) * 100).toFixed(0)}%`}>
                     {alertStatusData.map((entry) => (
-                      <Cell key={entry.name} fill={ALERT_STATUS_COLORS[entry.name] || "#5A6B73"} />
+                      <Cell key={entry.name} fill={ALERT_STATUS_COLORS[entry.name] || "#5F6376"} />
                     ))}
                   </Pie>
                   <Tooltip contentStyle={{ background: 'rgb(var(--card))', border: '1px solid rgb(var(--border))', borderRadius: 8 }} />

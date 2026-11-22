@@ -209,7 +209,7 @@ export default async function PredictionReportPage({ params }: { params: { id: s
             <p className="mt-1.5 text-sm">
               Severity:{" "}
               {severity ? (
-                <span className="font-bold" style={{ color: SEVERITY_TEXT_COLOR[severity] ?? "#06141B" }}>
+                <span className="font-bold" style={{ color: SEVERITY_TEXT_COLOR[severity] ?? "#212529" }}>
                   {severity}
                 </span>
               ) : (

@@ -25,7 +25,7 @@ function MetricBar({ label, value }: { label: string; value: number }) {
         <span className="font-mono font-semibold">{value.toFixed(3)}</span>
       </div>
       <div className="h-1.5 rounded-full bg-muted overflow-hidden">
-        <div className="h-full rounded-full bg-[#2E7FA8] transition-all duration-500" style={{ width: `${pct}%` }} />
+        <div className="h-full rounded-full bg-[#6B63FF] transition-all duration-500" style={{ width: `${pct}%` }} />
       </div>
     </div>
   )

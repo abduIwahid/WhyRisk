@@ -59,24 +59,24 @@ export function RiskTrendChart({ predictions }: { predictions: PredictionRow[] }
           const y = PAD.top + (1 - v) * innerH
           return (
             <g key={v}>
-              <line x1={PAD.left} x2={PAD.left + innerW} y1={y} y2={y} stroke="#CCD0CF" strokeWidth={v === 0 ? 1.2 : 0.6} strokeDasharray={v === 0 ? "" : "3 3"} />
-              <text x={PAD.left - 6} y={y + 3} textAnchor="end" fontSize="11" fill="#5A6B73" fontFamily="Quicksand, sans-serif">
+              <line x1={PAD.left} x2={PAD.left + innerW} y1={y} y2={y} stroke="#E5E7EB" strokeWidth={v === 0 ? 1.2 : 0.6} strokeDasharray={v === 0 ? "" : "3 3"} />
+              <text x={PAD.left - 6} y={y + 3} textAnchor="end" fontSize="11" fill="#5F6376" fontFamily="Quicksand, sans-serif">
                 {v * 100}
               </text>
             </g>
           )
         })}
-        <polygon points={area} fill="#2E7FA8" opacity={0.08} />
-        <polyline points={polyline} fill="none" stroke="#2E7FA8" strokeWidth={2} strokeLinejoin="round" strokeLinecap="round" />
+        <polygon points={area} fill="#6B63FF" opacity={0.08} />
+        <polyline points={polyline} fill="none" stroke="#6B63FF" strokeWidth={2} strokeLinejoin="round" strokeLinecap="round" />
         {coords.map((c, i) => (
-          <circle key={i} cx={c.x} cy={c.y} r={4} fill={c.p.severity ? (SEVERITY_DOT[c.p.severity] ?? "#5A6B73") : "#5A6B73"} stroke="#fff" strokeWidth={1.5}>
+          <circle key={i} cx={c.x} cy={c.y} r={4} fill={c.p.severity ? (SEVERITY_DOT[c.p.severity] ?? "#5F6376") : "#5F6376"} stroke="#fff" strokeWidth={1.5}>
             <title>{`${fmtFullDate(c.p.created_at)} — ${((c.p.probability ?? 0) * 100).toFixed(1)}% (${c.p.severity ?? "severity not recorded"})`}</title>
           </circle>
         ))}
-        <text x={PAD.left} y={H - 6} fontSize="11" fill="#5A6B73" fontFamily="Quicksand, sans-serif">
+        <text x={PAD.left} y={H - 6} fontSize="11" fill="#5F6376" fontFamily="Quicksand, sans-serif">
           {fmtShortDate(first.created_at)}
         </text>
-        <text x={PAD.left + innerW} y={H - 6} textAnchor="end" fontSize="11" fill="#5A6B73" fontFamily="Quicksand, sans-serif">
+        <text x={PAD.left + innerW} y={H - 6} textAnchor="end" fontSize="11" fill="#5F6376" fontFamily="Quicksand, sans-serif">
           {fmtShortDate(last.created_at)}
         </text>
       </svg>

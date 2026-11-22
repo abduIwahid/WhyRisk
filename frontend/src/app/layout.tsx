@@ -32,7 +32,7 @@ const description =
   "Diabetes risk prediction with explainable machine learning, every score shows its reasons.";
 
 export const viewport: Viewport = {
-  themeColor: "#0D2B3E",
+  themeColor: "#574CD6",
   // Edge-to-edge on notched phones; the chat + drawer footers pad
   // with env(safe-area-inset-bottom) (QA Round 3, mobile #16).
   viewportFit: "cover",

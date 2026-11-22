@@ -55,7 +55,7 @@ export default function LegalPage({
         {children}
       </main>
 
-      <footer className="bg-foreground py-8 text-[#C8D6DA]">
+      <footer className="bg-foreground py-8 text-[#D8DAEA]">
         <div className="mx-auto flex max-w-4xl flex-wrap items-center justify-between gap-3.5 px-5">
           <span className="flex items-center gap-2.5">
             <BrandMark className="h-9 w-9 shrink-0" />
@@ -63,7 +63,7 @@ export default function LegalPage({
           </span>
           <PublicFooterLinks
             className="flex flex-wrap items-center gap-5 text-sm font-medium"
-            linkClassName="text-white underline decoration-[#2E7FA8] decoration-2 underline-offset-4 hover:opacity-80"
+            linkClassName="text-white underline decoration-[#6B63FF] decoration-2 underline-offset-4 hover:opacity-80"
           />
           <p className="max-w-[640px] text-xs leading-relaxed opacity-75">
             WhyRisk is an experimental clinical decision-support and research tool. It is not a certified medical

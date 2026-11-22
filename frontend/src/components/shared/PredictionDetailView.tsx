@@ -38,7 +38,7 @@ export function PredictionDetailView({
   // which would read as a confident low-risk result (QA Round 1, item 90).
   const probability = prediction.probability ?? null
   const severity = prediction.severity ?? "Unknown"
-  const gaugeColor = SEVERITY_GAUGE_COLOR[severity] ?? "#2E7FA8"
+  const gaugeColor = SEVERITY_GAUGE_COLOR[severity] ?? "#6B63FF"
   const patientName = patient?.demographics?.full_name || patient?.demographics?.name ||
     `${patient?.demographics?.first_name || ""} ${patient?.demographics?.last_name || ""}`.trim() || "Unknown Patient"
 

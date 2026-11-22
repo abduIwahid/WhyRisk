@@ -61,7 +61,7 @@ export default async function AdminOverviewPage() {
   // most alarming possible value for the pending-approvals card.
   const display = (res: { error: unknown; count: number | null }) => (res.error ? "—" : res.count ?? 0)
   const stats = [
-    { label: "Total Patients", value: display(patientsRes), icon: Users, accent: "text-[#2E7FA8] bg-[#2E7FA8]/10", scope: scopedLabel },
+    { label: "Total Patients", value: display(patientsRes), icon: Users, accent: "text-[#6B63FF] bg-[#6B63FF]/10", scope: scopedLabel },
     { label: "Active Doctors", value: display(doctorsRes), icon: Stethoscope, accent: "text-primary bg-secondary", scope: viewerRole === "data_scientist" ? "Records you can access" : "Platform-wide" },
     { label: "Pending Approvals", value: display(pendingRes), icon: Clock, accent: "text-[#A85008] bg-[#D97706]/10", scope: viewerRole === "data_scientist" ? "Records you can access" : "Platform-wide" },
     { label: "Total Appointments", value: display(apptsRes), icon: Activity, accent: "text-[#1E7A46] bg-[#1E7A46]/10", scope: `${scopedLabel}, all statuses, incl. cancelled` },

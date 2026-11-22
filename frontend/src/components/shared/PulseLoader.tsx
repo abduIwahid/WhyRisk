@@ -16,7 +16,7 @@ interface PulseLoaderProps {
  *
  * Stroke/fill use the stroke-brand / fill-brand utilities, so colours come
  * from the --brand token and follow the light/dark theme automatically
- * (#2E7FA8 on paper, #5EA8C9 on ink). Keyframes (pulse-beat / pulse-dot /
+ * (#6B63FF on paper, #5EA8C9 on ink). Keyframes (pulse-beat / pulse-dot /
  * pulse-label) live in globals.css; under prefers-reduced-motion the trace
  * and dot render statically. Dependency-light like EmptyState, so it can
  * render from server components and loading.tsx.

@@ -84,7 +84,7 @@ export function DashboardClientView({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2, duration: 0.5 }}
-            className="flex items-center gap-2 text-[11px] font-medium text-[#8FC3DC]"
+            className="flex items-center gap-2 text-[11px] font-medium text-[#E0DCFF]"
           >
             <Sparkles className="h-4 w-4" /> WhyRisk: Clinical Intelligence Platform
           </motion.p>
@@ -93,7 +93,7 @@ export function DashboardClientView({
             Patient risk scores, critical alerts, and model predictions for your facility, each score with the factors behind it.
           </p>
           <div className="flex flex-wrap items-center gap-4 pt-4">
-            <Link href="/patients/new" className="inline-flex items-center justify-center rounded-lg bg-[#1F6E96] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[#1F6E96]/90">
+            <Link href="/patients/new" className="inline-flex items-center justify-center rounded-lg bg-[#574CD6] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[#574CD6]/90">
               New Risk Assessment <ArrowRight className="ml-2 h-4 w-4" />
             </Link>
             <Link href="/alerts" className="inline-flex items-center justify-center rounded-lg border border-white/30 bg-white/5 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/10">
@@ -114,7 +114,7 @@ export function DashboardClientView({
       {/* Stats Grid */}
       <motion.div variants={statsContainerVariants} className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 lg:gap-6">
         {[
-          { label: "Total Patients", value: totalPatients, icon: Users, color: "text-[#2E7FA8]", bg: "bg-[#2E7FA8]/10", href: "/patients" },
+          { label: "Total Patients", value: totalPatients, icon: Users, color: "text-[#6B63FF]", bg: "bg-[#6B63FF]/10", href: "/patients" },
           { label: "Active Doctors", value: totalDoctors, icon: Stethoscope, color: "text-primary", bg: "bg-secondary", href: "/doctors" },
           { label: "AI Predictions", value: totalPredictions, icon: Activity, color: "text-[#1E7A46]", bg: "bg-[#1E7A46]/10", href: "/analytics" },
           { label: "Unread Alerts", value: totalAlerts, icon: Bell, color: "text-[#A85008]", bg: "bg-[#D97706]/10", href: "/alerts" },

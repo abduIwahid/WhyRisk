@@ -7,13 +7,20 @@ import sys
 import threading
 from contextlib import asynccontextmanager
 from datetime import datetime
-from typing import List, Optional
 
 import joblib
 import numpy as np
 import pandas as pd
 import shap
-from fastapi import BackgroundTasks, Depends, FastAPI, Header, HTTPException, Request, status
+from fastapi import (
+    BackgroundTasks,
+    Depends,
+    FastAPI,
+    Header,
+    HTTPException,
+    Request,
+    status,
+)
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel, Field
@@ -87,7 +94,7 @@ app = FastAPI(
 # -- CORS -- origins are explicit and configurable. A wildcard subdomain
 # entry used to sit here as a literal string; Starlette never expands
 # wildcards in allow_origins, so it never matched anything.
-def _allowed_origins() -> List[str]:
+def _allowed_origins() -> list[str]:
     raw = os.environ.get("ALLOWED_ORIGINS", "http://localhost:3000")
     return [origin.strip() for origin in raw.split(",") if origin.strip()]
 
@@ -114,7 +121,7 @@ async def unhandled_exception_handler(request: Request, exc: Exception):
 # Protected routes require the X-API-Key header to match ML_SERVICE_API_KEY.
 # If the variable is unset the service runs in an explicit, loudly-logged dev
 # mode (see lifespan) so local development and tests keep working.
-def require_api_key(x_api_key: Optional[str] = Header(default=None, alias="X-API-Key")) -> None:
+def require_api_key(x_api_key: str | None = Header(default=None, alias="X-API-Key")) -> None:
     expected = os.environ.get("ML_SERVICE_API_KEY")
     if not expected:
         return  # dev mode: no key configured

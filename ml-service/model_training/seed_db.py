@@ -1,12 +1,13 @@
+import json
 import os
 import random
 import uuid
-import json
 from datetime import datetime, timedelta
+
 import pandas as pd
 import psycopg2
-from psycopg2.extras import execute_values
 from dotenv import load_dotenv
+from psycopg2.extras import execute_values
 
 # Load environment variables
 dotenv_path = os.path.join(os.path.dirname(__file__), "..", ".env")
@@ -455,7 +456,7 @@ def main():
     except Exception as e:
         conn.rollback()
         print(f"Error during seeding: {e}")
-        raise e
+        raise
     finally:
         cur.close()
         conn.close()

@@ -6,20 +6,26 @@ Indicators) and derives the balanced 50/50 training CSV this script
 expects. data/ is gitignored; the dataset is never committed.
 """
 import os
+from datetime import datetime
+
 import joblib
-import pandas as pd
-import numpy as np
-from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LogisticRegression
-from sklearn.ensemble import RandomForestClassifier
-from xgboost import XGBClassifier
-from lightgbm import LGBMClassifier
-from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, roc_auc_score
 import mlflow
+import mlflow.lightgbm
 import mlflow.sklearn
 import mlflow.xgboost
-import mlflow.lightgbm
-from datetime import datetime
+import pandas as pd
+from lightgbm import LGBMClassifier
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import (
+    accuracy_score,
+    f1_score,
+    precision_score,
+    recall_score,
+    roc_auc_score,
+)
+from sklearn.model_selection import train_test_split
+from xgboost import XGBClassifier
 
 # Define paths
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))

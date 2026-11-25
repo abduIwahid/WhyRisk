@@ -72,7 +72,7 @@ ml-service/models/        trained artifacts land here (gitignored)
 supabase/migrations/      schema, RLS policies, seeds
 supabase/functions/       Edge Functions (not wired to the frontend yet)
 scripts/                  Windows quick-start launchers for local dev
-Case Study #U2013 ML-003.pdf   the internship case study for this project
+docs/Case Study #U2013 ML-003.pdf   the internship case study for this project
 ```
 
 ## The model
@@ -280,7 +280,7 @@ blueprint has been removed.
 
 Additional project documents (PRD, viva notes) are archived on the
 `backup-md` branch to keep `main` compact. The internship case study is
-`Case Study #U2013 ML-003.pdf` in the repo root.
+`docs/Case Study #U2013 ML-003.pdf`.
 
 ## License
 

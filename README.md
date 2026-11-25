@@ -263,13 +263,18 @@ contract, the input ranges, and the generic-500 rule.
 
 ## Deployment
 
-`render.yaml` at the repo root describes the ML service as a Docker web
-service built from `ml-service/` (Dockerfile in `ml-service/`). The
-image contains the trained model, so run the training step before
-building, and set `ML_SERVICE_API_KEY` on the host - callers (the Next.js
-`/api/predict` route) must send it as the `X-API-Key` header. The
-frontend deploys from `frontend/` to Vercel. Both hosting projects are
-currently removed, so there is no live deployment at the moment.
+The frontend deploys from `frontend/` to Vercel and is live at
+https://whyrisk.vercel.app. The ML service runs as a separate Vercel
+project (`whyrisk-ml`, Python/FastAPI) at
+https://whyrisk-ml-abdu1wahid.vercel.app. The frontend reaches it
+server-side through `ML_SERVICE_URL`, and callers (the Next.js
+`/api/predict` route) must send the service API key as the `X-API-Key`
+header (`ML_SERVICE_API_KEY` on the ML host).
+
+`ml-service/Dockerfile` remains as a self-hosting option for the ML
+service: the image contains the trained model, so run the training step
+before building it. Render is no longer used - the `render.yaml`
+blueprint has been removed.
 
 ## Further documentation
 

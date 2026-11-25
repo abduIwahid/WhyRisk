@@ -1,9 +1,0 @@
-services:
-  - type: web
-    name: medisight-ml-service
-    env: docker
-    dockerContext: ./ml-service
-    dockerfilePath: ./ml-service/Dockerfile
-    plan: free
-    region: ohio
-    healthCheckPath: /

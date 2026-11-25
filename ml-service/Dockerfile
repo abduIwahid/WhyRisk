@@ -1,5 +1,6 @@
 # WhyRisk ML service -- inference image.
-# Build context: this directory (ml-service/), matching render.yaml.
+# Build context: this directory (ml-service/). Self-hosting option;
+# production runs on Vercel (see "Deployment" in the README).
 #
 # TRAIN BEFORE YOU BUILD: the image ships the trained artifact, so
 # models/production/model.joblib must exist before `docker build`
